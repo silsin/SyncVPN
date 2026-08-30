@@ -1,8 +1,21 @@
-# Publishes a GitHub Release whenever a version tag (vX.Y.Z) is pushed.
+# Builds a real, installable SyncVPN_vX.Y.Z_x64.exe and publishes it as a
+# GitHub Release asset whenever a version tag (vX.Y.Z) is pushed (or via
+# manual dispatch).
 #
-# This validates that the tagged commit builds, then creates the release
-# entry with auto-generated notes. It does not attach an installer - see
-# the note in ci.yml about why the native/installer build isn't done here.
+# KNOWN GAPS (best-effort build, see README/BUILD.md):
+#  - Unsigned. There's no code-signing certificate available here, so the
+#    installer and the exe/dll files inside it are unsigned. Windows
+#    SmartScreen will warn on install. The kernel driver and tunnel
+#    binaries under Setup/Native are prebuilt/already-signed and are used
+#    as-is.
+#  - LocalAgent.dll, proton_srp_cffi.dll (SRP login crypto), and
+#    proton_vpn_binary_status.dll are built from three git submodules
+#    (go-vpn-lib, proton-rs-srp-cffi, proton-vpn-binary-status) that are
+#    private/not reachable from a public runner. They're skipped, which
+#    means sign-in / VPN connection is expected to be broken in this
+#    build. Everything else (UI, install flow, settings) should work.
+#  - x64 only. ARM64 needs a cross-compile Docker step for Go that isn't
+#    wired up here.
 name: Release
 
 on:
@@ -10,12 +23,19 @@ on:
     tags:
       - 'v*.*.*'
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to build and attach the installer to (used for manual runs; ignored on tag push)'
+        required: false
+        default: 'v4.4.1'
 
 jobs:
-  release:
+  build-installer:
     runs-on: windows-latest
     permissions:
       contents: write
+    env:
+      BUILD_PATH: src/bin/win-x64/publish
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,14 +45,130 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Restore
-        run: dotnet restore SyncVPN.slnx
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
 
-      - name: Build
-        run: dotnet build SyncVPN.slnx -c Release --no-restore
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v2
 
-      - name: Create GitHub Release
+      - name: Install Inno Setup
+        run: choco install innosetup --no-progress -y
+
+      - name: Restore native solution
+        run: nuget restore SyncVPN.InstallActions.sln
+
+      - name: Create publish output folders
+        shell: pwsh
+        run: New-Item -ItemType Directory -Force -Path "$env:BUILD_PATH\Resources" | Out-Null
+
+      - name: Build native helper DLLs (IpFilter, NetworkUtil, InstallActions x86/x64)
+        shell: pwsh
+        run: |
+          $resourcesDir = "$env:BUILD_PATH\Resources\"
+          $common = @('/p:PlatformToolset=v143', '/p:Configuration=Release', "/p:OutDir=$resourcesDir", '/clp:ErrorsOnly')
+
+          msbuild src\SyncVPN.IpFilter\SyncVPN.IpFilter.vcxproj /p:Platform=x64 @common
+          if ($LASTEXITCODE -ne 0) { throw "IpFilter build failed" }
+
+          msbuild src\SyncVPN.NetworkUtil\SyncVPN.NetworkUtil.vcxproj /p:Platform=x64 @common
+          if ($LASTEXITCODE -ne 0) { throw "NetworkUtil build failed" }
+
+          msbuild src\SyncVPN.InstallActions\SyncVPN.InstallActions.vcxproj /p:Platform=Win32 @common
+          if ($LASTEXITCODE -ne 0) { throw "InstallActions (x86) build failed" }
+
+          msbuild src\SyncVPN.InstallActions\SyncVPN.InstallActions.vcxproj /p:Platform=x64 @common
+          if ($LASTEXITCODE -ne 0) { throw "InstallActions (x64) build failed" }
+
+      - name: Stamp assembly version with commit hash
+        shell: pwsh
+        run: |
+          $path = 'src\GlobalAssemblyInfo.cs'
+          $content = Get-Content $path -Raw
+          $version = [regex]::Match($content, 'AssemblyVersion\("(\d+\.\d+\.\d+)').Groups[1].Value
+          $shortSha = "$env:GITHUB_SHA".Substring(0, 7)
+          $content = $content.Replace('$AssemblyVersion', "$version-$shortSha")
+          Set-Content -Path $path -Value $content -NoNewline
+          "APP_VERSION=$version" >> $env:GITHUB_ENV
+          "SHORT_SHA=$shortSha" >> $env:GITHUB_ENV
+
+      - name: Generate build variables (Sentry/BTI config, all optional/empty here)
+        run: |
+          dotnet build src\Builds\SyncVPN.Builds.ConsoleJob\SyncVPN.Builds.ConsoleJob.csproj
+          src\bin\SyncVPN.Builds.ConsoleJob.exe
+
+      - name: Restore and build managed solution
+        run: |
+          dotnet restore SyncVPN.slnx
+          dotnet build SyncVPN.slnx -c Release --no-restore
+
+      - name: Publish client and services
+        shell: pwsh
+        run: |
+          $projects = @(
+            'src\Client\SyncVPN.Client\SyncVPN.Client.csproj',
+            'src\SyncVPN.Service\SyncVPN.Service.csproj',
+            'src\SyncVPN.TlsVerify\SyncVPN.TlsVerify.csproj',
+            'src\SyncVPN.WireGuardService\SyncVPN.WireGuardService.csproj',
+            'src\SyncVPN.RestoreInternet\SyncVPN.RestoreInternet.csproj',
+            'src\ProtonInstaller\ProtonInstaller.csproj'
+          )
+          foreach ($project in $projects) {
+            dotnet publish $project -c Release -r win-x64 --self-contained -o $env:BUILD_PATH /p:Platform=x64
+            if ($LASTEXITCODE -ne 0) { throw "Publish failed for $project" }
+          }
+
+          dotnet publish src\SyncVPN.Launcher\SyncVPN.Launcher.csproj -c Release -r win-x64 --self-contained -o $env:BUILD_PATH /p:Platform=x64 -p:PublishSingleFile=true
+          if ($LASTEXITCODE -ne 0) { throw "Publish failed for SyncVPN.Launcher" }
+
+      - name: Patch installer script (version, hash, optional-missing files)
+        shell: pwsh
+        run: |
+          $path = 'Setup\SetupBase.iss'
+          $content = Get-Content $path -Raw
+
+          $content = $content -replace '#define MyAppVersion "\d+\.\d+\.\d+"', "#define MyAppVersion `"$env:APP_VERSION`""
+          $content = $content.Replace('#define Hash ""', "#define Hash `"$env:SHORT_SHA`"")
+
+          # These three come from private submodules/internal artifact feeds not
+          # reachable here - mark them optional so ISCC doesn't fail when absent.
+          $content = $content -replace '(Source: "\.\.\\\{#SourcePath\}\\Resources\\LocalAgent\.dll"; DestDir: "\{app\}\\\{#VersionFolder\}\\Resources"; Flags: )signonce;', '${1}signonce skipifsourcedoesntexist;'
+          $content = $content -replace '(Source: "\.\.\\data\\ipv6_chaos_prefixtree\.bin"; DestDir: "\{app\}\\\{#VersionFolder\}\\ServiceData\\IPv6"; DestName: "PrefixTree\.bin";)', '$1 Flags: skipifsourcedoesntexist;'
+          $content = $content -replace '(Source: "\.\.\\\{#SourcePath\}\\proton_vpn_ipv6chaos\.dll"; DestDir: "\{app\}\\\{#VersionFolder\}";)', '$1 Flags: skipifsourcedoesntexist;'
+
+          Set-Content -Path $path -Value $content -NoNewline
+
+      - name: Build installer (unsigned)
+        shell: pwsh
+        run: |
+          iscc Setup\Setup.x64.iss "/Ssigntool=cmd /c exit 0"
+          if ($LASTEXITCODE -ne 0) { throw "ISCC installer build failed" }
+
+      - name: Locate installer output
+        id: installer
+        shell: pwsh
+        run: |
+          $exe = Get-ChildItem -Path Setup\Installers -Filter *.exe | Select-Object -First 1
+          if (-not $exe) { throw "No installer .exe produced" }
+          "path=$($exe.FullName)" >> $env:GITHUB_OUTPUT
+          "name=$($exe.Name)" >> $env:GITHUB_OUTPUT
+
+      - name: Upload installer as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.installer.outputs.name }}
+          path: ${{ steps.installer.outputs.path }}
+
+      - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          name: ${{ github.ref_name }}
+          tag_name: ${{ github.event_name == 'push' && github.ref_name || inputs.tag }}
+          name: ${{ github.event_name == 'push' && github.ref_name || inputs.tag }}
           generate_release_notes: true
+          files: ${{ steps.installer.outputs.path }}
+          body: |
+            Automated build from commit ${{ github.sha }}.
+
+            **This is an unsigned, best-effort test build.** Windows SmartScreen
+            will warn on install. Sign-in/VPN connection is expected to be
+            broken because the SRP auth crypto component (proton_srp_cffi.dll)
+            depends on a private submodule not available to this build.
