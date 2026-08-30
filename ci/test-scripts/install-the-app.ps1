@@ -1,4 +1,4 @@
-$installerPartialDir = $env:CI_PROJECT_DIR + "\Setup\Installers\ProtonVPN_*.exe"
+$installerPartialDir = $env:CI_PROJECT_DIR + "\Setup\Installers\SyncVPN_*.exe"
 $installerPath = Get-ChildItem -Path $installerPartialDir
 
 Write-Output ("Installer path: " + $installerPath)

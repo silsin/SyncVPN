@@ -1,11 +1,11 @@
-# Building Proton VPN Windows app
+# Building SyncVPN Windows app
 
-**Building guide of the Proton VPN Windows app.** 
-Proton VPN Windows app is .NET 6 application created using C# and C++ programming languages.
+**Building guide of the SyncVPN Windows app.** 
+SyncVPN Windows app is .NET 6 application created using C# and C++ programming languages.
 
 ## Prerequisites
 
-To build Proton VPN the following tools have to be installed:
+To build SyncVPN the following tools have to be installed:
 
 - [Visual Studio Community 2022](https://visualstudio.microsoft.com/downloads/)   (see details [here](#visual-studio))
 - [Windows Software Development Kit (SDK)](https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/)
@@ -16,7 +16,7 @@ To build Proton VPN the following tools have to be installed:
 *To enable the sending of crash reports to Sentry server the environment variable SENTRY_DSN_V2 should contain valid Sentry DSN value during build. If environment variable SENTRY_DSN_V2 is not set, sending of crash reports will be disabled.*
 
 Once all the [prerequisites](#prerequisites) have been installed
-1. Clone the [repository](https://github.com/ProtonVPN/win-app)
+1. Clone the [repository](https://github.com/SyncVPN/win-app)
 2. Open a command prompt as an administrator
 3. Navigate to the repository folder
 4. Run: `git submodule update --init`
@@ -59,7 +59,7 @@ The application can be built using the default Visual Studio build
 environment. To build the setup files use the following steps:
 
 - Select the "Release" solution configuration in Visual Studio.
-- Build the "ProtonVPN" solution.
+- Build the "SyncVPN" solution.
 
 ## Testing
 
@@ -68,17 +68,17 @@ using the default testing tools of Visual Studio.
 
 ## Services
 
-The **ProtonVPN Service** and **ProtonVPN Wireguard** services targets the installation folder by default 
+The **SyncVPN Service** and **SyncVPN Wireguard** services targets the installation folder by default 
 ("C:\Program Files\Proton\VPN\<version>").
 
 For development, it is possible to: 
 1. re-target the services to the repository output folder
 ```
-SC CONFIG "ProtonVPN Service" binPath="<repository-folder>\src\bin\ProtonVPNService.exe"
-NET STOP "ProtonVPN Service"
+SC CONFIG "SyncVPN Service" binPath="<repository-folder>\src\bin\SyncVPNService.exe"
+NET STOP "SyncVPN Service"
 
-SC CONFIG "ProtonVPN Wireguard" binPath="<repository-folder>\src\bin\ProtonVPN.WireGuardService.exe C:\ProgramData\ProtonVPN\Wireguard\ProtonVPN.conf"
-NET STOP "ProtonVPN Wireguard"
+SC CONFIG "SyncVPN Wireguard" binPath="<repository-folder>\src\bin\SyncVPN.WireGuardService.exe C:\ProgramData\SyncVPN\Wireguard\SyncVPN.conf"
+NET STOP "SyncVPN Wireguard"
 ```
 2. or to configure the solution to build into the installation folder directly
 

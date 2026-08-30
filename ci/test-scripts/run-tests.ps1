@@ -7,7 +7,7 @@ $reportPath = "$env:UI_TEST_REPORT_PATH\results_$Category.xml"
 
 $keywords = @("BVI-", "BackdropLocal", "missing frame","worldTransform", "0.00, 0.00", "chunk", "decoding stream")
 
-& VSTest.Console.exe src\bin\e2e\ProtonVPN.UI.Tests.dll /Settings:.testsettings.xml /TestCaseFilter:"Category=$Category" /Logger:"junit;LogFilePath=$reportPath" |
+& VSTest.Console.exe src\bin\e2e\SyncVPN.UI.Tests.dll /Settings:.testsettings.xml /TestCaseFilter:"Category=$Category" /Logger:"junit;LogFilePath=$reportPath" |
 ForEach-Object {
     $line = $_
     $shouldDrop = $false

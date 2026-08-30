@@ -1,0 +1,871 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <RootNamespace>SyncVPN.Client</RootNamespace>
+    <ApplicationIcon>Assets/SyncVPN.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>x64</Platforms>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UseWinUI>true</UseWinUI>
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <WindowsPackageType>None</WindowsPackageType>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <OutputPath>..\..\bin</OutputPath>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="UI\Main\Home\Details\Contracts\**" />
+    <EmbeddedResource Remove="UI\Main\Home\Details\Contracts\**" />
+    <None Remove="UI\Main\Home\Details\Contracts\**" />
+    <Page Remove="UI\Main\Home\Details\Contracts\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Assets\SyncVPN.ico" />
+    <None Remove="UI\Dialogs\DebugTools\DebugToolsShellView.xaml" />
+    <None Remove="UI\Dialogs\DebugTools\DebugToolsWindow.xaml" />
+    <None Remove="UI\Dialogs\ReportIssue\Pages\ReportIssueCategoriesPageView.xaml" />
+    <None Remove="UI\Dialogs\ReportIssue\Pages\ReportIssueCategoryPageView.xaml" />
+    <None Remove="UI\Dialogs\ReportIssue\Pages\ReportIssueContactPageView.xaml" />
+    <None Remove="UI\Dialogs\ReportIssue\Pages\ReportIssueResultPageView.xaml" />
+    <None Remove="UI\Dialogs\ReportIssue\ReportIssueShellView.xaml" />
+    <None Remove="UI\Dialogs\ReportIssue\ReportIssueWindow.xaml" />
+    <None Remove="UI\Dialogs\Tray\Pages\TrayLoginPageView.xaml" />
+    <None Remove="UI\Dialogs\Tray\Pages\TrayMainPageView.xaml" />
+    <None Remove="UI\Dialogs\Tray\TrayAppShellView.xaml" />
+    <None Remove="UI\Dialogs\Upsell\Features\ProfilesUpsellFeaturePageView.xaml" />
+    <None Remove="UI\Dialogs\Upsell\UpsellCarouselShellView.xaml" />
+    <None Remove="UI\Login\Components\DisableKillSwitchBannerComponent.xaml" />
+    <None Remove="UI\Login\Overlays\SsoLoginOverlayView.xaml" />
+    <None Remove="UI\Dialogs\Upsell\UpsellCarouselWindow.xaml" />
+    <None Remove="UI\Login\Pages\LoadingPageView.xaml" />
+    <None Remove="UI\Login\Pages\SignInPageView.xaml" />
+    <None Remove="UI\Login\Pages\TwoFactorPageView.xaml" />
+    <None Remove="UI\Login\LoginPageView.xaml" />
+    <None Remove="UI\MainWindowShellView.xaml" />
+    <None Remove="UI\Main\Components\ActivePortComponentView.xaml" />
+    <None Remove="UI\Main\Components\ConnectionErrorComponent.xaml" />
+    <None Remove="UI\Main\Components\CurrentProfileIconView.xaml" />
+    <None Remove="UI\Main\Components\EmptyPageView.xaml" />
+    <None Remove="UI\Main\Components\TitleBarMenuComponent.xaml" />
+    <None Remove="UI\Main\FeatureIcons\KillSwitchIconView.xaml" />
+    <None Remove="UI\Main\FeatureIcons\NetShieldIconView.xaml" />
+    <None Remove="UI\Main\FeatureIcons\PortForwardingIconView.xaml" />
+    <None Remove="UI\Main\FeatureIcons\ProtocolIconView.xaml" />
+    <None Remove="UI\Main\FeatureIcons\SplitTunnelingIconView.xaml" />
+    <None Remove="UI\Main\FeatureIcons\VpnAcceleratorIconView.xaml" />
+    <None Remove="UI\Main\Features\KillSwitch\KillSwitchPageView.xaml" />
+    <None Remove="UI\Main\Features\KillSwitch\KillSwitchWidgetView.xaml" />
+    <None Remove="UI\Main\Features\NetShield\NetShieldPageView.xaml" />
+    <None Remove="UI\Main\Features\NetShield\NetShieldWidgetView.xaml" />
+    <None Remove="UI\Main\Features\PortForwarding\PortForwardingPageView.xaml" />
+    <None Remove="UI\Main\Features\PortForwarding\PortForwardingWidgetView.xaml" />
+    <None Remove="UI\Main\Features\SplitTunneling\SplitTunnelingPageView.xaml" />
+    <None Remove="UI\Main\Features\SplitTunneling\SplitTunnelingWidgetView.xaml" />
+    <None Remove="UI\Main\Home\Card\ConnectionCardComponentView.xaml" />
+    <None Remove="UI\Main\Home\Card\DefaultConnections\DefaultConnectionSelectorView.xaml" />
+    <None Remove="UI\Main\Home\Details\Connection\SpeedChartComponentView.xaml" />
+    <None Remove="UI\Main\Home\Details\Connection\SpeedChartControl.xaml" />
+    <None Remove="UI\Main\Home\Details\DetailsComponentView.xaml" />
+    <None Remove="UI\Main\Home\Details\Connection\ConnectionDetailsPageView.xaml" />
+    <None Remove="UI\Main\Home\Details\Flyouts\CountryFlyoutView.xaml" />
+    <None Remove="UI\Main\Home\Details\Flyouts\IpAddressFlyout.xaml" />
+    <None Remove="UI\Main\Home\Details\Flyouts\IspFlyoutView.xaml" />
+    <None Remove="UI\Main\Home\Details\Flyouts\ProtocolFlyoutView.xaml" />
+    <None Remove="UI\Main\Home\Details\Flyouts\ServerLoadFlyoutView.xaml" />
+    <None Remove="UI\Main\Home\Details\Flyouts\SpeedFlyoutView.xaml" />
+    <None Remove="UI\Main\Home\Details\Flyouts\VolumeFlyoutView.xaml" />
+    <None Remove="UI\Main\Home\Details\Location\LocationDetailsPageView.xaml" />
+    <None Remove="UI\Main\Home\HomeComponentView.xaml" />
+    <None Remove="UI\Main\Home\Map\MapComponentView.xaml" />
+    <None Remove="UI\Main\Home\Status\ConnectionStatusGradientView.xaml" />
+    <None Remove="UI\Main\Home\Status\ConnectionStatusHeaderView.xaml" />
+    <None Remove="UI\Main\Home\Upsell\ChangeServerComponentView.xaml" />
+    <None Remove="UI\Main\Home\Upsell\ConnectionCardUpsellBannerView.xaml" />
+    <None Remove="UI\Main\MainPageView.xaml" />
+    <None Remove="UI\Main\Profiles\Components\ProfileOptionsSelectorView.xaml" />
+    <None Remove="UI\Main\Profiles\ProfilePageView.xaml" />
+    <None Remove="UI\Main\Settings\Pages\About\AboutPageView.xaml" />
+    <None Remove="UI\Main\Settings\Pages\About\LicensingPageView.xaml" />
+    <None Remove="UI\Main\Settings\Pages\AdvancedSettingsPageView.xaml" />
+    <None Remove="UI\Main\Settings\Pages\Advanced\CustomDnsServerPage.xaml" />
+    <None Remove="UI\Main\Settings\Pages\AutoStartupSettingsPageView.xaml" />
+    <None Remove="UI\Main\Settings\Pages\CensorshipSettingsPageView.xaml" />
+    <None Remove="UI\Main\Settings\Pages\CommonSettingsPageView.xaml" />
+    <None Remove="UI\Main\Settings\Pages\Connection\ConnectionSettingsView.xaml" />
+    <None Remove="UI\Main\Settings\Pages\DebugLogsPageView.xaml" />
+    <None Remove="UI\Main\Settings\Pages\DeveloperToolsPageView.xaml" />
+    <None Remove="UI\Main\Settings\Pages\ProtocolSettingsPageView.xaml" />
+    <None Remove="UI\Main\Settings\Pages\UserDetailsComponent.xaml" />
+    <None Remove="UI\Main\Settings\Pages\VpnAcceleratorSettingsPageView.xaml" />
+    <None Remove="UI\Main\Settings\SettingsPageView.xaml" />
+    <None Remove="UI\Main\Settings\SettingsWidgetView.xaml" />
+    <None Remove="UI\Main\Sidebar\Connections\Bases\Controls\ConnectionItemsControl.xaml" />
+    <None Remove="UI\Main\Sidebar\Connections\Bases\Controls\LocationComboBox.xaml" />
+    <None Remove="UI\Main\Sidebar\Connections\ConnectionsPageView.xaml" />
+    <None Remove="UI\Main\Sidebar\Connections\Countries\All\AllCountriesComponentView.xaml" />
+    <None Remove="UI\Main\Sidebar\Connections\Countries\CountriesPageView.xaml" />
+    <None Remove="UI\Main\Sidebar\Connections\Countries\P2P\P2PCountriesComponentView.xaml" />
+    <None Remove="UI\Main\Sidebar\Connections\Countries\SecureCore\SecureCoreCountriesComponentView.xaml" />
+    <None Remove="UI\Main\Sidebar\Connections\Countries\Tor\TorCountriesComponentView.xaml" />
+    <None Remove="UI\Main\Sidebar\Connections\Gateways\GatewaysPageView.xaml" />
+    <None Remove="UI\Main\Profiles\Components\ConnectionIntentSelectorView.xaml" />
+    <None Remove="UI\Main\Profiles\Components\ProfileIconSelectorView.xaml" />
+    <None Remove="UI\Main\Profiles\Components\ProfileSettingsSelectorView.xaml" />
+    <None Remove="UI\Main\Sidebar\Connections\Profiles\ProfilesPageView.xaml" />
+    <None Remove="UI\Main\Sidebar\Connections\Recents\RecentsPageView.xaml" />
+    <None Remove="UI\Main\Sidebar\Search\SearchResultsPageView.xaml" />
+    <None Remove="UI\Main\Sidebar\SidebarComponentView.xaml" />
+    <None Remove="UI\Main\Widgets\SideWidgetsHostComponentView.xaml" />
+    <None Remove="UI\NavigationMasterControllerView.xaml" />
+    <None Remove="UI\Overlays\Information\ProfileOverlayView.xaml" />
+    <None Remove="UI\Overlays\Selection\AppSelectorOverlayView.xaml" />
+    <None Remove="UI\Overlays\Selection\IpSelectorOverlayView.xaml" />
+    <None Remove="UI\Overlays\Upsell\FreeConnectionsOverlayView.xaml" />
+    <None Remove="UI\Overlays\HumanVerification\HumanVerificationOverlayView.xaml" />
+    <None Remove="UI\Overlays\Information\OutdatedClientOverlayView.xaml" />
+    <None Remove="UI\Overlays\Information\P2POverlayView.xaml" />
+    <None Remove="UI\Overlays\Information\SecureCoreOverlayView.xaml" />
+    <None Remove="UI\Overlays\Information\ServerLoadOverlayView.xaml" />
+    <None Remove="UI\Overlays\Information\SmartRoutingOverlayView.xaml" />
+    <None Remove="UI\Overlays\Information\TorOverlayView.xaml" />
+    <None Remove="UI\Overlays\Welcome\WelcomeOverlayView.xaml" />
+    <None Remove="UI\Overlays\Welcome\WelcomeToVpnB2BOverlayView.xaml" />
+    <None Remove="UI\Overlays\Welcome\WelcomeToVpnPlusOverlayView.xaml" />
+    <None Remove="UI\Overlays\Welcome\WelcomeToVpnUnlimitedOverlayView.xaml" />
+    <None Remove="UI\Tray\TrayAppWindow.xaml" />
+    <None Remove="UI\Tray\TrayIconComponentView.xaml" />
+    <None Remove="UI\Update\UpdateComponent.xaml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Compile Include="..\..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="CommunityToolkit.WinUI.Collections" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.HeaderedControls" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.RangeSelector" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Sizers" />
+    <PackageReference Include="CommunityToolkit.WinUI.Converters" />
+    <PackageReference Include="CommunityToolkit.WinUI.Triggers" />
+    <PackageReference Include="H.NotifyIcon.WinUI" />
+    <PackageReference Include="MarkdownTextBlock" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" />
+    <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="System.Collections.Immutable" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" />
+    <PackageReference Include="System.Formats.Asn1" />
+    <PackageReference Include="System.Private.Uri" />
+    <PackageReference Include="System.ServiceModel.Primitives" />
+    <PackageReference Include="System.Text.Encoding.CodePages" />
+    <PackageReference Include="System.Text.Json" />
+    <PackageReference Include="WinUIEx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\IPv6\SyncVPN.IPv6.Installers\SyncVPN.IPv6.Installers.csproj" />
+    <ProjectReference Include="..\..\IssueReporting\SyncVPN.IssueReporting.Static\SyncVPN.IssueReporting.Static.csproj" />
+    <ProjectReference Include="..\..\NetworkTimeProtocols\SyncVPN.NetworkTimeProtocols.Contracts\SyncVPN.NetworkTimeProtocols.Contracts.csproj" />
+    <ProjectReference Include="..\..\NetworkTimeProtocols\SyncVPN.NetworkTimeProtocols.Installers\SyncVPN.NetworkTimeProtocols.Installers.csproj" />
+    <ProjectReference Include="..\..\OperatingSystems\Antiviruses\SyncVPN.OperatingSystems.Antiviruses.Contracts\SyncVPN.OperatingSystems.Antiviruses.Contracts.csproj" />
+    <ProjectReference Include="..\..\OperatingSystems\Antiviruses\SyncVPN.OperatingSystems.Antiviruses.Installers\SyncVPN.OperatingSystems.Antiviruses.Installers.csproj" />
+    <ProjectReference Include="..\..\OperatingSystems\Network\SyncVPN.OperatingSystems.Network.Installers\SyncVPN.OperatingSystems.Network.Installers.csproj" />
+    <ProjectReference Include="..\..\OperatingSystems\WebAuthn\SyncVPN.OperatingSystems.WebAuthn.Installers\SyncVPN.OperatingSystems.WebAuthn.Installers.csproj" />
+    <ProjectReference Include="..\..\ProcessCommunication\Client\SyncVPN.ProcessCommunication.Client.Installers\SyncVPN.ProcessCommunication.Client.Installers.csproj" />
+    <ProjectReference Include="..\..\StatisticalEvents\SyncVPN.StatisticalEvents.Contracts\SyncVPN.StatisticalEvents.Contracts.csproj" />
+    <ProjectReference Include="..\..\StatisticalEvents\SyncVPN.StatisticalEvents.Installers\SyncVPN.StatisticalEvents.Installers.csproj" />
+    <ProjectReference Include="..\Logic\Profiles\SyncVPN.Client.Logic.Profiles.Installers\SyncVPN.Client.Logic.Profiles.Installers.csproj" />
+    <ProjectReference Include="..\Logic\Searches\SyncVPN.Client.Logic.Searches.Contracts\SyncVPN.Client.Logic.Searches.Contracts.csproj" />
+    <ProjectReference Include="..\Logic\Searches\SyncVPN.Client.Logic.Searches.Installers\SyncVPN.Client.Logic.Searches.Installers.csproj" />
+    <ProjectReference Include="..\SyncVPN.Client.Core\SyncVPN.Client.Core.csproj" />
+    <ProjectReference Include="..\..\Api\SyncVPN.Api.Installers\SyncVPN.Api.Installers.csproj" />
+    <ProjectReference Include="..\..\Configurations\SyncVPN.Configurations.Installers\SyncVPN.Configurations.Installers.csproj" />
+    <ProjectReference Include="..\..\Crypto\SyncVPN.Crypto.Installers\SyncVPN.Crypto.Installers.csproj" />
+    <ProjectReference Include="..\..\Dns\SyncVPN.Dns.Installers\SyncVPN.Dns.Installers.csproj" />
+    <ProjectReference Include="..\..\EntityMapping\SyncVPN.EntityMapping.Installers\SyncVPN.EntityMapping.Installers.csproj" />
+    <ProjectReference Include="..\..\Files\SyncVPN.Files.Installers\SyncVPN.Files.Installers.csproj" />
+    <ProjectReference Include="..\..\IssueReporting\SyncVPN.IssueReporting.Installers\SyncVPN.IssueReporting.Installers.csproj" />
+    <ProjectReference Include="..\..\Logging\SyncVPN.Logging.Installers\SyncVPN.Logging.Installers.csproj" />
+    <ProjectReference Include="..\..\OperatingSystems\PowerEvents\SyncVPN.OperatingSystems.PowerEvents.Contracts\SyncVPN.OperatingSystems.PowerEvents.Contracts.csproj" />
+    <ProjectReference Include="..\..\OperatingSystems\PowerEvents\SyncVPN.OperatingSystems.PowerEvents.Installers\SyncVPN.OperatingSystems.PowerEvents.Installers.csproj" />
+    <ProjectReference Include="..\..\OperatingSystems\Processes\SyncVPN.OperatingSystems.Processes.Installers\SyncVPN.OperatingSystems.Processes.Installers.csproj" />
+    <ProjectReference Include="..\..\OperatingSystems\Registries\SyncVPN.OperatingSystems.Registries.Installers\SyncVPN.OperatingSystems.Registries.Installers.csproj" />
+    <ProjectReference Include="..\..\OperatingSystems\Services\SyncVPN.OperatingSystems.Services.Installers\SyncVPN.OperatingSystems.Services.Installers.csproj" />
+    <ProjectReference Include="..\..\ProcessCommunication\SyncVPN.ProcessCommunication.Installers\SyncVPN.ProcessCommunication.Installers.csproj" />
+    <ProjectReference Include="..\..\Serialization\SyncVPN.Serialization.Installers\SyncVPN.Serialization.Installers.csproj" />
+    <ProjectReference Include="..\Common\SyncVPN.Client.Common.Interop\SyncVPN.Client.Common.Interop.csproj" />
+    <ProjectReference Include="..\Common\SyncVPN.Client.Common.UI\SyncVPN.Client.Common.UI.csproj" />
+    <ProjectReference Include="..\Common\SyncVPN.Client.Common\SyncVPN.Client.Common.csproj" />
+    <ProjectReference Include="..\EventMessaging\SyncVPN.Client.EventMessaging.Installers\SyncVPN.Client.EventMessaging.Installers.csproj" />
+    <ProjectReference Include="..\Files\SyncVPN.Client.Files.Installers\SyncVPN.Client.Files.Installers.csproj" />
+    <ProjectReference Include="..\Localization\SyncVPN.Client.Localization.Contracts\SyncVPN.Client.Localization.Contracts.csproj" />
+    <ProjectReference Include="..\Localization\SyncVPN.Client.Localization.Extensions\SyncVPN.Client.Localization.Extensions.csproj" />
+    <ProjectReference Include="..\Localization\SyncVPN.Client.Localization.Installers\SyncVPN.Client.Localization.Installers.csproj" />
+    <ProjectReference Include="..\Logic\Announcements\SyncVPN.Client.Logic.Announcements.Installers\SyncVPN.Client.Logic.Announcements.Installers.csproj" />
+    <ProjectReference Include="..\Logic\Auth\SyncVPN.Client.Logic.Auth.Installers\SyncVPN.Client.Logic.Auth.Installers.csproj" />
+    <ProjectReference Include="..\Logic\Connection\SyncVPN.Client.Logic.Connection.Contracts\SyncVPN.Client.Logic.Connection.Contracts.csproj" />
+    <ProjectReference Include="..\Logic\Connection\SyncVPN.Client.Logic.Connection.Installers\SyncVPN.Client.Logic.Connection.Installers.csproj" />
+    <ProjectReference Include="..\Logic\Feedback\SyncVPN.Client.Logic.Feedback.Installers\SyncVPN.Client.Logic.Feedback.Installers.csproj" />
+    <ProjectReference Include="..\Logic\Recents\SyncVPN.Client.Logic.Recents.Contracts\SyncVPN.Client.Logic.Recents.Contracts.csproj" />
+    <ProjectReference Include="..\Logic\Recents\SyncVPN.Client.Logic.Recents.Installers\SyncVPN.Client.Logic.Recents.Installers.csproj" />
+    <ProjectReference Include="..\Logic\Servers\SyncVPN.Client.Logic.Servers.Contracts\SyncVPN.Client.Logic.Servers.Contracts.csproj" />
+    <ProjectReference Include="..\Logic\Servers\SyncVPN.Client.Logic.Servers.Installers\SyncVPN.Client.Logic.Servers.Installers.csproj" />
+    <ProjectReference Include="..\Logic\Services\SyncVPN.Client.Logic.Services.Installers\SyncVPN.Client.Logic.Services.Installers.csproj" />
+    <ProjectReference Include="..\Logic\Updates\SyncVPN.Client.Logic.Updates.Contracts\SyncVPN.Client.Logic.Updates.Contracts.csproj" />
+    <ProjectReference Include="..\Logic\Updates\SyncVPN.Client.Logic.Updates.Installers\SyncVPN.Client.Logic.Updates.Installers.csproj" />
+    <ProjectReference Include="..\Logic\Users\SyncVPN.Client.Logic.Users.Contracts\SyncVPN.Client.Logic.Users.Contracts.csproj" />
+    <ProjectReference Include="..\Logic\Users\SyncVPN.Client.Logic.Users.Installers\SyncVPN.Client.Logic.Users.Installers.csproj" />
+    <ProjectReference Include="..\Notifications\SyncVPN.Client.Notifications.Installers\SyncVPN.Client.Notifications.Installers.csproj" />
+    <ProjectReference Include="..\Settings\SyncVPN.Client.Settings.Installers\SyncVPN.Client.Settings.Installers.csproj" />
+    <ProjectReference Include="..\UnsecureWifiDetection\SyncVPN.Client.UnsecureWifiDetection.Installers\SyncVPN.Client.UnsecureWifiDetection.Installers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Assets\SyncVPN.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UI\Overlays\Information\Notification\" />
+    <Page Update="UI\Main\Components\ConnectionErrorComponent.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="UI\Main\FeatureIcons\PortForwardingIconView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="UI\Main\FeatureIcons\NetShieldIconView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="UI\Main\FeatureIcons\VpnAcceleratorIconView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\FeatureIcons\SplitTunnelingIconView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\FeatureIcons\ProtocolIconView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Folder Include="UI\Main\Home\Details\Location\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Home\Details\Flyouts\SpeedFlyoutView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\Home\Details\Flyouts\VolumeFlyoutView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\Home\Details\Flyouts\CountryFlyoutView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\Home\Details\Flyouts\ProtocolFlyoutView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\Home\Details\Flyouts\ServerLoadFlyoutView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\Home\Details\Flyouts\IspFlyoutView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\Settings\Pages\About\AboutPageView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="UI\Main\Settings\Pages\About\LicensingPageView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="UI\Main\Settings\Pages\Advanced\CustomDnsServerPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="UI\Main\Settings\Pages\CensorshipSettingsPageView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\Settings\Pages\DeveloperToolsPageView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\Settings\Pages\DefaultConnections\ConnectionPreferencesSettingsPageView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="UI\Main\Settings\Pages\AutoStartupSettingsPageView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\Settings\Pages\DebugLogsPageView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\Settings\Pages\VpnAcceleratorSettingsPageView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Main\Settings\Pages\ProtocolSettingsPageView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="UI\Login\Components\DisableKillSwitchBannerComponent.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="UI\Login\Overlays\SsoLoginOverlayView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="UI\Main\Sidebar\Connections\Bases\Controls\LocationComboBox.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="UI\Overlays\Information\OutdatedClientOverlayView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="UI\Overlays\Welcome\WelcomeOverlayView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="UI\Overlays\Welcome\WelcomeToVpnB2BOverlayView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="UI\Overlays\Welcome\WelcomeToVpnPlusOverlayView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="UI\Overlays\Welcome\WelcomeToVpnUnlimitedOverlayView.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Tray\TrayIconComponentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <CustomAdditionalCompileInputs Remove="UI\MainWindowShellView.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Remove="UI\MainWindowShellView.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Home\Upsell\ChangeServerComponentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\FeatureIcons\KillSwitchIconView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Settings\Pages\Connection\ConnectionSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Settings\Pages\UserDetailsComponent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Home\Upsell\ConnectionCardUpsellBannerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Overlays\Free\FreeConnectionsOverlayView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Home\Details\Flyouts\IpAddressFlyout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Overlays\Information\ServerLoadOverlayView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Overlays\Information\SmartRoutingOverlayView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Overlays\Information\TorOverlayView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Overlays\Information\P2POverlayView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Sidebar\Connections\Bases\Controls\ConnectionItemsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Dialogs\Upsell\UpsellCarouselWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Sidebar\Connections\Countries\Tor\TorCountriesComponentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Sidebar\Connections\Countries\SecureCore\SecureCoreCountriesComponentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Sidebar\Connections\Countries\P2P\P2PCountriesComponentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Sidebar\Connections\Countries\All\AllCountriesComponentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Home\Details\Connection\ConnectionDetailsPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Home\Details\Location\LocationDetailsPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Settings\SettingsWidgetView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Overlays\Information\SecureCoreOverlayView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Overlays\HumanVerification\HumanVerificationOverlayView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Dialogs\ReportIssue\Pages\ReportIssueResultPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Dialogs\ReportIssue\Pages\ReportIssueContactPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Dialogs\ReportIssue\Pages\ReportIssueCategoryPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Dialogs\ReportIssue\Pages\ReportIssueCategoriesPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Dialogs\ReportIssue\ReportIssueShellView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Dialogs\ReportIssue\ReportIssueWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Settings\Pages\AdvancedSettingsPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Settings\Pages\CommonSettingsPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Home\Map\MapComponentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Features\SplitTunneling\SplitTunnelingWidgetView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Features\SplitTunneling\SplitTunnelingPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Features\PortForwarding\PortForwardingWidgetView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Features\PortForwarding\PortForwardingPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Features\NetShield\NetShieldPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Features\NetShield\NetShieldWidgetView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Features\KillSwitch\KillSwitchWidgetView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Features\KillSwitch\KillSwitchPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Home\Details\DetailsComponentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Home\Card\ConnectionCardComponentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Settings\SettingsPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Sidebar\Connections\ConnectionsPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Sidebar\Connections\Countries\CountriesPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Sidebar\Connections\Gateways\GatewaysPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Sidebar\Connections\Profiles\ProfilesPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Sidebar\Connections\Recents\RecentsPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Sidebar\Search\SearchResultsPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Sidebar\SidebarComponentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Widgets\SideWidgetsHostComponentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\NavigationMasterControllerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Login\Forms\TwoFactorPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Login\Forms\LoadingPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Login\Forms\SignInPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\MainPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Login\LoginPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PRIResource Remove="UI\Main\Home\Details\Contracts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Overlays\Selection\AppSelectorOverlayView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Overlays\Selection\IpSelectorOverlayView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Components\Selectors\IpAddressesSelectorComponentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Home\Details\Connection\SpeedChartControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Home\Details\Connection\SpeedChartComponentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Controls\DefaultConnectionSelector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Home\Status\ConnectionStatusHeaderView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Home\Status\ConnectionStatusGradientView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Dialogs\Tray\Pages\TrayMainPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Dialogs\Tray\Pages\TrayLoginPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Dialogs\Tray\TrayAppShellView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Tray\TrayAppWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Home\Card\DefaultConnection\DefaultConnectionSelectorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Components\CurrentProfileIconView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Overlays\Information\ProfileOverlayView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Profiles\Components\ProfileOptionsSelectorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Profiles\ProfilePageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Components\EmptyPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Home\HomeComponentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Components\BannerComponent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Dialogs\Upsell\Features\ProfilesUpsellFeaturePageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Dialogs\DebugTools\DebugToolsShellView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Dialogs\DebugTools\DebugToolsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Components\ActivePortComponentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Update\UpdateComponent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Components\TitleBarMenuComponent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Dialogs\Upsell\UpsellCarouselShellView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+</Project>

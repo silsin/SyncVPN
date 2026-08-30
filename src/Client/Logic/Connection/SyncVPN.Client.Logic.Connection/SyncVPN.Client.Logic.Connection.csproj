@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <PreserveCompilationContext>true</PreserveCompilationContext>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <OutputPath>..\..\..\..\bin</OutputPath>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="..\..\..\..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="Properties\" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="System.Formats.Asn1" />
+      <PackageReference Include="System.Text.Json" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\..\Api\SyncVPN.Api.Contracts\SyncVPN.Api.Contracts.csproj" />
+        <ProjectReference Include="..\..\..\..\Builds\SyncVPN.Builds.Variables\SyncVPN.Builds.Variables.csproj" />
+        <ProjectReference Include="..\..\..\..\EntityMapping\SyncVPN.EntityMapping.Contracts\SyncVPN.EntityMapping.Contracts.csproj" />
+        <ProjectReference Include="..\..\..\..\IPv6\SyncVPN.IPv6.Contracts\SyncVPN.IPv6.Contracts.csproj" />
+        <ProjectReference Include="..\..\..\..\OperatingSystems\Network\SyncVPN.OperatingSystems.Network.Contracts\SyncVPN.OperatingSystems.Network.Contracts.csproj" />
+        <ProjectReference Include="..\..\..\..\ProcessCommunication\SyncVPN.ProcessCommunication.Contracts\SyncVPN.ProcessCommunication.Contracts.csproj" />
+        <ProjectReference Include="..\..\..\..\Serialization\SyncVPN.Serialization.Contracts\SyncVPN.Serialization.Contracts.csproj" />
+        <ProjectReference Include="..\..\..\Common\SyncVPN.Client.Common\SyncVPN.Client.Common.csproj" />
+        <ProjectReference Include="..\..\..\EventMessaging\SyncVPN.Client.EventMessaging.Contracts\SyncVPN.Client.EventMessaging.Contracts.csproj" />
+        <ProjectReference Include="..\..\..\SyncVPN.Client.Contracts\SyncVPN.Client.Contracts.csproj" />
+        <ProjectReference Include="..\..\..\Settings\SyncVPN.Client.Settings.Contracts\SyncVPN.Client.Settings.Contracts.csproj" />
+        <ProjectReference Include="..\..\Auth\SyncVPN.Client.Logic.Auth.Contracts\SyncVPN.Client.Logic.Auth.Contracts.csproj" />
+        <ProjectReference Include="..\..\Profiles\SyncVPN.Client.Logic.Profiles.Contracts\SyncVPN.Client.Logic.Profiles.Contracts.csproj" />
+        <ProjectReference Include="..\..\Servers\SyncVPN.Client.Logic.Servers.Contracts\SyncVPN.Client.Logic.Servers.Contracts.csproj" />
+        <ProjectReference Include="..\..\Services\SyncVPN.Client.Logic.Services.Contracts\SyncVPN.Client.Logic.Services.Contracts.csproj" />
+        <ProjectReference Include="..\SyncVPN.Client.Logic.Connection.Contracts\SyncVPN.Client.Logic.Connection.Contracts.csproj" />
+    </ItemGroup>
+</Project>

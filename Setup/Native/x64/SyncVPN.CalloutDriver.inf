@@ -1,0 +1,60 @@
+;
+; SyncVPN.CalloutDriver.inf
+;
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = WFPCALLOUTS
+ClassGuid   = {57465043-616C-6C6F-7574-5F636C617373}
+Provider    = %ManufacturerName%
+CatalogFile = SyncVPN.CalloutDriver.cat
+DriverVer = 03/16/2026,9.16.38.67
+PnpLockdown = 1
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+SyncVPN.CalloutDriver.sys = 1,,
+
+[DestinationDirs]
+DefaultDestDir                   = 12    ; %WinDir%\System32\Drivers
+SyncVPN.CalloutDriver.Files    = 12    ; %WinDir%\System32\Drivers
+SyncVPN.CalloutDriver.DelFiles = 12    ; %WinDir%\System32\Drivers
+
+[DefaultInstall.NTamd64]
+OptionDesc = %ServiceDescription%
+CopyFiles  = SyncVPN.CalloutDriver.Files
+
+[DefaultUninstall.NTamd64]
+LegacyUninstall = 1
+DelFiles = SyncVPN.CalloutDriver.DelFiles
+
+[DefaultInstall.NTamd64.Services]
+AddService = %ServiceName%,,SyncVPN.CalloutDriver.Service
+
+[DefaultUninstall.NTamd64.Services]
+DelService = %ServiceName%,0x200    ; SPSVCINST_STOPSERVICE
+
+[SyncVPN.CalloutDriver.Files]
+SyncVPN.CalloutDriver.sys,,,0x00000040    ; COPYFLG_OVERWRITE_OLDER_ONLY
+
+[SyncVPN.CalloutDriver.DelFiles]
+SyncVPN.CalloutDriver.sys,,,0x00000040    ; COPYFLG_OVERWRITE_OLDER_ONLY
+
+[SyncVPN.CalloutDriver.Service]
+DisplayName    = %ServiceDisplayName%
+Description    = %ServiceDescription%
+ServiceType    = 1                                   ; SERVICE_KERNEL_DRIVER
+StartType      = 3                                   ; SERVICE_DEMAND_START
+ErrorControl   = 1                                   ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\SyncVPN.CalloutDriver.sys
+LoadOrderGroup = NDIS
+Dependencies   = TCPIP                               ; Load after TCPIP.sys
+
+[Strings]
+ManufacturerName   = "Proton AG"
+DiskName           = "SyncVPN Callout Driver Installation Disk"
+ServiceName        = "SyncVPNCallout"
+ServiceDisplayName = "SyncVPN Callout"
+ServiceDescription = "SyncVPN Callout Driver"

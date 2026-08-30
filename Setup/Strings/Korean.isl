@@ -1,5 +1,5 @@
 ﻿[CustomMessages]
-InstallerTitle=Proton VPN 설치 준비가 완료되었습니다
+InstallerTitle=SyncVPN 설치 준비가 완료되었습니다
 InstallOtherApps=설치할 다른 Proton 앱을 선택하세요. 회원님의 플랜에 해당 서비스가 포함되어 있습니다.
 FreeTrial=무료 체험
 Free=무료

@@ -94,7 +94,7 @@ def compute_checksum(file_path: str, algorithm: str) -> str:
 
 # architecture: 'x64' or 'arm64'
 def generate_release_json(version: str, architecture: str) -> str:
-    file_path = f"/builds/ProtonVPN/Windows/win-app/Setup/Installers/ProtonVPN_v{version}_{architecture}.exe"
+    file_path = f"/builds/SyncVPN/Windows/win-app/Setup/Installers/SyncVPN_v{version}_{architecture}.exe"
 
     if not os.path.isfile(file_path):
         raise FileNotFoundError(f"File not found: {file_path}")
@@ -109,7 +109,7 @@ def generate_release_json(version: str, architecture: str) -> str:
         f'    "Version": "{version}",\n'
          '    "CategoryName": "EarlyAccess",\n'
          '    "File": {\n'
-        f'        "Url": "https://vpn.protondownload.com/download/ProtonVPN_v{version}_{architecture}.exe",\n'
+        f'        "Url": "https://vpn.protondownload.com/download/SyncVPN_v{version}_{architecture}.exe",\n'
         f'        "SHA256CheckSum": "{sha256}",\n'
         f'        "SHA512CheckSum": "{sha512}",\n'
          '        "Args": "/silent"\n'
@@ -240,7 +240,7 @@ def deploy_file(api: GitLabAPI, architecture: str, version: str, target_json_pat
 # Start of v2 file code (windows-releases.json)
 
 def generate_v2_release_json(version: str) -> str:
-    file_path = f"/builds/ProtonVPN/Windows/win-app/Setup/Installers/ProtonVPN_v{version}_x64.exe"
+    file_path = f"/builds/SyncVPN/Windows/win-app/Setup/Installers/SyncVPN_v{version}_x64.exe"
 
     if not os.path.isfile(file_path):
         raise FileNotFoundError(f"File not found: {file_path}")
@@ -255,7 +255,7 @@ def generate_v2_release_json(version: str) -> str:
          '{\n'
         f'    "Version": "{version}",\n'
          '    "File": {\n'
-        f'        "Url": "https://vpn.protondownload.com/download/ProtonVPN_v{version}_x64.exe",\n'
+        f'        "Url": "https://vpn.protondownload.com/download/SyncVPN_v{version}_x64.exe",\n'
         f'        "SHA1CheckSum": "{sha1}",\n'
         f'        "SHA256CheckSum": "{sha256}",\n'
         f'        "SHA512CheckSum": "{sha512}",\n'

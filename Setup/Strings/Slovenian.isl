@@ -1,5 +1,5 @@
 ﻿[CustomMessages]
-InstallerTitle=Proton VPN je pripravljen za namestitev.
+InstallerTitle=SyncVPN je pripravljen za namestitev.
 InstallOtherApps=Izberite druge aplikacije Proton, ki jih želite namestiti. Te storitve so vključene v vaš paket.
 FreeTrial=Brezplačen preizkus
 Free=Brezplačno

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+        <PreserveCompilationContext>true</PreserveCompilationContext>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<OutputPath>..\..\..\..\bin</OutputPath>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Include="..\..\..\..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="System.Formats.Asn1" />
+	  <PackageReference Include="System.Text.Json" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Localization\SyncVPN.Client.Localization.Contracts\SyncVPN.Client.Localization.Contracts.csproj" />
+	  <ProjectReference Include="..\..\..\Localization\SyncVPN.Client.Localization.Extensions\SyncVPN.Client.Localization.Extensions.csproj" />
+	  <ProjectReference Include="..\..\Connection\SyncVPN.Client.Logic.Connection.Contracts\SyncVPN.Client.Logic.Connection.Contracts.csproj" />
+	  <ProjectReference Include="..\..\Profiles\SyncVPN.Client.Logic.Profiles.Contracts\SyncVPN.Client.Logic.Profiles.Contracts.csproj" />
+	  <ProjectReference Include="..\..\Servers\SyncVPN.Client.Logic.Servers.Contracts\SyncVPN.Client.Logic.Servers.Contracts.csproj" />
+	  <ProjectReference Include="..\SyncVPN.Client.Logic.Searches.Contracts\SyncVPN.Client.Logic.Searches.Contracts.csproj" />
+	</ItemGroup>
+</Project>

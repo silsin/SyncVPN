@@ -1,5 +1,5 @@
 ﻿[CustomMessages]
-InstallerTitle=Proton VPN พร้อมสำหรับการติดตั้ง
+InstallerTitle=SyncVPN พร้อมสำหรับการติดตั้ง
 InstallOtherApps=เลือกแอป Proton อื่นๆ เพื่อติดตั้ง บริการเหล่านี้รวมอยู่ในแผน
 FreeTrial=ทดลองใช้ฟรี
 Free=ฟรี

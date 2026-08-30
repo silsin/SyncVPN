@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <PreserveCompilationContext>true</PreserveCompilationContext>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <OutputPath>..\..\..\..\bin</OutputPath>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="..\..\..\..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Autofac" />
+        <PackageReference Include="System.Formats.Asn1" />
+        <PackageReference Include="System.Text.Json" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\SyncVPN.Client.Logic.Services.Contracts\SyncVPN.Client.Logic.Services.Contracts.csproj" />
+        <ProjectReference Include="..\SyncVPN.Client.Logic.Services\SyncVPN.Client.Logic.Services.csproj" />
+    </ItemGroup>
+</Project>

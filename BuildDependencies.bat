@@ -50,22 +50,22 @@ set x86buildParams=%buildParams% /p:Platform=Win32
 set x64buildParams=%buildParams% /p:Platform=%PLATFORM%
 
 if "%~2" NEQ "srponly" (
-    echo compiling ProtonVPN.IPFilter.dll %time%
-    msbuild src\ProtonVPN.IpFilter\ProtonVPN.IpFilter.vcxproj %x64buildParams% || exit /b %ERRORLEVEL%
+    echo compiling SyncVPN.IPFilter.dll %time%
+    msbuild src\SyncVPN.IpFilter\SyncVPN.IpFilter.vcxproj %x64buildParams% || exit /b %ERRORLEVEL%
 
-    echo compiling ProtonVPN.NetworkUtil.dll %time%
-    msbuild src\ProtonVPN.NetworkUtil\ProtonVPN.NetworkUtil.vcxproj %x64buildParams% || exit /b %ERRORLEVEL%
+    echo compiling SyncVPN.NetworkUtil.dll %time%
+    msbuild src\SyncVPN.NetworkUtil\SyncVPN.NetworkUtil.vcxproj %x64buildParams% || exit /b %ERRORLEVEL%
 
-    echo compiling ProtonVPN.InstallActions.x86.dll %time%
-    msbuild src\ProtonVPN.InstallActions\ProtonVPN.InstallActions.vcxproj %x86buildParams% || exit /b %ERRORLEVEL%
+    echo compiling SyncVPN.InstallActions.x86.dll %time%
+    msbuild src\SyncVPN.InstallActions\SyncVPN.InstallActions.vcxproj %x86buildParams% || exit /b %ERRORLEVEL%
 
-    echo compiling ProtonVPN.InstallActions.dll %time%
-    msbuild src\ProtonVPN.InstallActions\ProtonVPN.InstallActions.vcxproj %x64buildParams% || exit /b %ERRORLEVEL%
+    echo compiling SyncVPN.InstallActions.dll %time%
+    msbuild src\SyncVPN.InstallActions\SyncVPN.InstallActions.vcxproj %x64buildParams% || exit /b %ERRORLEVEL%
 
     echo compiling LocalAgent.dll %time%
     
     if "%PLATFORM%"=="x64" (
-        pushd %currentDir%src\ProtonVPN.LocalAgent\localAgentWin
+        pushd %currentDir%src\SyncVPN.LocalAgent\localAgentWin
         set GO111MODULE=on
         set CGO_CFLAGS=-O3 -Wall -Wno-unused-function -Wno-switch -std=gnu11 -DWINVER=0x0601
 
@@ -80,11 +80,11 @@ if "%~2" NEQ "srponly" (
         -e GOARCH="arm64" ^
         -e GOOS="windows" ^
         -e GO111MODULE="on" ^
-        -v %currentDir%\src\ProtonVPN.LocalAgent:/go/work ^
+        -v %currentDir%\src\SyncVPN.LocalAgent:/go/work ^
         -w /go/work/localAgentWin x1unix/go-mingw:1.23 ^
         go build -buildmode c-shared -ldflags="-w -s" -trimpath -v -o LocalAgent.dll .
         
-        xcopy %currentDir%src\ProtonVPN.LocalAgent\localAgentWin\LocalAgent.dll %resourcesDir% /y
+        xcopy %currentDir%src\SyncVPN.LocalAgent\localAgentWin\LocalAgent.dll %resourcesDir% /y
     )
 )
 

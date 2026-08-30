@@ -24,7 +24,7 @@ Source: "Native\x64\libssl-3-x64.dll"; DestDir: "{app}\{#VersionFolder}\Resource
 Source: "Native\x64\openvpn.exe"; DestDir: "{app}\{#VersionFolder}\Resources"; Flags: signonce;
 Source: "Native\x64\vcruntime140.dll"; DestDir: "{app}\{#VersionFolder}\Resources"; Flags: signonce;
 
-Source: "Native\x64\ProtonVPN.CalloutDriver.sys"; DestDir: "{app}\{#VersionFolder}\Resources"; AfterInstall: InstallNetworkDriver;
+Source: "Native\x64\SyncVPN.CalloutDriver.sys"; DestDir: "{app}\{#VersionFolder}\Resources"; AfterInstall: InstallNetworkDriver;
 
 Source: "tap\x64\tapinstall.exe"; DestDir: "{app}\{#VersionFolder}\Resources\tap";
 Source: "tap\x64\OemVista.inf"; DestDir: "{app}\{#VersionFolder}\Resources\tap";

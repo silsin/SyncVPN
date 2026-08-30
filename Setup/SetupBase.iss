@@ -1,23 +1,23 @@
 #define MyAppVersion "4.0.0"
-#define MyAppName "Proton VPN" 
-#define ClientName "ProtonVPN.Client"
-#define MyAppExeName "ProtonVPN.Client.exe"
-#define LegacyMyAppExeName "ProtonVPN.exe"
-#define LauncherExeName "ProtonVPN.Launcher.exe"
-#define AppUserModelID "Proton.VPN"
+#define MyAppName "SyncVPN" 
+#define ClientName "SyncVPN.Client"
+#define MyAppExeName "SyncVPN.Client.exe"
+#define LegacyMyAppExeName "SyncVPN.exe"
+#define LauncherExeName "SyncVPN.Launcher.exe"
+#define AppUserModelID "SyncVPN"
 
 #define MyPublisher "Proton AG"
 
-#define ServiceName "ProtonVPN Service"
-#define ServiceExe "ProtonVPNService.exe"
+#define ServiceName "SyncVPN Service"
+#define ServiceExe "SyncVPNService.exe"
 
-#define WireGuardServiceName "ProtonVPN WireGuard"
-#define WireGuardServiceExe "ProtonVPN.WireGuardService.exe"
+#define WireGuardServiceName "SyncVPN WireGuard"
+#define WireGuardServiceExe "SyncVPN.WireGuardService.exe"
 
-#define NetworkDriverName "ProtonVPNCallout"
-#define NetworkDriverFileName "Resources\ProtonVPN.CalloutDriver.sys"
+#define NetworkDriverName "SyncVPNCallout"
+#define NetworkDriverFileName "Resources\SyncVPN.CalloutDriver.sys"
 
-#define RestoreInternetExeName "ProtonVPN.RestoreInternet.exe"
+#define RestoreInternetExeName "SyncVPN.RestoreInternet.exe"
 
 #define ProtonInstallerName "ProtonInstaller.exe"
 #define Webview2InstallerName "MicrosoftEdgeWebview2Setup.exe"
@@ -36,7 +36,7 @@
 #define OpenOnDesktopClientArg "-OpenOnDesktop"
 #define AppFolder "Proton\VPN"
 #define RegistryRunPath "Software\Microsoft\Windows\CurrentVersion\Run"
-#define LegacyClientName "ProtonVPN"
+#define LegacyClientName "SyncVPN"
 
 [Setup]
 AppName={#MyAppName}
@@ -49,7 +49,7 @@ DisableProgramGroupPage=auto
 AppPublisher={#MyPublisher}
 UninstallDisplayIcon={app}\{#LauncherExeName}
 UninstallDisplayName={#MyAppName}
-OutputBaseFilename=ProtonVPN_{#VersionFolder}_{#Architecture}{#OutputBaseSuffix}
+OutputBaseFilename=SyncVPN_{#VersionFolder}_{#Architecture}{#OutputBaseSuffix}
 ArchitecturesInstallIn64BitMode=x64compatible
 WizardStyle=modern
 Compression=lzma2
@@ -71,26 +71,26 @@ SignTool=signtool sign /a /tr http://timestamp.sectigo.com /td SHA256 /fd SHA256
 SetupWindowTitle={#MyAppName}
 
 [Registry]
-Root: HKLM; Subkey: "Software\Proton AG\Proton VPN"; Flags: uninsdeletekey dontcreatekey;
-Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\EventLog\Application\ProtonVPNService"; Flags: uninsdeletekey dontcreatekey;
-Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\EventLog\Application\ProtonVPN"; Flags: uninsdeletekey;
-Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\EventLog\Application\ProtonVPN"; ValueType: expandsz; ValueName: "EventMessageFile"; ValueData: "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\EventLogMessages.dll"; Flags: deletekey uninsdeletekey;
+Root: HKLM; Subkey: "Software\Proton AG\SyncVPN"; Flags: uninsdeletekey dontcreatekey;
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\EventLog\Application\SyncVPNService"; Flags: uninsdeletekey dontcreatekey;
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\EventLog\Application\SyncVPN"; Flags: uninsdeletekey;
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\EventLog\Application\SyncVPN"; ValueType: expandsz; ValueName: "EventMessageFile"; ValueData: "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\EventLogMessages.dll"; Flags: deletekey uninsdeletekey;
 
 [Files]
 Source: "Images\Proton*.bmp"; Flags: dontcopy nocompression;
 
-Source: "..\{#SourcePath}\ProtonVPN.Launcher.exe"; DestDir: "{app}"; Flags: signonce;
+Source: "..\{#SourcePath}\SyncVPN.Launcher.exe"; DestDir: "{app}"; Flags: signonce;
 
-Source: "..\{#SourcePath}\ProtonVPNService.exe"; DestDir: "{app}\{#VersionFolder}"; Flags: signonce;
-Source: "..\{#SourcePath}\ProtonVPNService.dll"; DestDir: "{app}\{#VersionFolder}"; Flags: signonce;
-Source: "..\{#SourcePath}\ProtonVPNService.deps.json"; DestDir: "{app}\{#VersionFolder}";
-Source: "..\{#SourcePath}\ProtonVPNService.runtimeconfig.json"; DestDir: "{app}\{#VersionFolder}"; AfterInstall: InstallService;
+Source: "..\{#SourcePath}\SyncVPNService.exe"; DestDir: "{app}\{#VersionFolder}"; Flags: signonce;
+Source: "..\{#SourcePath}\SyncVPNService.dll"; DestDir: "{app}\{#VersionFolder}"; Flags: signonce;
+Source: "..\{#SourcePath}\SyncVPNService.deps.json"; DestDir: "{app}\{#VersionFolder}";
+Source: "..\{#SourcePath}\SyncVPNService.runtimeconfig.json"; DestDir: "{app}\{#VersionFolder}"; AfterInstall: InstallService;
 
 Source: "..\{#SourcePath}\*.dll"; DestDir: "{app}\{#VersionFolder}"; Flags: signonce;
-Source: "..\{#SourcePath}\*.exe"; Excludes: "ProtonVPN.Launcher.exe,ProtonVPNService.exe,createdump.exe,RestartAgent.exe"; DestDir: "{app}\{#VersionFolder}"; Flags: signonce;
+Source: "..\{#SourcePath}\*.exe"; Excludes: "SyncVPN.Launcher.exe,SyncVPNService.exe,createdump.exe,RestartAgent.exe"; DestDir: "{app}\{#VersionFolder}"; Flags: signonce;
 Source: "..\{#SourcePath}\*.pri"; DestDir: "{app}\{#VersionFolder}";
 Source: "..\{#SourcePath}\*.deps.json"; DestDir: "{app}\{#VersionFolder}";
-Source: "..\{#SourcePath}\Resources\ProtonVPN.InstallActions.dll"; DestDir: "{app}\{#VersionFolder}"; Flags: signonce;
+Source: "..\{#SourcePath}\Resources\SyncVPN.InstallActions.dll"; DestDir: "{app}\{#VersionFolder}"; Flags: signonce;
 
 ;Source: "..\{#SourcePath}\be-BY\Microsoft.ui.xaml.dll.mui"; DestDir: "{app}\{#VersionFolder}\be-BY"; Flags: signonce;
 Source: "..\{#SourcePath}\en-us\Microsoft.ui.xaml.dll.mui"; DestDir: "{app}\{#VersionFolder}\en-us"; Flags: signonce;
@@ -126,10 +126,10 @@ Source: "..\{#SourcePath}\nb-NO\Microsoft.ui.xaml.dll.mui"; DestDir: "{app}\{#Ve
 Source: "..\{#SourcePath}\sl-SI\Microsoft.ui.xaml.dll.mui"; DestDir: "{app}\{#VersionFolder}\sl-SI"; Flags: signonce;
 Source: "..\{#SourcePath}\zh-CN\Microsoft.ui.xaml.dll.mui"; DestDir: "{app}\{#VersionFolder}\zh-CN"; Flags: signonce;
 
-Source: "..\{#SourcePath}\Resources\ProtonVPN.InstallActions.x86.dll"; DestDir: "{app}\{#VersionFolder}\Resources"; Flags: signonce nocompression;
+Source: "..\{#SourcePath}\Resources\SyncVPN.InstallActions.x86.dll"; DestDir: "{app}\{#VersionFolder}\Resources"; Flags: signonce nocompression;
 Source: "..\{#SourcePath}\Resources\LocalAgent.dll"; DestDir: "{app}\{#VersionFolder}\Resources"; Flags: signonce;
-Source: "..\{#SourcePath}\Resources\ProtonVPN.IPFilter.dll"; DestDir: "{app}\{#VersionFolder}\Resources"; Flags: signonce;
-Source: "..\{#SourcePath}\Resources\ProtonVPN.NetworkUtil.dll"; DestDir: "{app}\{#VersionFolder}\Resources"; Flags: signonce;
+Source: "..\{#SourcePath}\Resources\SyncVPN.IPFilter.dll"; DestDir: "{app}\{#VersionFolder}\Resources"; Flags: signonce;
+Source: "..\{#SourcePath}\Resources\SyncVPN.NetworkUtil.dll"; DestDir: "{app}\{#VersionFolder}\Resources"; Flags: signonce;
 
 Source: "GuestHoleServers.json"; DestDir: "{app}\{#VersionFolder}\Resources";
 Source: "Dependencies\{#Webview2InstallerName}"; Flags: dontcopy;
@@ -138,31 +138,31 @@ Source: "..\{#SourcePath}\Microsoft.UI.Xaml\Assets\*.png"; DestDir: "{app}\{#Ver
 
 Source: "..\{#SourcePath}\Assets\*.ico"; DestDir: "{app}\{#VersionFolder}\Assets";
 
-Source: "..\{#SourcePath}\Assets\Illustrations\Dark\*"; DestDir: "{app}\{#VersionFolder}\ProtonVPN.Client.Common.UI\Assets\Illustrations\Dark";
-Source: "..\{#SourcePath}\Assets\Illustrations\Light\*"; DestDir: "{app}\{#VersionFolder}\ProtonVPN.Client.Common.UI\Assets\Illustrations\Light";
-Source: "..\{#SourcePath}\Assets\Illustrations\*"; DestDir: "{app}\{#VersionFolder}\ProtonVPN.Client.Common.UI\Assets\Illustrations";
+Source: "..\{#SourcePath}\Assets\Illustrations\Dark\*"; DestDir: "{app}\{#VersionFolder}\SyncVPN.Client.Common.UI\Assets\Illustrations\Dark";
+Source: "..\{#SourcePath}\Assets\Illustrations\Light\*"; DestDir: "{app}\{#VersionFolder}\SyncVPN.Client.Common.UI\Assets\Illustrations\Light";
+Source: "..\{#SourcePath}\Assets\Illustrations\*"; DestDir: "{app}\{#VersionFolder}\SyncVPN.Client.Common.UI\Assets\Illustrations";
 
-Source: "..\{#SourcePath}\Assets\Icons\App\*"; DestDir: "{app}\{#VersionFolder}\ProtonVPN.Client.Common.UI\Assets\Icons\App";
-Source: "..\{#SourcePath}\Assets\Icons\*.png"; DestDir: "{app}\{#VersionFolder}\ProtonVPN.Client.Common.UI\Assets\Icons";
-Source: "..\{#SourcePath}\Assets\Icons\*.svg"; DestDir: "{app}\{#VersionFolder}\ProtonVPN.Client.Common.UI\Assets\Icons";
-Source: "..\{#SourcePath}\Assets\Icons\Streaming\*"; DestDir: "{app}\{#VersionFolder}\ProtonVPN.Client.Common.UI\Assets\Icons\Streaming";
-Source: "..\{#SourcePath}\Assets\Icons\NetShield\*"; DestDir: "{app}\{#VersionFolder}\ProtonVPN.Client.Common.UI\Assets\Icons\NetShield";
+Source: "..\{#SourcePath}\Assets\Icons\App\*"; DestDir: "{app}\{#VersionFolder}\SyncVPN.Client.Common.UI\Assets\Icons\App";
+Source: "..\{#SourcePath}\Assets\Icons\*.png"; DestDir: "{app}\{#VersionFolder}\SyncVPN.Client.Common.UI\Assets\Icons";
+Source: "..\{#SourcePath}\Assets\Icons\*.svg"; DestDir: "{app}\{#VersionFolder}\SyncVPN.Client.Common.UI\Assets\Icons";
+Source: "..\{#SourcePath}\Assets\Icons\Streaming\*"; DestDir: "{app}\{#VersionFolder}\SyncVPN.Client.Common.UI\Assets\Icons\Streaming";
+Source: "..\{#SourcePath}\Assets\Icons\NetShield\*"; DestDir: "{app}\{#VersionFolder}\SyncVPN.Client.Common.UI\Assets\Icons\NetShield";
 
-Source: "..\{#SourcePath}\Assets\Flags\Dark\*"; DestDir: "{app}\{#VersionFolder}\ProtonVPN.Client.Common.UI\Assets\Flags\Dark";
-Source: "..\{#SourcePath}\Assets\Flags\Light\*"; DestDir: "{app}\{#VersionFolder}\ProtonVPN.Client.Common.UI\Assets\Flags\Light";
-Source: "..\{#SourcePath}\Assets\Flags\*"; DestDir: "{app}\{#VersionFolder}\ProtonVPN.Client.Common.UI\Assets\Flags";
+Source: "..\{#SourcePath}\Assets\Flags\Dark\*"; DestDir: "{app}\{#VersionFolder}\SyncVPN.Client.Common.UI\Assets\Flags\Dark";
+Source: "..\{#SourcePath}\Assets\Flags\Light\*"; DestDir: "{app}\{#VersionFolder}\SyncVPN.Client.Common.UI\Assets\Flags\Light";
+Source: "..\{#SourcePath}\Assets\Flags\*"; DestDir: "{app}\{#VersionFolder}\SyncVPN.Client.Common.UI\Assets\Flags";
 
-Source: "..\{#SourcePath}\Assets\Map\Data\*"; DestDir: "{app}\{#VersionFolder}\ProtonVPN.Client.Common.UI\Assets\Map\Data";
+Source: "..\{#SourcePath}\Assets\Map\Data\*"; DestDir: "{app}\{#VersionFolder}\SyncVPN.Client.Common.UI\Assets\Map\Data";
 
-Source: "..\{#SourcePath}\Assets\Fonts\*"; DestDir: "{app}\{#VersionFolder}\ProtonVPN.Client.Common.UI\Assets\Fonts";
+Source: "..\{#SourcePath}\Assets\Fonts\*"; DestDir: "{app}\{#VersionFolder}\SyncVPN.Client.Common.UI\Assets\Fonts";
 
 ; Comes from iplist-builder repo artifacts
 Source: "..\data\ipv6_chaos_prefixtree.bin"; DestDir: "{app}\{#VersionFolder}\ServiceData\IPv6"; DestName: "PrefixTree.bin";
 Source: "..\{#SourcePath}\proton_vpn_ipv6chaos.dll"; DestDir: "{app}\{#VersionFolder}";
 
 [Icons]
-Name: "{group}\Proton VPN"; Filename: "{app}\{#LauncherExeName}"
-Name: "{commondesktop}\Proton VPN"; Filename: "{app}\{#LauncherExeName}"; Tasks: desktopicon; AppUserModelID: "{#AppUserModelID}";
+Name: "{group}\SyncVPN"; Filename: "{app}\{#LauncherExeName}"
+Name: "{commondesktop}\SyncVPN"; Filename: "{app}\{#LauncherExeName}"; Tasks: desktopicon; AppUserModelID: "{#AppUserModelID}";
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopShortcuts}"; 
@@ -216,46 +216,46 @@ function lstrcpyW(lpStringDest: String; lpStringSrc: Cardinal): Integer;
 external 'lstrcpyW@kernel32.dll stdcall';
 
 function InitLogger(logger: Longword): Integer;
-external 'InitLogger@files:ProtonVPN.InstallActions.x86.dll cdecl';
+external 'InitLogger@files:SyncVPN.InstallActions.x86.dll cdecl';
 
 function UpdateTaskbarIconTarget(launcherPath: String): Integer;
-external 'UpdateTaskbarIconTarget@files:ProtonVPN.InstallActions.x86.dll cdecl';
+external 'UpdateTaskbarIconTarget@files:SyncVPN.InstallActions.x86.dll cdecl';
 
 function UninstallProduct(upgradeCode: String): Integer;
-external 'UninstallProduct@files:ProtonVPN.InstallActions.x86.dll cdecl';
+external 'UninstallProduct@files:SyncVPN.InstallActions.x86.dll cdecl';
 
 function IsProductInstalled(upgradeCode: String): Integer;
-external 'IsProductInstalled@files:ProtonVPN.InstallActions.x86.dll cdecl';
+external 'IsProductInstalled@files:SyncVPN.InstallActions.x86.dll cdecl';
 
 function InstallWindowsService(name, displayName, path: String): Integer;
-external 'InstallService@files:ProtonVPN.InstallActions.x86.dll cdecl';
+external 'InstallService@files:SyncVPN.InstallActions.x86.dll cdecl';
 
 function IsProcessRunning(processName: String): Boolean;
-external 'IsProcessRunning@files:ProtonVPN.InstallActions.x86.dll cdecl';
+external 'IsProcessRunning@files:SyncVPN.InstallActions.x86.dll cdecl';
 
 function IsProcessRunningByPath(processPath: String): Boolean;
-external 'IsProcessRunningByPath@files:ProtonVPN.InstallActions.x86.dll cdecl';
+external 'IsProcessRunningByPath@files:SyncVPN.InstallActions.x86.dll cdecl';
 
 function InstallCalloutDriver(name, displayName, path: String): Integer;
-external 'InstallCalloutDriver@files:ProtonVPN.InstallActions.x86.dll cdecl';
+external 'InstallCalloutDriver@files:SyncVPN.InstallActions.x86.dll cdecl';
 
 function LaunchUnelevatedProcess(processPath, args: String; isToWait: Boolean): Integer;
-external 'LaunchUnelevatedProcess@files:ProtonVPN.InstallActions.x86.dll cdecl';
+external 'LaunchUnelevatedProcess@files:SyncVPN.InstallActions.x86.dll cdecl';
 
 function UninstallService(name: String): Integer;
-external 'UninstallService@{app}\{#VersionFolder}\Resources\ProtonVPN.InstallActions.x86.dll cdecl uninstallonly';
+external 'UninstallService@{app}\{#VersionFolder}\Resources\SyncVPN.InstallActions.x86.dll cdecl uninstallonly';
 
 function InitLoggerUninstall(logger: Longword): Integer;
-external 'InitLogger@{app}\{#VersionFolder}\Resources\ProtonVPN.InstallActions.x86.dll cdecl uninstallonly';
+external 'InitLogger@{app}\{#VersionFolder}\Resources\SyncVPN.InstallActions.x86.dll cdecl uninstallonly';
 
 function UninstallTapAdapter(tapFilesPath: String): Integer;
-external 'UninstallTapAdapter@{app}\{#VersionFolder}\Resources\ProtonVPN.InstallActions.x86.dll cdecl uninstallonly';
+external 'UninstallTapAdapter@{app}\{#VersionFolder}\Resources\SyncVPN.InstallActions.x86.dll cdecl uninstallonly';
 
 function RemovePinnedIcons(shortcutPath: String): Integer;
-external 'RemovePinnedIcons@{app}\{#VersionFolder}\Resources\ProtonVPN.InstallActions.x86.dll cdecl uninstallonly';
+external 'RemovePinnedIcons@{app}\{#VersionFolder}\Resources\SyncVPN.InstallActions.x86.dll cdecl uninstallonly';
 
 function LaunchUnelevatedProcessOnUninstall(processPath, args: String; isToWait: Boolean): Integer;
-external 'LaunchUnelevatedProcess@{app}\{#VersionFolder}\Resources\ProtonVPN.InstallActions.x86.dll cdecl uninstallonly';
+external 'LaunchUnelevatedProcess@{app}\{#VersionFolder}\Resources\SyncVPN.InstallActions.x86.dll cdecl uninstallonly';
 
 type
   TInt64Array = array of Int64;
@@ -535,7 +535,7 @@ var
   IsRunningProcessFound: Boolean;
 begin
   Log('Using directory ' + Directory + ' to find previous app versions for deletion');
-  Processes := ['ProtonVPN.exe', 'ProtonVPN.Client.exe', 'ProtonVPNService.exe', 'ProtonVPN.WireGuardService.exe'];
+  Processes := ['SyncVPN.exe', 'SyncVPN.Client.exe', 'SyncVPNService.exe', 'SyncVPN.WireGuardService.exe'];
   if FindFirst(ExpandConstant(Directory + '\v*'), VersionFolder) then
   try
     repeat
@@ -721,13 +721,13 @@ begin
     Log('Trying to update taskbar icon path if exists');
     UpdateTaskbarIconTarget(ExpandConstant('{app}\{#VersionFolder}\{#MyAppExeName}'));
 
-    Log('Trying to uninstall an old version of ProtonVPN app');
+    Log('Trying to uninstall an old version of SyncVPN app');
     UninstallProduct('{2B10124D-2F81-4BB1-9165-4F9B1B1BA0F9}');
 
-    Log('Trying to uninstall an old version of ProtonVPN TUN adapter');
+    Log('Trying to uninstall an old version of SyncVPN TUN adapter');
     UninstallProduct('{FED0679F-A292-4507-AEF5-DD2BB8898A36}');
 
-    Log('Trying to uninstall an old version of ProtonVPN TAP adapter');
+    Log('Trying to uninstall an old version of SyncVPN TAP adapter');
     UninstallProduct('{E23B9F7F-AA0A-481A-8ECA-FA69794BF50A}');
 
     Log('Trying to delete a legacy app startup record if exists');
@@ -847,7 +847,7 @@ var res, errorCode: Integer;
 begin
   Log('CurUninstallStepChanged(' + IntToStr(Ord(CurUninstallStep)) + ') called');
   if CurUninstallStep = usUninstall then begin
-    RemovePinnedIcons(ExpandConstant('{commondesktop}\Proton VPN.lnk'));
+    RemovePinnedIcons(ExpandConstant('{commondesktop}\SyncVPN.lnk'));
 
     Log('Killing {#MyAppExeName} process');
     ShellExec('open', 'taskkill.exe', '/f /im {#MyAppExeName}', '', SW_HIDE, ewWaitUntilTerminated, errorCode);
@@ -873,6 +873,6 @@ begin
 
     LaunchUnelevatedProcessOnUninstall(ExpandConstant('{app}\{#VersionFolder}\{#MyAppExeName}'), '{#ClearAppDataClientArg}', True);
 
-    UnloadDLL(ExpandConstant('{app}\{#VersionFolder}\Resources\ProtonVPN.InstallActions.x86.dll'));
+    UnloadDLL(ExpandConstant('{app}\{#VersionFolder}\Resources\SyncVPN.InstallActions.x86.dll'));
   end;
 end;

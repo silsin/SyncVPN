@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <PreserveCompilationContext>true</PreserveCompilationContext>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <OutputPath>..\..\..\..\bin</OutputPath>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\SyncVPN.Client.Logic.Auth.Srp.Contracts\SyncVPN.Client.Logic.Auth.Srp.Contracts.csproj" />
+        <ProjectReference Include="..\..\..\..\Api\SyncVPN.Api.Contracts\SyncVPN.Api.Contracts.csproj" />
+        <ProjectReference Include="..\..\..\..\Logging\SyncVPN.Logging.Contracts\SyncVPN.Logging.Contracts.csproj" />
+    </ItemGroup>
+</Project>

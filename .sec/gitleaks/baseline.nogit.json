@@ -8,7 +8,7 @@
   "EndColumn": 69,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/Configurations/ProtonVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs",
+  "File": "src/Configurations/SyncVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs",
   "SymlinkFile": "",
   "Commit": "",
   "Entropy": 4.7513914,
@@ -17,7 +17,7 @@
   "Date": "",
   "Message": "",
   "Tags": [],
-  "Fingerprint": "src/Configurations/ProtonVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs:proton-aead-jwt-signing-key:55"
+  "Fingerprint": "src/Configurations/SyncVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs:proton-aead-jwt-signing-key:55"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -28,7 +28,7 @@
   "EndColumn": 69,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/Configurations/ProtonVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs",
+  "File": "src/Configurations/SyncVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs",
   "SymlinkFile": "",
   "Commit": "",
   "Entropy": 4.8681254,
@@ -37,7 +37,7 @@
   "Date": "",
   "Message": "",
   "Tags": [],
-  "Fingerprint": "src/Configurations/ProtonVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs:proton-aead-jwt-signing-key:56"
+  "Fingerprint": "src/Configurations/SyncVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs:proton-aead-jwt-signing-key:56"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -48,7 +48,7 @@
   "EndColumn": 69,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/Configurations/ProtonVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs",
+  "File": "src/Configurations/SyncVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs",
   "SymlinkFile": "",
   "Commit": "",
   "Entropy": 4.711035,
@@ -57,7 +57,7 @@
   "Date": "",
   "Message": "",
   "Tags": [],
-  "Fingerprint": "src/Configurations/ProtonVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs:proton-aead-jwt-signing-key:78"
+  "Fingerprint": "src/Configurations/SyncVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs:proton-aead-jwt-signing-key:78"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -68,7 +68,7 @@
   "EndColumn": 69,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/Configurations/ProtonVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs",
+  "File": "src/Configurations/SyncVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs",
   "SymlinkFile": "",
   "Commit": "",
   "Entropy": 4.833014,
@@ -77,7 +77,7 @@
   "Date": "",
   "Message": "",
   "Tags": [],
-  "Fingerprint": "src/Configurations/ProtonVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs:proton-aead-jwt-signing-key:79"
+  "Fingerprint": "src/Configurations/SyncVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs:proton-aead-jwt-signing-key:79"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -88,7 +88,7 @@
   "EndColumn": 43,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Service/Resources/config.ovpn",
+  "File": "src/SyncVPN.Service/Resources/config.ovpn",
   "SymlinkFile": "",
   "Commit": "",
   "Entropy": 4.711035,
@@ -97,7 +97,7 @@
   "Date": "",
   "Message": "",
   "Tags": [],
-  "Fingerprint": "src/ProtonVPN.Service/Resources/config.ovpn:proton-aead-jwt-signing-key:70"
+  "Fingerprint": "src/SyncVPN.Service/Resources/config.ovpn:proton-aead-jwt-signing-key:70"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -108,7 +108,7 @@
   "EndColumn": 43,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Vpn/OpenVpn/ConfigTemplate.cs",
+  "File": "src/SyncVPN.Vpn/OpenVpn/ConfigTemplate.cs",
   "SymlinkFile": "",
   "Commit": "",
   "Entropy": 4.711035,
@@ -117,7 +117,7 @@
   "Date": "",
   "Message": "",
   "Tags": [],
-  "Fingerprint": "src/ProtonVPN.Vpn/OpenVpn/ConfigTemplate.cs:proton-aead-jwt-signing-key:124"
+  "Fingerprint": "src/SyncVPN.Vpn/OpenVpn/ConfigTemplate.cs:proton-aead-jwt-signing-key:124"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -128,7 +128,7 @@
   "EndColumn": 53,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Vpn/Config/VpnCertConfig.cs",
+  "File": "src/SyncVPN.Vpn/Config/VpnCertConfig.cs",
   "SymlinkFile": "",
   "Commit": "",
   "Entropy": 4.711035,
@@ -137,7 +137,7 @@
   "Date": "",
   "Message": "",
   "Tags": [],
-  "Fingerprint": "src/ProtonVPN.Vpn/Config/VpnCertConfig.cs:proton-aead-jwt-signing-key:50"
+  "Fingerprint": "src/SyncVPN.Vpn/Config/VpnCertConfig.cs:proton-aead-jwt-signing-key:50"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -148,7 +148,7 @@
   "EndColumn": 53,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Vpn/Config/VpnCertConfig.cs",
+  "File": "src/SyncVPN.Vpn/Config/VpnCertConfig.cs",
   "SymlinkFile": "",
   "Commit": "",
   "Entropy": 4.594301,
@@ -157,6 +157,6 @@
   "Date": "",
   "Message": "",
   "Tags": [],
-  "Fingerprint": "src/ProtonVPN.Vpn/Config/VpnCertConfig.cs:proton-aead-jwt-signing-key:84"
+  "Fingerprint": "src/SyncVPN.Vpn/Config/VpnCertConfig.cs:proton-aead-jwt-signing-key:84"
  }
 ]

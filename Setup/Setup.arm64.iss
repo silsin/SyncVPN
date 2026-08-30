@@ -23,7 +23,7 @@ Source: "Native\arm64\libpkcs11-helper-1.dll"; DestDir: "{app}\{#VersionFolder}\
 Source: "Native\arm64\libssl-3-arm64.dll"; DestDir: "{app}\{#VersionFolder}\Resources"; Flags: signonce;
 Source: "Native\arm64\openvpn.exe"; DestDir: "{app}\{#VersionFolder}\Resources"; Flags: signonce;
 
-Source: "Native\arm64\ProtonVPN.CalloutDriver.sys"; DestDir: "{app}\{#VersionFolder}\Resources"; AfterInstall: InstallNetworkDriver;
+Source: "Native\arm64\SyncVPN.CalloutDriver.sys"; DestDir: "{app}\{#VersionFolder}\Resources"; AfterInstall: InstallNetworkDriver;
 
 Source: "tap\arm64\tapinstall.exe"; DestDir: "{app}\{#VersionFolder}\Resources\tap";
 Source: "tap\arm64\OemVista.inf"; DestDir: "{app}\{#VersionFolder}\Resources\tap";

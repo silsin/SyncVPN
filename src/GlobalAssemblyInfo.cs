@@ -5,11 +5,11 @@ using System.Runtime.Versioning;
 // AssemblyCompany should be left empty as it is used by the .NET in forming
 // the folder path where user settings are saved.
 
-[assembly: AssemblyTitle("Proton VPN")]
+[assembly: AssemblyTitle("SyncVPN")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ProtonVPN")]
-[assembly: AssemblyProduct("Proton VPN")]
+[assembly: AssemblyCompany("SyncVPN")]
+[assembly: AssemblyProduct("SyncVPN")]
 [assembly: AssemblyCopyright("Copyright © 2023 Proton AG")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -1,5 +1,5 @@
 ﻿[CustomMessages]
-InstallerTitle=لنبدأ الآن تثبيت Proton VPN
+InstallerTitle=لنبدأ الآن تثبيت SyncVPN
 InstallOtherApps=بإمكانك أيضاً إدراج تطبيقات Proton الأخرى في عملية التثبيت، إذ تتوفر كافة هذه الخدمات ضمن اشتراكك الحالي.
 FreeTrial=فترة تجريبية
 Free=مجاني

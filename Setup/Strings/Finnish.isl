@@ -1,5 +1,5 @@
 ﻿[CustomMessages]
-InstallerTitle=Proton VPN on valmis asennettavaksi
+InstallerTitle=SyncVPN on valmis asennettavaksi
 InstallOtherApps=Valitse muut asennettavat Proton-sovellukset. Nämä palvelut kuuluvat tilaukseesi.
 FreeTrial=Ilmainen kokeilu
 Free=Free

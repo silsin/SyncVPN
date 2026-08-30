@@ -1,5 +1,5 @@
 ﻿[CustomMessages]
-InstallerTitle=A Proton VPN készen áll a telepítésre
+InstallerTitle=A SyncVPN készen áll a telepítésre
 InstallOtherApps=Válassza ki a telepítendő egyéb Proton alkalmazásokat. Ezeket a szolgáltatásokat a csomagja tartalmazza.
 FreeTrial=Ingyenes próbaverzió
 Free=Ingyenes

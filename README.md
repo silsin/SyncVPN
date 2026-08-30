@@ -1,44 +1,44 @@
-# Proton VPN Windows app
+# SyncVPN Windows app
 
 Copyright (c) 2023 Proton AG
 
-This repository holds the Proton VPN Windows app.
+This repository holds the SyncVPN Windows app.
 For a detailed build information see [BUILD](BUILD.md).
 For licensing information see [COPYING](COPYING.md).
 For contribution policy see [CONTRIBUTING](CONTRIBUTING.md).
 
 ## Description
 
-The [Proton VPN](https://protonvpn.com) Windows app is intended for every Proton VPN service user,
+The [SyncVPN](https://protonvpn.com) Windows app is intended for every SyncVPN service user,
 paid or free and supports all functionalities available to authenticated users (user signup instead happens on the web site).
 
-You can download the latest stable release, either on [Proton VPN official website](https://protonvpn.com/download) or directly on the [official GitHub repository](https://github.com/ProtonVPN/win-app/releases/latest).
+You can download the latest stable release, either on [SyncVPN official website](https://protonvpn.com/download) or directly on the [official GitHub repository](https://github.com/SyncVPN/win-app/releases/latest).
 
 ### The application
 
 The app consists of these interacting parts:
-- Proton VPN GUI application
-- Proton VPN Service
+- SyncVPN GUI application
+- SyncVPN Service
 - OpenVPN
 - TAP adapter
 - Split Tunnel driver
 
 #### GUI application
 
-The Proton VPN GUI app is installed into "C:\Program Files\Proton\VPN\<version>" directory by default. 
-The main executable is "ProtonVPN.exe".
+The SyncVPN GUI app is installed into "C:\Program Files\Proton\VPN\<version>" directory by default. 
+The main executable is "SyncVPN.exe".
 
-Proton VPN GUI app starts Proton VPN Service when launched and stops the service
+SyncVPN GUI app starts SyncVPN Service when launched and stops the service
 when closed.
 
-App logs are saved to "%LOCALAPPDATA%\ProtonVPN\Logs" directory.
+App logs are saved to "%LOCALAPPDATA%\SyncVPN\Logs" directory.
 
-The Proton VPN build using Debug configuration optionally loads its configuration from file
-"ProtonVPN.config" in the app directory. This file is not deployed during install. If the configuration
+The SyncVPN build using Debug configuration optionally loads its configuration from file
+"SyncVPN.config" in the app directory. This file is not deployed during install. If the configuration
 file doesn't exist or contains not valid values the app tries to save default configuration
 used in the app.
 
-To monitor Http traffic of Proton VPN GUI app using Fiddler or another tool, you might need to disable
+To monitor Http traffic of SyncVPN GUI app using Fiddler or another tool, you might need to disable
 TLS certificate pinning. To disable TLS certificate pinning the configuration file with empty
 "TlsPinningConfig" value should be provided:
 ```
@@ -47,57 +47,57 @@ TLS certificate pinning. To disable TLS certificate pinning the configuration fi
     ...
 ```
 
-#### Proton VPN Service
+#### SyncVPN Service
 
-The Windows service "ProtonVPN Service" is installed into
+The Windows service "SyncVPN Service" is installed into
 "C:\Program Files\Proton\VPN\<version>" directory by default. Service
-executable is "ProtonVPNService.exe". The service is started and stopped by the Proton VPN
+executable is "SyncVPNService.exe". The service is started and stopped by the SyncVPN
 GUI app.
 
 During installation, the service is configured to be started and stopped by the unprivileged
 interactive users.
 
 Service executable supports installation and uninstallation of service. Passing "install" on
-command line to "ProtonVPNService.exe" installs the service, passing "uninstall" - uninstalls.
+command line to "SyncVPNService.exe" installs the service, passing "uninstall" - uninstalls.
 This installation method doesn't configure service security settings.
 
 Service is responsible for interaction with OpenVPN, managing Windows firewall and Split Tunnel
 driver.
 
-Service logs are saved to "%ALLUSERSPROFILE%\ProtonVPN\Logs" directory.
+Service logs are saved to "%ALLUSERSPROFILE%\SyncVPN\Logs" directory.
 
 #### OpenVPN
 
-The Proton VPN uses OpenVPN for maintaining a VPN tunnel. The new OpenVPN process is started on each
+The SyncVPN uses OpenVPN for maintaining a VPN tunnel. The new OpenVPN process is started on each
 connect to a VPN and closed on disconnect. Communication with the OpenVPN process is maintained through
 TCP management interface.
 
 OpenVPN is installed into "C:\Program Files\Proton\VPN\<version>\Resources\"
 directory by default. The OpenVPN config file is static, it doesn't change for each VPN server.
 
-The OpenVPN is built from official source by applying a patch to support Proton VPN specific
-TAP adapter. See [win-openvpn](https://github.com/ProtonVPN/win-openvpn) repository.
+The OpenVPN is built from official source by applying a patch to support SyncVPN specific
+TAP adapter. See [win-openvpn](https://github.com/SyncVPN/win-openvpn) repository.
 
 #### TAP adapter
 
-TAP adapter "TAP-ProtonVPN Windows Adapter V9" is used by the OpenVPN.
+TAP adapter "TAP-SyncVPN Windows Adapter V9" is used by the OpenVPN.
 
-The TAP adapter is built from official source by applying a patch to have Proton VPN specific
-name and identification. See [win-tap-adapter](https://github.com/ProtonVPN/win-tap-adapter) repository.
+The TAP adapter is built from official source by applying a patch to have SyncVPN specific
+name and identification. See [win-tap-adapter](https://github.com/SyncVPN/win-tap-adapter) repository.
 
 #### Callout driver
 
-The kernel-mode driver "ProtonVPN Callout Driver" is used for redirecting socket bindings when
+The kernel-mode driver "SyncVPN Callout Driver" is used for redirecting socket bindings when
 Split Tunnel is enabled and preventing DNS leak by sending SERVFAIL response packet for DNS
-requests which were made from other interfaces than Proton VPN uses.
+requests which were made from other interfaces than SyncVPN uses.
 
 The driver is installed as a system service. It is started when connecting to VPN and stopped
-when disconnecting by Proton VPN Service.
+when disconnecting by SyncVPN Service.
 
 ## Folder structure
 
 The main repository folder contains the .NET Visual Studio solution of the
-Proton VPN Windows app named ProtonVPN.
+SyncVPN Windows app named SyncVPN.
 
 ### Folder "ci"
 
@@ -105,7 +105,7 @@ Contains continuous integration scripts.
 
 ### Folder "packages"
 
-It contains NuGet packages of the ProtonVPN solution.
+It contains NuGet packages of the SyncVPN solution.
 
 ### Folder "Setup"
 
@@ -113,9 +113,9 @@ This folder contains Advanced Installer setup project files, resources included 
 and built installer files. Subfolders contain:
 
 - "Images" - images for inclusion into the installer.
-- "Installers" - built Proton VPN installer files.
-- "ProtonVPNTap-SetupFiles" - built TAP adapter installer files. The latest successfully
-  built TAP adapter installer file is required to build the Proton VPN installer.
+- "Installers" - built SyncVPN installer files.
+- "SyncVPNTap-SetupFiles" - built TAP adapter installer files. The latest successfully
+  built TAP adapter installer file is required to build the SyncVPN installer.
 - "SplitTunnel" - SplitTunnel Callout driver for inclusion into the installer.
 
 ### Folder "src"
@@ -133,31 +133,31 @@ This folder contains GIT submodule of [ProtonMail SRP library](https://github.co
 
 ### Folder "test"
 
-This folder contains test projects of the ProtonVPN solution.
+This folder contains test projects of the SyncVPN solution.
 
 ## Solution
 
-Proton VPN Windows app is created using C# and C++ programming languages, WPF and MVVM
+SyncVPN Windows app is created using C# and C++ programming languages, WPF and MVVM
 technologies. The Visual Studio solution consists of a series of projects:
-- **ProtonVPN.App** - the main project which builds to Proton VPN GUI app executable.
+- **SyncVPN.App** - the main project which builds to SyncVPN GUI app executable.
   It contains startup logic and GUI (view models and views).
-- **ProtonVPN.CalloutDriver** - the callout driver written in C++ used for split tunneling and DNS leak protection.
-- **ProtonVPN.Common** - the classes shared between projects.
-- **ProtonVPN.Core** - the business logic of the application.
-- **ProtonVPN.ErrorMessage** - displays an error message when the application cannot be run. Builds to an executable.
-- **ProtonVPN.InstallActions** - the C++ actions used by the app installer.
-- **ProtonVPN.IpFilter** - the C++ library for configuring Windows firewall filters.
-- **ProtonVPN.Native** - the C# wrapper around Windows system libraries.
-- **ProtonVPN.NetworkFilter** - the C# wrapper around C++ library for configuring Windows firewall.
-- **ProtonVPN.NetworkUtil** - the C++ library for changing network configuration.
-- **ProtonVPN.Resource** - contains resources shared between projects.
-- **ProtonVPN.Service** - the Windows service which handles VPN, Windows firewall and Split Tunneling.
-- **ProtonVPN.Service.Contract** - contains the service contract.
-- **ProtonVPN.TapInstaller** - the TAP install action used in the app installer.
-- **ProtonVPN.TlsVerify** - the command line utility which verifies the VPN server certificate.
-- **ProtonVPN.Update** - the application update module used in the update service.
-- **ProtonVPN.UpdateService** - the Windows service which handles the app updates.
-- **ProtonVPN.UpdateServiceContract** - contains the update service contract.
-- **ProtonVPN.Vpn** - the OpenVPN management module used in the service.
+- **SyncVPN.CalloutDriver** - the callout driver written in C++ used for split tunneling and DNS leak protection.
+- **SyncVPN.Common** - the classes shared between projects.
+- **SyncVPN.Core** - the business logic of the application.
+- **SyncVPN.ErrorMessage** - displays an error message when the application cannot be run. Builds to an executable.
+- **SyncVPN.InstallActions** - the C++ actions used by the app installer.
+- **SyncVPN.IpFilter** - the C++ library for configuring Windows firewall filters.
+- **SyncVPN.Native** - the C# wrapper around Windows system libraries.
+- **SyncVPN.NetworkFilter** - the C# wrapper around C++ library for configuring Windows firewall.
+- **SyncVPN.NetworkUtil** - the C++ library for changing network configuration.
+- **SyncVPN.Resource** - contains resources shared between projects.
+- **SyncVPN.Service** - the Windows service which handles VPN, Windows firewall and Split Tunneling.
+- **SyncVPN.Service.Contract** - contains the service contract.
+- **SyncVPN.TapInstaller** - the TAP install action used in the app installer.
+- **SyncVPN.TlsVerify** - the command line utility which verifies the VPN server certificate.
+- **SyncVPN.Update** - the application update module used in the update service.
+- **SyncVPN.UpdateService** - the Windows service which handles the app updates.
+- **SyncVPN.UpdateServiceContract** - contains the update service contract.
+- **SyncVPN.Vpn** - the OpenVPN management module used in the service.
 
 Solution folder "Test" contains test projects.

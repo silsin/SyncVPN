@@ -8,7 +8,7 @@
   "EndColumn": 43,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Service/Resources/config.ovpn",
+  "File": "src/SyncVPN.Service/Resources/config.ovpn",
   "SymlinkFile": "",
   "Commit": "9b541f3cfafa2054a05077bbea941755b5e2a48c",
   "Entropy": 4.711035,
@@ -17,7 +17,7 @@
   "Date": "2026-04-22T08:33:54Z",
   "Message": "[v4] Introduce new Root CA and Intermediate1 Legacy CA",
   "Tags": [],
-  "Fingerprint": "9b541f3cfafa2054a05077bbea941755b5e2a48c:src/ProtonVPN.Service/Resources/config.ovpn:proton-aead-jwt-signing-key:70"
+  "Fingerprint": "9b541f3cfafa2054a05077bbea941755b5e2a48c:src/SyncVPN.Service/Resources/config.ovpn:proton-aead-jwt-signing-key:70"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -28,7 +28,7 @@
   "EndColumn": 53,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Vpn/Config/VpnCertConfig.cs",
+  "File": "src/SyncVPN.Vpn/Config/VpnCertConfig.cs",
   "SymlinkFile": "",
   "Commit": "9b541f3cfafa2054a05077bbea941755b5e2a48c",
   "Entropy": 4.711035,
@@ -37,7 +37,7 @@
   "Date": "2026-04-22T08:33:54Z",
   "Message": "[v4] Introduce new Root CA and Intermediate1 Legacy CA",
   "Tags": [],
-  "Fingerprint": "9b541f3cfafa2054a05077bbea941755b5e2a48c:src/ProtonVPN.Vpn/Config/VpnCertConfig.cs:proton-aead-jwt-signing-key:50"
+  "Fingerprint": "9b541f3cfafa2054a05077bbea941755b5e2a48c:src/SyncVPN.Vpn/Config/VpnCertConfig.cs:proton-aead-jwt-signing-key:50"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -48,7 +48,7 @@
   "EndColumn": 53,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Vpn/Config/VpnCertConfig.cs",
+  "File": "src/SyncVPN.Vpn/Config/VpnCertConfig.cs",
   "SymlinkFile": "",
   "Commit": "9b541f3cfafa2054a05077bbea941755b5e2a48c",
   "Entropy": 4.594301,
@@ -57,7 +57,7 @@
   "Date": "2026-04-22T08:33:54Z",
   "Message": "[v4] Introduce new Root CA and Intermediate1 Legacy CA",
   "Tags": [],
-  "Fingerprint": "9b541f3cfafa2054a05077bbea941755b5e2a48c:src/ProtonVPN.Vpn/Config/VpnCertConfig.cs:proton-aead-jwt-signing-key:84"
+  "Fingerprint": "9b541f3cfafa2054a05077bbea941755b5e2a48c:src/SyncVPN.Vpn/Config/VpnCertConfig.cs:proton-aead-jwt-signing-key:84"
  },
  {
   "RuleID": "proton-key-equals",
@@ -88,7 +88,7 @@
   "EndColumn": 81,
   "Match": "                             Password=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/ProtonVPN.Client/UI/Login/Pages/SignInPageView.xaml",
+  "File": "src/Client/SyncVPN.Client/UI/Login/Pages/SignInPageView.xaml",
   "SymlinkFile": "",
   "Commit": "9a396f59b0c935681af48cb3edce5f13eee0b7c5",
   "Entropy": 4.4341836,
@@ -97,7 +97,7 @@
   "Date": "2024-10-21T10:40:49Z",
   "Message": "Add sign in fixes",
   "Tags": [],
-  "Fingerprint": "9a396f59b0c935681af48cb3edce5f13eee0b7c5:src/Client/ProtonVPN.Client/UI/Login/Pages/SignInPageView.xaml:proton-password-equals-quotes:86"
+  "Fingerprint": "9a396f59b0c935681af48cb3edce5f13eee0b7c5:src/Client/SyncVPN.Client/UI/Login/Pages/SignInPageView.xaml:proton-password-equals-quotes:86"
  },
  {
   "RuleID": "proton-password-equals-quotes",
@@ -108,7 +108,7 @@
   "EndColumn": 77,
   "Match": "                         Password=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/ProtonVPN.Client/UI/Login/Pages/SignInPageView.xaml",
+  "File": "src/Client/SyncVPN.Client/UI/Login/Pages/SignInPageView.xaml",
   "SymlinkFile": "",
   "Commit": "36ef566d4164f1a5d0170057dcf20ff0cda009f5",
   "Entropy": 4.4341836,
@@ -117,7 +117,7 @@
   "Date": "2024-10-02T08:38:51Z",
   "Message": "Replace v4.0.9 with v4.1.0 (Mona Lisa)",
   "Tags": [],
-  "Fingerprint": "36ef566d4164f1a5d0170057dcf20ff0cda009f5:src/Client/ProtonVPN.Client/UI/Login/Pages/SignInPageView.xaml:proton-password-equals-quotes:60"
+  "Fingerprint": "36ef566d4164f1a5d0170057dcf20ff0cda009f5:src/Client/SyncVPN.Client/UI/Login/Pages/SignInPageView.xaml:proton-password-equals-quotes:60"
  },
  {
   "RuleID": "generic-api-key",
@@ -128,7 +128,7 @@
   "EndColumn": 60,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/BotProfileIcon.xaml",
+  "File": "src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/BotProfileIcon.xaml",
   "SymlinkFile": "",
   "Commit": "d959d07efaed919be16dad894146eb4401972571",
   "Entropy": 3.9705732,
@@ -137,7 +137,7 @@
   "Date": "2024-08-14T07:30:44Z",
   "Message": "Profiles MVP [VPNWIN-2219]",
   "Tags": [],
-  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/BotProfileIcon.xaml:generic-api-key:42"
+  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/BotProfileIcon.xaml:generic-api-key:42"
  },
  {
   "RuleID": "generic-api-key",
@@ -148,7 +148,7 @@
   "EndColumn": 66,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/BusinessProfileIcon.xaml",
+  "File": "src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/BusinessProfileIcon.xaml",
   "SymlinkFile": "",
   "Commit": "d959d07efaed919be16dad894146eb4401972571",
   "Entropy": 4.021641,
@@ -157,7 +157,7 @@
   "Date": "2024-08-14T07:30:44Z",
   "Message": "Profiles MVP [VPNWIN-2219]",
   "Tags": [],
-  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/BusinessProfileIcon.xaml:generic-api-key:62"
+  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/BusinessProfileIcon.xaml:generic-api-key:62"
  },
  {
   "RuleID": "generic-api-key",
@@ -168,7 +168,7 @@
   "EndColumn": 60,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/DefaultProfileIcon.xaml",
+  "File": "src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/DefaultProfileIcon.xaml",
   "SymlinkFile": "",
   "Commit": "d959d07efaed919be16dad894146eb4401972571",
   "Entropy": 3.9705732,
@@ -177,7 +177,7 @@
   "Date": "2024-08-14T07:30:44Z",
   "Message": "Profiles MVP [VPNWIN-2219]",
   "Tags": [],
-  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/DefaultProfileIcon.xaml:generic-api-key:42"
+  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/DefaultProfileIcon.xaml:generic-api-key:42"
  },
  {
   "RuleID": "generic-api-key",
@@ -188,7 +188,7 @@
   "EndColumn": 60,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/DownloadProfileIcon.xaml",
+  "File": "src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/DownloadProfileIcon.xaml",
   "SymlinkFile": "",
   "Commit": "d959d07efaed919be16dad894146eb4401972571",
   "Entropy": 3.9705732,
@@ -197,7 +197,7 @@
   "Date": "2024-08-14T07:30:44Z",
   "Message": "Profiles MVP [VPNWIN-2219]",
   "Tags": [],
-  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/DownloadProfileIcon.xaml:generic-api-key:42"
+  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/DownloadProfileIcon.xaml:generic-api-key:42"
  },
  {
   "RuleID": "generic-api-key",
@@ -208,7 +208,7 @@
   "EndColumn": 60,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/GatewayProfileIcon.xaml",
+  "File": "src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/GatewayProfileIcon.xaml",
   "SymlinkFile": "",
   "Commit": "d959d07efaed919be16dad894146eb4401972571",
   "Entropy": 3.9705732,
@@ -217,7 +217,7 @@
   "Date": "2024-08-14T07:30:44Z",
   "Message": "Profiles MVP [VPNWIN-2219]",
   "Tags": [],
-  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/GatewayProfileIcon.xaml:generic-api-key:50"
+  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/GatewayProfileIcon.xaml:generic-api-key:50"
  },
  {
   "RuleID": "generic-api-key",
@@ -228,7 +228,7 @@
   "EndColumn": 60,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/GatewayProfileIcon.xaml",
+  "File": "src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/GatewayProfileIcon.xaml",
   "SymlinkFile": "",
   "Commit": "d959d07efaed919be16dad894146eb4401972571",
   "Entropy": 3.9705732,
@@ -237,7 +237,7 @@
   "Date": "2024-08-14T07:30:44Z",
   "Message": "Profiles MVP [VPNWIN-2219]",
   "Tags": [],
-  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/GatewayProfileIcon.xaml:generic-api-key:59"
+  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/GatewayProfileIcon.xaml:generic-api-key:59"
  },
  {
   "RuleID": "generic-api-key",
@@ -248,7 +248,7 @@
   "EndColumn": 60,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/HomeProfileIcon.xaml",
+  "File": "src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/HomeProfileIcon.xaml",
   "SymlinkFile": "",
   "Commit": "d959d07efaed919be16dad894146eb4401972571",
   "Entropy": 3.9705732,
@@ -257,7 +257,7 @@
   "Date": "2024-08-14T07:30:44Z",
   "Message": "Profiles MVP [VPNWIN-2219]",
   "Tags": [],
-  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/HomeProfileIcon.xaml:generic-api-key:42"
+  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/HomeProfileIcon.xaml:generic-api-key:42"
  },
  {
   "RuleID": "generic-api-key",
@@ -268,7 +268,7 @@
   "EndColumn": 60,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/PrivacyProfileIcon.xaml",
+  "File": "src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/PrivacyProfileIcon.xaml",
   "SymlinkFile": "",
   "Commit": "d959d07efaed919be16dad894146eb4401972571",
   "Entropy": 3.9705732,
@@ -277,7 +277,7 @@
   "Date": "2024-08-14T07:30:44Z",
   "Message": "Profiles MVP [VPNWIN-2219]",
   "Tags": [],
-  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/PrivacyProfileIcon.xaml:generic-api-key:42"
+  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/PrivacyProfileIcon.xaml:generic-api-key:42"
  },
  {
   "RuleID": "generic-api-key",
@@ -288,7 +288,7 @@
   "EndColumn": 60,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/PrivacyProfileIcon.xaml",
+  "File": "src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/PrivacyProfileIcon.xaml",
   "SymlinkFile": "",
   "Commit": "d959d07efaed919be16dad894146eb4401972571",
   "Entropy": 3.9705732,
@@ -297,7 +297,7 @@
   "Date": "2024-08-14T07:30:44Z",
   "Message": "Profiles MVP [VPNWIN-2219]",
   "Tags": [],
-  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/PrivacyProfileIcon.xaml:generic-api-key:51"
+  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/PrivacyProfileIcon.xaml:generic-api-key:51"
  },
  {
   "RuleID": "generic-api-key",
@@ -308,7 +308,7 @@
   "EndColumn": 60,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/SecurityProfileIcon.xaml",
+  "File": "src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/SecurityProfileIcon.xaml",
   "SymlinkFile": "",
   "Commit": "d959d07efaed919be16dad894146eb4401972571",
   "Entropy": 3.9705732,
@@ -317,7 +317,7 @@
   "Date": "2024-08-14T07:30:44Z",
   "Message": "Profiles MVP [VPNWIN-2219]",
   "Tags": [],
-  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/SecurityProfileIcon.xaml:generic-api-key:42"
+  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/SecurityProfileIcon.xaml:generic-api-key:42"
  },
  {
   "RuleID": "generic-api-key",
@@ -328,7 +328,7 @@
   "EndColumn": 60,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/StreamingProfileIcon.xaml",
+  "File": "src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/StreamingProfileIcon.xaml",
   "SymlinkFile": "",
   "Commit": "d959d07efaed919be16dad894146eb4401972571",
   "Entropy": 3.9705732,
@@ -337,7 +337,7 @@
   "Date": "2024-08-14T07:30:44Z",
   "Message": "Profiles MVP [VPNWIN-2219]",
   "Tags": [],
-  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/StreamingProfileIcon.xaml:generic-api-key:42"
+  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/StreamingProfileIcon.xaml:generic-api-key:42"
  },
  {
   "RuleID": "generic-api-key",
@@ -348,7 +348,7 @@
   "EndColumn": 61,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/BrowsingProfileIcon.xaml",
+  "File": "src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/BrowsingProfileIcon.xaml",
   "SymlinkFile": "",
   "Commit": "d959d07efaed919be16dad894146eb4401972571",
   "Entropy": 3.882045,
@@ -357,7 +357,7 @@
   "Date": "2024-08-14T07:30:44Z",
   "Message": "Profiles MVP [VPNWIN-2219]",
   "Tags": [],
-  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/BrowsingProfileIcon.xaml:generic-api-key:80"
+  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/BrowsingProfileIcon.xaml:generic-api-key:80"
  },
  {
   "RuleID": "generic-api-key",
@@ -368,7 +368,7 @@
   "EndColumn": 60,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/ShoppingProfileIcon.xaml",
+  "File": "src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/ShoppingProfileIcon.xaml",
   "SymlinkFile": "",
   "Commit": "d959d07efaed919be16dad894146eb4401972571",
   "Entropy": 3.9705732,
@@ -377,7 +377,7 @@
   "Date": "2024-08-14T07:30:44Z",
   "Message": "Profiles MVP [VPNWIN-2219]",
   "Tags": [],
-  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/ShoppingProfileIcon.xaml:generic-api-key:61"
+  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/ShoppingProfileIcon.xaml:generic-api-key:61"
  },
  {
   "RuleID": "generic-api-key",
@@ -388,7 +388,7 @@
   "EndColumn": 60,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/ShoppingProfileIcon.xaml",
+  "File": "src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/ShoppingProfileIcon.xaml",
   "SymlinkFile": "",
   "Commit": "d959d07efaed919be16dad894146eb4401972571",
   "Entropy": 3.9705732,
@@ -397,7 +397,7 @@
   "Date": "2024-08-14T07:30:44Z",
   "Message": "Profiles MVP [VPNWIN-2219]",
   "Tags": [],
-  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/ProtonVPN.Client.Common.UI/Assets/Icons/Profiles/ShoppingProfileIcon.xaml:generic-api-key:70"
+  "Fingerprint": "d959d07efaed919be16dad894146eb4401972571:src/Client/Common/SyncVPN.Client.Common.UI/Assets/Icons/Profiles/ShoppingProfileIcon.xaml:generic-api-key:70"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -408,7 +408,7 @@
   "EndColumn": 43,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Vpn/OpenVpn/ConfigTemplate.cs",
+  "File": "src/SyncVPN.Vpn/OpenVpn/ConfigTemplate.cs",
   "SymlinkFile": "",
   "Commit": "6176e65c9ec818850ff75188f883e55400bd1e86",
   "Entropy": 4.711035,
@@ -417,7 +417,7 @@
   "Date": "2024-05-02T05:17:30Z",
   "Message": "Update OpenVPN to 2.6.10 [VPNWIN-2191]",
   "Tags": [],
-  "Fingerprint": "6176e65c9ec818850ff75188f883e55400bd1e86:src/ProtonVPN.Vpn/OpenVpn/ConfigTemplate.cs:proton-aead-jwt-signing-key:117"
+  "Fingerprint": "6176e65c9ec818850ff75188f883e55400bd1e86:src/SyncVPN.Vpn/OpenVpn/ConfigTemplate.cs:proton-aead-jwt-signing-key:117"
  },
  {
   "RuleID": "proton-password-equals-quotes",
@@ -428,7 +428,7 @@
   "EndColumn": 77,
   "Match": "                         Password=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/ProtonVPN.Client/UI/Login/Forms/LoginForm.xaml",
+  "File": "src/Client/SyncVPN.Client/UI/Login/Forms/LoginForm.xaml",
   "SymlinkFile": "",
   "Commit": "4a7d703c0bda10d7f8d234d1714f0691d908d541",
   "Entropy": 4.4341836,
@@ -437,7 +437,7 @@
   "Date": "2023-11-30T13:45:11Z",
   "Message": "Authentication with SSO [VPNWIN-1879]",
   "Tags": [],
-  "Fingerprint": "4a7d703c0bda10d7f8d234d1714f0691d908d541:src/Client/ProtonVPN.Client/UI/Login/Forms/LoginForm.xaml:proton-password-equals-quotes:57"
+  "Fingerprint": "4a7d703c0bda10d7f8d234d1714f0691d908d541:src/Client/SyncVPN.Client/UI/Login/Forms/LoginForm.xaml:proton-password-equals-quotes:57"
  },
  {
   "RuleID": "proton-api-key",
@@ -448,7 +448,7 @@
   "EndColumn": 89,
   "Match": "https://REDACTED@api.proton",
   "Secret": "REDACTED",
-  "File": "src/Builds/ProtonVPN.Builds.Variables/GlobalConfig.cs",
+  "File": "src/Builds/SyncVPN.Builds.Variables/GlobalConfig.cs",
   "SymlinkFile": "",
   "Commit": "5b3f2567bd4a65e74279834ef88522d78382675a",
   "Entropy": 3.6761086,
@@ -457,7 +457,7 @@
   "Date": "2023-11-22T18:34:57Z",
   "Message": "Implement countries page connection [VPNWIN-1848]",
   "Tags": [],
-  "Fingerprint": "5b3f2567bd4a65e74279834ef88522d78382675a:src/Builds/ProtonVPN.Builds.Variables/GlobalConfig.cs:proton-api-key:24"
+  "Fingerprint": "5b3f2567bd4a65e74279834ef88522d78382675a:src/Builds/SyncVPN.Builds.Variables/GlobalConfig.cs:proton-api-key:24"
  },
  {
   "RuleID": "proton-key-equals",
@@ -488,7 +488,7 @@
   "EndColumn": 69,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/Configurations/ProtonVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs",
+  "File": "src/Configurations/SyncVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs",
   "SymlinkFile": "",
   "Commit": "aa2055fb4d43cb4e8f7756e29075ec72ed8c42bc",
   "Entropy": 4.7513914,
@@ -497,7 +497,7 @@
   "Date": "2023-10-24T15:55:14Z",
   "Message": "Implement and migrate configurations [VPNWIN-1802]",
   "Tags": [],
-  "Fingerprint": "aa2055fb4d43cb4e8f7756e29075ec72ed8c42bc:src/Configurations/ProtonVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs:proton-aead-jwt-signing-key:55"
+  "Fingerprint": "aa2055fb4d43cb4e8f7756e29075ec72ed8c42bc:src/Configurations/SyncVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs:proton-aead-jwt-signing-key:55"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -508,7 +508,7 @@
   "EndColumn": 69,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/Configurations/ProtonVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs",
+  "File": "src/Configurations/SyncVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs",
   "SymlinkFile": "",
   "Commit": "aa2055fb4d43cb4e8f7756e29075ec72ed8c42bc",
   "Entropy": 4.8681254,
@@ -517,7 +517,7 @@
   "Date": "2023-10-24T15:55:14Z",
   "Message": "Implement and migrate configurations [VPNWIN-1802]",
   "Tags": [],
-  "Fingerprint": "aa2055fb4d43cb4e8f7756e29075ec72ed8c42bc:src/Configurations/ProtonVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs:proton-aead-jwt-signing-key:56"
+  "Fingerprint": "aa2055fb4d43cb4e8f7756e29075ec72ed8c42bc:src/Configurations/SyncVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs:proton-aead-jwt-signing-key:56"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -528,7 +528,7 @@
   "EndColumn": 69,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/Configurations/ProtonVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs",
+  "File": "src/Configurations/SyncVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs",
   "SymlinkFile": "",
   "Commit": "aa2055fb4d43cb4e8f7756e29075ec72ed8c42bc",
   "Entropy": 4.711035,
@@ -537,7 +537,7 @@
   "Date": "2023-10-24T15:55:14Z",
   "Message": "Implement and migrate configurations [VPNWIN-1802]",
   "Tags": [],
-  "Fingerprint": "aa2055fb4d43cb4e8f7756e29075ec72ed8c42bc:src/Configurations/ProtonVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs:proton-aead-jwt-signing-key:78"
+  "Fingerprint": "aa2055fb4d43cb4e8f7756e29075ec72ed8c42bc:src/Configurations/SyncVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs:proton-aead-jwt-signing-key:78"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -548,7 +548,7 @@
   "EndColumn": 69,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/Configurations/ProtonVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs",
+  "File": "src/Configurations/SyncVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs",
   "SymlinkFile": "",
   "Commit": "aa2055fb4d43cb4e8f7756e29075ec72ed8c42bc",
   "Entropy": 4.833014,
@@ -557,7 +557,7 @@
   "Date": "2023-10-24T15:55:14Z",
   "Message": "Implement and migrate configurations [VPNWIN-1802]",
   "Tags": [],
-  "Fingerprint": "aa2055fb4d43cb4e8f7756e29075ec72ed8c42bc:src/Configurations/ProtonVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs:proton-aead-jwt-signing-key:79"
+  "Fingerprint": "aa2055fb4d43cb4e8f7756e29075ec72ed8c42bc:src/Configurations/SyncVPN.Configurations/Defaults/DefaultTlsPinningConfigurationFactory.cs:proton-aead-jwt-signing-key:79"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -568,7 +568,7 @@
   "EndColumn": 75,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/Configurations/ProtonVPN.Configurations.Contracts/DefaultConfiguration.cs",
+  "File": "src/Configurations/SyncVPN.Configurations.Contracts/DefaultConfiguration.cs",
   "SymlinkFile": "",
   "Commit": "c178ac29ce97fad9f30936c10b1405ea1efee565",
   "Entropy": 4.7513914,
@@ -577,7 +577,7 @@
   "Date": "2023-09-07T15:47:54Z",
   "Message": "Implement Configurations [VPNWIN-1551]",
   "Tags": [],
-  "Fingerprint": "c178ac29ce97fad9f30936c10b1405ea1efee565:src/Configurations/ProtonVPN.Configurations.Contracts/DefaultConfiguration.cs:proton-aead-jwt-signing-key:290"
+  "Fingerprint": "c178ac29ce97fad9f30936c10b1405ea1efee565:src/Configurations/SyncVPN.Configurations.Contracts/DefaultConfiguration.cs:proton-aead-jwt-signing-key:290"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -588,7 +588,7 @@
   "EndColumn": 75,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/Configurations/ProtonVPN.Configurations.Contracts/DefaultConfiguration.cs",
+  "File": "src/Configurations/SyncVPN.Configurations.Contracts/DefaultConfiguration.cs",
   "SymlinkFile": "",
   "Commit": "c178ac29ce97fad9f30936c10b1405ea1efee565",
   "Entropy": 4.8681254,
@@ -597,7 +597,7 @@
   "Date": "2023-09-07T15:47:54Z",
   "Message": "Implement Configurations [VPNWIN-1551]",
   "Tags": [],
-  "Fingerprint": "c178ac29ce97fad9f30936c10b1405ea1efee565:src/Configurations/ProtonVPN.Configurations.Contracts/DefaultConfiguration.cs:proton-aead-jwt-signing-key:291"
+  "Fingerprint": "c178ac29ce97fad9f30936c10b1405ea1efee565:src/Configurations/SyncVPN.Configurations.Contracts/DefaultConfiguration.cs:proton-aead-jwt-signing-key:291"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -608,7 +608,7 @@
   "EndColumn": 75,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/Configurations/ProtonVPN.Configurations.Contracts/DefaultConfiguration.cs",
+  "File": "src/Configurations/SyncVPN.Configurations.Contracts/DefaultConfiguration.cs",
   "SymlinkFile": "",
   "Commit": "c178ac29ce97fad9f30936c10b1405ea1efee565",
   "Entropy": 4.711035,
@@ -617,7 +617,7 @@
   "Date": "2023-09-07T15:47:54Z",
   "Message": "Implement Configurations [VPNWIN-1551]",
   "Tags": [],
-  "Fingerprint": "c178ac29ce97fad9f30936c10b1405ea1efee565:src/Configurations/ProtonVPN.Configurations.Contracts/DefaultConfiguration.cs:proton-aead-jwt-signing-key:313"
+  "Fingerprint": "c178ac29ce97fad9f30936c10b1405ea1efee565:src/Configurations/SyncVPN.Configurations.Contracts/DefaultConfiguration.cs:proton-aead-jwt-signing-key:313"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -628,7 +628,7 @@
   "EndColumn": 75,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/Configurations/ProtonVPN.Configurations.Contracts/DefaultConfiguration.cs",
+  "File": "src/Configurations/SyncVPN.Configurations.Contracts/DefaultConfiguration.cs",
   "SymlinkFile": "",
   "Commit": "c178ac29ce97fad9f30936c10b1405ea1efee565",
   "Entropy": 4.833014,
@@ -637,7 +637,7 @@
   "Date": "2023-09-07T15:47:54Z",
   "Message": "Implement Configurations [VPNWIN-1551]",
   "Tags": [],
-  "Fingerprint": "c178ac29ce97fad9f30936c10b1405ea1efee565:src/Configurations/ProtonVPN.Configurations.Contracts/DefaultConfiguration.cs:proton-aead-jwt-signing-key:314"
+  "Fingerprint": "c178ac29ce97fad9f30936c10b1405ea1efee565:src/Configurations/SyncVPN.Configurations.Contracts/DefaultConfiguration.cs:proton-aead-jwt-signing-key:314"
  },
  {
   "RuleID": "proton-password-equals-quotes",
@@ -648,7 +648,7 @@
   "EndColumn": 73,
   "Match": "                     Password=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/Client/ProtonVPN.Client/UI/Login/Forms/LoginForm.xaml",
+  "File": "src/Client/SyncVPN.Client/UI/Login/Forms/LoginForm.xaml",
   "SymlinkFile": "",
   "Commit": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6",
   "Entropy": 4.4341836,
@@ -657,7 +657,7 @@
   "Date": "2023-07-13T11:15:36Z",
   "Message": "Implement login screen [VPNWIN-1550]",
   "Tags": [],
-  "Fingerprint": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6:src/Client/ProtonVPN.Client/UI/Login/Forms/LoginForm.xaml:proton-password-equals-quotes:43"
+  "Fingerprint": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6:src/Client/SyncVPN.Client/UI/Login/Forms/LoginForm.xaml:proton-password-equals-quotes:43"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -668,7 +668,7 @@
   "EndColumn": 73,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs",
+  "File": "src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs",
   "SymlinkFile": "",
   "Commit": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6",
   "Entropy": 4.7399907,
@@ -677,7 +677,7 @@
   "Date": "2023-07-13T11:15:36Z",
   "Message": "Implement login screen [VPNWIN-1550]",
   "Tags": [],
-  "Fingerprint": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6:src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:284"
+  "Fingerprint": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6:src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:284"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -688,7 +688,7 @@
   "EndColumn": 73,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs",
+  "File": "src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs",
   "SymlinkFile": "",
   "Commit": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6",
   "Entropy": 4.7513914,
@@ -697,7 +697,7 @@
   "Date": "2023-07-13T11:15:36Z",
   "Message": "Implement login screen [VPNWIN-1550]",
   "Tags": [],
-  "Fingerprint": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6:src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:297"
+  "Fingerprint": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6:src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:297"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -708,7 +708,7 @@
   "EndColumn": 73,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs",
+  "File": "src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs",
   "SymlinkFile": "",
   "Commit": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6",
   "Entropy": 4.8681254,
@@ -717,7 +717,7 @@
   "Date": "2023-07-13T11:15:36Z",
   "Message": "Implement login screen [VPNWIN-1550]",
   "Tags": [],
-  "Fingerprint": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6:src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:298"
+  "Fingerprint": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6:src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:298"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -728,7 +728,7 @@
   "EndColumn": 73,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs",
+  "File": "src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs",
   "SymlinkFile": "",
   "Commit": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6",
   "Entropy": 4.711035,
@@ -737,7 +737,7 @@
   "Date": "2023-07-13T11:15:36Z",
   "Message": "Implement login screen [VPNWIN-1550]",
   "Tags": [],
-  "Fingerprint": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6:src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:320"
+  "Fingerprint": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6:src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:320"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -748,7 +748,7 @@
   "EndColumn": 73,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs",
+  "File": "src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs",
   "SymlinkFile": "",
   "Commit": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6",
   "Entropy": 4.833014,
@@ -757,7 +757,7 @@
   "Date": "2023-07-13T11:15:36Z",
   "Message": "Implement login screen [VPNWIN-1550]",
   "Tags": [],
-  "Fingerprint": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6:src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:321"
+  "Fingerprint": "5713eb7756a21f2dc9c2acdd10eda609eacefdf6:src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:321"
  },
  {
   "RuleID": "private-key",
@@ -768,7 +768,7 @@
   "EndColumn": 160,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/Client/Logic/Services/ProtonVPN.Client.Logic.Services/ServiceCaller.cs",
+  "File": "src/Client/Logic/Services/SyncVPN.Client.Logic.Services/ServiceCaller.cs",
   "SymlinkFile": "",
   "Commit": "8fa23fc9efb0cb221ad08205bcfc9c89c0d1d76b",
   "Entropy": 4.946284,
@@ -777,7 +777,7 @@
   "Date": "2023-06-16T11:35:03Z",
   "Message": "Implement VPN status and hardcoded Connect/Disconnect [VPNWIN-1512]",
   "Tags": [],
-  "Fingerprint": "8fa23fc9efb0cb221ad08205bcfc9c89c0d1d76b:src/Client/Logic/Services/ProtonVPN.Client.Logic.Services/ServiceCaller.cs:private-key:88"
+  "Fingerprint": "8fa23fc9efb0cb221ad08205bcfc9c89c0d1d76b:src/Client/Logic/Services/SyncVPN.Client.Logic.Services/ServiceCaller.cs:private-key:88"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1028,7 +1028,7 @@
   "EndColumn": 164,
   "Match": "KeyPath=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "0f3cfa6a8499ec438b96f5733385b999657248a1",
   "Entropy": 3.8924072,
@@ -1037,7 +1037,7 @@
   "Date": "2022-06-20T07:15:33Z",
   "Message": "Introduce API retry logic [VPNWIN-1092]",
   "Tags": [],
-  "Fingerprint": "0f3cfa6a8499ec438b96f5733385b999657248a1:Setup/ProtonVPN.aip:generic-api-key:186"
+  "Fingerprint": "0f3cfa6a8499ec438b96f5733385b999657248a1:Setup/SyncVPN.aip:generic-api-key:186"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1048,7 +1048,7 @@
   "EndColumn": 91,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.HumanVerification.Contracts/ProtonVPN.HumanVerification.Contracts.csproj.DotSettings",
+  "File": "src/SyncVPN.HumanVerification.Contracts/SyncVPN.HumanVerification.Contracts.csproj.DotSettings",
   "SymlinkFile": "",
   "Commit": "0f3cfa6a8499ec438b96f5733385b999657248a1",
   "Entropy": 4.453696,
@@ -1057,7 +1057,7 @@
   "Date": "2022-06-20T07:15:33Z",
   "Message": "Introduce API retry logic [VPNWIN-1092]",
   "Tags": [],
-  "Fingerprint": "0f3cfa6a8499ec438b96f5733385b999657248a1:src/ProtonVPN.HumanVerification.Contracts/ProtonVPN.HumanVerification.Contracts.csproj.DotSettings:proton-key-equals:2"
+  "Fingerprint": "0f3cfa6a8499ec438b96f5733385b999657248a1:src/SyncVPN.HumanVerification.Contracts/SyncVPN.HumanVerification.Contracts.csproj.DotSettings:proton-key-equals:2"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1068,7 +1068,7 @@
   "EndColumn": 91,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.HumanVerification.Gui/ProtonVPN.HumanVerification.Gui.csproj.DotSettings",
+  "File": "src/SyncVPN.HumanVerification.Gui/SyncVPN.HumanVerification.Gui.csproj.DotSettings",
   "SymlinkFile": "",
   "Commit": "0f3cfa6a8499ec438b96f5733385b999657248a1",
   "Entropy": 4.453696,
@@ -1077,7 +1077,7 @@
   "Date": "2022-06-20T07:15:33Z",
   "Message": "Introduce API retry logic [VPNWIN-1092]",
   "Tags": [],
-  "Fingerprint": "0f3cfa6a8499ec438b96f5733385b999657248a1:src/ProtonVPN.HumanVerification.Gui/ProtonVPN.HumanVerification.Gui.csproj.DotSettings:proton-key-equals:2"
+  "Fingerprint": "0f3cfa6a8499ec438b96f5733385b999657248a1:src/SyncVPN.HumanVerification.Gui/SyncVPN.HumanVerification.Gui.csproj.DotSettings:proton-key-equals:2"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1088,7 +1088,7 @@
   "EndColumn": 91,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.HumanVerification.Installers/ProtonVPN.HumanVerification.Installers.csproj.DotSettings",
+  "File": "src/SyncVPN.HumanVerification.Installers/SyncVPN.HumanVerification.Installers.csproj.DotSettings",
   "SymlinkFile": "",
   "Commit": "0f3cfa6a8499ec438b96f5733385b999657248a1",
   "Entropy": 4.453696,
@@ -1097,7 +1097,7 @@
   "Date": "2022-06-20T07:15:33Z",
   "Message": "Introduce API retry logic [VPNWIN-1092]",
   "Tags": [],
-  "Fingerprint": "0f3cfa6a8499ec438b96f5733385b999657248a1:src/ProtonVPN.HumanVerification.Installers/ProtonVPN.HumanVerification.Installers.csproj.DotSettings:proton-key-equals:2"
+  "Fingerprint": "0f3cfa6a8499ec438b96f5733385b999657248a1:src/SyncVPN.HumanVerification.Installers/SyncVPN.HumanVerification.Installers.csproj.DotSettings:proton-key-equals:2"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1128,7 +1128,7 @@
   "EndColumn": 82,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484",
   "Entropy": 4.4653115,
@@ -1137,7 +1137,7 @@
   "Date": "2022-05-06T09:59:45Z",
   "Message": "Implement rebranded app version [VPNWIN-849]",
   "Tags": [],
-  "Fingerprint": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484:Setup/ProtonVPNTun.aip:proton-key-equals:283"
+  "Fingerprint": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484:Setup/SyncVPNTun.aip:proton-key-equals:283"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1148,7 +1148,7 @@
   "EndColumn": 102,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484",
   "Entropy": 4.601838,
@@ -1157,7 +1157,7 @@
   "Date": "2022-05-06T09:59:45Z",
   "Message": "Implement rebranded app version [VPNWIN-849]",
   "Tags": [],
-  "Fingerprint": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484:Setup/ProtonVPNTun.aip:proton-key-equals:286"
+  "Fingerprint": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484:Setup/SyncVPNTun.aip:proton-key-equals:286"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1168,7 +1168,7 @@
   "EndColumn": 123,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484",
   "Entropy": 4.646885,
@@ -1177,7 +1177,7 @@
   "Date": "2022-05-06T09:59:45Z",
   "Message": "Implement rebranded app version [VPNWIN-849]",
   "Tags": [],
-  "Fingerprint": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484:Setup/ProtonVPNTun.aip:proton-key-equals:288"
+  "Fingerprint": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484:Setup/SyncVPNTun.aip:proton-key-equals:288"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1188,7 +1188,7 @@
   "EndColumn": 82,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484",
   "Entropy": 4.4653115,
@@ -1197,7 +1197,7 @@
   "Date": "2022-05-06T09:59:45Z",
   "Message": "Implement rebranded app version [VPNWIN-849]",
   "Tags": [],
-  "Fingerprint": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484:Setup/ProtonVPNTap.aip:proton-key-equals:321"
+  "Fingerprint": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484:Setup/SyncVPNTap.aip:proton-key-equals:321"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1208,7 +1208,7 @@
   "EndColumn": 102,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484",
   "Entropy": 4.601838,
@@ -1217,7 +1217,7 @@
   "Date": "2022-05-06T09:59:45Z",
   "Message": "Implement rebranded app version [VPNWIN-849]",
   "Tags": [],
-  "Fingerprint": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484:Setup/ProtonVPNTap.aip:proton-key-equals:324"
+  "Fingerprint": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484:Setup/SyncVPNTap.aip:proton-key-equals:324"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1228,7 +1228,7 @@
   "EndColumn": 123,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484",
   "Entropy": 4.646885,
@@ -1237,7 +1237,7 @@
   "Date": "2022-05-06T09:59:45Z",
   "Message": "Implement rebranded app version [VPNWIN-849]",
   "Tags": [],
-  "Fingerprint": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484:Setup/ProtonVPNTap.aip:proton-key-equals:326"
+  "Fingerprint": "9ea1bd01062e90cdfc6cf62ff5e58105ec659484:Setup/SyncVPNTap.aip:proton-key-equals:326"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1248,7 +1248,7 @@
   "EndColumn": 81,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "988391b1db7b1391e70efd4a02640db42794044f",
   "Entropy": 4.4653115,
@@ -1257,7 +1257,7 @@
   "Date": "2022-03-31T13:56:43Z",
   "Message": "Update installer file to version 19.3",
   "Tags": [],
-  "Fingerprint": "988391b1db7b1391e70efd4a02640db42794044f:Setup/ProtonVPN.aip:proton-key-equals:810"
+  "Fingerprint": "988391b1db7b1391e70efd4a02640db42794044f:Setup/SyncVPN.aip:proton-key-equals:810"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1268,7 +1268,7 @@
   "EndColumn": 103,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "988391b1db7b1391e70efd4a02640db42794044f",
   "Entropy": 4.601838,
@@ -1277,7 +1277,7 @@
   "Date": "2022-03-31T13:56:43Z",
   "Message": "Update installer file to version 19.3",
   "Tags": [],
-  "Fingerprint": "988391b1db7b1391e70efd4a02640db42794044f:Setup/ProtonVPN.aip:proton-key-equals:815"
+  "Fingerprint": "988391b1db7b1391e70efd4a02640db42794044f:Setup/SyncVPN.aip:proton-key-equals:815"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1288,7 +1288,7 @@
   "EndColumn": 100,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "988391b1db7b1391e70efd4a02640db42794044f",
   "Entropy": 4.4510455,
@@ -1297,7 +1297,7 @@
   "Date": "2022-03-31T13:56:43Z",
   "Message": "Update installer file to version 19.3",
   "Tags": [],
-  "Fingerprint": "988391b1db7b1391e70efd4a02640db42794044f:Setup/ProtonVPN.aip:proton-key-equals:816"
+  "Fingerprint": "988391b1db7b1391e70efd4a02640db42794044f:Setup/SyncVPN.aip:proton-key-equals:816"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1308,7 +1308,7 @@
   "EndColumn": 108,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "988391b1db7b1391e70efd4a02640db42794044f",
   "Entropy": 4.4534307,
@@ -1317,7 +1317,7 @@
   "Date": "2022-03-31T13:56:43Z",
   "Message": "Update installer file to version 19.3",
   "Tags": [],
-  "Fingerprint": "988391b1db7b1391e70efd4a02640db42794044f:Setup/ProtonVPN.aip:proton-key-equals:817"
+  "Fingerprint": "988391b1db7b1391e70efd4a02640db42794044f:Setup/SyncVPN.aip:proton-key-equals:817"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1328,7 +1328,7 @@
   "EndColumn": 145,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "988391b1db7b1391e70efd4a02640db42794044f",
   "Entropy": 4.4248977,
@@ -1337,7 +1337,7 @@
   "Date": "2022-03-31T13:56:43Z",
   "Message": "Update installer file to version 19.3",
   "Tags": [],
-  "Fingerprint": "988391b1db7b1391e70efd4a02640db42794044f:Setup/ProtonVPN.aip:proton-key-equals:819"
+  "Fingerprint": "988391b1db7b1391e70efd4a02640db42794044f:Setup/SyncVPN.aip:proton-key-equals:819"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1348,7 +1348,7 @@
   "EndColumn": 123,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "988391b1db7b1391e70efd4a02640db42794044f",
   "Entropy": 4.646885,
@@ -1357,7 +1357,7 @@
   "Date": "2022-03-31T13:56:43Z",
   "Message": "Update installer file to version 19.3",
   "Tags": [],
-  "Fingerprint": "988391b1db7b1391e70efd4a02640db42794044f:Setup/ProtonVPN.aip:proton-key-equals:820"
+  "Fingerprint": "988391b1db7b1391e70efd4a02640db42794044f:Setup/SyncVPN.aip:proton-key-equals:820"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1368,7 +1368,7 @@
   "EndColumn": 128,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "988391b1db7b1391e70efd4a02640db42794044f",
   "Entropy": 4.5027413,
@@ -1377,7 +1377,7 @@
   "Date": "2022-03-31T13:56:43Z",
   "Message": "Update installer file to version 19.3",
   "Tags": [],
-  "Fingerprint": "988391b1db7b1391e70efd4a02640db42794044f:Setup/ProtonVPN.aip:proton-key-equals:821"
+  "Fingerprint": "988391b1db7b1391e70efd4a02640db42794044f:Setup/SyncVPN.aip:proton-key-equals:821"
  },
  {
   "RuleID": "proton-password-equals-quotes",
@@ -1388,7 +1388,7 @@
   "EndColumn": 154,
   "Match": "                                     input:PasswordBoxAssistant.BoundPassword=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Login/Views/LoginView.xaml",
+  "File": "src/SyncVPN.App/Login/Views/LoginView.xaml",
   "SymlinkFile": "",
   "Commit": "4259736a7d4131af0b55dd5a58f80412b3a21469",
   "Entropy": 4.595608,
@@ -1397,7 +1397,7 @@
   "Date": "2022-03-03T14:40:40Z",
   "Message": "Implement two factor authentication [VPNWIN-986]",
   "Tags": [],
-  "Fingerprint": "4259736a7d4131af0b55dd5a58f80412b3a21469:src/ProtonVPN.App/Login/Views/LoginView.xaml:proton-password-equals-quotes:222"
+  "Fingerprint": "4259736a7d4131af0b55dd5a58f80412b3a21469:src/SyncVPN.App/Login/Views/LoginView.xaml:proton-password-equals-quotes:222"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1588,7 +1588,7 @@
   "EndColumn": 140,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "915b729ca9cbedf9686ee9ffcbf57a7bbb7150c1",
   "Entropy": 4.5027413,
@@ -1597,7 +1597,7 @@
   "Date": "2021-02-01T14:31:33Z",
   "Message": "Skip KB3063858 if later updates installed",
   "Tags": [],
-  "Fingerprint": "915b729ca9cbedf9686ee9ffcbf57a7bbb7150c1:Setup/ProtonVPN.aip:proton-key-equals:697"
+  "Fingerprint": "915b729ca9cbedf9686ee9ffcbf57a7bbb7150c1:Setup/SyncVPN.aip:proton-key-equals:697"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1608,7 +1608,7 @@
   "EndColumn": 123,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "915b729ca9cbedf9686ee9ffcbf57a7bbb7150c1",
   "Entropy": 4.5027413,
@@ -1617,7 +1617,7 @@
   "Date": "2021-02-01T14:31:33Z",
   "Message": "Skip KB3063858 if later updates installed",
   "Tags": [],
-  "Fingerprint": "915b729ca9cbedf9686ee9ffcbf57a7bbb7150c1:Setup/ProtonVPN.aip:proton-key-equals:703"
+  "Fingerprint": "915b729ca9cbedf9686ee9ffcbf57a7bbb7150c1:Setup/SyncVPN.aip:proton-key-equals:703"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1628,7 +1628,7 @@
   "EndColumn": 140,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "b9251489b80cb37143c9b41ff8bb3de5969f6517",
   "Entropy": 4.5027413,
@@ -1637,7 +1637,7 @@
   "Date": "2021-01-07T09:23:36Z",
   "Message": "Install tun adapter when installing the app",
   "Tags": [],
-  "Fingerprint": "b9251489b80cb37143c9b41ff8bb3de5969f6517:Setup/ProtonVPN.aip:proton-key-equals:691"
+  "Fingerprint": "b9251489b80cb37143c9b41ff8bb3de5969f6517:Setup/SyncVPN.aip:proton-key-equals:691"
  },
  {
   "RuleID": "generic-api-key",
@@ -1648,7 +1648,7 @@
   "EndColumn": 53,
   "Match": "PrereqKey=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "b9251489b80cb37143c9b41ff8bb3de5969f6517",
   "Entropy": 3.800182,
@@ -1657,7 +1657,7 @@
   "Date": "2021-01-07T09:23:36Z",
   "Message": "Install tun adapter when installing the app",
   "Tags": [],
-  "Fingerprint": "b9251489b80cb37143c9b41ff8bb3de5969f6517:Setup/ProtonVPN.aip:generic-api-key:746"
+  "Fingerprint": "b9251489b80cb37143c9b41ff8bb3de5969f6517:Setup/SyncVPN.aip:generic-api-key:746"
  },
  {
   "RuleID": "generic-api-key",
@@ -1668,7 +1668,7 @@
   "EndColumn": 56,
   "Match": "SearchKey=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "1beb533dec5d2757f3076c2a3fd7c68717c3ffb6",
   "Entropy": 3.9217212,
@@ -1677,7 +1677,7 @@
   "Date": "2020-12-28T14:48:15Z",
   "Message": "Remove outdated windows 7 update\n\nThis security update was superseded by KB3063858",
   "Tags": [],
-  "Fingerprint": "1beb533dec5d2757f3076c2a3fd7c68717c3ffb6:Setup/ProtonVPN.aip:generic-api-key:742"
+  "Fingerprint": "1beb533dec5d2757f3076c2a3fd7c68717c3ffb6:Setup/SyncVPN.aip:generic-api-key:742"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1688,7 +1688,7 @@
   "EndColumn": 173,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.629412,
@@ -1697,7 +1697,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:98"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:98"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1708,7 +1708,7 @@
   "EndColumn": 189,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.470774,
@@ -1717,7 +1717,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:99"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:99"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1728,7 +1728,7 @@
   "EndColumn": 185,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.4635596,
@@ -1737,7 +1737,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:100"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:100"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1748,7 +1748,7 @@
   "EndColumn": 197,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.4949074,
@@ -1757,7 +1757,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:106"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:106"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1768,7 +1768,7 @@
   "EndColumn": 261,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.823771,
@@ -1777,7 +1777,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:115"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:115"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1788,7 +1788,7 @@
   "EndColumn": 255,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.9620914,
@@ -1797,7 +1797,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:116"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:116"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1808,7 +1808,7 @@
   "EndColumn": 245,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.8506923,
@@ -1817,7 +1817,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:120"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:120"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1828,7 +1828,7 @@
   "EndColumn": 269,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.7647247,
@@ -1837,7 +1837,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:132"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:132"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1848,7 +1848,7 @@
   "EndColumn": 185,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.532678,
@@ -1857,7 +1857,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:135"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:135"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1868,7 +1868,7 @@
   "EndColumn": 213,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.453626,
@@ -1877,7 +1877,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:146"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:146"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1888,7 +1888,7 @@
   "EndColumn": 211,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.500342,
@@ -1897,7 +1897,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:147"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:147"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1908,7 +1908,7 @@
   "EndColumn": 203,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.6402364,
@@ -1917,7 +1917,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:148"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:148"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1928,7 +1928,7 @@
   "EndColumn": 213,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.530686,
@@ -1937,7 +1937,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:157"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:157"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1948,7 +1948,7 @@
   "EndColumn": 211,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.5167866,
@@ -1957,7 +1957,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:158"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:158"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1968,7 +1968,7 @@
   "EndColumn": 203,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.7000284,
@@ -1977,7 +1977,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:159"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:159"
  },
  {
   "RuleID": "proton-key-equals",
@@ -1988,7 +1988,7 @@
   "EndColumn": 215,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.4711175,
@@ -1997,7 +1997,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:162"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:162"
  },
  {
   "RuleID": "proton-key-equals",
@@ -2008,7 +2008,7 @@
   "EndColumn": 211,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.4881663,
@@ -2017,7 +2017,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:163"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:163"
  },
  {
   "RuleID": "proton-key-equals",
@@ -2028,7 +2028,7 @@
   "EndColumn": 203,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.6877346,
@@ -2037,7 +2037,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:164"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:164"
  },
  {
   "RuleID": "proton-key-equals",
@@ -2048,7 +2048,7 @@
   "EndColumn": 225,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.4300675,
@@ -2057,7 +2057,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:165"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:165"
  },
  {
   "RuleID": "proton-key-equals",
@@ -2068,7 +2068,7 @@
   "EndColumn": 205,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.530534,
@@ -2077,7 +2077,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:169"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:169"
  },
  {
   "RuleID": "proton-key-equals",
@@ -2088,7 +2088,7 @@
   "EndColumn": 211,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.4542975,
@@ -2097,7 +2097,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:173"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:173"
  },
  {
   "RuleID": "proton-key-equals",
@@ -2108,7 +2108,7 @@
   "EndColumn": 223,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.612747,
@@ -2117,7 +2117,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:174"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:174"
  },
  {
   "RuleID": "proton-key-equals",
@@ -2128,7 +2128,7 @@
   "EndColumn": 124,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.646885,
@@ -2137,7 +2137,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:266"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:266"
  },
  {
   "RuleID": "proton-key-equals",
@@ -2148,7 +2148,7 @@
   "EndColumn": 124,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.646885,
@@ -2157,7 +2157,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:267"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:267"
  },
  {
   "RuleID": "proton-key-equals",
@@ -2168,7 +2168,7 @@
   "EndColumn": 119,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTun.aip",
+  "File": "Setup/SyncVPNTun.aip",
   "SymlinkFile": "",
   "Commit": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce",
   "Entropy": 4.646885,
@@ -2177,7 +2177,7 @@
   "Date": "2020-12-22T09:23:01Z",
   "Message": "Create TUN adapter installer",
   "Tags": [],
-  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/ProtonVPNTun.aip:proton-key-equals:270"
+  "Fingerprint": "55b15fadcb6c5a50160a4fdc5beb26ab5ef091ce:Setup/SyncVPNTun.aip:proton-key-equals:270"
  },
  {
   "RuleID": "proton-key-equals",
@@ -2188,7 +2188,7 @@
   "EndColumn": 132,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "9b3a1b82e3f74e48a6c51677980842d1891f6948",
   "Entropy": 4.4248977,
@@ -2197,7 +2197,7 @@
   "Date": "2020-11-24T13:49:40Z",
   "Message": "Add new tap adapter driver signed with new certificate [VPNWIN-486]",
   "Tags": [],
-  "Fingerprint": "9b3a1b82e3f74e48a6c51677980842d1891f6948:Setup/ProtonVPN.aip:proton-key-equals:699"
+  "Fingerprint": "9b3a1b82e3f74e48a6c51677980842d1891f6948:Setup/SyncVPN.aip:proton-key-equals:699"
  },
  {
   "RuleID": "proton-key-equals",
@@ -2208,7 +2208,7 @@
   "EndColumn": 131,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "9b3a1b82e3f74e48a6c51677980842d1891f6948",
   "Entropy": 4.4248977,
@@ -2217,7 +2217,7 @@
   "Date": "2020-11-24T13:49:40Z",
   "Message": "Add new tap adapter driver signed with new certificate [VPNWIN-486]",
   "Tags": [],
-  "Fingerprint": "9b3a1b82e3f74e48a6c51677980842d1891f6948:Setup/ProtonVPN.aip:proton-key-equals:712"
+  "Fingerprint": "9b3a1b82e3f74e48a6c51677980842d1891f6948:Setup/SyncVPN.aip:proton-key-equals:712"
  },
  {
   "RuleID": "proton-key-equals",
@@ -2228,7 +2228,7 @@
   "EndColumn": 132,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "9b3a1b82e3f74e48a6c51677980842d1891f6948",
   "Entropy": 4.4248977,
@@ -2237,7 +2237,7 @@
   "Date": "2020-11-24T13:49:40Z",
   "Message": "Add new tap adapter driver signed with new certificate [VPNWIN-486]",
   "Tags": [],
-  "Fingerprint": "9b3a1b82e3f74e48a6c51677980842d1891f6948:Setup/ProtonVPN.aip:proton-key-equals:713"
+  "Fingerprint": "9b3a1b82e3f74e48a6c51677980842d1891f6948:Setup/SyncVPN.aip:proton-key-equals:713"
  },
  {
   "RuleID": "proton-key-equals",
@@ -2248,7 +2248,7 @@
   "EndColumn": 104,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "5cd233c0952ad41d22a42379ead5e70186ac5317",
   "Entropy": 4.4510455,
@@ -2257,7 +2257,7 @@
   "Date": "2020-06-02T11:18:48Z",
   "Message": "Add language selection dropdown when installing the app [VPNWIN-179]",
   "Tags": [],
-  "Fingerprint": "5cd233c0952ad41d22a42379ead5e70186ac5317:Setup/ProtonVPN.aip:proton-key-equals:677"
+  "Fingerprint": "5cd233c0952ad41d22a42379ead5e70186ac5317:Setup/SyncVPN.aip:proton-key-equals:677"
  },
  {
   "RuleID": "proton-key-equals",
@@ -2308,7 +2308,7 @@
   "EndColumn": 77,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs",
+  "File": "src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs",
   "SymlinkFile": "",
   "Commit": "481f4ad1a84ead755dd3a04edc9f6c268c63f98d",
   "Entropy": 4.711035,
@@ -2317,7 +2317,7 @@
   "Date": "2020-02-25T08:26:31Z",
   "Message": "Add tls pinning keys for alternative host names",
   "Tags": [],
-  "Fingerprint": "481f4ad1a84ead755dd3a04edc9f6c268c63f98d:src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:219"
+  "Fingerprint": "481f4ad1a84ead755dd3a04edc9f6c268c63f98d:src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:219"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2328,7 +2328,7 @@
   "EndColumn": 77,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs",
+  "File": "src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs",
   "SymlinkFile": "",
   "Commit": "481f4ad1a84ead755dd3a04edc9f6c268c63f98d",
   "Entropy": 4.833014,
@@ -2337,7 +2337,7 @@
   "Date": "2020-02-25T08:26:31Z",
   "Message": "Add tls pinning keys for alternative host names",
   "Tags": [],
-  "Fingerprint": "481f4ad1a84ead755dd3a04edc9f6c268c63f98d:src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:220"
+  "Fingerprint": "481f4ad1a84ead755dd3a04edc9f6c268c63f98d:src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:220"
  },
  {
   "RuleID": "proton-password-equals-quotes",
@@ -2348,7 +2348,7 @@
   "EndColumn": 150,
   "Match": "                                 input:PasswordBoxAssistant.BoundPassword=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Login/Views/LoginView.xaml",
+  "File": "src/SyncVPN.App/Login/Views/LoginView.xaml",
   "SymlinkFile": "",
   "Commit": "33c2c9b9d11425e54687b20e64b2ff1235d8087b",
   "Entropy": 4.595608,
@@ -2357,7 +2357,7 @@
   "Date": "2020-01-14T12:16:02Z",
   "Message": "Make consistent hyperlinks across the app",
   "Tags": [],
-  "Fingerprint": "33c2c9b9d11425e54687b20e64b2ff1235d8087b:src/ProtonVPN.App/Login/Views/LoginView.xaml:proton-password-equals-quotes:198"
+  "Fingerprint": "33c2c9b9d11425e54687b20e64b2ff1235d8087b:src/SyncVPN.App/Login/Views/LoginView.xaml:proton-password-equals-quotes:198"
  },
  {
   "RuleID": "proton-key-equals",
@@ -2588,7 +2588,7 @@
   "EndColumn": 95,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.8505697,
@@ -2597,7 +2597,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:56"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:56"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2608,7 +2608,7 @@
   "EndColumn": 62,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 5.083128,
@@ -2617,7 +2617,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:64"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:64"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2628,7 +2628,7 @@
   "EndColumn": 105,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.8795257,
@@ -2637,7 +2637,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:64"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:64"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2648,7 +2648,7 @@
   "EndColumn": 82,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 5.0366163,
@@ -2657,7 +2657,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:69"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:69"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2668,7 +2668,7 @@
   "EndColumn": 68,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.8970814,
@@ -2677,7 +2677,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:79"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:79"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2688,7 +2688,7 @@
   "EndColumn": 62,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.8681254,
@@ -2697,7 +2697,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:88"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:88"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2708,7 +2708,7 @@
   "EndColumn": 105,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.833014,
@@ -2717,7 +2717,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:88"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:88"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2728,7 +2728,7 @@
   "EndColumn": 62,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.8970814,
@@ -2737,7 +2737,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:104"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:104"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2748,7 +2748,7 @@
   "EndColumn": 105,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.833014,
@@ -2757,7 +2757,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:104"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:104"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2768,7 +2768,7 @@
   "EndColumn": 63,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.7865024,
@@ -2777,7 +2777,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:109"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:109"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2788,7 +2788,7 @@
   "EndColumn": 106,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 5.0541716,
@@ -2797,7 +2797,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:109"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:109"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2808,7 +2808,7 @@
   "EndColumn": 74,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.804058,
@@ -2817,7 +2817,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:131"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:131"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2828,7 +2828,7 @@
   "EndColumn": 67,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.9146366,
@@ -2837,7 +2837,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:138"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:138"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2848,7 +2848,7 @@
   "EndColumn": 82,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.8619704,
@@ -2857,7 +2857,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:147"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:147"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2868,7 +2868,7 @@
   "EndColumn": 63,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.8970814,
@@ -2877,7 +2877,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:152"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:152"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2888,7 +2888,7 @@
   "EndColumn": 106,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.768947,
@@ -2897,7 +2897,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:152"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:152"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2908,7 +2908,7 @@
   "EndColumn": 63,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.8505697,
@@ -2917,7 +2917,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:163"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:163"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2928,7 +2928,7 @@
   "EndColumn": 106,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.7048798,
@@ -2937,7 +2937,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:163"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:163"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2948,7 +2948,7 @@
   "EndColumn": 63,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.8970814,
@@ -2957,7 +2957,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:170"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:170"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2968,7 +2968,7 @@
   "EndColumn": 106,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.9260373,
@@ -2977,7 +2977,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:170"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:170"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -2988,7 +2988,7 @@
   "EndColumn": 104,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.9260373,
@@ -2997,7 +2997,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:196"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:196"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -3008,7 +3008,7 @@
   "EndColumn": 69,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
+  "File": "src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.943593,
@@ -3017,7 +3017,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:207"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Core/Settings/Migrations/v1_7_2/MigratedServerId.cs:proton-aead-jwt-signing-key:207"
  },
  {
   "RuleID": "proton-password-equals-quotes",
@@ -3028,7 +3028,7 @@
   "EndColumn": 141,
   "Match": "                        input:PasswordBoxAssistant.BoundPassword=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.App/Login/Views/LoginView.xaml",
+  "File": "src/SyncVPN.App/Login/Views/LoginView.xaml",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.595608,
@@ -3037,7 +3037,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.App/Login/Views/LoginView.xaml:proton-password-equals-quotes:205"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.App/Login/Views/LoginView.xaml:proton-password-equals-quotes:205"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3048,7 +3048,7 @@
   "EndColumn": 173,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.629412,
@@ -3057,7 +3057,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:126"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:126"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3068,7 +3068,7 @@
   "EndColumn": 189,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.470774,
@@ -3077,7 +3077,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:127"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:127"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3088,7 +3088,7 @@
   "EndColumn": 185,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4635596,
@@ -3097,7 +3097,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:128"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:128"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3108,7 +3108,7 @@
   "EndColumn": 197,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4949074,
@@ -3117,7 +3117,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:134"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:134"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3128,7 +3128,7 @@
   "EndColumn": 261,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.823771,
@@ -3137,7 +3137,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:143"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:143"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3148,7 +3148,7 @@
   "EndColumn": 255,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.9620914,
@@ -3157,7 +3157,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:144"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:144"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3168,7 +3168,7 @@
   "EndColumn": 245,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.8506923,
@@ -3177,7 +3177,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:148"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:148"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3188,7 +3188,7 @@
   "EndColumn": 269,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.7647247,
@@ -3197,7 +3197,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:160"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:160"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3208,7 +3208,7 @@
   "EndColumn": 185,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.532678,
@@ -3217,7 +3217,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:163"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:163"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3228,7 +3228,7 @@
   "EndColumn": 213,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.453626,
@@ -3237,7 +3237,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:174"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:174"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3248,7 +3248,7 @@
   "EndColumn": 211,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.500342,
@@ -3257,7 +3257,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:175"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:175"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3268,7 +3268,7 @@
   "EndColumn": 203,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.6402364,
@@ -3277,7 +3277,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:176"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:176"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3288,7 +3288,7 @@
   "EndColumn": 213,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.530686,
@@ -3297,7 +3297,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:185"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:185"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3308,7 +3308,7 @@
   "EndColumn": 211,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.5167866,
@@ -3317,7 +3317,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:186"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:186"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3328,7 +3328,7 @@
   "EndColumn": 203,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.7000284,
@@ -3337,7 +3337,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:187"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:187"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3348,7 +3348,7 @@
   "EndColumn": 215,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4711175,
@@ -3357,7 +3357,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:190"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:190"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3368,7 +3368,7 @@
   "EndColumn": 211,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4881663,
@@ -3377,7 +3377,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:191"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:191"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3388,7 +3388,7 @@
   "EndColumn": 203,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.6877346,
@@ -3397,7 +3397,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:192"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:192"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3408,7 +3408,7 @@
   "EndColumn": 225,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4300675,
@@ -3417,7 +3417,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:193"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:193"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3428,7 +3428,7 @@
   "EndColumn": 205,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.530534,
@@ -3437,7 +3437,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:197"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:197"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3448,7 +3448,7 @@
   "EndColumn": 211,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4542975,
@@ -3457,7 +3457,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:201"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:201"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3468,7 +3468,7 @@
   "EndColumn": 223,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.612747,
@@ -3477,7 +3477,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:202"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:202"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3488,7 +3488,7 @@
   "EndColumn": 124,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.646885,
@@ -3497,7 +3497,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:284"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:284"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3508,7 +3508,7 @@
   "EndColumn": 124,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.646885,
@@ -3517,7 +3517,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:285"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:285"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3528,7 +3528,7 @@
   "EndColumn": 119,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPNTap.aip",
+  "File": "Setup/SyncVPNTap.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.646885,
@@ -3537,7 +3537,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPNTap.aip:proton-key-equals:288"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPNTap.aip:proton-key-equals:288"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3548,7 +3548,7 @@
   "EndColumn": 197,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4949074,
@@ -3557,7 +3557,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:326"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:326"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3568,7 +3568,7 @@
   "EndColumn": 245,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.8506923,
@@ -3577,7 +3577,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:327"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:327"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3588,7 +3588,7 @@
   "EndColumn": 213,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.453626,
@@ -3597,7 +3597,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:331"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:331"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3608,7 +3608,7 @@
   "EndColumn": 211,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.500342,
@@ -3617,7 +3617,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:332"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:332"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3628,7 +3628,7 @@
   "EndColumn": 203,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.6402364,
@@ -3637,7 +3637,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:333"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:333"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3648,7 +3648,7 @@
   "EndColumn": 213,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.530686,
@@ -3657,7 +3657,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:336"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:336"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3668,7 +3668,7 @@
   "EndColumn": 211,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.5167866,
@@ -3677,7 +3677,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:337"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:337"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3688,7 +3688,7 @@
   "EndColumn": 203,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.7000284,
@@ -3697,7 +3697,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:338"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:338"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3708,7 +3708,7 @@
   "EndColumn": 215,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4711175,
@@ -3717,7 +3717,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:341"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:341"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3728,7 +3728,7 @@
   "EndColumn": 211,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4881663,
@@ -3737,7 +3737,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:342"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:342"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3748,7 +3748,7 @@
   "EndColumn": 203,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.6877346,
@@ -3757,7 +3757,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:343"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:343"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3768,7 +3768,7 @@
   "EndColumn": 225,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4300675,
@@ -3777,7 +3777,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:344"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:344"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3788,7 +3788,7 @@
   "EndColumn": 173,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.629412,
@@ -3797,7 +3797,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:347"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:347"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3808,7 +3808,7 @@
   "EndColumn": 189,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.470774,
@@ -3817,7 +3817,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:348"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:348"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3828,7 +3828,7 @@
   "EndColumn": 185,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4635596,
@@ -3837,7 +3837,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:349"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:349"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3848,7 +3848,7 @@
   "EndColumn": 261,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.823771,
@@ -3857,7 +3857,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:363"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:363"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3868,7 +3868,7 @@
   "EndColumn": 255,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.9620914,
@@ -3877,7 +3877,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:364"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:364"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3888,7 +3888,7 @@
   "EndColumn": 269,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.7647247,
@@ -3897,7 +3897,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:379"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:379"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3908,7 +3908,7 @@
   "EndColumn": 185,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.532678,
@@ -3917,7 +3917,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:382"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:382"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3928,7 +3928,7 @@
   "EndColumn": 205,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.530534,
@@ -3937,7 +3937,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:387"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:387"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3948,7 +3948,7 @@
   "EndColumn": 211,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4542975,
@@ -3957,7 +3957,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:389"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:389"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3968,7 +3968,7 @@
   "EndColumn": 223,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.612747,
@@ -3977,7 +3977,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:390"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:390"
  },
  {
   "RuleID": "proton-key-equals",
@@ -3988,7 +3988,7 @@
   "EndColumn": 124,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.646885,
@@ -3997,7 +3997,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:613"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:613"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4008,7 +4008,7 @@
   "EndColumn": 124,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.646885,
@@ -4017,7 +4017,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:614"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:614"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4028,7 +4028,7 @@
   "EndColumn": 119,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.646885,
@@ -4037,7 +4037,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:617"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:617"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4048,7 +4048,7 @@
   "EndColumn": 128,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4248977,
@@ -4057,7 +4057,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:618"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:618"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4068,7 +4068,7 @@
   "EndColumn": 127,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4248977,
@@ -4077,7 +4077,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:619"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:619"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4088,7 +4088,7 @@
   "EndColumn": 131,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4248977,
@@ -4097,7 +4097,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:620"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:620"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4108,7 +4108,7 @@
   "EndColumn": 131,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4248977,
@@ -4117,7 +4117,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:621"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:621"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4128,7 +4128,7 @@
   "EndColumn": 134,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4248977,
@@ -4137,7 +4137,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:622"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:622"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4148,7 +4148,7 @@
   "EndColumn": 133,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4248977,
@@ -4157,7 +4157,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:623"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:623"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4168,7 +4168,7 @@
   "EndColumn": 141,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.5027413,
@@ -4177,7 +4177,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:624"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:624"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4188,7 +4188,7 @@
   "EndColumn": 128,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4248977,
@@ -4197,7 +4197,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:625"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:625"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4208,7 +4208,7 @@
   "EndColumn": 133,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4248977,
@@ -4217,7 +4217,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:626"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:626"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4228,7 +4228,7 @@
   "EndColumn": 135,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4248977,
@@ -4237,7 +4237,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:627"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:627"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4248,7 +4248,7 @@
   "EndColumn": 129,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4248977,
@@ -4257,7 +4257,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:630"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:630"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4268,7 +4268,7 @@
   "EndColumn": 132,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4248977,
@@ -4277,7 +4277,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:631"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:631"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4288,7 +4288,7 @@
   "EndColumn": 133,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4248977,
@@ -4297,7 +4297,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:632"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:632"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4308,7 +4308,7 @@
   "EndColumn": 133,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4248977,
@@ -4317,7 +4317,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:633"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:633"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4328,7 +4328,7 @@
   "EndColumn": 135,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4248977,
@@ -4337,7 +4337,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:634"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:634"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4348,7 +4348,7 @@
   "EndColumn": 132,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4248977,
@@ -4357,7 +4357,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:636"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:636"
  },
  {
   "RuleID": "proton-key-equals",
@@ -4368,7 +4368,7 @@
   "EndColumn": 132,
   "Match": "Key=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.4248977,
@@ -4377,7 +4377,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:proton-key-equals:637"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:proton-key-equals:637"
  },
  {
   "RuleID": "generic-api-key",
@@ -4388,7 +4388,7 @@
   "EndColumn": 164,
   "Match": "KeyPath=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 3.8924072,
@@ -4397,7 +4397,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:generic-api-key:133"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:generic-api-key:133"
  },
  {
   "RuleID": "generic-api-key",
@@ -4408,7 +4408,7 @@
   "EndColumn": 57,
   "Match": "SearchKey=\"REDACTED\"",
   "Secret": "REDACTED",
-  "File": "Setup/ProtonVPN.aip",
+  "File": "Setup/SyncVPN.aip",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 3.9217212,
@@ -4417,7 +4417,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/ProtonVPN.aip:generic-api-key:678"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:Setup/SyncVPN.aip:generic-api-key:678"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -4428,7 +4428,7 @@
   "EndColumn": 109,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Core/Profiles/README.md",
+  "File": "src/SyncVPN.Core/Profiles/README.md",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.6118565,
@@ -4437,7 +4437,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.Core/Profiles/README.md:proton-aead-jwt-signing-key:22"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.Core/Profiles/README.md:proton-aead-jwt-signing-key:22"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -4448,7 +4448,7 @@
   "EndColumn": 77,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs",
+  "File": "src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.7399907,
@@ -4457,7 +4457,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:184"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:184"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -4468,7 +4468,7 @@
   "EndColumn": 77,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs",
+  "File": "src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.7513914,
@@ -4477,7 +4477,7 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:197"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:197"
  },
  {
   "RuleID": "proton-aead-jwt-signing-key",
@@ -4488,7 +4488,7 @@
   "EndColumn": 77,
   "Match": "REDACTED",
   "Secret": "REDACTED",
-  "File": "src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs",
+  "File": "src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs",
   "SymlinkFile": "",
   "Commit": "8cd129d8c8a4235de79c46b80f21eaeefebb691c",
   "Entropy": 4.8681254,
@@ -4497,6 +4497,6 @@
   "Date": "2020-01-15T16:37:41Z",
   "Message": "Initial commit",
   "Tags": [],
-  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/ProtonVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:198"
+  "Fingerprint": "8cd129d8c8a4235de79c46b80f21eaeefebb691c:src/SyncVPN.Common/Configuration/Source/DefaultConfig.cs:proton-aead-jwt-signing-key:198"
  }
 ]

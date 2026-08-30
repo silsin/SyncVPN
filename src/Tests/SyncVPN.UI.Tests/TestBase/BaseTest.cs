@@ -1,0 +1,232 @@
+﻿/*
+ * Copyright (c) 2025 Proton AG
+ *
+ * This file is part of SyncVPN.
+ *
+ * SyncVPN is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * SyncVPN is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+using System;
+using System.IO;
+using System.Threading;
+using System.Diagnostics;
+using System.ComponentModel;
+using System.ServiceProcess;
+using System.Threading.Tasks;
+using FlaUI.Core;
+using FlaUI.UIA3;
+using FlaUI.Core.Tools;
+using FlaUI.Core.AutomationElements;
+using NUnit.Framework;
+using NUnit.Framework.Interfaces;
+using SyncVPN.UI.Tests.Robots;
+using SyncVPN.UI.Tests.TestsHelper;
+using TimeoutException = System.TimeoutException;
+
+namespace SyncVPN.UI.Tests.TestBase;
+
+// Shared methods related to test session.
+public class BaseTest
+{
+    public static Application? App;
+    public static Window? Window;
+
+    protected static LoginRobot LoginRobot { get; } = new();
+    protected static HomeRobot HomeRobot { get; } = new();
+    protected static NavigationRobot NavigationRobot { get; } = new();
+    protected static ProfileRobot ProfileRobot { get; } = new();
+    protected static SidebarRobot SidebarRobot { get; } = new();
+    protected static SettingRobot SettingRobot { get; } = new();
+    protected static DesktopRobot DesktopRobot { get; } = new();
+    protected static SupportRobot SupportRobot { get; } = new(() => Window);
+    protected static AdvancedSettingsRobot AdvancedSettingsRobot { get; } = new();
+    protected static UpsellCarrouselRobot UpsellCarrouselRobot { get; } = new();
+    protected static SplitTunnelingRobot SplitTunnelingRobot { get; } = new();
+    protected static IpSelectorRobot IpSelectorRobot { get; } = new();
+    protected static AppSelectorRobot AppSelectorRobot { get; } = new();
+
+    protected static ConfirmationRobot ConfirmationRobot { get; } = new();
+
+    private const string CLIENT_NAME = "SyncVPN.Client.exe";
+
+    private static readonly bool _isDevelopmentModeEnabled = false;
+
+    // Shared SetUp, TearDown actions that will be performed accross all the tests.
+    [SetUp]
+    public async Task GlobalSetUpAsync()
+    {
+        string testName = TestContext.CurrentContext.Test.MethodName ?? throw new Exception("Test method name is null.");
+        ArtifactsHelper.ClearEventViewerLogs();
+        ArtifactsHelper.DeleteArtifactFolder(testName);
+        await ArtifactsHelper.StartVideoCaptureAsync(testName);
+    }
+
+    [TearDown]
+    public void GlobalTeardown()
+    {
+        string testName = TestContext.CurrentContext.Test.MethodName ?? throw new Exception("Test method name is null.");
+
+        ArtifactsHelper.Recorder?.Stop();
+        ArtifactsHelper.Recorder?.Dispose();
+        ArtifactsHelper.SaveEventViewerLogs(testName);
+        if (TestContext.CurrentContext.Result.Outcome.Status != TestStatus.Failed)
+        {
+            ArtifactsHelper.DeleteArtifactFolder(testName);
+        }
+    }
+
+    public static void RefreshWindow(TimeSpan? timeout = null)
+    {
+        Window = null;
+        TimeSpan refreshTimeout = timeout ?? TestConstants.ThirtySecondsTimeout;
+        RetryResult<Window?> retry = Retry.WhileNull(() =>
+        {
+            try
+            {
+                Window = App?.GetMainWindow(new UIA3Automation(), refreshTimeout);
+            }
+            catch (TimeoutException)
+            {
+                //Ignore
+            }
+            catch (Win32Exception)
+            {
+                // Ignore
+            }
+            return Window;
+        },
+        refreshTimeout, TestConstants.RetryInterval);
+
+        if (!retry.Success)
+        {
+            Assert.Fail($"Failed to refresh window in {refreshTimeout.TotalSeconds:0} seconds.");
+        }
+    }
+
+    protected static void DeleteProtonData()
+    {
+        try
+        {
+            Directory.Delete(TestConstants.UserStoragePath, true);
+            File.Delete(TestEnvironment.GetServiceLogsPath());
+        }
+        catch
+        {
+        }
+    }
+
+    protected static void Cleanup()
+    {
+        try
+        {
+            SaveScreenshotAndLogsIfFailed();
+        }
+        catch
+        {
+            //Do nothing, since artifact collection shouldn't block cleanup.
+        }
+
+        try
+        {
+            HomeRobot.CloseClientViaCloseButton();
+            Thread.Sleep(TestConstants.OneSecondTimeout);
+        }
+        catch { }
+
+        try
+        {
+            App?.Close();
+        }
+        catch { }
+
+        finally
+        {
+            App?.Dispose();
+            Thread.Sleep(TestConstants.OneSecondTimeout);
+            StopVpnCalloutService();
+        }
+    }
+
+    protected static void StopVpnCalloutService()
+    {
+        try
+        {
+            using ServiceController protonService = new ServiceController("SyncVPNCallout");
+
+            if (protonService.Status != ServiceControllerStatus.Stopped)
+            {
+                TestContext.WriteLine($"WARNING: The SyncVPNCallout service is still running after app close - possible bug or unclean shutdown.");
+
+                protonService.Stop();
+                protonService.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromSeconds(10));
+            }
+        }
+        catch (Exception)
+        {
+            Assert.Fail("SyncVPNCallout service failed to stop");
+        }
+    }
+
+    protected static void LaunchApp(bool isFreshStart = true)
+    {
+        if (isFreshStart)
+        {
+            DeleteProtonData();
+        }
+
+        string installedClientPath = Path.Combine(
+            _isDevelopmentModeEnabled
+                ? TestEnvironment.GetDevProtonClientFolder()
+                : TestEnvironment.GetProtonClientFolder(),
+            CLIENT_NAME);
+
+        ProcessStartInfo startInfo = new ProcessStartInfo(installedClientPath)
+        {
+            Arguments = "-ExitAppOnClose -DisableAutoUpdate"
+        };
+        App = Application.Launch(startInfo);
+
+        RetryResult<bool> result = WaitUntilAppIsRunning();
+        if (!result.Success)
+        {
+            //Sometimes app fails to launch on first try due to CI issues.
+            App = Application.Launch(installedClientPath);
+        }
+
+        RefreshWindow(TestConstants.OneMinuteTimeout);
+        Window?.Focus();
+    }
+
+    protected static void SaveScreenshotAndLogsIfFailed()
+    {
+        if (!TestEnvironment.AreTestsRunningLocally() && TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Failed)
+        {
+            string testName = TestContext.CurrentContext.Test.MethodName ?? throw new Exception("Test method name is null.");
+            ArtifactsHelper.SaveScreenshotAndLogs(testName, TestEnvironment.GetServiceLogsPath());
+        }
+    }
+
+    private static RetryResult<bool> WaitUntilAppIsRunning()
+    {
+        RetryResult<bool> retry = Retry.WhileFalse(
+            () =>
+            {
+                Process[] pname = Process.GetProcessesByName("SyncVPN.Client");
+                return pname.Length > 0;
+            },
+            TimeSpan.FromSeconds(30), TestConstants.RetryInterval);
+
+        return retry;
+    }
+}

@@ -1,0 +1,308 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+  </Configurations>
+  <Folder Name="/Api/">
+    <Project Path="src/Api/SyncVPN.Api.Contracts/SyncVPN.Api.Contracts.csproj" />
+    <Project Path="src/Api/SyncVPN.Api.Installers/SyncVPN.Api.Installers.csproj" />
+    <Project Path="src/Api/SyncVPN.Api.Tests/SyncVPN.Api.Tests.csproj" />
+    <Project Path="src/Api/SyncVPN.Api/SyncVPN.Api.csproj" />
+  </Folder>
+  <Folder Name="/Builds/">
+    <Project Path="src/Builds/SyncVPN.Builds.ConsoleJob/SyncVPN.Builds.ConsoleJob.csproj" />
+    <Project Path="src/Builds/SyncVPN.Builds.Variables/SyncVPN.Builds.Variables.csproj" />
+  </Folder>
+  <Folder Name="/Client/">
+    <Project Path="src/Client/SyncVPN.Client.Contracts/SyncVPN.Client.Contracts.csproj" />
+    <Project Path="src/Client/SyncVPN.Client.Core/SyncVPN.Client.Core.csproj" />
+    <Project Path="src/Client/SyncVPN.Client/SyncVPN.Client.csproj">
+      <Platform Solution="*|Any CPU" Project="x64" />
+      <Platform Solution="*|ARM64" Project="ARM64" />
+      <Platform Solution="*|x64" Project="x64" />
+      <Deploy />
+    </Project>
+  </Folder>
+  <Folder Name="/Client/Common/">
+    <Project Path="src/Client/Common/SyncVPN.Client.Common.Interop/SyncVPN.Client.Common.Interop.csproj" />
+    <Project Path="src/Client/Common/SyncVPN.Client.Common.UI/SyncVPN.Client.Common.UI.csproj" />
+    <Project Path="src/Client/Common/SyncVPN.Client.Common/SyncVPN.Client.Common.csproj" />
+  </Folder>
+  <Folder Name="/Client/EventMessaging/">
+    <Project Path="src/Client/EventMessaging/SyncVPN.Client.EventMessaging.Contracts/SyncVPN.Client.EventMessaging.Contracts.csproj" />
+    <Project Path="src/Client/EventMessaging/SyncVPN.Client.EventMessaging.Installers/SyncVPN.Client.EventMessaging.Installers.csproj" />
+    <Project Path="src/Client/EventMessaging/SyncVPN.Client.EventMessaging/SyncVPN.Client.EventMessaging.csproj" />
+  </Folder>
+  <Folder Name="/Client/Files/">
+    <Project Path="src/Client/Files/SyncVPN.Client.Files.Contracts/SyncVPN.Client.Files.Contracts.csproj" />
+    <Project Path="src/Client/Files/SyncVPN.Client.Files.Installers/SyncVPN.Client.Files.Installers.csproj" />
+    <Project Path="src/Client/Files/SyncVPN.Client.Files/SyncVPN.Client.Files.csproj" />
+  </Folder>
+  <Folder Name="/Client/Localization/">
+    <Project Path="src/Client/Localization/SyncVPN.Client.Localization.Contracts/SyncVPN.Client.Localization.Contracts.csproj" />
+    <Project Path="src/Client/Localization/SyncVPN.Client.Localization.Extensions/SyncVPN.Client.Localization.Extensions.csproj" />
+    <Project Path="src/Client/Localization/SyncVPN.Client.Localization.Installers/SyncVPN.Client.Localization.Installers.csproj" />
+    <Project Path="src/Client/Localization/SyncVPN.Client.Localization.Tests/SyncVPN.Client.Localization.Tests.csproj" />
+    <Project Path="src/Client/Localization/SyncVPN.Client.Localization/SyncVPN.Client.Localization.csproj" />
+  </Folder>
+  <Folder Name="/Client/Logic/" />
+  <Folder Name="/Client/Logic/Announcements/">
+    <Project Path="src/Client/Logic/Announcements/SyncVPN.Client.Logic.Announcements.Contracts/SyncVPN.Client.Logic.Announcements.Contracts.csproj" />
+    <Project Path="src/Client/Logic/Announcements/SyncVPN.Client.Logic.Announcements.EntityMapping/SyncVPN.Client.Logic.Announcements.EntityMapping.csproj" />
+    <Project Path="src/Client/Logic/Announcements/SyncVPN.Client.Logic.Announcements.Installers/SyncVPN.Client.Logic.Announcements.Installers.csproj" />
+    <Project Path="src/Client/Logic/Announcements/SyncVPN.Client.Logic.Announcements.Tests/SyncVPN.Client.Logic.Announcements.Tests.csproj" />
+    <Project Path="src/Client/Logic/Announcements/SyncVPN.Client.Logic.Announcements/SyncVPN.Client.Logic.Announcements.csproj" />
+  </Folder>
+  <Folder Name="/Client/Logic/Auth/">
+    <Project Path="src/Client/Logic/Auth/SyncVPN.Client.Logic.Auth.Contracts/SyncVPN.Client.Logic.Auth.Contracts.csproj" />
+    <Project Path="src/Client/Logic/Auth/SyncVPN.Client.Logic.Auth.Srp.Contracts/SyncVPN.Client.Logic.Auth.Srp.Contracts.csproj" />
+    <Project Path="src/Client/Logic/Auth/SyncVPN.Client.Logic.Auth.Srp/SyncVPN.Client.Logic.Auth.Srp.csproj" />
+    <Project Path="src/Client/Logic/Auth/SyncVPN.Client.Logic.Auth.Installers/SyncVPN.Client.Logic.Auth.Installers.csproj" />
+    <Project Path="src/Client/Logic/Auth/SyncVPN.Client.Logic.Auth.Tests/SyncVPN.Client.Logic.Auth.Tests.csproj" />
+    <Project Path="src/Client/Logic/Auth/SyncVPN.Client.Logic.Auth/SyncVPN.Client.Logic.Auth.csproj" />
+  </Folder>
+  <Folder Name="/Client/Logic/Connection/">
+    <Project Path="src/Client/Logic/Connection/SyncVPN.Client.Logic.Connection.Contracts/SyncVPN.Client.Logic.Connection.Contracts.csproj" />
+    <Project Path="src/Client/Logic/Connection/SyncVPN.Client.Logic.Connection.EntityMapping/SyncVPN.Client.Logic.Connection.EntityMapping.csproj" />
+    <Project Path="src/Client/Logic/Connection/SyncVPN.Client.Logic.Connection.Installers/SyncVPN.Client.Logic.Connection.Installers.csproj" />
+    <Project Path="src/Client/Logic/Connection/SyncVPN.Client.Logic.Connection.Tests/SyncVPN.Client.Logic.Connection.Tests.csproj" />
+    <Project Path="src/Client/Logic/Connection/SyncVPN.Client.Logic.Connection/SyncVPN.Client.Logic.Connection.csproj" />
+  </Folder>
+  <Folder Name="/Client/Logic/Feedback/">
+    <Project Path="src/Client/Logic/Feedback/SyncVPN.Client.Logic.Feedback.Contracts/SyncVPN.Client.Logic.Feedback.Contracts.csproj" />
+    <Project Path="src/Client/Logic/Feedback/SyncVPN.Client.Logic.Feedback.Installers/SyncVPN.Client.Logic.Feedback.Installers.csproj" />
+    <Project Path="src/Client/Logic/Feedback/SyncVPN.Client.Logic.Feedback.Tests/SyncVPN.Client.Logic.Feedback.Tests.csproj" />
+    <Project Path="src/Client/Logic/Feedback/SyncVPN.Client.Logic.Feedback/SyncVPN.Client.Logic.Feedback.csproj" />
+  </Folder>
+  <Folder Name="/Client/Logic/Profiles/">
+    <Project Path="src/Client/Logic/Profiles/SyncVPN.Client.Logic.Profiles.Contracts/SyncVPN.Client.Logic.Profiles.Contracts.csproj" />
+    <Project Path="src/Client/Logic/Profiles/SyncVPN.Client.Logic.Profiles.EntityMapping/SyncVPN.Client.Logic.Profiles.EntityMapping.csproj" />
+    <Project Path="src/Client/Logic/Profiles/SyncVPN.Client.Logic.Profiles.Installers/SyncVPN.Client.Logic.Profiles.Installers.csproj" />
+    <Project Path="src/Client/Logic/Profiles/SyncVPN.Client.Logic.Profiles/SyncVPN.Client.Logic.Profiles.csproj" />
+  </Folder>
+  <Folder Name="/Client/Logic/Recents/">
+    <Project Path="src/Client/Logic/Recents/SyncVPN.Client.Logic.Recents.Contracts/SyncVPN.Client.Logic.Recents.Contracts.csproj" />
+    <Project Path="src/Client/Logic/Recents/SyncVPN.Client.Logic.Recents.EntityMapping/SyncVPN.Client.Logic.Recents.EntityMapping.csproj" />
+    <Project Path="src/Client/Logic/Recents/SyncVPN.Client.Logic.Recents.Installers/SyncVPN.Client.Logic.Recents.Installers.csproj" />
+    <Project Path="src/Client/Logic/Recents/SyncVPN.Client.Logic.Recents/SyncVPN.Client.Logic.Recents.csproj" />
+  </Folder>
+  <Folder Name="/Client/Logic/Searches/">
+    <Project Path="src/Client/Logic/Searches/SyncVPN.Client.Logic.Searches.Contracts/SyncVPN.Client.Logic.Searches.Contracts.csproj" />
+    <Project Path="src/Client/Logic/Searches/SyncVPN.Client.Logic.Searches.Installers/SyncVPN.Client.Logic.Searches.Installers.csproj" />
+    <Project Path="src/Client/Logic/Searches/SyncVPN.Client.Logic.Searches.Tests/SyncVPN.Client.Logic.Searches.Tests.csproj" />
+    <Project Path="src/Client/Logic/Searches/SyncVPN.Client.Logic.Searches/SyncVPN.Client.Logic.Searches.csproj" />
+  </Folder>
+  <Folder Name="/Client/Logic/Servers/">
+    <Project Path="src/Client/Logic/Servers/SyncVPN.Client.Logic.Servers.Contracts/SyncVPN.Client.Logic.Servers.Contracts.csproj" />
+    <Project Path="src/Client/Logic/Servers/SyncVPN.Client.Logic.Servers.Installers/SyncVPN.Client.Logic.Servers.Installers.csproj" />
+    <Project Path="src/Client/Logic/Servers/SyncVPN.Client.Logic.Servers.Mappers.Tests/SyncVPN.Client.Logic.Servers.Mappers.Tests.csproj" />
+    <Project Path="src/Client/Logic/Servers/SyncVPN.Client.Logic.Servers.Mappers/SyncVPN.Client.Logic.Servers.Mappers.csproj" />
+    <Project Path="src/Client/Logic/Servers/SyncVPN.Client.Logic.Servers.Tests/SyncVPN.Client.Logic.Servers.Tests.csproj" />
+    <Project Path="src/Client/Logic/Servers/SyncVPN.Client.Logic.Servers/SyncVPN.Client.Logic.Servers.csproj" />
+  </Folder>
+  <Folder Name="/Client/Logic/Servers/Searches/" />
+  <Folder Name="/Client/Logic/Services/">
+    <Project Path="src/Client/Logic/Services/SyncVPN.Client.Logic.Services.Contracts/SyncVPN.Client.Logic.Services.Contracts.csproj" />
+    <Project Path="src/Client/Logic/Services/SyncVPN.Client.Logic.Services.Installers/SyncVPN.Client.Logic.Services.Installers.csproj" />
+    <Project Path="src/Client/Logic/Services/SyncVPN.Client.Logic.Services/SyncVPN.Client.Logic.Services.csproj" />
+  </Folder>
+  <Folder Name="/Client/Logic/Updates/">
+    <Project Path="src/Client/Logic/Updates/SyncVPN.Client.Logic.Updates.Contracts/SyncVPN.Client.Logic.Updates.Contracts.csproj" />
+    <Project Path="src/Client/Logic/Updates/SyncVPN.Client.Logic.Updates.Installers/SyncVPN.Client.Logic.Updates.Installers.csproj" />
+    <Project Path="src/Client/Logic/Updates/SyncVPN.Client.Logic.Updates/SyncVPN.Client.Logic.Updates.csproj" />
+  </Folder>
+  <Folder Name="/Client/Logic/Users/">
+    <Project Path="src/Client/Logic/Users/SyncVPN.Client.Logic.Users.Contracts/SyncVPN.Client.Logic.Users.Contracts.csproj" />
+    <Project Path="src/Client/Logic/Users/SyncVPN.Client.Logic.Users.Installers/SyncVPN.Client.Logic.Users.Installers.csproj" />
+    <Project Path="src/Client/Logic/Users/SyncVPN.Client.Logic.Users.Tests/SyncVPN.Client.Logic.Users.Tests.csproj" />
+    <Project Path="src/Client/Logic/Users/SyncVPN.Client.Logic.Users/SyncVPN.Client.Logic.Users.csproj" />
+  </Folder>
+  <Folder Name="/Client/Notifications/">
+    <Project Path="src/Client/Notifications/SyncVPN.Client.Notifications.Contracts/SyncVPN.Client.Notifications.Contracts.csproj" />
+    <Project Path="src/Client/Notifications/SyncVPN.Client.Notifications.Installers/SyncVPN.Client.Notifications.Installers.csproj" />
+    <Project Path="src/Client/Notifications/SyncVPN.Client.Notifications/SyncVPN.Client.Notifications.csproj" />
+  </Folder>
+  <Folder Name="/Client/Settings/">
+    <Project Path="src/Client/Settings/SyncVPN.Client.Settings.Contracts/SyncVPN.Client.Settings.Contracts.csproj" />
+    <Project Path="src/Client/Settings/SyncVPN.Client.Settings.Installers/SyncVPN.Client.Settings.Installers.csproj" />
+    <Project Path="src/Client/Settings/SyncVPN.Client.Settings/SyncVPN.Client.Settings.csproj" />
+  </Folder>
+  <Folder Name="/Client/UnsecureWifiDetection/">
+    <Project Path="src/Client/UnsecureWifiDetection/SyncVPN.Client.UnsecureWifiDetection.Contracts/SyncVPN.Client.UnsecureWifiDetection.Contracts.csproj" />
+    <Project Path="src/Client/UnsecureWifiDetection/SyncVPN.Client.UnsecureWifiDetection.Installers/SyncVPN.Client.UnsecureWifiDetection.Installers.csproj" />
+    <Project Path="src/Client/UnsecureWifiDetection/SyncVPN.Client.UnsecureWifiDetection/SyncVPN.Client.UnsecureWifiDetection.csproj" />
+  </Folder>
+  <Folder Name="/Common/">
+    <Project Path="src/Common/SyncVPN.Common.Core.Tests/SyncVPN.Common.Core.Tests.csproj" />
+    <Project Path="src/Common/SyncVPN.Common.Core/SyncVPN.Common.Core.csproj" />
+    <Project Path="src/Common/SyncVPN.Common.Installers/SyncVPN.Common.Installers.csproj" />
+  </Folder>
+  <Folder Name="/Configurations/">
+    <Project Path="src/Configurations/SyncVPN.Configurations.Contracts/SyncVPN.Configurations.Contracts.csproj" />
+    <Project Path="src/Configurations/SyncVPN.Configurations.Installers/SyncVPN.Configurations.Installers.csproj" />
+    <Project Path="src/Configurations/SyncVPN.Configurations.Tests/SyncVPN.Configurations.Tests.csproj" />
+    <Project Path="src/Configurations/SyncVPN.Configurations/SyncVPN.Configurations.csproj" />
+  </Folder>
+  <Folder Name="/Crypto/">
+    <Project Path="src/Crypto/SyncVPN.Crypto.Contracts/SyncVPN.Crypto.Contracts.csproj" />
+    <Project Path="src/Crypto/SyncVPN.Crypto.Installers/SyncVPN.Crypto.Installers.csproj" />
+    <Project Path="src/Crypto/SyncVPN.Crypto.Tests/SyncVPN.Crypto.Tests.csproj" />
+    <Project Path="src/Crypto/SyncVPN.Crypto/SyncVPN.Crypto.csproj" />
+  </Folder>
+  <Folder Name="/Dns/">
+    <Project Path="src/Dns/SyncVPN.Dns.Contracts/SyncVPN.Dns.Contracts.csproj" />
+    <Project Path="src/Dns/SyncVPN.Dns.Installers/SyncVPN.Dns.Installers.csproj" />
+    <Project Path="src/Dns/SyncVPN.Dns.Tests/SyncVPN.Dns.Tests.csproj" />
+    <Project Path="src/Dns/SyncVPN.Dns/SyncVPN.Dns.csproj" />
+  </Folder>
+  <Folder Name="/EntityMapping/">
+    <Project Path="src/EntityMapping/SyncVPN.EntityMapping.Common.Installers/SyncVPN.EntityMapping.Common.Installers.csproj" />
+    <Project Path="src/EntityMapping/SyncVPN.EntityMapping.Contracts/SyncVPN.EntityMapping.Contracts.csproj" />
+    <Project Path="src/EntityMapping/SyncVPN.EntityMapping.Installers/SyncVPN.EntityMapping.Installers.csproj" />
+    <Project Path="src/EntityMapping/SyncVPN.EntityMapping.Tests/SyncVPN.EntityMapping.Tests.csproj" />
+    <Project Path="src/EntityMapping/SyncVPN.EntityMapping/SyncVPN.EntityMapping.csproj" />
+  </Folder>
+  <Folder Name="/Files/">
+    <Project Path="src/Files/SyncVPN.Files.Contracts/SyncVPN.Files.Contracts.csproj" />
+    <Project Path="src/Files/SyncVPN.Files.Installers/SyncVPN.Files.Installers.csproj" />
+    <Project Path="src/Files/SyncVPN.Files/SyncVPN.Files.csproj" />
+  </Folder>
+  <Folder Name="/IPv6/">
+    <Project Path="src/IPv6/SyncVPN.IPv6.Contracts/SyncVPN.IPv6.Contracts.csproj" />
+    <Project Path="src/IPv6/SyncVPN.IPv6.Installers/SyncVPN.IPv6.Installers.csproj" />
+    <Project Path="src/IPv6/SyncVPN.IPv6/SyncVPN.IPv6.csproj" />
+  </Folder>
+  <Folder Name="/IssueReporting/">
+    <Project Path="src/IssueReporting/SyncVPN.IssueReporting.Contracts/SyncVPN.IssueReporting.Contracts.csproj" />
+    <Project Path="src/IssueReporting/SyncVPN.IssueReporting.Installers/SyncVPN.IssueReporting.Installers.csproj" />
+    <Project Path="src/IssueReporting/SyncVPN.IssueReporting.Static/SyncVPN.IssueReporting.Static.csproj" />
+    <Project Path="src/IssueReporting/SyncVPN.IssueReporting.Tests/SyncVPN.IssueReporting.Tests.csproj" />
+    <Project Path="src/IssueReporting/SyncVPN.IssueReporting/SyncVPN.IssueReporting.csproj" />
+  </Folder>
+  <Folder Name="/Logging/">
+    <Project Path="src/Logging/SyncVPN.Logging.Contracts/SyncVPN.Logging.Contracts.csproj" />
+    <Project Path="src/Logging/SyncVPN.Logging.Events/SyncVPN.Logging.Events.csproj" />
+    <Project Path="src/Logging/SyncVPN.Logging.Installers/SyncVPN.Logging.Installers.csproj" />
+    <Project Path="src/Logging/SyncVPN.Logging.Tests/SyncVPN.Logging.Tests.csproj" />
+    <Project Path="src/Logging/SyncVPN.Logging/SyncVPN.Logging.csproj" />
+  </Folder>
+  <Folder Name="/NetworkTimeProtocols/">
+    <Project Path="src/NetworkTimeProtocols/SyncVPN.NetworkTimeProtocols.Contracts/SyncVPN.NetworkTimeProtocols.Contracts.csproj" />
+    <Project Path="src/NetworkTimeProtocols/SyncVPN.NetworkTimeProtocols.Installers/SyncVPN.NetworkTimeProtocols.Installers.csproj" />
+    <Project Path="src/NetworkTimeProtocols/SyncVPN.NetworkTimeProtocols/SyncVPN.NetworkTimeProtocols.csproj" />
+  </Folder>
+  <Folder Name="/OperatingSystems/" />
+  <Folder Name="/OperatingSystems/Antiviruses/">
+    <Project Path="src/OperatingSystems/Antiviruses/SyncVPN.OperatingSystems.Antiviruses.Contracts/SyncVPN.OperatingSystems.Antiviruses.Contracts.csproj" />
+    <Project Path="src/OperatingSystems/Antiviruses/SyncVPN.OperatingSystems.Antiviruses.Installers/SyncVPN.OperatingSystems.Antiviruses.Installers.csproj" />
+    <Project Path="src/OperatingSystems/Antiviruses/SyncVPN.OperatingSystems.Antiviruses/SyncVPN.OperatingSystems.Antiviruses.csproj" />
+  </Folder>
+  <Folder Name="/OperatingSystems/NameResolutionPolicyTable/">
+    <Project Path="src/OperatingSystems/NameResolutionPolicyTable/SyncVPN.OperatingSystems.NRPT.Contracts/SyncVPN.OperatingSystems.NRPT.Contracts.csproj" />
+    <Project Path="src/OperatingSystems/NameResolutionPolicyTable/SyncVPN.OperatingSystems.NRPT.Installers/SyncVPN.OperatingSystems.NRPT.Installers.csproj" />
+    <Project Path="src/OperatingSystems/NameResolutionPolicyTable/SyncVPN.OperatingSystems.NRPT/SyncVPN.OperatingSystems.NRPT.csproj" />
+  </Folder>
+  <Folder Name="/OperatingSystems/Network/">
+    <Project Path="src/OperatingSystems/Network/SyncVPN.OperatingSystems.Network.Contracts/SyncVPN.OperatingSystems.Network.Contracts.csproj" />
+    <Project Path="src/OperatingSystems/Network/SyncVPN.OperatingSystems.Network.Installers/SyncVPN.OperatingSystems.Network.Installers.csproj" />
+    <Project Path="src/OperatingSystems/Network/SyncVPN.OperatingSystems.Network/SyncVPN.OperatingSystems.Network.csproj" />
+  </Folder>
+  <Folder Name="/OperatingSystems/PowerEvents/">
+    <Project Path="src/OperatingSystems/PowerEvents/SyncVPN.OperatingSystems.PowerEvents.Contracts/SyncVPN.OperatingSystems.PowerEvents.Contracts.csproj" />
+    <Project Path="src/OperatingSystems/PowerEvents/SyncVPN.OperatingSystems.PowerEvents.Installers/SyncVPN.OperatingSystems.PowerEvents.Installers.csproj" />
+    <Project Path="src/OperatingSystems/PowerEvents/SyncVPN.OperatingSystems.PowerEvents/SyncVPN.OperatingSystems.PowerEvents.csproj" />
+  </Folder>
+  <Folder Name="/OperatingSystems/Processes/">
+    <Project Path="src/OperatingSystems/Processes/SyncVPN.OperatingSystems.Processes.Contracts/SyncVPN.OperatingSystems.Processes.Contracts.csproj" />
+    <Project Path="src/OperatingSystems/Processes/SyncVPN.OperatingSystems.Processes.Installers/SyncVPN.OperatingSystems.Processes.Installers.csproj" />
+    <Project Path="src/OperatingSystems/Processes/SyncVPN.OperatingSystems.Processes/SyncVPN.OperatingSystems.Processes.csproj" />
+  </Folder>
+  <Folder Name="/OperatingSystems/Registries/">
+    <Project Path="src/OperatingSystems/Registries/SyncVPN.OperatingSystems.Registries.Contracts/SyncVPN.OperatingSystems.Registries.Contracts.csproj" />
+    <Project Path="src/OperatingSystems/Registries/SyncVPN.OperatingSystems.Registries.Installers/SyncVPN.OperatingSystems.Registries.Installers.csproj" />
+    <Project Path="src/OperatingSystems/Registries/SyncVPN.OperatingSystems.Registries/SyncVPN.OperatingSystems.Registries.csproj" />
+  </Folder>
+  <Folder Name="/OperatingSystems/Services/">
+    <Project Path="src/OperatingSystems/Services/SyncVPN.OperatingSystems.Services.Contracts/SyncVPN.OperatingSystems.Services.Contracts.csproj" />
+    <Project Path="src/OperatingSystems/Services/SyncVPN.OperatingSystems.Services.Installers/SyncVPN.OperatingSystems.Services.Installers.csproj" />
+    <Project Path="src/OperatingSystems/Services/SyncVPN.OperatingSystems.Services/SyncVPN.OperatingSystems.Services.csproj" />
+  </Folder>
+  <Folder Name="/OperatingSystems/WebAuthn/">
+    <Project Path="src/OperatingSystems/WebAuthn/SyncVPN.OperatingSystems.WebAuthn.Contracts/SyncVPN.OperatingSystems.WebAuthn.Contracts.csproj" />
+    <Project Path="src/OperatingSystems/WebAuthn/SyncVPN.OperatingSystems.WebAuthn.Installers/SyncVPN.OperatingSystems.WebAuthn.Installers.csproj" />
+    <Project Path="src/OperatingSystems/WebAuthn/SyncVPN.OperatingSystems.WebAuthn.Tests/SyncVPN.OperatingSystems.WebAuthn.Tests.csproj" />
+    <Project Path="src/OperatingSystems/WebAuthn/SyncVPN.OperatingSystems.WebAuthn/SyncVPN.OperatingSystems.WebAuthn.csproj" />
+  </Folder>
+  <Folder Name="/ProcessCommunication/">
+    <Project Path="src/ProcessCommunication/SyncVPN.ProcessCommunication.Contracts/SyncVPN.ProcessCommunication.Contracts.csproj" />
+    <Project Path="src/ProcessCommunication/SyncVPN.ProcessCommunication.EntityMapping.Tests/SyncVPN.ProcessCommunication.EntityMapping.Tests.csproj" />
+    <Project Path="src/ProcessCommunication/SyncVPN.ProcessCommunication.EntityMapping/SyncVPN.ProcessCommunication.EntityMapping.csproj" />
+    <Project Path="src/ProcessCommunication/SyncVPN.ProcessCommunication.Installers/SyncVPN.ProcessCommunication.Installers.csproj" />
+  </Folder>
+  <Folder Name="/ProcessCommunication/Client/">
+    <Project Path="src/ProcessCommunication/Client/SyncVPN.ProcessCommunication.Client.Installers/SyncVPN.ProcessCommunication.Client.Installers.csproj" />
+    <Project Path="src/ProcessCommunication/Client/SyncVPN.ProcessCommunication.Client/SyncVPN.ProcessCommunication.Client.csproj" />
+  </Folder>
+  <Folder Name="/ProcessCommunication/Common/">
+    <Project Path="src/ProcessCommunication/Common/SyncVPN.ProcessCommunication.Common/SyncVPN.ProcessCommunication.Common.csproj" />
+  </Folder>
+  <Folder Name="/ProcessCommunication/Server/">
+    <Project Path="src/ProcessCommunication/Server/SyncVPN.ProcessCommunication.Server.Installers/SyncVPN.ProcessCommunication.Server.Installers.csproj" />
+    <Project Path="src/ProcessCommunication/Server/SyncVPN.ProcessCommunication.Server/SyncVPN.ProcessCommunication.Server.csproj" />
+  </Folder>
+  <Folder Name="/ProtonInstaller/">
+    <Project Path="src/ProtonInstaller/ProtonInstaller.csproj" />
+  </Folder>
+  <Folder Name="/Serialization/">
+    <Project Path="src/Serialization/SyncVPN.Serialization.Contracts/SyncVPN.Serialization.Contracts.csproj" />
+    <Project Path="src/Serialization/SyncVPN.Serialization.Installers/SyncVPN.Serialization.Installers.csproj" />
+    <Project Path="src/Serialization/SyncVPN.Serialization.Json/SyncVPN.Serialization.Json.csproj" />
+    <Project Path="src/Serialization/SyncVPN.Serialization.Protobuf.Entities/SyncVPN.Serialization.Protobuf.Entities.csproj" />
+    <Project Path="src/Serialization/SyncVPN.Serialization.Protobuf/SyncVPN.Serialization.Protobuf.csproj" />
+    <Project Path="src/Serialization/SyncVPN.Serialization.Tests/SyncVPN.Serialization.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="BUILD.md" />
+    <File Path="BuildDependencies.bat" />
+    <File Path="CONTRIBUTING.md" />
+    <File Path="COPYING.md" />
+    <File Path="Directory.Packages.props" />
+    <File Path="LICENSE" />
+    <File Path="Publish.bat" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/StatisticalEvents/">
+    <Project Path="src/StatisticalEvents/SyncVPN.StatisticalEvents.Contracts/SyncVPN.StatisticalEvents.Contracts.csproj" />
+    <Project Path="src/StatisticalEvents/SyncVPN.StatisticalEvents.Installers/SyncVPN.StatisticalEvents.Installers.csproj" />
+    <Project Path="src/StatisticalEvents/SyncVPN.StatisticalEvents.Tests/SyncVPN.StatisticalEvents.Tests.csproj" />
+    <Project Path="src/StatisticalEvents/SyncVPN.StatisticalEvents/SyncVPN.StatisticalEvents.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="src/Tests/SyncVPN.Client.Common.Tests/SyncVPN.Client.Common.Tests.csproj" />
+    <Project Path="src/Tests/SyncVPN.Common.Tests/SyncVPN.Common.Tests.csproj" />
+    <Project Path="src/Tests/SyncVPN.Integration.Tests/SyncVPN.Integration.Tests.csproj" />
+    <Project Path="src/Tests/SyncVPN.Service.Tests/SyncVPN.Service.Tests.csproj" />
+    <Project Path="src/Tests/SyncVPN.Tests.Common/SyncVPN.Tests.Common.csproj" />
+    <Project Path="src/Tests/SyncVPN.UI.Tests/SyncVPN.UI.Tests.csproj" />
+    <Project Path="src/Tests/SyncVPN.Update.Tests/SyncVPN.Update.Tests.csproj" />
+    <Project Path="src/Tests/SyncVPN.Vpn.Tests/SyncVPN.Vpn.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Update/">
+    <Project Path="src/Update/SyncVPN.Update.Contracts/SyncVPN.Update.Contracts.csproj" />
+    <Project Path="src/Update/SyncVPN.Update.Installers/SyncVPN.Update.Installers.csproj" />
+    <Project Path="src/Update/SyncVPN.Update/SyncVPN.Update.csproj" />
+  </Folder>
+  <Project Path="src/SyncVPN.Common.Legacy/SyncVPN.Common.Legacy.csproj" />
+  <Project Path="src/SyncVPN.Launcher/SyncVPN.Launcher.csproj" />
+  <Project Path="src/SyncVPN.MarkupValidator/SyncVPN.MarkupValidator.csproj" />
+  <Project Path="src/SyncVPN.Native/SyncVPN.Native.csproj" />
+  <Project Path="src/SyncVPN.NetworkFilter/SyncVPN.NetworkFilter.csproj" />
+  <Project Path="src/SyncVPN.RestoreInternet/SyncVPN.RestoreInternet.csproj" />
+  <Project Path="src/SyncVPN.Service/SyncVPN.Service.csproj" />
+  <Project Path="src/SyncVPN.TlsVerify/SyncVPN.TlsVerify.csproj" />
+  <Project Path="src/SyncVPN.Vpn/SyncVPN.Vpn.csproj" />
+  <Project Path="src/SyncVPN.WireGuardDriver/SyncVPN.WireGuardDriver.csproj" />
+  <Project Path="src/SyncVPN.WireGuardService/SyncVPN.WireGuardService.csproj" />
+</Solution>

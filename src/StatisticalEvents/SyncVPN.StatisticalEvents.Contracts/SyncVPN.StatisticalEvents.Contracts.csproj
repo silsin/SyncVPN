@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <OutputPath>..\..\bin\</OutputPath>
+	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Client\Logic\Users\SyncVPN.Client.Logic.Users.Contracts\SyncVPN.Client.Logic.Users.Contracts.csproj" />
+    <ProjectReference Include="..\..\Common\SyncVPN.Common.Core\SyncVPN.Common.Core.csproj" />
+    <ProjectReference Include="..\..\OperatingSystems\Network\SyncVPN.OperatingSystems.Network.Contracts\SyncVPN.OperatingSystems.Network.Contracts.csproj" />
+  </ItemGroup>
+</Project>

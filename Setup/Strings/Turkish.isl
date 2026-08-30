@@ -1,5 +1,5 @@
 ﻿[CustomMessages]
-InstallerTitle=Proton VPN kurulmaya hazır
+InstallerTitle=SyncVPN kurulmaya hazır
 InstallOtherApps=Kurulacak diğer Proton uygulamalarını seçin. Bu hizmetler tarifenizde bulunuyor.
 FreeTrial=Ücretsiz deneme
 Free=Ücretsiz

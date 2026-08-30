@@ -1,5 +1,5 @@
 ﻿[CustomMessages]
-InstallerTitle=Proton VPN დასაყენებლად მზადაა
+InstallerTitle=SyncVPN დასაყენებლად მზადაა
 InstallOtherApps=აირჩიეთ სხვა Proton-ის აპები დასაყენებლად. თქვენი სატარიფო გეგმა შეიცავს შემდეგ სერვისებს.
 FreeTrial=უფასო საცდელი პერიოდი
 Free=უფასო

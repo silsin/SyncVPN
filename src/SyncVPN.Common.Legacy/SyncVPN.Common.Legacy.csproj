@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <PreserveCompilationContext>true</PreserveCompilationContext>
+        <OutputType>Library</OutputType>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <OutputPath>..\bin\</OutputPath>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="..\GlobalAssemblyInfo.cs">
+            <Link>Properties\GlobalAssemblyInfo.cs</Link>
+        </Compile>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Common\SyncVPN.Common.Core\SyncVPN.Common.Core.csproj" />
+        <ProjectReference Include="..\Configurations\SyncVPN.Configurations.Contracts\SyncVPN.Configurations.Contracts.csproj" />
+        <ProjectReference Include="..\Crypto\SyncVPN.Crypto.Contracts\SyncVPN.Crypto.Contracts.csproj" />
+        <ProjectReference Include="..\Files\SyncVPN.Files.Contracts\SyncVPN.Files.Contracts.csproj" />
+        <ProjectReference Include="..\Logging\SyncVPN.Logging.Contracts\SyncVPN.Logging.Contracts.csproj" />
+        <ProjectReference Include="..\Serialization\SyncVPN.Serialization.Contracts\SyncVPN.Serialization.Contracts.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="DeviceId.Windows.Wmi" />
+        <PackageReference Include="Newtonsoft.Json" />
+        <PackageReference Include="Polly" />
+        <PackageReference Include="System.Formats.Asn1" />
+        <PackageReference Include="System.ServiceProcess.ServiceController" />
+        <PackageReference Include="System.Text.Json" />
+    </ItemGroup>
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+</Project>

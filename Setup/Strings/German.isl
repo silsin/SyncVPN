@@ -1,5 +1,5 @@
 ﻿[CustomMessages]
-InstallerTitle=Proton VPN ist bereit zur Installation
+InstallerTitle=SyncVPN ist bereit zur Installation
 InstallOtherApps=Wähle weitere Proton-Apps zur Installation aus. Diese Dienste sind in deinem Abonnement enthalten.
 FreeTrial=Kostenlose Testphase
 Free=Kostenlos

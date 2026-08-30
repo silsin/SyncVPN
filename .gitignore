@@ -6,7 +6,7 @@
 *.user
 *.userosscache
 *.sln.docstates
-src/ProtonVPN.App/Properties/Resources.*.resx
+src/SyncVPN.App/Properties/Resources.*.resx
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

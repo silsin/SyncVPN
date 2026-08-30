@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows</TargetFramework>
+        <PreserveCompilationContext>true</PreserveCompilationContext>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<OutputPath>..\..\..\bin</OutputPath>
+		<Nullable>enable</Nullable>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Include="..\..\..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="System.Formats.Asn1" />
+	  <PackageReference Include="System.Text.Json" />
+	  <PackageReference Include="Vanara.PInvoke.IpHlpApi" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Common\SyncVPN.Common.Core\SyncVPN.Common.Core.csproj" />
+	  <ProjectReference Include="..\..\..\Configurations\SyncVPN.Configurations.Contracts\SyncVPN.Configurations.Contracts.csproj" />
+	  <ProjectReference Include="..\..\..\Logging\SyncVPN.Logging.Contracts\SyncVPN.Logging.Contracts.csproj" />
+	  <ProjectReference Include="..\..\Registries\SyncVPN.OperatingSystems.Registries.Contracts\SyncVPN.OperatingSystems.Registries.Contracts.csproj" />
+	  <ProjectReference Include="..\SyncVPN.OperatingSystems.Network.Contracts\SyncVPN.OperatingSystems.Network.Contracts.csproj" />
+	</ItemGroup>
+
+</Project>

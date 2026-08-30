@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+        <PreserveCompilationContext>true</PreserveCompilationContext>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <OutputPath>..\..\..\bin</OutputPath>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="..\..\..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" />
+      <PackageReference Include="System.Formats.Asn1" />
+      <PackageReference Include="System.Text.Json" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\..\Localization\SyncVPN.Client.Localization.Contracts\SyncVPN.Client.Localization.Contracts.csproj" />
+      <ProjectReference Include="..\..\Localization\SyncVPN.Client.Localization.Extensions\SyncVPN.Client.Localization.Extensions.csproj" />
+      <ProjectReference Include="..\..\Logic\Connection\SyncVPN.Client.Logic.Connection.Contracts\SyncVPN.Client.Logic.Connection.Contracts.csproj" />
+      <ProjectReference Include="..\..\SyncVPN.Client.Contracts\SyncVPN.Client.Contracts.csproj" />
+      <ProjectReference Include="..\..\UnsecureWifiDetection\SyncVPN.Client.UnsecureWifiDetection.Contracts\SyncVPN.Client.UnsecureWifiDetection.Contracts.csproj" />
+      <ProjectReference Include="..\SyncVPN.Client.Notifications.Contracts\SyncVPN.Client.Notifications.Contracts.csproj" />
+    </ItemGroup>
+</Project>

@@ -18,7 +18,7 @@ def print_sha256(file_path):
     sha256 = get_sha256(file_path)
     print(os.path.basename(file_path) + ' SHA256: ' + sha256)
 
-parser = argparse.ArgumentParser(description='ProtonVPN CI')
+parser = argparse.ArgumentParser(description='SyncVPN CI')
 subparsers = parser.add_subparsers(help='sub-command help', dest='command')
 
 subparsers.add_parser('defaultConfig')
@@ -41,7 +41,7 @@ if len(sys.argv) < 2:
 args = parser.parse_args()
 
 if args.command == 'defaultConfig':
-    configPath = r"src\Configurations\ProtonVPN.Configurations\Defaults\DefaultTlsPinningConfigurationFactory.cs"
+    configPath = r"src\Configurations\SyncVPN.Configurations\Defaults\DefaultTlsPinningConfigurationFactory.cs"
     f = open(configPath, "rt")
     data = f.read()
     data = data.replace('[InternalReleaseHost]', os.environ.get("INTERNAL_RELEASE_HOST"))
@@ -53,17 +53,17 @@ if args.command == 'defaultConfig':
 
 elif args.command == 'app-installer':
     build_path = os.environ.get('BUILD_PATH', '.\\publish\\')
-    exe_path = os.path.join(build_path, 'ProtonVPN.Client.exe')
+    exe_path = os.path.join(build_path, 'SyncVPN.Client.exe')
     exe_path = ".\\" + exe_path
     print('Executable File Path:', exe_path)
     v = win32api.GetFileVersionInfo(exe_path, '\\')
     semVersion = "%d.%d.%d" % (v['FileVersionMS'] / 65536, v['FileVersionMS'] % 65536, v['FileVersionLS'] / 65536)
     print('Building app installer')
     err = installer.build(semVersion, args.hash, 'Setup/Setup.{platform}.iss'.format(platform=args.platform))
-    installer_filename = 'ProtonVPN_v{semVersion}_{platform}.exe'.format(semVersion=semVersion, platform=args.platform)
+    installer_filename = 'SyncVPN_v{semVersion}_{platform}.exe'.format(semVersion=semVersion, platform=args.platform)
     
     if 'BTI' in build_path:
-        installer_filename = 'ProtonVPN_v{semVersion}_{platform}_BTI.exe'.format(semVersion=semVersion, platform=args.platform)  
+        installer_filename = 'SyncVPN_v{semVersion}_{platform}_BTI.exe'.format(semVersion=semVersion, platform=args.platform)  
     installer_path = os.path.join(r'.\Setup\Installers', installer_filename)
     
     print_sha256(installer_path)

@@ -1,5 +1,5 @@
 ﻿[CustomMessages]
-InstallerTitle=已經安裝Proton VPN
+InstallerTitle=已經安裝SyncVPN
 InstallOtherApps=選擇安裝其他Proton應用程式。在你的計劃內這些服務經已包括在內。
 FreeTrial=免費試用期
 Free=免費

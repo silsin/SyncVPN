@@ -1,0 +1,95 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <AssemblyName>SyncVPNService</AssemblyName>
+    </PropertyGroup>
+    <PropertyGroup>
+        <ApplicationIcon>protonvpn.ico</ApplicationIcon>
+    </PropertyGroup>
+    <PropertyGroup>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+    </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+        <PreserveCompilationContext>true</PreserveCompilationContext>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <OutputPath>..\bin\</OutputPath>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="..\GlobalAssemblyInfo.cs">
+            <Link>Properties\GlobalAssemblyInfo.cs</Link>
+        </Compile>
+        <Compile Update="Properties\Settings.Designer.cs">
+            <AutoGen>True</AutoGen>
+            <DesignTimeSharedInput>True</DesignTimeSharedInput>
+            <DependentUpon>Settings.settings</DependentUpon>
+        </Compile>
+        <Compile Update="VpnService.cs" />
+        <Compile Update="VpnService.Designer.cs">
+            <DependentUpon>VpnService.cs</DependentUpon>
+        </Compile>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="protonvpn.ico" />
+        <Content Include="Resources\config.ovpn">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Update="Properties\Settings.settings">
+            <Generator>SettingsSingleFileGenerator</Generator>
+            <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Api\SyncVPN.Api.Installers\SyncVPN.Api.Installers.csproj" />
+        <ProjectReference Include="..\Common\SyncVPN.Common.Installers\SyncVPN.Common.Installers.csproj" />
+        <ProjectReference Include="..\Configurations\SyncVPN.Configurations.Installers\SyncVPN.Configurations.Installers.csproj" />
+        <ProjectReference Include="..\Crypto\SyncVPN.Crypto.Installers\SyncVPN.Crypto.Installers.csproj" />
+        <ProjectReference Include="..\EntityMapping\SyncVPN.EntityMapping.Contracts\SyncVPN.EntityMapping.Contracts.csproj" />
+        <ProjectReference Include="..\EntityMapping\SyncVPN.EntityMapping.Installers\SyncVPN.EntityMapping.Installers.csproj" />
+        <ProjectReference Include="..\Files\SyncVPN.Files.Installers\SyncVPN.Files.Installers.csproj" />
+        <ProjectReference Include="..\IPv6\SyncVPN.IPv6.Installers\SyncVPN.IPv6.Installers.csproj" />
+        <ProjectReference Include="..\IssueReporting\SyncVPN.IssueReporting.Installers\SyncVPN.IssueReporting.Installers.csproj" />
+        <ProjectReference Include="..\IssueReporting\SyncVPN.IssueReporting.Static\SyncVPN.IssueReporting.Static.csproj" />
+        <ProjectReference Include="..\Logging\SyncVPN.Logging.Events\SyncVPN.Logging.Events.csproj" />
+        <ProjectReference Include="..\Logging\SyncVPN.Logging.Installers\SyncVPN.Logging.Installers.csproj" />
+        <ProjectReference Include="..\OperatingSystems\NameResolutionPolicyTable\SyncVPN.OperatingSystems.NRPT.Installers\SyncVPN.OperatingSystems.NRPT.Installers.csproj" />
+        <ProjectReference Include="..\OperatingSystems\Network\SyncVPN.OperatingSystems.Network.Installers\SyncVPN.OperatingSystems.Network.Installers.csproj" />
+        <ProjectReference Include="..\OperatingSystems\PowerEvents\SyncVPN.OperatingSystems.PowerEvents.Contracts\SyncVPN.OperatingSystems.PowerEvents.Contracts.csproj" />
+        <ProjectReference Include="..\OperatingSystems\PowerEvents\SyncVPN.OperatingSystems.PowerEvents.Installers\SyncVPN.OperatingSystems.PowerEvents.Installers.csproj" />
+        <ProjectReference Include="..\OperatingSystems\Processes\SyncVPN.OperatingSystems.Processes.Installers\SyncVPN.OperatingSystems.Processes.Installers.csproj" />
+        <ProjectReference Include="..\OperatingSystems\Registries\SyncVPN.OperatingSystems.Registries.Installers\SyncVPN.OperatingSystems.Registries.Installers.csproj" />
+        <ProjectReference Include="..\OperatingSystems\Services\SyncVPN.OperatingSystems.Services.Installers\SyncVPN.OperatingSystems.Services.Installers.csproj" />
+        <ProjectReference Include="..\ProcessCommunication\SyncVPN.ProcessCommunication.Contracts\SyncVPN.ProcessCommunication.Contracts.csproj" />
+        <ProjectReference Include="..\ProcessCommunication\SyncVPN.ProcessCommunication.Installers\SyncVPN.ProcessCommunication.Installers.csproj" />
+        <ProjectReference Include="..\ProcessCommunication\Server\SyncVPN.ProcessCommunication.Server.Installers\SyncVPN.ProcessCommunication.Server.Installers.csproj" />
+        <ProjectReference Include="..\SyncVPN.Common.Legacy\SyncVPN.Common.Legacy.csproj" />
+        <ProjectReference Include="..\SyncVPN.Native\SyncVPN.Native.csproj" />
+        <ProjectReference Include="..\SyncVPN.NetworkFilter\SyncVPN.NetworkFilter.csproj" />
+        <ProjectReference Include="..\SyncVPN.Vpn\SyncVPN.Vpn.csproj" />
+        <ProjectReference Include="..\Serialization\SyncVPN.Serialization.Installers\SyncVPN.Serialization.Installers.csproj" />
+        <ProjectReference Include="..\Update\SyncVPN.Update.Installers\SyncVPN.Update.Installers.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Autofac" />
+        <PackageReference Include="Polly" />
+        <PackageReference Include="protobuf-net.Grpc" />
+        <PackageReference Include="protobuf-net.Grpc.Native" />
+        <PackageReference Include="System.Collections.Immutable" />
+        <PackageReference Include="System.ComponentModel.Annotations" />
+        <PackageReference Include="System.Diagnostics.DiagnosticSource" />
+        <PackageReference Include="System.Diagnostics.EventLog" />
+        <PackageReference Include="System.Formats.Asn1" />
+        <PackageReference Include="System.Private.Uri" />
+        <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" />
+        <PackageReference Include="System.ServiceModel.Primitives" />
+        <PackageReference Include="System.Text.Encoding.CodePages" />
+        <PackageReference Include="System.Text.Json" />
+        <PackageReference Include="System.Threading.AccessControl" />
+    </ItemGroup>
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+</Project>

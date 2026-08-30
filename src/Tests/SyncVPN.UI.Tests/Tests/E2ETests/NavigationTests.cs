@@ -1,0 +1,146 @@
+﻿/*
+ * Copyright (c) 2025 Proton AG
+ *
+ * This file is part of SyncVPN.
+ *
+ * SyncVPN is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * SyncVPN is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+using System;
+using System.Linq;
+using System.Threading;
+using System.Diagnostics;
+using FlaUI.Core.WindowsAPI;
+using NUnit.Framework;
+using SyncVPN.UI.Tests.TestBase;
+using SyncVPN.UI.Tests.TestsHelper;
+
+namespace SyncVPN.UI.Tests.Tests.E2ETests;
+
+[TestFixture]
+[Category("2")]
+[Category("ARM")]
+public class NavigationTests : FreshSessionSetUp
+{
+    [SetUp]
+    public void TestInitialize()
+    {
+        CommonUiFlows.FullLogin(TestUserData.PlusUser);
+    }
+
+    [Test]
+    public void NavigateToSettingsViaKebabMenu()
+    {
+        HomeRobot.ExpandKebabMenuButton()
+            .NavigateToSettingsViaKebabMenu();
+
+        SettingRobot.Verify.IsSettingsPageDisplayed();
+    }
+
+    [Test]
+    public void AppExitViaKebabMenu()
+    {
+        HomeRobot.ExpandKebabMenuButton()
+            .ExitViaKebabMenu();
+
+        // Allow some delay after exiting the app
+        Thread.Sleep(TestConstants.FiveSecondsTimeout);
+
+        Assert.That(AreNoSyncVPNProcessesRunning, Is.True, "SyncVPN process was still running after app was exited.");
+    }
+
+    [Test]
+    public void AppExitViaAccountDropDown()
+    {
+        SettingRobot
+            .OpenSettings()
+            .ExpandAccountDropdown()
+            .ExitTheApp();
+
+        // Allow some delay after exiting the app
+        Thread.Sleep(TestConstants.FiveSecondsTimeout);
+
+        Assert.That(AreNoSyncVPNProcessesRunning, Is.True, "SyncVPN process was still running after app was exited.");
+    }
+
+    [Test]
+    public void ClickingOnSidebarClosesSettings()
+    {
+        SettingRobot.OpenSettings()
+            .Verify.IsSettingsPageDisplayed();
+        SidebarRobot.ClickOnSidebar();
+        SettingRobot.Verify.IsSettingsPageNotDisplayed();
+    }
+
+    [Test]
+    public void KeyboardShortcutsNavigateToRelevantComponents()
+    {
+        SidebarRobot
+            .Verify.IsSidebarConnectionsDisplayed()
+            .ShortcutTo(VirtualKeyShort.NUMPAD1)
+            .Verify.IsSidebarRecentsDisplayed()
+            .ShortcutTo(VirtualKeyShort.NUMPAD2)
+            .Verify.IsSidebarCountriesDisplayed()
+            .ShortcutTo(VirtualKeyShort.NUMPAD3)
+            .Verify.IsSidebarProfilesDisplayed()
+            .ShortcutTo(VirtualKeyShort.KEY_1)
+            .Verify.IsSidebarRecentsDisplayed()
+            .ShortcutTo(VirtualKeyShort.KEY_2)
+            .Verify.IsSidebarCountriesDisplayed()
+            .ShortcutTo(VirtualKeyShort.KEY_3)
+            .Verify.IsSidebarProfilesDisplayed()
+            .ShortcutTo(VirtualKeyShort.KEY_F)
+            .Verify.IsSidebarSearchResultsDisplayed()
+            .ExitSearchWithTab()
+            .Verify.IsSidebarConnectionsDisplayed();
+
+        Thread.Sleep(TestConstants.OneSecondTimeout);
+
+        Window?.Focus();
+
+        Thread.Sleep(TestConstants.OneSecondTimeout);
+
+        SettingRobot
+            .OpenSettingsViaShortcut()
+            .Verify.IsSettingsPageDisplayed();
+
+        Thread.Sleep(TestConstants.OneSecondTimeout);
+
+        Window?.Focus();
+
+        Thread.Sleep(TestConstants.OneSecondTimeout);
+
+        SettingRobot
+            .CloseSettingsUsingEscButton()
+            .Verify.IsSettingsPageNotDisplayed();
+    }
+
+    [Test]
+    public void AboutPageIsOpened()
+    {
+        SettingRobot
+            .OpenSettings()
+            .ScrollToAboutSection()
+            .Verify.IsCorrectAppVersionDisplayedInAboutSettingsCard(TestEnvironment.GetAppVersion())
+            .OpenAboutSection()
+            .Verify
+                .IsChangelogDispalyed()
+                .IsCorrectAppVersionDisplayedInAboutSection(TestEnvironment.GetAppVersion())
+            .PressLearnMore()
+            .Verify.IsLicensingDisplayed();
+    }
+
+    public static bool AreNoSyncVPNProcessesRunning() =>
+        !Process.GetProcesses().Any(p => new[] { "SyncVPN", "SyncVPNService" }.Contains(p.ProcessName, StringComparer.OrdinalIgnoreCase));
+}
