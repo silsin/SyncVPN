@@ -54,6 +54,22 @@ jobs:
       - name: Install Inno Setup
         run: choco install innosetup --no-progress -y
 
+      - name: Add VC ATL component (needed by SyncVPN.NetworkUtil)
+        shell: pwsh
+        run: |
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          $vsInstallPath = & $vswhere -latest -property installationPath
+          $installer = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vs_installer.exe"
+
+          $process = Start-Process -FilePath $installer -ArgumentList @(
+            'modify',
+            '--installPath', $vsInstallPath,
+            '--add', 'Microsoft.VisualStudio.Component.VC.ATL',
+            '--quiet', '--norestart', '--wait'
+          ) -Wait -PassThru
+
+          if ($process.ExitCode -ne 0) { throw "Failed to add VC.ATL component, exit code $($process.ExitCode)" }
+
       - name: Restore native solution
         run: nuget restore SyncVPN.InstallActions.sln
 
