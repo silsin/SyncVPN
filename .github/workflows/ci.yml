@@ -1,0 +1,58 @@
+# Builds and unit-tests the SyncVPN .NET solution (SyncVPN.slnx).
+#
+# Scope: managed (.NET/WinUI) code only. This does NOT build the native
+# C++ drivers, the Go/Rust helper binaries, or the Inno Setup installer -
+# those require the WDK, MinGW, Rust, and internal Proton infrastructure
+# that isn't available to a public GitHub-hosted runner. See BUILD.md for
+# the full local build process.
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore SyncVPN.slnx
+
+      - name: Build
+        run: dotnet build SyncVPN.slnx -c Release --no-restore
+
+      - name: Run unit tests
+        shell: pwsh
+        run: |
+          # Exclude UI.Tests (WinAppDriver e2e, needs an installed app) and
+          # Integration.Tests (hits live services) - not runnable in CI.
+          $testDlls = Get-ChildItem -Path src\bin -Filter *.Tests.dll -Recurse |
+            Where-Object { $_.Name -notlike '*UI.Tests*' -and $_.Name -notlike '*Integration.Tests*' } |
+            Select-Object -ExpandProperty FullName
+
+          if ($testDlls.Count -eq 0) {
+            throw "No test assemblies found under src\bin"
+          }
+
+          dotnet test $testDlls -c Release --no-build `
+            --logger "console;verbosity=normal" `
+            --logger "trx;LogFileName=test-results.trx" `
+            --results-directory TestResults
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults
