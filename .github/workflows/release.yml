@@ -58,17 +58,22 @@ jobs:
         shell: pwsh
         run: |
           $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
-          $vsInstallPath = & $vswhere -latest -property installationPath
+          $installPath = & $vswhere -latest -property installationPath
+
+          if ([string]::IsNullOrWhiteSpace($installPath)) {
+            $installPath = "${env:ProgramFiles}\Microsoft Visual Studio\2022\Enterprise"
+            Write-Host "vswhere returned nothing, falling back to $installPath"
+          }
+
+          if (-not (Test-Path $installPath)) {
+            throw "Could not locate a Visual Studio installation (tried: $installPath)"
+          }
+
+          Write-Host "Using VS install path: $installPath"
+
           $installer = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vs_installer.exe"
-
-          $process = Start-Process -FilePath $installer -ArgumentList @(
-            'modify',
-            '--installPath', $vsInstallPath,
-            '--add', 'Microsoft.VisualStudio.Component.VC.ATL',
-            '--quiet', '--norestart', '--wait'
-          ) -Wait -PassThru
-
-          if ($process.ExitCode -ne 0) { throw "Failed to add VC.ATL component, exit code $($process.ExitCode)" }
+          & $installer modify --installPath "$installPath" --add Microsoft.VisualStudio.Component.VC.ATL --quiet --norestart --wait
+          if ($LASTEXITCODE -ne 0) { throw "Failed to add VC.ATL component, exit code $LASTEXITCODE" }
 
       - name: Restore native solution
         run: nuget restore SyncVPN.InstallActions.sln
