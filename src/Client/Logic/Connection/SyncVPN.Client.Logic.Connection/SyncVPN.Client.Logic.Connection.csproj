@@ -20,6 +20,8 @@
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\..\..\Api\SyncVPN.Api.Contracts\SyncVPN.Api.Contracts.csproj" />
+        <ProjectReference Include="..\..\..\..\Api\SyncVPN.Api.BackendSelection\SyncVPN.Api.BackendSelection.csproj" />
+        <ProjectReference Include="..\..\..\..\Api\SyncVPN.Api.V2.Contracts\SyncVPN.Api.V2.Contracts.csproj" />
         <ProjectReference Include="..\..\..\..\Builds\SyncVPN.Builds.Variables\SyncVPN.Builds.Variables.csproj" />
         <ProjectReference Include="..\..\..\..\EntityMapping\SyncVPN.EntityMapping.Contracts\SyncVPN.EntityMapping.Contracts.csproj" />
         <ProjectReference Include="..\..\..\..\IPv6\SyncVPN.IPv6.Contracts\SyncVPN.IPv6.Contracts.csproj" />

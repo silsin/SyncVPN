@@ -29,6 +29,7 @@ public static class DefaultUrlsConfigurationFactory
         return new UrlsConfiguration()
         {
             ApiUrl = "https://vpn-api.proton.me",
+            SyncVpnApiUrl = "https://syncvpn.com/api/",
             BfeArticleUrl = "https://protonvpn.com/support/how-to-enable-the-base-filtering-engine",
             PasswordResetUrl = "https://account.protonvpn.com/reset-password",
             ForgetUsernameUrl = "https://account.protonvpn.com/forgot-username",

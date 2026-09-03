@@ -14,6 +14,8 @@
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\..\..\Api\SyncVPN.Api.Contracts\SyncVPN.Api.Contracts.csproj" />
+        <ProjectReference Include="..\..\..\..\Api\SyncVPN.Api.BackendSelection\SyncVPN.Api.BackendSelection.csproj" />
+        <ProjectReference Include="..\..\..\..\Api\SyncVPN.Api.V2.Contracts\SyncVPN.Api.V2.Contracts.csproj" />
         <ProjectReference Include="..\..\..\..\OperatingSystems\WebAuthn\SyncVPN.OperatingSystems.WebAuthn.Contracts\SyncVPN.OperatingSystems.WebAuthn.Contracts.csproj" />
         <ProjectReference Include="..\..\..\Common\SyncVPN.Client.Common\SyncVPN.Client.Common.csproj" />
         <ProjectReference Include="..\..\..\EventMessaging\SyncVPN.Client.EventMessaging.Contracts\SyncVPN.Client.EventMessaging.Contracts.csproj" />

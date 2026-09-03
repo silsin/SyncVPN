@@ -43,8 +43,8 @@ public static class TestConstants
     public static TimeSpan NavigationDelay => TimeSpan.FromMilliseconds(500);
     public static TimeSpan UserInputSimulationDelay => TimeSpan.FromMilliseconds(500);
 
-    public static string AppFolderPath = @"C:\Program Files\Proton\VPN";
-    public static string LauncherPath = @"C:\Program Files\Proton\VPN\SyncVPN.Launcher.exe";
+    public static string AppFolderPath = @"C:\Program Files\Proton\SyncVPN";
+    public static string LauncherPath = @"C:\Program Files\Proton\SyncVPN\SyncVPN.Launcher.exe";
     public static string MapCountry = "CA";
     public static string ClientLogsPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Proton\SyncVPN\Logs\client-logs.txt");
     public static string UserStoragePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Proton\SyncVPN");    

@@ -25,8 +25,6 @@ namespace SyncVPN.Client.Core.Services.Activation;
 
 public interface IMainWindowOverlayActivator : IOverlayActivator
 {
-    Task<ContentDialogResult> ShowHumanVerificationOverlayAsync();
-
     Task<ContentDialogResult> ShowSecureCoreInfoOverlayAsync();
 
     Task<ContentDialogResult> ShowP2PInfoOverlayAsync();

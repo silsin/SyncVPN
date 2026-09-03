@@ -30,15 +30,22 @@ public readonly struct VpnCredentials
         DateTime? clientCertificateExpirationDateUtc,
         AsymmetricKeyPair clientKeyPair,
         string username,
-        string password)
+        string password,
+        string provisionedConfigText = null)
     {
-        Ensure.NotNull(clientKeyPair, nameof(clientKeyPair));
+        // A server-issued config (new SyncVPN backend) carries no client keypair/certificate at all -
+        // only require one when there's no ready-made config to fall back on.
+        if (provisionedConfigText is null)
+        {
+            Ensure.NotNull(clientKeyPair, nameof(clientKeyPair));
+        }
 
         ClientCertPem = clientCertPem;
         ClientCertificateExpirationDateUtc = clientCertificateExpirationDateUtc;
         ClientKeyPair = clientKeyPair;
         Username = username;
         Password = password;
+        ProvisionedConfigText = provisionedConfigText;
     }
 
     public VpnCredentials(AsymmetricKeyPair clientKeyPair) : this(string.Empty, null, clientKeyPair, string.Empty, string.Empty)
@@ -49,10 +56,19 @@ public readonly struct VpnCredentials
     {
     }
 
+    // Full ready-to-write WireGuard or OpenVpn config text, as returned by the new SyncVPN backend's
+    // POST /account. When set, WireGuardConnection/OpenVpnConnection write it verbatim instead of
+    // building a config from ClientKeyPair/ClientCertPem - see the migration plan's Phase 2.
+    public static VpnCredentials FromProvisionedConfig(string provisionedConfigText, string username, string password)
+    {
+        return new VpnCredentials(string.Empty, null, null, username, password, provisionedConfigText);
+    }
+
     public string Username { get; }
     public string Password { get; }
 
     public string ClientCertPem { get; }
     public DateTime? ClientCertificateExpirationDateUtc { get; }
     public AsymmetricKeyPair ClientKeyPair { get; }
+    public string ProvisionedConfigText { get; }
 }

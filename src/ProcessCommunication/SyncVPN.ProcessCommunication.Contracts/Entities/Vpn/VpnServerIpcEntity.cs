@@ -44,5 +44,8 @@ namespace SyncVPN.ProcessCommunication.Contracts.Entities.Vpn
 
         [DataMember(Order = 7)]
         public Dictionary<VpnProtocolIpcEntity, string> RelayIpByProtocol { get; set; }
+
+        [DataMember(Order = 8)]
+        public bool SkipSignatureValidation { get; set; }
     }
 }

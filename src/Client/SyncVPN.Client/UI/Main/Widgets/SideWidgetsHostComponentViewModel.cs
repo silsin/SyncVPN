@@ -20,6 +20,8 @@
 using System.Collections.ObjectModel;
 using SyncVPN.Client.Core.Bases;
 using SyncVPN.Client.Core.Bases.ViewModels;
+using SyncVPN.Client.UI.Main.Features.NetShield;
+using SyncVPN.Client.UI.Main.Settings;
 using SyncVPN.Client.UI.Main.Widgets.Contracts;
 
 namespace SyncVPN.Client.UI.Main.Widgets;
@@ -38,7 +40,9 @@ public partial class SideWidgetsHostComponentViewModel : ViewModelBase
         IViewModelHelper viewModelHelper)
         : base(viewModelHelper)
     {
-        HeaderWidgets = new(headerWidgets.OrderBy(p => p.SortIndex));
-        FooterWidgets = new(footerWidgets.OrderBy(p => p.SortIndex));
+        // NetShield and Settings already have their own entries in the sidebar's main
+        // navigation list, so they're excluded here to avoid showing them twice.
+        HeaderWidgets = new(headerWidgets.Where(w => w is not NetShieldWidgetViewModel).OrderBy(p => p.SortIndex));
+        FooterWidgets = new(footerWidgets.Where(w => w is not SettingsWidgetViewModel).OrderBy(p => p.SortIndex));
     }
 }

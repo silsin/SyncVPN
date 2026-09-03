@@ -76,6 +76,16 @@ public partial class CountriesPageViewModel : ConnectionPageViewModelBase
         GoToCountryFeature(CountriesConnectionType.All);
     }
 
+    public override void OnNavigatedTo(object parameter, bool isBackNavigation)
+    {
+        base.OnNavigatedTo(parameter, isBackNavigation);
+
+        if (parameter is CountriesConnectionType connectionType)
+        {
+            GoToCountryFeature(connectionType);
+        }
+    }
+
     protected override IEnumerable<ConnectionItemBase> GetItems()
     {
         return SelectedCountriesComponent.GetItems();

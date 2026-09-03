@@ -132,7 +132,6 @@
     <None Remove="UI\Overlays\Selection\AppSelectorOverlayView.xaml" />
     <None Remove="UI\Overlays\Selection\IpSelectorOverlayView.xaml" />
     <None Remove="UI\Overlays\Upsell\FreeConnectionsOverlayView.xaml" />
-    <None Remove="UI\Overlays\HumanVerification\HumanVerificationOverlayView.xaml" />
     <None Remove="UI\Overlays\Information\OutdatedClientOverlayView.xaml" />
     <None Remove="UI\Overlays\Information\P2POverlayView.xaml" />
     <None Remove="UI\Overlays\Information\SecureCoreOverlayView.xaml" />
@@ -197,6 +196,7 @@
     <ProjectReference Include="..\Logic\Searches\SyncVPN.Client.Logic.Searches.Installers\SyncVPN.Client.Logic.Searches.Installers.csproj" />
     <ProjectReference Include="..\SyncVPN.Client.Core\SyncVPN.Client.Core.csproj" />
     <ProjectReference Include="..\..\Api\SyncVPN.Api.Installers\SyncVPN.Api.Installers.csproj" />
+    <ProjectReference Include="..\..\Api\SyncVPN.Api.V2.Installers\SyncVPN.Api.V2.Installers.csproj" />
     <ProjectReference Include="..\..\Configurations\SyncVPN.Configurations.Installers\SyncVPN.Configurations.Installers.csproj" />
     <ProjectReference Include="..\..\Crypto\SyncVPN.Crypto.Installers\SyncVPN.Crypto.Installers.csproj" />
     <ProjectReference Include="..\..\Dns\SyncVPN.Dns.Installers\SyncVPN.Dns.Installers.csproj" />
@@ -224,6 +224,8 @@
     <ProjectReference Include="..\Logic\Connection\SyncVPN.Client.Logic.Connection.Contracts\SyncVPN.Client.Logic.Connection.Contracts.csproj" />
     <ProjectReference Include="..\Logic\Connection\SyncVPN.Client.Logic.Connection.Installers\SyncVPN.Client.Logic.Connection.Installers.csproj" />
     <ProjectReference Include="..\Logic\Feedback\SyncVPN.Client.Logic.Feedback.Installers\SyncVPN.Client.Logic.Feedback.Installers.csproj" />
+    <ProjectReference Include="..\Logic\Purchases\SyncVPN.Client.Logic.Purchases.Contracts\SyncVPN.Client.Logic.Purchases.Contracts.csproj" />
+    <ProjectReference Include="..\Logic\Purchases\SyncVPN.Client.Logic.Purchases.Installers\SyncVPN.Client.Logic.Purchases.Installers.csproj" />
     <ProjectReference Include="..\Logic\Recents\SyncVPN.Client.Logic.Recents.Contracts\SyncVPN.Client.Logic.Recents.Contracts.csproj" />
     <ProjectReference Include="..\Logic\Recents\SyncVPN.Client.Logic.Recents.Installers\SyncVPN.Client.Logic.Recents.Installers.csproj" />
     <ProjectReference Include="..\Logic\Servers\SyncVPN.Client.Logic.Servers.Contracts\SyncVPN.Client.Logic.Servers.Contracts.csproj" />
@@ -489,12 +491,6 @@
 
   <ItemGroup>
     <Page Update="UI\Overlays\Information\SecureCoreOverlayView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="UI\Overlays\HumanVerification\HumanVerificationOverlayView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

@@ -23,8 +23,10 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+using SyncVPN.Api.BackendSelection;
 using SyncVPN.Api.Contracts;
 using SyncVPN.Api.Contracts.Servers;
+using SyncVPN.Api.V2.Contracts;
 using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.Common.Core.Geographical;
 using SyncVPN.Configurations.Contracts;
@@ -65,7 +67,10 @@ public class ApiClientTest
 
         IConfiguration config = Substitute.For<IConfiguration>();
 
-        _apiClient = new ApiClient(_apiHttpClientFactory, _logger, _appVersion, _appSettings, config);
+        IBackendModeProvider backendModeProvider = Substitute.For<IBackendModeProvider>();
+        ISyncVpnApiClient syncVpnApiClient = Substitute.For<ISyncVpnApiClient>();
+
+        _apiClient = new ApiClient(_apiHttpClientFactory, _logger, _appVersion, _appSettings, config, backendModeProvider, syncVpnApiClient);
     }
 
     [TestMethod]

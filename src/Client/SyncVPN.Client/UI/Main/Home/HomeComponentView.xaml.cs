@@ -30,12 +30,6 @@ public sealed partial class HomeComponentView : IContextAware
         typeof(HomeComponentView),
         new PropertyMetadata(default));
 
-    public static readonly DependencyProperty WidgetsBarWidthProperty = DependencyProperty.Register(
-        nameof(WidgetsBarWidth),
-        typeof(double),
-        typeof(HomeComponentView),
-        new PropertyMetadata(default));
-
     public static readonly DependencyProperty MapTopOffsetProperty = DependencyProperty.Register(
         nameof(MapTopOffset),
         typeof(double),
@@ -60,12 +54,6 @@ public sealed partial class HomeComponentView : IContextAware
     {
         get => (double)GetValue(SidebarWidthProperty);
         set => SetValue(SidebarWidthProperty, value);
-    }
-
-    public double WidgetsBarWidth
-    {
-        get => (double)GetValue(WidgetsBarWidthProperty);
-        set => SetValue(WidgetsBarWidthProperty, value);
     }
 
     public double MapTopOffset
@@ -107,12 +95,13 @@ public sealed partial class HomeComponentView : IContextAware
         DetailsComponent.SizeChanged += InvalidateMapOffsets;
         ConnectionCardComponent.SizeChanged += InvalidateMapOffsets;
         BannersContainer.SizeChanged += InvalidateMapOffsets;
+        HomeSearchBarComponent.SizeChanged += InvalidateMapOffsets;
     }
 
     private void InvalidateMapOffsets(object sender, SizeChangedEventArgs e)
     {
-        MapBottomOffset = DetailsComponent.ActualHeight + BannersContainer.ActualHeight;
-        MapTopOffset = ConnectionCardComponent.ActualHeight;
+        MapBottomOffset = DetailsComponent.ActualHeight + BannersContainer.ActualHeight + ConnectionCardComponent.ActualHeight;
+        MapTopOffset = HomeSearchBarComponent.ActualHeight;
     }
 
     private void OnUnloaded(object sender, RoutedEventArgs e)
@@ -121,5 +110,6 @@ public sealed partial class HomeComponentView : IContextAware
         DetailsComponent.SizeChanged -= InvalidateMapOffsets;
         ConnectionCardComponent.SizeChanged -= InvalidateMapOffsets;
         BannersContainer.SizeChanged -= InvalidateMapOffsets;
+        HomeSearchBarComponent.SizeChanged -= InvalidateMapOffsets;
     }
 }

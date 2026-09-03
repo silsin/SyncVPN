@@ -109,6 +109,17 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                         </custom:GridSettingsCard.ActionIcon>
                     </custom:GridSettingsCard>
 
+                    <custom:GridSettingsCard AutomationProperties.AutomationId="DnsFiltersSettingsCard"
+                                             Command="{x:Bind ViewModel.NavigateToDnsFiltersPageCommand, Mode=OneTime}"
+                                             Header="{x:Bind ViewModel.Localizer.Get('Settings_Connection_DnsFilters')}"
+                                             IsClickEnabled="True"
+                                             Style="{StaticResource GridSettingsCardStyle}"
+                                             Visibility="{x:Bind ViewModel.IsDnsFiltersAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <custom:GridSettingsCard.ActionIcon>
+                            <pathicons:ChevronRight />
+                        </custom:GridSettingsCard.ActionIcon>
+                    </custom:GridSettingsCard>
+
                     <custom:GridSettingsCard AutomationProperties.AutomationId="PortForwardingSettingsCard"
                                              Command="{x:Bind ViewModel.NavigateToPortForwardingPageCommand, Mode=OneTime}"
                                              Header="{x:Bind ViewModel.Localizer.Get('Settings_Connection_PortForwarding')}"

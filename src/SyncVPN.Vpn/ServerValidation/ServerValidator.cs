@@ -94,6 +94,11 @@ public class ServerValidator : IServerValidator
 
     private VpnError ValidateSignature(VpnHost host)
     {
+        if (host.SkipSignatureValidation)
+        {
+            return VpnError.None;
+        }
+
         if (string.IsNullOrWhiteSpace(host.Signature))
         {
             _logger.Error<DisconnectTriggerLog>($"The server with name '{host.Name}' and IP '{host.Ip}' " +

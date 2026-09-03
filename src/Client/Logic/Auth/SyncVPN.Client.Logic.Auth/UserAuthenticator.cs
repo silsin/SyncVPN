@@ -18,6 +18,7 @@
  */
 
 using System.Security;
+using SyncVPN.Api.BackendSelection;
 using SyncVPN.Api.Contracts;
 using SyncVPN.Api.Contracts.Users;
 using SyncVPN.Client.EventMessaging.Contracts;
@@ -65,6 +66,8 @@ public class UserAuthenticator : IUserAuthenticator,
     private readonly ISsoAuthenticator _ssoAuthenticator;
     private readonly IFeatureFlagsObserver _featureFlagsObserver;
     private readonly IClientConfigObserver _clientConfigObserver;
+    private readonly IBackendModeProvider _backendModeProvider;
+    private readonly ISyncVpnAuthenticator _syncVpnAuthenticator;
 
     private CancellationTokenSource _cts = new();
 
@@ -95,7 +98,9 @@ public class UserAuthenticator : IUserAuthenticator,
         ISrpAuthenticator srpAuthenticator,
         ISsoAuthenticator ssoAuthenticator,
         IFeatureFlagsObserver featureFlagsObserver,
-        IClientConfigObserver clientConfigObserver)
+        IClientConfigObserver clientConfigObserver,
+        IBackendModeProvider backendModeProvider,
+        ISyncVpnAuthenticator syncVpnAuthenticator)
     {
         _logger = logger;
         _apiClient = apiClient;
@@ -115,12 +120,44 @@ public class UserAuthenticator : IUserAuthenticator,
         _ssoAuthenticator = ssoAuthenticator;
         _featureFlagsObserver = featureFlagsObserver;
         _clientConfigObserver = clientConfigObserver;
+        _backendModeProvider = backendModeProvider;
+        _syncVpnAuthenticator = syncVpnAuthenticator;
 
         _tokenClient.RefreshTokenExpired += OnTokenExpiredAsync;
     }
 
+    private bool IsSyncVpnAuthEnabled => _backendModeProvider.IsNewBackendEnabled(BackendCapability.Auth);
+
+    // Credential exchange only against the new backend (Phase 4) - deliberately skips the Proton-specific
+    // post-login orchestration CompleteLoginAsync does (VPN plan, certificate, feature flags, IPv6),
+    // since none of it has a new-backend equivalent yet. Internal/QA testing only, gated behind
+    // BackendCapability.Auth - see the migration plan.
     public async Task<AuthResult> LoginUserAsync(string username, SecureString password)
     {
+        if (IsSyncVpnAuthEnabled)
+        {
+            SetAuthenticationStatus(AuthenticationStatus.LoggingIn);
+            ResetCancellationTokenIfCancelled();
+
+            // Feature flags/client config/guest hole/announcements are still Proton-backed - keep a
+            // Proton unauth session alive even though this user's auth session lives on the new backend,
+            // so those features keep working. See the migration plan's Phase 5 note on this gap.
+            await _unauthSessionManager.CreateIfDoesNotExistAsync(_cts.Token);
+
+            AuthResult result = await _syncVpnAuthenticator.LoginUserAsync(username, password, _cts.Token);
+            if (result.Success)
+            {
+                OnSyncVpnLoginSucceeded();
+                SetAuthenticationStatus(AuthenticationStatus.LoggedIn);
+            }
+            else if (result.Value != AuthError.TwoFactorRequired)
+            {
+                SetAuthenticationStatus(AuthenticationStatus.LoggedOut);
+            }
+
+            return result;
+        }
+
         SetAuthenticationStatus(AuthenticationStatus.LoggingIn);
         ClearAuthSessionDetails();
         ResetCancellationTokenIfCancelled();
@@ -153,6 +190,28 @@ public class UserAuthenticator : IUserAuthenticator,
 
             return await HandleLoginOverGuestHoleAsync(username, password);
         }
+    }
+
+    // No legacy Proton equivalent - always goes to the new backend, regardless of BackendCapability.Auth.
+    public async Task<AuthResult> LoginWithCodeAsync(string code)
+    {
+        SetAuthenticationStatus(AuthenticationStatus.LoggingIn);
+        ResetCancellationTokenIfCancelled();
+
+        await _unauthSessionManager.CreateIfDoesNotExistAsync(_cts.Token);
+
+        AuthResult result = await _syncVpnAuthenticator.LoginWithCodeAsync(code, _cts.Token);
+        if (result.Success)
+        {
+            OnSyncVpnLoginSucceeded();
+            SetAuthenticationStatus(AuthenticationStatus.LoggedIn);
+        }
+        else
+        {
+            SetAuthenticationStatus(AuthenticationStatus.LoggedOut);
+        }
+
+        return result;
     }
 
     public void Receive(NoVpnConnectionsAssignedMessage message)
@@ -271,6 +330,18 @@ public class UserAuthenticator : IUserAuthenticator,
         SetAuthenticationStatus(AuthenticationStatus.LoggingIn);
         ResetCancellationTokenIfCancelled();
 
+        if (IsSyncVpnAuthEnabled)
+        {
+            AuthResult syncVpnResult = await _syncVpnAuthenticator.SendTwoFactorCodeAsync(code, _cts.Token);
+            if (syncVpnResult.Success)
+            {
+                OnSyncVpnLoginSucceeded();
+            }
+
+            SetAuthenticationStatus(syncVpnResult.Success ? AuthenticationStatus.LoggedIn : AuthenticationStatus.LoggedOut);
+            return syncVpnResult;
+        }
+
         try
         {
             AuthResult result = await _srpAuthenticator.SendTwoFactorCodeAsync(code, _cts.Token);
@@ -322,6 +393,25 @@ public class UserAuthenticator : IUserAuthenticator,
 
     public async Task<AuthResult> AutoLoginUserAsync(bool isAppStartup)
     {
+        if (IsSyncVpnAuthEnabled && _syncVpnAuthenticator.HasAuthenticatedSessionData())
+        {
+            SetAuthenticationStatus(AuthenticationStatus.LoggingIn);
+
+            // See the migration plan's Phase 5 note: keep Proton's unauth session alive on this path too,
+            // so feature flags/client config/guest hole/announcements keep working for a user whose auth
+            // session lives entirely on the new backend.
+            await _unauthSessionManager.CreateIfDoesNotExistAsync(_cts.Token);
+
+            AuthResult result = await _syncVpnAuthenticator.ValidateSessionAsync(_cts.Token);
+            if (result.Success)
+            {
+                OnSyncVpnLoginSucceeded();
+            }
+
+            SetAuthenticationStatus(result.Success ? AuthenticationStatus.LoggedIn : AuthenticationStatus.LoggedOut);
+            return result;
+        }
+
         if (HasAuthenticatedSessionData())
         {
             SetAuthenticationStatus(AuthenticationStatus.LoggingIn);
@@ -345,6 +435,14 @@ public class UserAuthenticator : IUserAuthenticator,
                 await _connectionManager.DisconnectAsync(VpnTriggerDimension.Signout);
             }
 
+            if (IsSyncVpnAuthEnabled)
+            {
+                await _syncVpnAuthenticator.LogoutAsync(CancellationToken.None);
+                IsAutoLogin = null;
+                SetAuthenticationStatus(AuthenticationStatus.LoggedOut, reason);
+                return;
+            }
+
             _connectionCertificateManager.DeleteKeyPairAndCertificate();
 
             await SendLogoutRequestAsync();
@@ -363,6 +461,11 @@ public class UserAuthenticator : IUserAuthenticator,
 
     public bool HasAuthenticatedSessionData()
     {
+        if (IsSyncVpnAuthEnabled)
+        {
+            return _syncVpnAuthenticator.HasAuthenticatedSessionData();
+        }
+
         return !string.IsNullOrWhiteSpace(_settings.AccessToken) &&
                !string.IsNullOrWhiteSpace(_settings.RefreshToken) &&
                !string.IsNullOrWhiteSpace(_settings.UniqueSessionId);
@@ -390,6 +493,21 @@ public class UserAuthenticator : IUserAuthenticator,
         _settings.UniqueSessionId = null;
         _settings.AccessToken = null;
         _settings.RefreshToken = null;
+    }
+
+    // The new-backend login path skips CompleteLoginAsync entirely (no new-backend equivalent for VPN
+    // plan/certificate/IPv6 yet). Profiles/recents are local-storage reads, not Proton API calls, so
+    // they run here directly; feature flags/client config are still fetched over the Proton unauth
+    // session kept alive alongside this login, so those keep working too. See the migration plan's
+    // Phase 5 note on this gap.
+    private void OnSyncVpnLoginSucceeded()
+    {
+        _profilesManager.LoadProfiles();
+        _recentConnectionsManager.LoadRecentConnections();
+
+        Task.WhenAll(
+            _featureFlagsObserver.UpdateAsync(_cts.Token),
+            _clientConfigObserver.UpdateAsync(_cts.Token)).FireAndForget();
     }
 
     private async Task<AuthResult> CompleteLoginAsync(bool isAutoLogin, bool isToSendLoggedInEvent)

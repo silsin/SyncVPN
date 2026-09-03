@@ -46,13 +46,19 @@ public class VpnCredentialsMapper : IMapper<VpnCredentials, VpnCredentialsIpcEnt
             ClientKeyPair = _entityMapper.Map<AsymmetricKeyPair, AsymmetricKeyPairIpcEntity>(leftEntity.ClientKeyPair),
             Username = leftEntity.Username,
             Password = leftEntity.Password,
+            ProvisionedConfigText = leftEntity.ProvisionedConfigText,
         };
     }
 
     public VpnCredentials Map(VpnCredentialsIpcEntity rightEntity)
     {
-        return new(rightEntity.Certificate.Pem,
-            rightEntity.Certificate.ExpirationDateUtc,
+        if (rightEntity.ProvisionedConfigText is not null)
+        {
+            return VpnCredentials.FromProvisionedConfig(rightEntity.ProvisionedConfigText, rightEntity.Username, rightEntity.Password);
+        }
+
+        return new(rightEntity.Certificate?.Pem,
+            rightEntity.Certificate?.ExpirationDateUtc,
             _entityMapper.Map<AsymmetricKeyPairIpcEntity, AsymmetricKeyPair>(rightEntity.ClientKeyPair),
             rightEntity.Username,
             rightEntity.Password);

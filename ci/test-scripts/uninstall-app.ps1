@@ -1,4 +1,4 @@
-$protonFolder = "C:\Program Files\Proton\VPN"
+$protonFolder = "C:\Program Files\Proton\SyncVPN"
 $protonUninstallExe = $protonFolder + "\unins000.exe"
 
 if (Test-Path -Path $protonFolder) {

@@ -29,6 +29,11 @@ public interface IConfiguration : IStaticConfiguration
     string ApiVersion { get; }
     string ServerValidationPublicKey { get; }
 
+    // Local-dev/QA override for the new SyncVPN backend's AppToken - see ISyncVpnAppTokenProvider.
+    // Read from _configuration.json on Debug builds, empty by default otherwise (build-injected, like
+    // GlobalConfig.SyncVpnAppToken, which stays the fallback for real builds).
+    string SyncVpnAppToken { get; }
+
     string GuestHoleVpnUsername { get; }
     string GuestHoleVpnPassword { get; }
     string VpnUsernameSuffix { get; }

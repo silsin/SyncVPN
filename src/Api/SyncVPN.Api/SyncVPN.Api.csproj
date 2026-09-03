@@ -22,6 +22,8 @@
         <ProjectReference Include="..\..\Crypto\SyncVPN.Crypto\SyncVPN.Crypto.csproj" />
         <ProjectReference Include="..\..\Dns\SyncVPN.Dns.Contracts\SyncVPN.Dns.Contracts.csproj" />
         <ProjectReference Include="..\SyncVPN.Api.Contracts\SyncVPN.Api.Contracts.csproj" />
+        <ProjectReference Include="..\SyncVPN.Api.BackendSelection\SyncVPN.Api.BackendSelection.csproj" />
+        <ProjectReference Include="..\SyncVPN.Api.V2.Contracts\SyncVPN.Api.V2.Contracts.csproj" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" />

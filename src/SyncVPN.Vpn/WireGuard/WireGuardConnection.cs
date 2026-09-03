@@ -393,7 +393,12 @@ public class WireGuardConnection : IAdapterSingleVpnConnection
         }
 
         CreateConfigDirectoryPathIfNotExists();
-        string configContent = _wireGuardConfigGenerator.GenerateConfig(_endpoint, _credentials, _vpnConfig);
+        // A server-issued config (new SyncVPN backend, see VpnCredentials.ProvisionedConfigText) is
+        // written verbatim rather than regenerated - the server already picked the private key, peer,
+        // and DNS. GenerateConfig only applies to the legacy Proton path, where the client owns the key.
+        string configContent = _credentials.ProvisionedConfigText is not null
+            ? WireGuardConfigDnsPatcher.ApplyCustomDnsOverride(_credentials.ProvisionedConfigText, _vpnConfig.CustomDns)
+            : _wireGuardConfigGenerator.GenerateConfig(_endpoint, _credentials, _vpnConfig);
         File.WriteAllText(_config.WireGuard.ConfigFilePath, configContent);
     }
 

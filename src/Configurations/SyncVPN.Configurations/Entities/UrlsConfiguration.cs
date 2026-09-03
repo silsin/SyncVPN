@@ -24,6 +24,7 @@ namespace SyncVPN.Configurations.Entities;
 public class UrlsConfiguration : IUrlsConfiguration
 {
     public string ApiUrl { get; set; } = string.Empty;
+    public string SyncVpnApiUrl { get; set; } = string.Empty;
     public string BfeArticleUrl { get; set; } = string.Empty;
     public string PasswordResetUrl { get; set; } = string.Empty;
     public string ForgetUsernameUrl { get; set; } = string.Empty;

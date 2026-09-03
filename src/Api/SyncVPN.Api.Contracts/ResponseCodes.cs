@@ -30,7 +30,6 @@ public class ResponseCodes
     public const int INVALID_PROFILE_ID_ON_UPDATE = 86062;
     public const int INVALID_PROFILE_ID_ON_DELETE = 86063;
     public const int PROFILE_NAME_CONFLICT = 86065;
-    public const int HUMAN_VERIFICATION_REQUIRED = 9001;
     public const int NO_VPN_CONNECTIONS_ASSIGNED = 86300;
     public const int INCORRECT_LOGIN_CREDENTIALS = 8002;
     public const int AUTH_SWITCH_TO_SSO = 8100;

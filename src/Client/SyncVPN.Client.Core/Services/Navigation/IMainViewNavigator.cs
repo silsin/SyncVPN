@@ -27,4 +27,10 @@ public interface IMainViewNavigator : IViewNavigator
     Task<bool> NavigateToHomeViewAsync(bool forceNavigation = false);
 
     Task<bool> NavigateToSettingsViewAsync();
+
+    Task<bool> NavigateToCountriesViewAsync();
+
+    Task<bool> NavigateToProfilesViewAsync();
+
+    Task<bool> NavigateToSecureCoreViewAsync();
 }

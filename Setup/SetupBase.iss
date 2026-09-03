@@ -34,7 +34,7 @@
 #define DisableAutoUpdateClientArg "-DisableAutoUpdate"
 #define OpenOnDesktopInstallerArg "/OPENONDESKTOP"
 #define OpenOnDesktopClientArg "-OpenOnDesktop"
-#define AppFolder "Proton\VPN"
+#define AppFolder "Proton\SyncVPN"
 #define RegistryRunPath "Software\Microsoft\Windows\CurrentVersion\Run"
 #define LegacyClientName "SyncVPN"
 

@@ -74,7 +74,8 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                                               OrientationWhenFalse="Horizontal"
                                               OrientationWhenTrue="Vertical"/>
     <converters:SeverityToInfoBarSeverityConverter x:Key="SeverityToInfoBarSeverityConverter" />
-    <converters:BooleanToOpacityConverter x:Key="BooleanToReducedOpacityConverter" 
+    <converters:BooleanToOpacityConverter x:Key="BooleanToReducedOpacityConverter"
                                           OpacityWhenTrue="0.4"
                                           OpacityWhenFalse="1.0"/>
+    <converters:BooleanToVpnGreenForegroundConverter x:Key="BooleanToVpnGreenForegroundConverter" />
 </ResourceDictionary>

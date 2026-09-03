@@ -46,9 +46,7 @@ namespace SyncVPN.Api.Installers
             builder.RegisterType<ApiAppVersion>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<TokenClient>().As<ITokenClient>().SingleInstance();
             builder.RegisterType<ReportClientUriProvider>().AsImplementedInterfaces().SingleInstance();
-            builder.RegisterType<ApiAvailabilityVerifier>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<HttpClients>().As<IHttpClients>().SingleInstance();
-            builder.RegisterType<HumanVerificationHttpClientFactory>().AsImplementedInterfaces().SingleInstance();
             builder.Register(c =>
                     new CachingReportClient(
                         new ReportClient(c.Resolve<IReportClientUriProvider>())))
@@ -63,7 +61,6 @@ namespace SyncVPN.Api.Installers
         {
             builder.RegisterType<RetryingHandler>().As<RetryingHandlerBase>().AsSelf().InstancePerDependency();
             builder.RegisterType<LoggingHandler>().As<LoggingHandlerBase>().AsSelf().InstancePerDependency();
-            builder.RegisterType<HumanVerificationHandler>().As<HumanVerificationHandlerBase>().AsSelf().InstancePerDependency();
             builder.RegisterType<CancellingHandler>().As<CancellingHandlerBase>().AsSelf().InstancePerDependency();
 
             builder.RegisterType<AlternativeHostHandler>().AsImplementedInterfaces().AsSelf().InstancePerDependency();

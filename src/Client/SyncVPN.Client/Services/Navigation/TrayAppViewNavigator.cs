@@ -17,6 +17,7 @@
  * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+using SyncVPN.Api.BackendSelection;
 using SyncVPN.Client.Common.Dispatching;
 using SyncVPN.Client.Core.Services.Mapping;
 using SyncVPN.Client.Core.Services.Navigation;
@@ -33,18 +34,24 @@ public class TrayAppViewNavigator : ViewNavigatorBase, ITrayAppViewNavigator,
     IEventMessageReceiver<AuthenticationStatusChanged>
 {
     private readonly IUserAuthenticator _userAuthenticator;
+    private readonly IBackendModeProvider _backendModeProvider;
 
     public TrayAppViewNavigator(
         ILogger logger,
         IPageViewMapper pageViewMapper,
         IUIThreadDispatcher uiThreadDispatcher,
-        IUserAuthenticator userAuthenticator)
+        IUserAuthenticator userAuthenticator,
+        IBackendModeProvider backendModeProvider)
         : base(logger,
                pageViewMapper,
                uiThreadDispatcher)
     {
         _userAuthenticator = userAuthenticator;
+        _backendModeProvider = backendModeProvider;
     }
+
+    // See MainWindowViewNavigator.IsGuestAccessEnabled.
+    private bool IsGuestAccessEnabled => _backendModeProvider.IsNewBackendEnabled(BackendCapability.DeviceRegistration);
 
     public Task<bool> NavigateToLoginViewAsync()
     {
@@ -58,7 +65,7 @@ public class TrayAppViewNavigator : ViewNavigatorBase, ITrayAppViewNavigator,
 
     public override Task<bool> NavigateToDefaultAsync()
     {
-        return _userAuthenticator.IsLoggedIn
+        return _userAuthenticator.IsLoggedIn || IsGuestAccessEnabled
             ? NavigateToMainViewAsync()
             : NavigateToLoginViewAsync();
     }

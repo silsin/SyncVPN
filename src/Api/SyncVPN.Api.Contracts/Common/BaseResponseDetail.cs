@@ -28,7 +28,5 @@ namespace SyncVPN.Api.Contracts.Common
         public string Title { get; set; }
         public string Body { get; set; }
         public string HintWithMarkdown { get; set; }
-        public IReadOnlyList<string> HumanVerificationMethods { get; set; }
-        public string HumanVerificationToken { get; set; }
     }
 }

@@ -26,7 +26,6 @@ using SyncVPN.Client.Core.Services.Mapping;
 using SyncVPN.Client.Core.Services.Selection;
 using SyncVPN.Client.Localization.Contracts;
 using SyncVPN.Client.Settings.Contracts;
-using SyncVPN.Client.UI.Overlays.HumanVerification;
 using SyncVPN.Client.UI.Overlays.Information;
 using SyncVPN.Client.UI.Overlays.Information.Notification;
 using SyncVPN.Client.UI.Overlays.Selection;
@@ -57,11 +56,6 @@ public class MainWindowOverlayActivator : OverlayActivatorBase<MainWindow>, IMai
                overlayViewMapper)
     {
         _localizer = localizer;
-    }
-
-    public Task<ContentDialogResult> ShowHumanVerificationOverlayAsync()
-    {
-        return ShowOverlayAsync<HumanVerificationOverlayViewModel>();
     }
 
     public Task<ContentDialogResult> ShowSecureCoreInfoOverlayAsync()

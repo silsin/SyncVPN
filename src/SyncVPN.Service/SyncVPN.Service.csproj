@@ -44,6 +44,7 @@
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\Api\SyncVPN.Api.Installers\SyncVPN.Api.Installers.csproj" />
+        <ProjectReference Include="..\Api\SyncVPN.Api.V2.Installers\SyncVPN.Api.V2.Installers.csproj" />
         <ProjectReference Include="..\Common\SyncVPN.Common.Installers\SyncVPN.Common.Installers.csproj" />
         <ProjectReference Include="..\Configurations\SyncVPN.Configurations.Installers\SyncVPN.Configurations.Installers.csproj" />
         <ProjectReference Include="..\Crypto\SyncVPN.Crypto.Installers\SyncVPN.Crypto.Installers.csproj" />

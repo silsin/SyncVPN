@@ -65,5 +65,17 @@ public interface IGlobalSettings
     TimeSpan WireGuardConnectionTimeout { get; set; }
     bool IsEfficiencyModeAllowed { get; set; }
 
+    // Local override for the new-vs-legacy SyncVPN backend migration (see BackendModeProvider).
+    // false (default) = defer to the remote feature flag; true = force the new backend on. Engineering/QA only.
+    bool NewBackendOverride { get; set; }
+
+    // Deviceid issued by the new SyncVPN backend's POST /devices/register. Null until that call has
+    // succeeded at least once (only happens when NewBackendOverride/the remote flag enables it).
+    string? SyncVpnDeviceId { get; set; }
+
+    // Bearer DeviceToken from the new SyncVPN backend's login flow (Phase 4). Null until a device has
+    // logged in - Pro-gated calls like PATCH /account/dns-filters require it and will 401 without it.
+    string? SyncVpnDeviceToken { get; set; }
+
     Dictionary<string, Dictionary<string, string?>>? LegacySettingsByUsername { get; set; }
 }

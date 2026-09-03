@@ -70,10 +70,15 @@ public class ConnectionsViewNavigator : ViewNavigatorBase, IConnectionsViewNavig
         return _serversLoader.HasAnyCountries();
     }
 
-    public async Task<bool> NavigateToCountriesViewAsync()
+    public async Task<bool> NavigateToCountriesViewAsync(CountriesConnectionType initialType = CountriesConnectionType.All)
     {
         return CanNavigateToCountriesView()
-            && await NavigateToAsync<CountriesPageViewModel>();
+            && await NavigateToAsync<CountriesPageViewModel>(parameter: initialType);
+    }
+
+    public Task<bool> NavigateToSecureCoreViewAsync()
+    {
+        return NavigateToCountriesViewAsync(CountriesConnectionType.SecureCore);
     }
 
     public bool CanNavigateToGatewaysView()

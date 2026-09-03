@@ -20,6 +20,7 @@
 using Autofac;
 using Autofac.Builder;
 using SyncVPN.Api.Installers;
+using SyncVPN.Api.V2.Installers;
 using SyncVPN.Client.Commands;
 using SyncVPN.Client.Core.Bases.Helpers;
 using SyncVPN.Client.Core.Bases.ViewModels;
@@ -34,6 +35,7 @@ using SyncVPN.Client.Logic.Auth.Installers;
 using SyncVPN.Client.Logic.Connection.Installers;
 using SyncVPN.Client.Logic.Feedback.Installers;
 using SyncVPN.Client.Logic.Profiles.Installers;
+using SyncVPN.Client.Logic.Purchases.Installers;
 using SyncVPN.Client.Logic.Recents.Installers;
 using SyncVPN.Client.Logic.Searches.Installers;
 using SyncVPN.Client.Logic.Servers.Installers;
@@ -49,6 +51,7 @@ using SyncVPN.Client.Services.Bootstrapping.Activators;
 using SyncVPN.Client.Services.Browsing;
 using SyncVPN.Client.Services.DefaultConnections;
 using SyncVPN.Client.Services.Dispatching;
+using SyncVPN.Client.Services.DnsFilters;
 using SyncVPN.Client.Services.Edition;
 using SyncVPN.Client.Services.Enabling;
 using SyncVPN.Client.Services.Lifecycle;
@@ -62,7 +65,6 @@ using SyncVPN.Client.Services.SignoutHandling;
 using SyncVPN.Client.Services.TeachingTips;
 using SyncVPN.Client.Services.Upselling;
 using SyncVPN.Client.Services.Validation;
-using SyncVPN.Client.Services.Verification;
 using SyncVPN.Client.Settings.Installers;
 using SyncVPN.Client.UI;
 using SyncVPN.Client.UI.Dialogs.DebugTools;
@@ -94,6 +96,7 @@ using SyncVPN.Client.UI.Main.Home.Details;
 using SyncVPN.Client.UI.Main.Home.Details.Connection;
 using SyncVPN.Client.UI.Main.Home.Details.Flyouts;
 using SyncVPN.Client.UI.Main.Home.Details.Location;
+using SyncVPN.Client.UI.Main.Home.SearchBar;
 using SyncVPN.Client.UI.Main.Home.Status;
 using SyncVPN.Client.UI.Main.Home.Upsell;
 using SyncVPN.Client.UI.Main.Map;
@@ -118,7 +121,6 @@ using SyncVPN.Client.UI.Main.Sidebar.Connections.Profiles;
 using SyncVPN.Client.UI.Main.Sidebar.Connections.Recents;
 using SyncVPN.Client.UI.Main.Sidebar.Search;
 using SyncVPN.Client.UI.Main.Widgets;
-using SyncVPN.Client.UI.Overlays.HumanVerification;
 using SyncVPN.Client.UI.Overlays.Information;
 using SyncVPN.Client.UI.Overlays.Information.Notification;
 using SyncVPN.Client.UI.Overlays.Selection;
@@ -202,8 +204,10 @@ public class AppModule : Module
                .RegisterModule<ServersLogicModule>()
                .RegisterModule<ConfigurationsModule>()
                .RegisterModule<ApiModule>()
+               .RegisterModule<ApiV2Module>()
                .RegisterModule<SettingsModule>()
                .RegisterModule<AuthLogicModule>()
+               .RegisterModule<PurchasesLogicModule>()
                .RegisterModule<CryptoModule>()
                .RegisterModule<FeedbackLogicModule>()
                .RegisterModule<DnsModule>()
@@ -233,8 +237,6 @@ public class AppModule : Module
         builder.RegisterType<PageViewMapper>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<OverlayViewMapper>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<UIThreadDispatcher>().AsImplementedInterfaces().SingleInstance();
-        builder.RegisterType<HumanVerifier>().AsImplementedInterfaces().SingleInstance();
-        builder.RegisterType<HumanVerificationConfig>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<UrlsBrowser>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<FilesBrowser>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<AccountUpgradeUrlLauncher>().AsImplementedInterfaces().SingleInstance();
@@ -298,6 +300,7 @@ public class AppModule : Module
         builder.RegisterType<DefaultConnectionSelectionManager>().AsImplementedInterfaces().SingleInstance();
 
         builder.RegisterType<ExcludeLocationsManager>().AsImplementedInterfaces().SingleInstance();
+        builder.RegisterType<DnsFiltersManager>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<TeachingTipService>().AsImplementedInterfaces().SingleInstance();
     }
 
@@ -355,6 +358,7 @@ public class AppModule : Module
         RegisterViewModel<SearchResultsPageViewModel>(builder);
         RegisterViewModel<HomeComponentViewModel>(builder);
         RegisterViewModel<MapComponentViewModel>(builder).AutoActivate();
+        RegisterViewModel<HomeSearchBarComponentViewModel>(builder);
         RegisterViewModel<ConnectionCardComponentViewModel>(builder);
         RegisterViewModel<DefaultConnectionSelectorViewModel>(builder);
         RegisterViewModel<ChangeServerComponentViewModel>(builder);
@@ -395,6 +399,7 @@ public class AppModule : Module
         RegisterViewModel<UserDetailsComponentViewModel>(builder);
         RegisterViewModel<ConnectionSettingsViewModel>(builder);
         RegisterViewModel<ConnectionErrorViewModel>(builder);
+        RegisterViewModel<ServiceDisabledBannerViewModel>(builder);
         RegisterViewModel<UpdateViewModel>(builder).AutoActivate();
 
         RegisterViewModel<ReportIssueShellViewModel>(builder);
@@ -420,7 +425,6 @@ public class AppModule : Module
         RegisterViewModel<WorldwideCoverageUpsellFeaturePageViewModel>(builder);
         RegisterViewModel<ProfilesUpsellFeaturePageViewModel>(builder);
 
-        RegisterViewModel<HumanVerificationOverlayViewModel>(builder).AutoActivate();
         RegisterViewModel<P2POverlayViewModel>(builder);
         RegisterViewModel<SecureCoreOverlayViewModel>(builder);
         RegisterViewModel<TorOverlayViewModel>(builder);
@@ -450,6 +454,7 @@ public class AppModule : Module
         RegisterViewModel<CountryFlyoutViewModel>(builder);
         RegisterViewModel<IspFlyoutViewModel>(builder);
         RegisterViewModel<ServerLoadFlyoutViewModel>(builder);
+        RegisterViewModel<FreeServersFlyoutViewModel>(builder);
         RegisterViewModel<ProtocolFlyoutViewModel>(builder);
         RegisterViewModel<VolumeFlyoutViewModel>(builder).AutoActivate();
         RegisterViewModel<SpeedFlyoutViewModel>(builder).AutoActivate();

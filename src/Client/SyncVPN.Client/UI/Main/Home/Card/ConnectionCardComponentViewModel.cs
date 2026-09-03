@@ -23,6 +23,7 @@ using SyncVPN.Client.Common.Enums;
 using SyncVPN.Client.Core.Bases;
 using SyncVPN.Client.Core.Bases.ViewModels;
 using SyncVPN.Client.Core.Services.Activation;
+using SyncVPN.Client.Core.Services.Navigation;
 using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Localization.Extensions;
 using SyncVPN.Client.Logic.Connection.Contracts;
@@ -40,6 +41,8 @@ using SyncVPN.Client.Logic.Servers.Contracts;
 using SyncVPN.Client.Logic.Servers.Contracts.Enums;
 using SyncVPN.Client.Logic.Servers.Contracts.Extensions;
 using SyncVPN.Client.Logic.Servers.Contracts.Messages;
+using SyncVPN.Client.Logic.Services.Contracts;
+using SyncVPN.Client.Logic.Services.Contracts.Messages;
 using SyncVPN.Client.Logic.Users.Contracts.Messages;
 using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.Client.Settings.Contracts.Messages;
@@ -54,7 +57,8 @@ public partial class ConnectionCardComponentViewModel : ActivatableViewModelBase
     IEventMessageReceiver<ProfilesChangedMessage>,
     IEventMessageReceiver<SettingChangedMessage>,
     IEventMessageReceiver<ServerListChangedMessage>,
-    IEventMessageReceiver<LocationNamesChangedMessage>
+    IEventMessageReceiver<LocationNamesChangedMessage>,
+    IEventMessageReceiver<ServiceEnablementChangedMessage>
 {
     private const int FREE_COUNTRIES_DISPLAYED_AS_FLAGS = 3;
 
@@ -63,6 +67,8 @@ public partial class ConnectionCardComponentViewModel : ActivatableViewModelBase
     private readonly IRecentConnectionsManager _recentConnectionsManager;
     private readonly IMainWindowOverlayActivator _mainWindowOverlayActivator;
     private readonly IServersLoader _serversLoader;
+    private readonly IServiceManager _serviceManager;
+    private readonly IMainViewNavigator _mainViewNavigator;
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(ConnectCommand))]
@@ -197,7 +203,9 @@ public partial class ConnectionCardComponentViewModel : ActivatableViewModelBase
         ISettings settings,
         IRecentConnectionsManager recentConnectionsManager,
         IMainWindowOverlayActivator mainWindowOverlayActivator,
-        IServersLoader serversLoader)
+        IServersLoader serversLoader,
+        IServiceManager serviceManager,
+        IMainViewNavigator mainViewNavigator)
         : base(viewModelHelper)
     {
         _connectionManager = connectionManager;
@@ -205,6 +213,22 @@ public partial class ConnectionCardComponentViewModel : ActivatableViewModelBase
         _recentConnectionsManager = recentConnectionsManager;
         _mainWindowOverlayActivator = mainWindowOverlayActivator;
         _serversLoader = serversLoader;
+        _serviceManager = serviceManager;
+        _mainViewNavigator = mainViewNavigator;
+    }
+
+    [RelayCommand]
+    private Task OpenCountriesAsync()
+    {
+        return _mainViewNavigator.NavigateToCountriesViewAsync();
+    }
+
+    public void Receive(ServiceEnablementChangedMessage message)
+    {
+        if (IsActive)
+        {
+            ExecuteOnUIThread(ConnectCommand.NotifyCanExecuteChanged);
+        }
     }
 
     public void Receive(ConnectionStatusChangedMessage message)
@@ -306,7 +330,7 @@ public partial class ConnectionCardComponentViewModel : ActivatableViewModelBase
 
     private bool CanConnect()
     {
-        return IsDisconnected;
+        return IsDisconnected && _serviceManager.IsServiceEnabled;
     }
 
     [RelayCommand(CanExecute = nameof(CanCancelConnection))]

@@ -17,6 +17,7 @@
  * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+using SyncVPN.Api.BackendSelection;
 using SyncVPN.Client.Common.Dispatching;
 using SyncVPN.Client.Core.Services.Mapping;
 using SyncVPN.Client.Core.Services.Navigation;
@@ -38,6 +39,7 @@ public class MainWindowViewNavigator : ViewNavigatorBase, IMainWindowViewNavigat
     private readonly IServersCache _serversCache;
     private readonly IUserAuthenticator _userAuthenticator;
     private readonly IVpnPlanUpdater _vpnPlanUpdater;
+    private readonly IBackendModeProvider _backendModeProvider;
 
     public MainWindowViewNavigator(
         ILogger logger,
@@ -45,13 +47,20 @@ public class MainWindowViewNavigator : ViewNavigatorBase, IMainWindowViewNavigat
         IUIThreadDispatcher uiThreadDispatcher,
         IServersCache serversCache,
         IUserAuthenticator userAuthenticator,
-        IVpnPlanUpdater vpnPlanUpdater)
+        IVpnPlanUpdater vpnPlanUpdater,
+        IBackendModeProvider backendModeProvider)
         : base(logger, pageViewMapper, uiThreadDispatcher)
     {
         _serversCache = serversCache;
         _userAuthenticator = userAuthenticator;
         _vpnPlanUpdater = vpnPlanUpdater;
+        _backendModeProvider = backendModeProvider;
     }
+
+    // A device-registered guest (no Proton account login) can reach Main directly. Free servers,
+    // plans, etc. come from the new SyncVPN backend keyed off just the Deviceid header, not the legacy
+    // Proton server cache, so the logged-in HasNoServers()/login requirement doesn't apply to this path.
+    private bool IsGuestAccessEnabled => _backendModeProvider.IsNewBackendEnabled(BackendCapability.DeviceRegistration);
 
     public Task<bool> NavigateToLoginViewAsync()
     {
@@ -72,10 +81,15 @@ public class MainWindowViewNavigator : ViewNavigatorBase, IMainWindowViewNavigat
 
     public override Task<bool> NavigateToDefaultAsync()
     {
-        return _userAuthenticator.IsLoggedIn
-            ? _serversCache.HasNoServers()
+        if (_userAuthenticator.IsLoggedIn)
+        {
+            return _serversCache.HasNoServers()
                 ? NavigateToNoServersViewAsync()
-                : NavigateToMainViewAsync()
+                : NavigateToMainViewAsync();
+        }
+
+        return IsGuestAccessEnabled
+            ? NavigateToMainViewAsync()
             : NavigateToLoginViewAsync();
     }
 

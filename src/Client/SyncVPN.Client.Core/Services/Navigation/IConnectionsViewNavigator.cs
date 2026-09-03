@@ -18,6 +18,7 @@
  */
 
 using System.Threading.Tasks;
+using SyncVPN.Client.Core.Enums;
 using SyncVPN.Client.Core.Services.Navigation.Bases;
 
 namespace SyncVPN.Client.Core.Services.Navigation;
@@ -30,7 +31,9 @@ public interface IConnectionsViewNavigator : IViewNavigator
 
     Task<bool> NavigateToProfilesViewAsync();
 
-    Task<bool> NavigateToCountriesViewAsync();
+    Task<bool> NavigateToCountriesViewAsync(CountriesConnectionType initialType = CountriesConnectionType.All);
+
+    Task<bool> NavigateToSecureCoreViewAsync();
 
     bool CanNavigateToRecentsView();
 

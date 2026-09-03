@@ -43,6 +43,8 @@ public interface ISettingsViewNavigator : IViewNavigator
 
     Task<bool> NavigateToSplitTunnelingSettingsViewAsync(bool isDirectNavigation = false);
 
+    Task<bool> NavigateToDnsFiltersSettingsViewAsync(bool isDirectNavigation = false);
+
     Task<bool> NavigateToVpnAcceleratorSettingsViewAsync();
 
     Task<bool> NavigateToCustomDnsSettingsViewAsync();

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2025 Proton AG
  *
  * This file is part of SyncVPN.
@@ -17,126 +17,185 @@
  * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using SyncVPN.Client.Core.Bases;
 using SyncVPN.Client.Core.Bases.ViewModels;
+using SyncVPN.Client.Core.Enums;
+using SyncVPN.Client.Core.Services.Activation;
 using SyncVPN.Client.Core.Services.Navigation;
 using SyncVPN.Client.EventMessaging.Contracts;
-using SyncVPN.Client.Localization.Contracts;
-using SyncVPN.Client.Logic.Auth.Contracts.Messages;
-using SyncVPN.Client.Logic.Servers.Cache;
-using SyncVPN.Client.Logic.Servers.Contracts.Messages;
-using SyncVPN.Client.Logic.Servers.Contracts.Searches;
+using SyncVPN.Client.Logic.Users.Contracts.Messages;
+using SyncVPN.Client.Settings.Contracts;
+using SyncVPN.Client.UI.Main.Settings;
+using SyncVPN.Client.UI.Main.Settings.Connection;
 using SyncVPN.Client.UI.Main.Sidebar.Connections;
-using SyncVPN.Client.UI.Main.Sidebar.Connections.Bases.Contracts;
-using SyncVPN.Client.UI.Main.Sidebar.Search.Contracts;
+using SyncVPN.Client.UI.Main.Sidebar.Connections.Countries;
 
 namespace SyncVPN.Client.UI.Main.Sidebar;
 
-public partial class SidebarComponentViewModel : HostViewModelBase<ISidebarViewNavigator>,
-    IEventMessageReceiver<LoggedInMessage>,
-    IEventMessageReceiver<ServerListChangedMessage>
+public partial class SidebarComponentViewModel : ActivatableViewModelBase,
+    IEventMessageReceiver<VpnPlanChangedMessage>
 {
-    private readonly IServersCache _serversCache;
-    private readonly IServerFinder _serverFinder;
-    private readonly ISearchInputReceiver _searchInputReceiver;
+    private readonly IMainViewNavigator _mainViewNavigator;
+    private readonly IConnectionsViewNavigator _connectionsViewNavigator;
+    private readonly ISettingsViewNavigator _settingsViewNavigator;
+    private readonly ISettings _settings;
+    private readonly IUpsellCarouselWindowActivator _upsellCarouselWindowActivator;
 
     [ObservableProperty]
-    private string _searchText = string.Empty;
+    [NotifyPropertyChangedFor(nameof(IsHomeSelected))]
+    [NotifyPropertyChangedFor(nameof(IsCountriesSelected))]
+    [NotifyPropertyChangedFor(nameof(IsSecureCoreSelected))]
+    [NotifyPropertyChangedFor(nameof(IsNetShieldSelected))]
+    [NotifyPropertyChangedFor(nameof(IsSettingsSelected))]
+    private SidebarSection _selectedSection = SidebarSection.Home;
 
     [ObservableProperty]
-    private bool _isSearchVisible = true;
+    private string _planLabel = string.Empty;
 
-    public ObservableCollection<IConnectionPage> ConnectionPages { get; }
+    [ObservableProperty]
+    private bool _isFreePlan;
+
+    public bool IsHomeSelected => SelectedSection == SidebarSection.Home;
+
+    public bool IsCountriesSelected => SelectedSection == SidebarSection.Countries;
+
+    public bool IsSecureCoreSelected => SelectedSection == SidebarSection.SecureCore;
+
+    public bool IsNetShieldSelected => SelectedSection == SidebarSection.NetShield;
+
+    public bool IsSettingsSelected => SelectedSection == SidebarSection.Settings;
+
+    // The following are static placeholders: this app has no daily-data-quota
+    // tracking backend, so these values aren't wired to any real usage data.
+    public string DailyDataUsageText => "512 MB / 512 MB";
+
+    public double DailyDataUsageValue => 512;
+
+    public double DailyDataUsageMaximum => 512;
+
+    public string DailyDataUsedText => "0%";
+
+    public string ResetsInText => "23:59:59";
 
     public SidebarComponentViewModel(
-        IServersCache serversCache,
-        ISidebarViewNavigator childViewNavigator,
-        ILocalizationProvider localizer,
-        ISearchInputReceiver searchInputReceiver,
-        IEnumerable<IConnectionPage> connectionPages,
-        IViewModelHelper viewModelHelper,
-        IServerFinder serverFinder)
-        : base(childViewNavigator, viewModelHelper)
+        IMainViewNavigator mainViewNavigator,
+        IConnectionsViewNavigator connectionsViewNavigator,
+        ISettingsViewNavigator settingsViewNavigator,
+        ISettings settings,
+        IUpsellCarouselWindowActivator upsellCarouselWindowActivator,
+        IViewModelHelper viewModelHelper)
+        : base(viewModelHelper)
     {
-        _serversCache = serversCache;
-        _searchInputReceiver = searchInputReceiver;
-        _serverFinder = serverFinder;
-        ConnectionPages = new(connectionPages.OrderBy(p => p.SortIndex));
+        _mainViewNavigator = mainViewNavigator;
+        _connectionsViewNavigator = connectionsViewNavigator;
+        _settingsViewNavigator = settingsViewNavigator;
+        _settings = settings;
+        _upsellCarouselWindowActivator = upsellCarouselWindowActivator;
+
+        _mainViewNavigator.Navigated += OnMainNavigated;
+        _settingsViewNavigator.Navigated += OnSettingsNavigated;
+
+        InvalidatePlan();
     }
 
-    protected override void OnChildNavigation(NavigationEventArgs e)
+    public void Receive(VpnPlanChangedMessage message)
     {
-        base.OnChildNavigation(e);
-
-        if (ChildViewNavigator.GetCurrentPageContext() is ConnectionsPageViewModel)
-        {
-            ClearSearch();
-        }
-    }
-
-    partial void OnSearchTextChanged(string value)
-    {
-        _searchInputReceiver.SearchAsync(value).Wait();
-    }
-
-    public void ClearSearch()
-    {
-        SearchText = string.Empty;
-    }
-
-    public void OnSearchTextBoxGotFocus(object sender, RoutedEventArgs _)
-    {
-        if (sender is TextBox)
-        {
-            ChildViewNavigator.NavigateToSearchViewAsync();
-        }
-    }
-
-    public void OnSearchTextBoxLostFocus(object sender, RoutedEventArgs _)
-    {
-        if (sender is TextBox && string.IsNullOrWhiteSpace(SearchText))
-        {
-            _serverFinder.ClearSearchBlock();
-            ChildViewNavigator.NavigateToConnectionsViewAsync();
-        }
-    }
-
-    public void Receive(LoggedInMessage message)
-    {
-        ExecuteOnUIThread(() =>
-        {
-            ClearSearch();
-            InvalidateSearchVisibility();
-        });
-    }
-
-    public void Receive(ServerListChangedMessage message)
-    {
-        ExecuteOnUIThread(InvalidateSearchVisibility);
-    }
-
-    private void InvalidateSearchVisibility()
-    {
-        bool hasAnyCountries = _serversCache.Countries.Any();
-        IsSearchVisible = hasAnyCountries;
-
-        if (!hasAnyCountries)
-        {
-            ChildViewNavigator.NavigateToConnectionsViewAsync();
-        }
+        ExecuteOnUIThread(InvalidatePlan);
     }
 
     [RelayCommand]
-    private Task LeaveSearchModeAsync()
+    private async Task NavigateHomeAsync()
     {
-        ClearSearch();
-        _serverFinder.ClearSearchBlock();
-        return ChildViewNavigator.NavigateToConnectionsViewAsync();
+        SelectedSection = SidebarSection.Home;
+        await _mainViewNavigator.NavigateToHomeViewAsync();
+    }
+
+    [RelayCommand]
+    private async Task NavigateCountriesAsync()
+    {
+        SelectedSection = SidebarSection.Countries;
+        await _mainViewNavigator.NavigateToCountriesViewAsync();
+    }
+
+    [RelayCommand]
+    private async Task NavigateSecureCoreAsync()
+    {
+        SelectedSection = SidebarSection.SecureCore;
+        await _mainViewNavigator.NavigateToSecureCoreViewAsync();
+    }
+
+    [RelayCommand]
+    private async Task NavigateNetShieldAsync()
+    {
+        SelectedSection = SidebarSection.NetShield;
+        await _mainViewNavigator.NavigateToSettingsViewAsync();
+        await _settingsViewNavigator.NavigateToNetShieldSettingsViewAsync();
+    }
+
+    [RelayCommand]
+    private async Task NavigateSettingsAsync()
+    {
+        SelectedSection = SidebarSection.Settings;
+        await _mainViewNavigator.NavigateToSettingsViewAsync();
+        await _settingsViewNavigator.NavigateToCommonSettingsViewAsync();
+    }
+
+    [RelayCommand]
+    private Task UpgradeToPremiumAsync()
+    {
+        return _upsellCarouselWindowActivator.ActivateAsync(UpsellFeatureType.WorldwideCoverage);
+    }
+
+    private void OnMainNavigated(object sender, NavigationEventArgs e)
+    {
+        switch (_mainViewNavigator.GetCurrentPageContext())
+        {
+            case ConnectionsPageViewModel:
+                InvalidateConnectionsSection();
+                break;
+            case SettingsPageViewModel:
+                InvalidateSettingsSection();
+                break;
+            case null:
+                SelectedSection = SidebarSection.Home;
+                break;
+        }
+    }
+
+    private void OnSettingsNavigated(object sender, NavigationEventArgs e)
+    {
+        if (_mainViewNavigator.GetCurrentPageContext() is SettingsPageViewModel)
+        {
+            InvalidateSettingsSection();
+        }
+    }
+
+    private void InvalidateConnectionsSection()
+    {
+        SelectedSection = _connectionsViewNavigator.GetCurrentPageContext() switch
+        {
+            CountriesPageViewModel countries when countries.SelectedCountriesComponent.ConnectionType == CountriesConnectionType.SecureCore => SidebarSection.SecureCore,
+            _ => SidebarSection.Countries
+        };
+    }
+
+    private void InvalidateSettingsSection()
+    {
+        SelectedSection = _settingsViewNavigator.GetCurrentPageContext() switch
+        {
+            NetShieldPageViewModel => SidebarSection.NetShield,
+            _ => SidebarSection.Settings
+        };
+    }
+
+    private void InvalidatePlan()
+    {
+        PlanLabel = _settings.VpnPlan.IsFreePlan || _settings.VpnPlan.IsDefaultPlan
+            ? Localizer.Get("Sidebar_FreePlanBadge")
+            : _settings.VpnPlan.Title;
+        IsFreePlan = _settings.VpnPlan.IsFreePlan || _settings.VpnPlan.IsDefaultPlan;
     }
 }

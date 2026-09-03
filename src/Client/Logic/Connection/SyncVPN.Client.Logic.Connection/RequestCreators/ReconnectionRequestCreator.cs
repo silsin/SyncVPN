@@ -17,6 +17,8 @@
  * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+using SyncVPN.Api.BackendSelection;
+using SyncVPN.Api.V2.Contracts;
 using SyncVPN.Client.Logic.Auth.Contracts;
 using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents;
 using SyncVPN.Client.Logic.Connection.Contracts.RequestCreators;
@@ -43,7 +45,10 @@ public class ReconnectionRequestCreator : ConnectionRequestCreator, IReconnectio
         IServerListGenerator serverListGenerator,
         ISmartServerListGenerator smartServerListGenerator,
         IFeatureFlagsObserver featureFlagsObserver,
-        IMainSettingsRequestCreator mainSettingsRequestCreator)
+        IMainSettingsRequestCreator mainSettingsRequestCreator,
+        IBackendModeProvider backendModeProvider,
+        ISyncVpnApiClient syncVpnApiClient,
+        Lazy<IUserAuthenticator> userAuthenticator)
         : base(logger,
                settings,
                entityMapper,
@@ -52,7 +57,10 @@ public class ReconnectionRequestCreator : ConnectionRequestCreator, IReconnectio
                serverListGenerator,
                smartServerListGenerator,
                featureFlagsObserver,
-               mainSettingsRequestCreator)
+               mainSettingsRequestCreator,
+               backendModeProvider,
+               syncVpnApiClient,
+               userAuthenticator)
     { }
 
     public override async Task<ConnectionRequestIpcEntity> CreateAsync(IConnectionIntent connectionIntent)
@@ -72,14 +80,15 @@ public class ReconnectionRequestCreator : ConnectionRequestCreator, IReconnectio
 
         List<VpnProtocol> preferredProtocols = EntityMapper.Map<VpnProtocolIpcEntity, VpnProtocol>(config.PreferredProtocols);
         ServerListResult serverListResult = GetReconnectionServerListResult(connectionIntent, preferredProtocols);
-        VpnServerIpcEntity[] servers = PhysicalServersToVpnServerIpcEntities(serverListResult.PhysicalServers);
+        (VpnServerIpcEntity[] servers, VpnCredentialsIpcEntity credentials) =
+            await ResolveServersAndCredentialsAsync(connectionIntent, serverListResult.PhysicalServers, preferredProtocols);
         bool areAllServersExcluded = servers.Length == 0 && serverListResult.Diagnostic.AreAllCandidatesExcluded;
 
         ConnectionRequestIpcEntity request = new()
         {
             RetryId = Guid.NewGuid(),
             Config = config,
-            Credentials = await GetVpnCredentialsAsync(),
+            Credentials = credentials,
             Protocol = VpnProtocolIpcEntity.Smart,
             Servers = servers,
             Settings = settings,

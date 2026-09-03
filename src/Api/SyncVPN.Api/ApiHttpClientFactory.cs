@@ -32,11 +32,10 @@ public class ApiHttpClientFactory : IApiHttpClientFactory
     private readonly IConfiguration _config;
     private readonly HttpMessageHandler _innerHandler;
 
-    public ApiHttpClientFactory(IConfiguration config, 
+    public ApiHttpClientFactory(IConfiguration config,
         AlternativeHostHandler alternativeHostHandler,
         CancellingHandlerBase cancellingHandlerBase,
         UnauthorizedResponseHandler unauthorizedResponseHandler,
-        HumanVerificationHandlerBase humanVerificationHandlerBase,
         OutdatedAppHandler outdatedAppHandler,
         RetryingHandlerBase retryingHandlerBase,
         DnsHandler dnsHandler,
@@ -49,7 +48,6 @@ public class ApiHttpClientFactory : IApiHttpClientFactory
             .AddDelegatingHandler(alternativeHostHandler)
             .AddDelegatingHandler(cancellingHandlerBase)
             .AddDelegatingHandler(unauthorizedResponseHandler)
-            .AddDelegatingHandler(humanVerificationHandlerBase)
             .AddDelegatingHandler(outdatedAppHandler)
             .AddDelegatingHandler(retryingHandlerBase)
             .AddDelegatingHandler(dnsHandler)

@@ -23,6 +23,7 @@ using System.IO;
 using System.ServiceProcess;
 using Autofac;
 using SyncVPN.Api.Installers;
+using SyncVPN.Api.V2.Installers;
 using SyncVPN.Common.Installers.Extensions;
 using SyncVPN.Common.Legacy.OS.Processes;
 using SyncVPN.Common.Legacy.Vpn;
@@ -71,6 +72,7 @@ internal class Bootstrapper
                .RegisterModule<CryptoModule>()
                .RegisterModule<ServiceModule>()
                .RegisterModule<ApiModule>()
+               .RegisterModule<ApiV2Module>()
                .RegisterModule<NetworkModule>()
                .RegisterModule<ConfigurationsModule>()
                .RegisterAssemblyModule<LoggingModule>()

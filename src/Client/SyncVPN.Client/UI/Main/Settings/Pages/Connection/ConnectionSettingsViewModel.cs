@@ -31,6 +31,7 @@ using SyncVPN.Client.Logic.Connection.Contracts.Messages;
 using SyncVPN.Client.Logic.Profiles.Contracts.Messages;
 using SyncVPN.Client.Logic.Profiles.Contracts.Models;
 using SyncVPN.Client.Logic.Users.Contracts.Messages;
+using SyncVPN.Client.Services.DnsFilters;
 using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.Client.Settings.Contracts.Messages;
 using SyncVPN.Common.Core.Networking;
@@ -48,8 +49,13 @@ public partial class ConnectionSettingsViewModel : ActivatableViewModelBase,
     private readonly ISettingsViewNavigator _settingsViewNavigator;
     private readonly IProfileEditor _profileEditor;
     private readonly IConnectionManager _connectionManager;
+    private readonly IDnsFiltersManager _dnsFiltersManager;
 
     public bool IsPaidUser => _settings.VpnPlan.IsPaid;
+
+    // Hidden entirely (not upsold) while the new backend isn't enabled for this capability - see the
+    // migration plan. Unlike NetShield/PortForwarding, there's no legacy equivalent to fall back to.
+    public bool IsDnsFiltersAvailable => _dnsFiltersManager.IsAvailable;
 
     public IConnectionProfile? CurrentProfile => _connectionManager.CurrentConnectionIntent as IConnectionProfile;
 
@@ -93,6 +99,7 @@ public partial class ConnectionSettingsViewModel : ActivatableViewModelBase,
         ISettingsViewNavigator settingsViewNavigator,
         IProfileEditor profileEditor,
         IConnectionManager connectionManager,
+        IDnsFiltersManager dnsFiltersManager,
         IViewModelHelper viewModelHelper)
         : base(viewModelHelper)
     {
@@ -101,6 +108,7 @@ public partial class ConnectionSettingsViewModel : ActivatableViewModelBase,
         _settingsViewNavigator = settingsViewNavigator;
         _profileEditor = profileEditor;
         _connectionManager = connectionManager;
+        _dnsFiltersManager = dnsFiltersManager;
     }
 
     public void Receive(SettingChangedMessage message)
@@ -203,6 +211,12 @@ public partial class ConnectionSettingsViewModel : ActivatableViewModelBase,
     private async Task NavigateToKillSwitchPageAsync()
     {
         await _settingsViewNavigator.NavigateToKillSwitchSettingsViewAsync();
+    }
+
+    [RelayCommand]
+    private async Task NavigateToDnsFiltersPageAsync()
+    {
+        await _settingsViewNavigator.NavigateToDnsFiltersSettingsViewAsync();
     }
 
     [RelayCommand]

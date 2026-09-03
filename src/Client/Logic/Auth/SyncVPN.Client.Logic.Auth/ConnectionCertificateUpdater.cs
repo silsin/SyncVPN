@@ -17,6 +17,7 @@
  * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+using SyncVPN.Api.BackendSelection;
 using SyncVPN.Client.Common.Dispatching;
 using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Logic.Auth.Contracts;
@@ -35,17 +36,20 @@ public class ConnectionCertificateUpdater : IConnectionCertificateUpdater,
     private readonly IConnectionCertificateManager _connectionCertificateManager;
     private readonly ILogger _logger;
     private readonly IUIThreadDispatcher _uiThreadDispatcher;
+    private readonly IBackendModeProvider _backendModeProvider;
     private Timer? _timer;
 
     public ConnectionCertificateUpdater(IConfiguration config,
         IConnectionCertificateManager connectionCertificateManager,
         ILogger logger,
-        IUIThreadDispatcher uiThreadDispatcher)
+        IUIThreadDispatcher uiThreadDispatcher,
+        IBackendModeProvider backendModeProvider)
     {
         _config = config;
         _connectionCertificateManager = connectionCertificateManager;
         _logger = logger;
         _uiThreadDispatcher = uiThreadDispatcher;
+        _backendModeProvider = backendModeProvider;
     }
 
     private void Timer_OnTick(object? sender)
@@ -56,6 +60,14 @@ public class ConnectionCertificateUpdater : IConnectionCertificateUpdater,
 
     public void Receive(LoggedInMessage message)
     {
+        // A new-backend VPN account has no certificate to renew - POST /account is claimed fresh at
+        // connect time instead (see the migration plan's VpnProvisioning phase). Starting this timer
+        // anyway would just be a periodic, pointless call to the legacy Proton cert endpoint.
+        if (_backendModeProvider.IsNewBackendEnabled(BackendCapability.VpnProvisioning))
+        {
+            return;
+        }
+
         TimeSpan interval = _config.ConnectionCertificateUpdateInterval;
         _timer = new(Timer_OnTick);
         _timer.Change(interval, interval);

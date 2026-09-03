@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2024 Proton AG
  *
  * This file is part of SyncVPN.
@@ -20,10 +20,11 @@
 using Microsoft.UI.Xaml.Controls;
 using SyncVPN.Client.Common.Dispatching;
 using SyncVPN.Client.Common.Models;
-using SyncVPN.Client.Contracts.Services.Lifecycle;
 using SyncVPN.Client.Core.Services.Activation;
+using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Localization.Contracts;
 using SyncVPN.Client.Logic.Services.Contracts;
+using SyncVPN.Client.Logic.Services.Contracts.Messages;
 using SyncVPN.Logging.Contracts;
 using SyncVPN.Logging.Contracts.Events.AppServiceLogs;
 using SyncVPN.OperatingSystems.Services.Contracts;
@@ -32,11 +33,14 @@ namespace SyncVPN.Client.Services.Enabling;
 
 public class ServiceEnabler : IServiceEnabler
 {
+    private static readonly TimeSpan EnablePollInterval = TimeSpan.FromMilliseconds(500);
+    private static readonly TimeSpan EnablePollTimeout = TimeSpan.FromSeconds(5);
+
     private readonly ILogger _logger;
     private readonly IUIThreadDispatcher _uiThreadDispatcher;
     private readonly ILocalizationProvider _localizer;
     private readonly IMainWindowOverlayActivator _mainWindowOverlayActivator;
-    private readonly Lazy<IAppExitInvoker> _appExitInvoker;
+    private readonly IEventMessageSender _eventMessageSender;
     private readonly SemaphoreSlim _semaphore = new(1, 1);
 
     public ServiceEnabler(
@@ -44,13 +48,13 @@ public class ServiceEnabler : IServiceEnabler
         IUIThreadDispatcher uiThreadDispatcher,
         ILocalizationProvider localizer,
         IMainWindowOverlayActivator mainWindowOverlayActivator,
-        Lazy<IAppExitInvoker> appExitInvoker)
+        IEventMessageSender eventMessageSender)
     {
         _logger = logger;
         _uiThreadDispatcher = uiThreadDispatcher;
         _localizer = localizer;
         _mainWindowOverlayActivator = mainWindowOverlayActivator;
-        _appExitInvoker = appExitInvoker;
+        _eventMessageSender = eventMessageSender;
     }
 
     public async Task EnableAsync(IService service)
@@ -69,6 +73,32 @@ public class ServiceEnabler : IServiceEnabler
         catch (Exception)
         {
             // The first call from bootstrapper calls this method too early and the UI is not yet ready.
+        }
+        finally
+        {
+            _semaphore.Release();
+        }
+    }
+
+    public async Task<bool> TryEnableAsync(IService service)
+    {
+        if (service.IsEnabled())
+        {
+            PublishState(service, isEnabled: true);
+            return true;
+        }
+
+        await _semaphore.WaitAsync();
+
+        try
+        {
+            _logger.Info<AppServiceLog>($"Attempting to enable service {service.Name}.");
+            service.Enable();
+            await WaitUntilEnabledOrTimeoutAsync(service);
+
+            bool isEnabled = service.IsEnabled();
+            PublishState(service, isEnabled);
+            return isEnabled;
         }
         finally
         {
@@ -96,16 +126,34 @@ public class ServiceEnabler : IServiceEnabler
         {
             _logger.Info<AppServiceLog>($"The user requested to enable service {service.Name}.");
             service.Enable();
+            await WaitUntilEnabledOrTimeoutAsync(service);
         }
         else
         {
             _logger.Info<AppServiceLog>($"The user refused to enable service {service.Name}.");
         }
 
-        if (!service.IsEnabled())
+        // Whatever the outcome, the app keeps running: a persistent banner (see
+        // ServiceDisabledBannerViewModel) takes over from here and Connect stays disabled
+        // until the service is actually enabled - the app no longer force-exits on failure.
+        PublishState(service, service.IsEnabled());
+    }
+
+    private void PublishState(IService service, bool isEnabled)
+    {
+        _logger.Info<AppServiceLog>($"Service {service.Name} enablement state: {isEnabled}.");
+        _eventMessageSender.Send(new ServiceEnablementChangedMessage(isEnabled));
+    }
+
+    // service.Enable() only fires off an elevated "sc config" call; the Windows Service Control
+    // Manager can take a short moment to apply it, so poll instead of checking IsEnabled() once
+    // immediately - otherwise a legitimately-succeeding enable can still be seen as a failure.
+    private static async Task WaitUntilEnabledOrTimeoutAsync(IService service)
+    {
+        DateTime start = DateTime.UtcNow;
+        while (!service.IsEnabled() && DateTime.UtcNow - start < EnablePollTimeout)
         {
-            _logger.Info<AppServiceLog>($"The service {service.Name} was not enabled. Shutting down the application.");
-            await _appExitInvoker.Value.ForceExitAsync();
+            await Task.Delay(EnablePollInterval);
         }
     }
 }

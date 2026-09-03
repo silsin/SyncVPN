@@ -18,11 +18,13 @@
  */
 
 using System.Runtime.InteropServices;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using SyncVPN.Client.Core.Bases;
 using SyncVPN.Client.Core.Extensions;
 using SyncVPN.Client.Core.Messages;
 using SyncVPN.Client.EventMessaging.Contracts;
+using SyncVPN.Client.Logic.Auth.Contracts;
 using SyncVPN.Client.Services.Activation;
 using SyncVPN.Client.UI.Main.Components;
 using Windows.Foundation;
@@ -39,6 +41,7 @@ public sealed partial class MainWindow : IFocusAware
     public MainWindowActivator WindowActivator { get; }
     public MainWindowOverlayActivator OverlayActivator { get; }
     private IEventMessageSender EventMessageSender { get; }
+    private IUserAuthenticator UserAuthenticator { get; }
 
     private IntPtr _hWnd;
     private WindowProc? _newWndProc;
@@ -49,6 +52,7 @@ public sealed partial class MainWindow : IFocusAware
         WindowActivator = App.GetService<MainWindowActivator>();
         OverlayActivator = App.GetService<MainWindowOverlayActivator>();
         EventMessageSender = App.GetService<IEventMessageSender>();
+        UserAuthenticator = App.GetService<IUserAuthenticator>();
 
         InitializeComponent();
 
@@ -60,6 +64,14 @@ public sealed partial class MainWindow : IFocusAware
     {
         base.OnActivated(sender, e);
 
+        // Self-heals the min/max/resize caption buttons in case some earlier page
+        // (e.g. NoServersPage) disabled them and the Home page never got a chance
+        // to re-enable them afterwards.
+        if (UserAuthenticator.IsLoggedIn)
+        {
+            InvalidateWindowResizeCapabilities(canResize: true);
+        }
+
         if (_hWnd != IntPtr.Zero)
         {
             return;
@@ -70,6 +82,27 @@ public sealed partial class MainWindow : IFocusAware
         // garbage collector deletes the reference which causes the app to crash.
         _newWndProc = new(CustomWndProc);
         _oldWndProc = SetWindowLongPtr(_hWnd, GWLP_WNDPROC, Marshal.GetFunctionPointerForDelegate(_newWndProc));
+
+        // Force the native minimize/maximize caption buttons to be present.
+        // Setting WindowEx.IsMaximizable/IsMinimizable alone isn't reliably
+        // reflected in the actual window style bits, so set them directly too.
+        EnsureMinimizeMaximizeWindowStyle();
+    }
+
+    private void EnsureMinimizeMaximizeWindowStyle()
+    {
+        long style = GetWindowLongPtr(_hWnd, GWL_STYLE).ToInt64();
+        style |= WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU;
+        SetWindowLongPtr(_hWnd, GWL_STYLE, new IntPtr(style));
+
+        // WinUI3's AppWindow/OverlappedPresenter owns the actual caption-button
+        // chrome and ignores the legacy GWL_STYLE bits above, so set it there too.
+        if (AppWindow?.Presenter is OverlappedPresenter presenter)
+        {
+            presenter.IsMinimizable = true;
+            presenter.IsMaximizable = true;
+            presenter.IsResizable = true;
+        }
     }
 
     private IntPtr CustomWndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
@@ -136,6 +169,13 @@ public sealed partial class MainWindow : IFocusAware
         IsMaximizable = canResize;
         IsMinimizable = canResize;
         IsResizable = canResize;
+
+        if (AppWindow?.Presenter is OverlappedPresenter presenter)
+        {
+            presenter.IsMinimizable = canResize;
+            presenter.IsMaximizable = canResize;
+            presenter.IsResizable = canResize;
+        }
     }
 
     public void InvalidateTitleDragArea()

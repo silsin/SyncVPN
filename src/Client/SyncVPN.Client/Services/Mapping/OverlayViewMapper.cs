@@ -23,7 +23,6 @@ using SyncVPN.Client.Core.Services.Mapping;
 using SyncVPN.Client.Services.Mapping.Bases;
 using SyncVPN.Client.UI.Login.Overlays;
 using SyncVPN.Client.UI.Overlays.Upsell;
-using SyncVPN.Client.UI.Overlays.HumanVerification;
 using SyncVPN.Client.UI.Overlays.Information;
 using SyncVPN.Client.UI.Overlays.Information.Notification;
 using SyncVPN.Client.UI.Overlays.Welcome;
@@ -36,8 +35,6 @@ public class OverlayViewMapper : ViewMapperBase<OverlayViewModelBase, ContentDia
 {
     protected override void ConfigureMappings()
     {
-        ConfigureMapping<HumanVerificationOverlayViewModel, HumanVerificationOverlayView>();
-
         ConfigureMapping<P2POverlayViewModel, P2POverlayView>();
         ConfigureMapping<SecureCoreOverlayViewModel, SecureCoreOverlayView>();
         ConfigureMapping<TorOverlayViewModel, TorOverlayView>();

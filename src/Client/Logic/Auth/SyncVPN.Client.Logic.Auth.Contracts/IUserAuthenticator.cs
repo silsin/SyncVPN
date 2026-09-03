@@ -38,6 +38,11 @@ public interface IUserAuthenticator
     Task<SsoAuthResult> StartSsoAuthAsync(string username);
     Task<AuthResult> CompleteSsoAuthAsync(string ssoResponseToken);
     Task<AuthResult> LoginUserAsync(string username, SecureString password);
+
+    // Exchanges a 16-character login_code (e.g. returned by POST /purchases for a guest purchase)
+    // for a SyncVPN device session - no legacy Proton equivalent, always goes to the new backend.
+    Task<AuthResult> LoginWithCodeAsync(string code);
+
     Task<AuthResult> SendTwoFactorCodeAsync(string code);
     Task<AuthResult> AuthenticateWithSecurityKeyAsync();
 

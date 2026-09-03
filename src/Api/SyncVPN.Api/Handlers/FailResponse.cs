@@ -41,10 +41,5 @@ namespace SyncVPN.Api.Handlers
         {
             return new FailResponse(HttpStatusCode.Unauthorized, 10013);
         }
-
-        public static HttpResponseMessage HumanVerificationFailureResponse(string error)
-        {
-            return new FailResponse(HttpStatusCode.OK, ResponseCodes.HUMAN_VERIFICATION_REQUIRED, error);
-        }
     }
 }

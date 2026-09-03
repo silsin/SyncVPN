@@ -152,6 +152,24 @@ public class GlobalSettings : IGlobalSettings
         set => _globalCache.SetValueType<bool>(value, SettingEncryption.Unencrypted);
     }
 
+    public bool NewBackendOverride
+    {
+        get => _globalCache.GetValueType<bool>(SettingEncryption.Unencrypted) ?? DefaultSettings.NewBackendOverride;
+        set => _globalCache.SetValueType<bool>(value, SettingEncryption.Unencrypted);
+    }
+
+    public string? SyncVpnDeviceId
+    {
+        get => _globalCache.GetReferenceType<string>(SettingEncryption.Unencrypted);
+        set => _globalCache.SetReferenceType(value, SettingEncryption.Unencrypted);
+    }
+
+    public string? SyncVpnDeviceToken
+    {
+        get => _globalCache.GetReferenceType<string>(SettingEncryption.Encrypted);
+        set => _globalCache.SetReferenceType(value, SettingEncryption.Encrypted);
+    }
+
     public bool AreAutomaticUpdatesEnabled
     {
         get => _globalCache.GetValueType<bool>(SettingEncryption.Unencrypted) ?? DefaultSettings.AreAutomaticUpdatesEnabled;

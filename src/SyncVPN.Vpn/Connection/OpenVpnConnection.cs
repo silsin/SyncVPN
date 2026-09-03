@@ -167,9 +167,20 @@ internal class OpenVpnConnection : IAdapterSingleVpnConnection
     {
         try
         {
-            bool isIpv6Enabled = _vpnConfig.IsIpv6Enabled && _endpoint.Server.IsIpv6Supported;
-            ConfigTemplate template = new();
-            string content = template.GetConfig(_credentials, isIpv6Enabled);
+            // A server-issued config (new SyncVPN backend) embeds its own CA and is written verbatim -
+            // ConfigTemplate hardcodes Proton's CA/tls-crypt key and must never be applied to it.
+            string content;
+            if (_credentials.ProvisionedConfigText is not null)
+            {
+                content = _credentials.ProvisionedConfigText;
+            }
+            else
+            {
+                bool isIpv6Enabled = _vpnConfig.IsIpv6Enabled && _endpoint.Server.IsIpv6Supported;
+                ConfigTemplate template = new();
+                content = template.GetConfig(_credentials, isIpv6Enabled);
+            }
+
             File.WriteAllText(_config.OpenVpn.ConfigPath, content);
             return true;
         }

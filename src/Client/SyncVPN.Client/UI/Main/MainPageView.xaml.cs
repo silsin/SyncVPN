@@ -28,10 +28,6 @@ namespace SyncVPN.Client.UI.Main;
 
 public sealed partial class MainPageView : IContextAware
 {
-    private const int EXPAND_SIDEBAR_DELAY_IN_MS = 100;
-
-    private readonly DispatcherTimer _timer;
-
     public MainPageViewModel ViewModel { get; }
 
     public MainViewNavigator Navigator { get; }
@@ -47,12 +43,6 @@ public sealed partial class MainPageView : IContextAware
 
         Loaded += OnLoaded;
         Unloaded += OnUnloaded;
-
-        _timer = new DispatcherTimer()
-        {
-            Interval = TimeSpan.FromMilliseconds(EXPAND_SIDEBAR_DELAY_IN_MS)
-        };
-        _timer.Tick += OnExpandSidebarTimerTick;
     }
 
     public object GetContext()
@@ -90,58 +80,9 @@ public sealed partial class MainPageView : IContextAware
     private void OnPointerPressed(object sender, PointerRoutedEventArgs e)
     {
         if (IsInside(e, MainContainer) &&
-            !IsInside(e, MainNavigationFrame) &&
-            !IsInside(e, SidebarSizeGrip))
+            !IsInside(e, MainNavigationFrame))
         {
             ViewModel.CloseCurrentPageAsync();
         }
-    }
-
-    private void OnSidebarPointerEntered(object sender, PointerRoutedEventArgs e)
-    {
-        // Delay the sidebar expansion to avoid flickering effect.
-        if (IsSidebarDisplayedAsCompactOverlay())
-        {
-            StartTimer();
-        }
-    }
-
-    private void OnSidebarPointerExited(object sender, PointerRoutedEventArgs e)
-    {
-        StopTimer();
-
-        if (IsSidebarDisplayedAsCompactOverlay())
-        {
-            ViewModel.IsSidebarExpanded = false;
-        }
-    }
-
-    private void OnExpandSidebarTimerTick(object? sender, object e)
-    {
-        if (IsSidebarDisplayedAsCompactOverlay())
-        {
-            ViewModel.IsSidebarExpanded = true;
-        }
-    }
-
-    private void StartTimer()
-    {
-        if (!_timer.IsEnabled)
-        {
-            _timer.Start();
-        }
-    }
-
-    private void StopTimer()
-    {
-        if (_timer.IsEnabled)
-        {
-            _timer.Stop();
-        }
-    }
-
-    private bool IsSidebarDisplayedAsCompactOverlay()
-    {
-        return ViewModel.SidebarDisplayMode == SplitViewDisplayMode.CompactOverlay;
     }
 }

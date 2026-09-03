@@ -5,9 +5,13 @@
     <Platform Name="x64" />
   </Configurations>
   <Folder Name="/Api/">
+    <Project Path="src/Api/SyncVPN.Api.BackendSelection/SyncVPN.Api.BackendSelection.csproj" />
     <Project Path="src/Api/SyncVPN.Api.Contracts/SyncVPN.Api.Contracts.csproj" />
     <Project Path="src/Api/SyncVPN.Api.Installers/SyncVPN.Api.Installers.csproj" />
     <Project Path="src/Api/SyncVPN.Api.Tests/SyncVPN.Api.Tests.csproj" />
+    <Project Path="src/Api/SyncVPN.Api.V2.Contracts/SyncVPN.Api.V2.Contracts.csproj" />
+    <Project Path="src/Api/SyncVPN.Api.V2.Installers/SyncVPN.Api.V2.Installers.csproj" />
+    <Project Path="src/Api/SyncVPN.Api.V2/SyncVPN.Api.V2.csproj" />
     <Project Path="src/Api/SyncVPN.Api/SyncVPN.Api.csproj" />
   </Folder>
   <Folder Name="/Builds/">
@@ -80,6 +84,11 @@
     <Project Path="src/Client/Logic/Profiles/SyncVPN.Client.Logic.Profiles.EntityMapping/SyncVPN.Client.Logic.Profiles.EntityMapping.csproj" />
     <Project Path="src/Client/Logic/Profiles/SyncVPN.Client.Logic.Profiles.Installers/SyncVPN.Client.Logic.Profiles.Installers.csproj" />
     <Project Path="src/Client/Logic/Profiles/SyncVPN.Client.Logic.Profiles/SyncVPN.Client.Logic.Profiles.csproj" />
+  </Folder>
+  <Folder Name="/Client/Logic/Purchases/">
+    <Project Path="src/Client/Logic/Purchases/SyncVPN.Client.Logic.Purchases.Contracts/SyncVPN.Client.Logic.Purchases.Contracts.csproj" />
+    <Project Path="src/Client/Logic/Purchases/SyncVPN.Client.Logic.Purchases.Installers/SyncVPN.Client.Logic.Purchases.Installers.csproj" />
+    <Project Path="src/Client/Logic/Purchases/SyncVPN.Client.Logic.Purchases/SyncVPN.Client.Logic.Purchases.csproj" />
   </Folder>
   <Folder Name="/Client/Logic/Recents/">
     <Project Path="src/Client/Logic/Recents/SyncVPN.Client.Logic.Recents.Contracts/SyncVPN.Client.Logic.Recents.Contracts.csproj" />

@@ -32,4 +32,5 @@ public static class GlobalConfig
     public const string BtiServerSignaturePublicKey = "";
     public const string GuestHoleKey1 = "";
     public const string GuestHoleKey2 = "";
+    public const string SyncVpnAppToken = "";
 }

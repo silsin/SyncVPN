@@ -28,19 +28,24 @@ public static class ConnectionRequestIpcEntityExtensions
     {
         VpnError error = VpnError.None;
 
+        bool hasProvisionedConfig = !string.IsNullOrWhiteSpace(request.Credentials.ProvisionedConfigText);
+
         if (request.Servers.Length <= 0)
         {
             error = request.AreAllServersExcludedByUserPreference
                 ? VpnError.AllServersExcluded
                 : VpnError.NoServers;
         }
-        else if (request.Credentials.Certificate is null ||
-                 request.Credentials.ClientKeyPair is null ||
-                 string.IsNullOrWhiteSpace(request.Credentials.Certificate.Pem))
+        // The new SyncVPN backend (POST /account) returns a ready-to-use config instead of a
+        // certificate/key pair - see VpnCredentialsIpcEntity.ProvisionedConfigText.
+        else if (!hasProvisionedConfig &&
+                 (request.Credentials.Certificate is null ||
+                  request.Credentials.ClientKeyPair is null ||
+                  string.IsNullOrWhiteSpace(request.Credentials.Certificate.Pem)))
         {
             error = VpnError.MissingConnectionCertificate;
         }
-        else if (request.Credentials.Certificate.ExpirationDateUtc <= DateTimeOffset.UtcNow)
+        else if (!hasProvisionedConfig && request.Credentials.Certificate.ExpirationDateUtc <= DateTimeOffset.UtcNow)
         {
             error = VpnError.CertificateExpired;
         }

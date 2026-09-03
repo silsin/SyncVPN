@@ -22,6 +22,7 @@ namespace SyncVPN.Configurations.Contracts.Entities;
 public interface IUrlsConfiguration
 {
     string ApiUrl { get; }
+    string SyncVpnApiUrl { get; }
     string BfeArticleUrl { get; }
     string PasswordResetUrl { get; }
     string ForgetUsernameUrl { get; }

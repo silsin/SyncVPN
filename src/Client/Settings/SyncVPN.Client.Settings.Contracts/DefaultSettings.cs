@@ -95,6 +95,7 @@ public static class DefaultSettings
     public static List<ExcludedLocation> ExcludedLocationsList = [];
     public static bool ShouldDisableWeakHostSetting = true;
     public static bool IsWireGuardServerRouteEnabled = true;
+    public static bool NewBackendOverride = true;
 
     public static ChangeServerSettings ChangeServerSettings = new()
     {

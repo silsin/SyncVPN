@@ -230,4 +230,23 @@ public class ServerValidatorTest
         VpnError error = _serverValidator.Validate(server);
         error.Should().Be(VpnError.ServerValidationError);
     }
+
+    [TestMethod]
+    public void TestValidate_SkipsSignatureCheck_WhenSkipSignatureValidationIsSet()
+    {
+        // No config, no signature, no valid Ed25519 result set up - would fail every check below if reached.
+        VpnHost server = new(
+            name: SERVER_NAME,
+            ip: SERVER_IP,
+            label: SERVER_LABEL,
+            x25519PublicKey: null,
+            signature: null,
+            isIpv6Supported: false,
+            relayIpByProtocol: null,
+            skipSignatureValidation: true);
+
+        VpnError error = _serverValidator.Validate(server);
+
+        error.Should().Be(VpnError.None);
+    }
 }

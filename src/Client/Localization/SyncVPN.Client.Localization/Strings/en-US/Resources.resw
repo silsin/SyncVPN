@@ -132,6 +132,9 @@
   <data name="Common_Actions_Connect" xml:space="preserve">
     <value>Connect</value>
   </data>
+  <data name="Common_Actions_Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
   <data name="Common_Actions_Disconnect" xml:space="preserve">
     <value>Disconnect</value>
   </data>
@@ -1512,6 +1515,9 @@
   <data name="Home_ConnectionDetails_Isp" xml:space="preserve">
     <value>Provider</value>
   </data>
+  <data name="Home_ConnectionDetails_FreeServers" xml:space="preserve">
+    <value>Free servers</value>
+  </data>
   <data name="Home_ConnectionDetails_ConnectingSubLabel" xml:space="preserve">
     <value>Protecting your digital identity...</value>
   </data>
@@ -1768,6 +1774,45 @@
   </data>
   <data name="Settings_Connection_NetShield_PrivacyPanel" xml:space="preserve">
     <value>NetShield Privacy Panel</value>
+  </data>
+  <data name="Settings_Connection_DnsFilters" xml:space="preserve">
+    <value>DNS filters</value>
+  </data>
+  <data name="Settings_Connection_DnsFilters_Description" xml:space="preserve">
+    <value>Block specific categories of content across your connection.</value>
+  </data>
+  <data name="Settings_Connection_DnsFilters_LoadFailed" xml:space="preserve">
+    <value>Couldn't load your DNS filter settings. Please try again later.</value>
+  </data>
+  <data name="Settings_Connection_DnsFilters_UpgradeRequired" xml:space="preserve">
+    <value>An active Pro subscription is required to change these settings.</value>
+  </data>
+  <data name="Settings_Connection_DnsFilters_Malware" xml:space="preserve">
+    <value>Malware</value>
+  </data>
+  <data name="Settings_Connection_DnsFilters_AdsTrackers" xml:space="preserve">
+    <value>Ads &amp; trackers</value>
+  </data>
+  <data name="Settings_Connection_DnsFilters_SocialNetworks" xml:space="preserve">
+    <value>Social networks</value>
+  </data>
+  <data name="Settings_Connection_DnsFilters_Porn" xml:space="preserve">
+    <value>Adult content</value>
+  </data>
+  <data name="Settings_Connection_DnsFilters_Gambling" xml:space="preserve">
+    <value>Gambling</value>
+  </data>
+  <data name="Settings_Connection_DnsFilters_Clickbait" xml:space="preserve">
+    <value>Clickbait</value>
+  </data>
+  <data name="Settings_Connection_DnsFilters_OtherVpns" xml:space="preserve">
+    <value>Other VPNs &amp; proxies</value>
+  </data>
+  <data name="Settings_Connection_DnsFilters_Crypto" xml:space="preserve">
+    <value>Crypto &amp; mining</value>
+  </data>
+  <data name="Automation_Properties_DnsFilters_Page" xml:space="preserve">
+    <value>DNS filters settings page</value>
   </data>
   <data name="Settings_Connection_PortForwarding" xml:space="preserve">
     <value>Port forwarding</value>
@@ -2529,6 +2574,12 @@
   <data name="Dialogs_DisabledService_Description" xml:space="preserve">
     <value>Looks like the SyncVPN Service is disabled. You'll need to re-enable the service to connect.</value>
   </data>
+  <data name="Banner_ServiceDisabled_Title" xml:space="preserve">
+    <value>SyncVPN Service is disabled</value>
+  </data>
+  <data name="Banner_ServiceDisabled_Description" xml:space="preserve">
+    <value>Enable the SyncVPN Service to connect.</value>
+  </data>
   <data name="Connections_Fastest" xml:space="preserve">
     <value>Fastest</value>
   </data>
@@ -2708,6 +2759,45 @@
   <data name="Home_Account_SignOut_Confirmation_Title" xml:space="preserve">
     <value>Sign out from {0}?</value>
     <comment>{0} is a placeholder for the username</comment>
+  </data>
+  <data name="Home_NavItem_Title" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Map_NavItem_Title" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="Home_NavItem_Tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="Sidebar_FreePlanBadge" xml:space="preserve">
+    <value>FREE</value>
+  </data>
+  <data name="Sidebar_FreePlanCard_Title" xml:space="preserve">
+    <value>Free plan</value>
+  </data>
+  <data name="Sidebar_FreePlanCard_DailyData" xml:space="preserve">
+    <value>Daily data</value>
+  </data>
+  <data name="Sidebar_FreePlanCard_ResetsInLabel" xml:space="preserve">
+    <value>Resets in:</value>
+  </data>
+  <data name="Sidebar_FreePlanCard_Upgrade" xml:space="preserve">
+    <value>Upgrade to Premium</value>
+  </data>
+  <data name="Home_Map_Search_Placeholder" xml:space="preserve">
+    <value>Search for a location</value>
+  </data>
+  <data name="Home_QuickConnect_Label" xml:space="preserve">
+    <value>Quick Connect</value>
+  </data>
+  <data name="Home_PickCountry_Title" xml:space="preserve">
+    <value>Pick country</value>
+  </data>
+  <data name="Home_PickCountry_Description" xml:space="preserve">
+    <value>Select a country from the list</value>
+  </data>
+  <data name="Home_FastestServer_Description" xml:space="preserve">
+    <value>Connect you to the fastest server</value>
   </data>
   <data name="Home_TitleBar_Menu_UpdateNow" xml:space="preserve">
     <value>Update now</value>
@@ -3629,6 +3719,21 @@
   </data>
   <data name="Flyouts_Isp_KnowledgeBaseLinkTitle" xml:space="preserve">
     <value>What is an Internet Service Provider (ISP)?</value>
+  </data>
+  <data name="Flyouts_FreeServers_Title" xml:space="preserve">
+    <value>Free servers</value>
+  </data>
+  <data name="Flyouts_FreeServers_Description" xml:space="preserve">
+    <value>Pick a free server to connect to. Available to every SyncVPN user.</value>
+  </data>
+  <data name="Flyouts_FreeServers_Loading" xml:space="preserve">
+    <value>Loading free servers…</value>
+  </data>
+  <data name="Flyouts_FreeServers_Error" xml:space="preserve">
+    <value>Couldn't load free servers. Please try again.</value>
+  </data>
+  <data name="Flyouts_FreeServers_Empty" xml:space="preserve">
+    <value>No free servers are available right now.</value>
   </data>
   <data name="Flyouts_ServerLoad_Title" xml:space="preserve">
     <value>Server load</value>

@@ -26,6 +26,7 @@ using SyncVPN.Client.Logic.Auth.Contracts.Messages;
 using SyncVPN.Client.Logic.Connection.Contracts.Enums;
 using SyncVPN.Client.Logic.Connection.Contracts.Messages;
 using SyncVPN.Client.UI.Main.Settings;
+using SyncVPN.Client.UI.Main.Sidebar.Connections;
 using SyncVPN.Logging.Contracts;
 
 namespace SyncVPN.Client.Services.Navigation;
@@ -34,14 +35,19 @@ public class MainViewNavigator : ViewNavigatorBase, IMainViewNavigator,
     IEventMessageReceiver<ConnectionStatusChangedMessage>,
     IEventMessageReceiver<LoggedOutMessage>
 {
+    private readonly IConnectionsViewNavigator _connectionsViewNavigator;
+
     private ConnectionStatus _connectionStatus = ConnectionStatus.Disconnected;
 
     public MainViewNavigator(
         ILogger logger,
         IPageViewMapper pageViewMapper,
-        IUIThreadDispatcher uiThreadDispatcher) 
+        IUIThreadDispatcher uiThreadDispatcher,
+        IConnectionsViewNavigator connectionsViewNavigator)
         : base(logger, pageViewMapper, uiThreadDispatcher)
-    { }
+    {
+        _connectionsViewNavigator = connectionsViewNavigator;
+    }
 
     public Task<bool> NavigateToHomeViewAsync(bool forceNavigation = false)
     {
@@ -51,6 +57,39 @@ public class MainViewNavigator : ViewNavigatorBase, IMainViewNavigator,
     public Task<bool> NavigateToSettingsViewAsync()
     {
         return NavigateToAsync<SettingsPageViewModel>();
+    }
+
+    public async Task<bool> NavigateToCountriesViewAsync()
+    {
+        bool navigated = await NavigateToAsync<ConnectionsPageViewModel>();
+        if (navigated)
+        {
+            await _connectionsViewNavigator.NavigateToCountriesViewAsync();
+        }
+
+        return navigated;
+    }
+
+    public async Task<bool> NavigateToProfilesViewAsync()
+    {
+        bool navigated = await NavigateToAsync<ConnectionsPageViewModel>();
+        if (navigated)
+        {
+            await _connectionsViewNavigator.NavigateToProfilesViewAsync();
+        }
+
+        return navigated;
+    }
+
+    public async Task<bool> NavigateToSecureCoreViewAsync()
+    {
+        bool navigated = await NavigateToAsync<ConnectionsPageViewModel>();
+        if (navigated)
+        {
+            await _connectionsViewNavigator.NavigateToSecureCoreViewAsync();
+        }
+
+        return navigated;
     }
 
     public override Task<bool> NavigateToDefaultAsync()

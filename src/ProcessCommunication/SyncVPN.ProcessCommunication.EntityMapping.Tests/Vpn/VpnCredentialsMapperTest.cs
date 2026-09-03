@@ -114,4 +114,37 @@ public class VpnCredentialsMapperTest
             ExpirationDateUtc = DateTime.UtcNow.AddDays(1),
         };
     }
+
+    [TestMethod]
+    public void TestMapLeftToRight_WithProvisionedConfig_NoKeyPairRequired()
+    {
+        VpnCredentials entityToTest = VpnCredentials.FromProvisionedConfig("[Interface]\nPrivateKey = SERVER_ISSUED", "username", "password");
+
+        VpnCredentialsIpcEntity result = _mapper.Map(entityToTest);
+
+        Assert.IsNotNull(result);
+        Assert.AreEqual(entityToTest.ProvisionedConfigText, result.ProvisionedConfigText);
+        Assert.AreEqual(entityToTest.Username, result.Username);
+        Assert.AreEqual(entityToTest.Password, result.Password);
+    }
+
+    [TestMethod]
+    public void TestMapRightToLeft_WithProvisionedConfig_NoCertificateRequired()
+    {
+        VpnCredentialsIpcEntity entityToTest = new()
+        {
+            Certificate = null,
+            ClientKeyPair = null,
+            Username = "username",
+            Password = "password",
+            ProvisionedConfigText = "[Interface]\nPrivateKey = SERVER_ISSUED",
+        };
+
+        VpnCredentials result = _mapper.Map(entityToTest);
+
+        Assert.IsNotNull(result);
+        Assert.AreEqual(entityToTest.ProvisionedConfigText, result.ProvisionedConfigText);
+        Assert.AreEqual(entityToTest.Username, result.Username);
+        Assert.AreEqual(entityToTest.Password, result.Password);
+    }
 }

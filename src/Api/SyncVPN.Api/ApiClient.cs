@@ -39,6 +39,9 @@ using SyncVPN.Api.Contracts.Servers;
 using SyncVPN.Api.Contracts.Streaming;
 using SyncVPN.Api.Contracts.Users;
 using SyncVPN.Api.Contracts.VpnConfig;
+using SyncVPN.Api.BackendSelection;
+using SyncVPN.Api.V2.Contracts;
+using SyncVPN.Api.V2.Contracts.Servers;
 using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.Common.Core.Geographical;
 using SyncVPN.Common.Core.StatisticalEvents;
@@ -60,16 +63,22 @@ public class ApiClient : BaseApiClient, IApiClient
 
     private readonly HttpClient _client;
     private readonly HttpClient _noCacheClient;
+    private readonly IBackendModeProvider _backendModeProvider;
+    private readonly ISyncVpnApiClient _syncVpnApiClient;
 
     public ApiClient(
         IApiHttpClientFactory httpClientFactory,
         ILogger logger,
         IApiAppVersion appVersion,
         ISettings settings,
-        IConfiguration config) : base(logger, appVersion, settings, config)
+        IConfiguration config,
+        IBackendModeProvider backendModeProvider,
+        ISyncVpnApiClient syncVpnApiClient) : base(logger, appVersion, settings, config)
     {
         _client = httpClientFactory.GetApiHttpClientWithCache();
         _noCacheClient = httpClientFactory.GetApiHttpClientWithoutCache();
+        _backendModeProvider = backendModeProvider;
+        _syncVpnApiClient = syncVpnApiClient;
     }
 
     public async Task<ApiResponseResult<UnauthSessionResponse>> PostUnauthSessionAsync(CancellationToken cancellationToken = default)
@@ -134,6 +143,11 @@ public class ApiClient : BaseApiClient, IApiClient
         IEnumerable<string> favoriteServerIds = default,
         CancellationToken cancellationToken = default)
     {
+        if (_backendModeProvider.IsNewBackendEnabled(BackendCapability.Servers))
+        {
+            return await GetSyncVpnServersAsync(cancellationToken);
+        }
+
         StringBuilder endpoint = new("vpn/v2/logicals" +
             $"?SignServer={LOGICALS_SIGN_SERVER_PARAM_VALUE}" +
             "&SecureCoreFilter=all" +
@@ -155,6 +169,34 @@ public class ApiClient : BaseApiClient, IApiClient
         request.Headers.Add("x-pm-response-truncation-permitted", "true");
 
         return await SendRequestAsync<ServersResponse>(request, cancellationToken, "Get servers");
+    }
+
+    // Servers capability on the new backend: no logicals scoring/Secure Core/load status - just the
+    // public server catalog, translated into the legacy shape so the rest of the pipeline (entity
+    // mapper, ServersCache) doesn't need to know which backend served it. See the migration plan.
+    // Free and Pro servers are two separate endpoints on this backend (GET /servers vs GET /servers/pro)
+    // - merge them here so callers keep seeing one combined catalog, same as the legacy logicals list.
+    private async Task<ApiResponseResult<ServersResponse>> GetSyncVpnServersAsync(CancellationToken cancellationToken)
+    {
+        Task<ApiResponseResult<ServerListResponse>> freeServersTask = _syncVpnApiClient.GetServersAsync(cancellationToken);
+        Task<ApiResponseResult<ServerListResponse>> proServersTask = _syncVpnApiClient.GetProServersAsync(cancellationToken);
+        await Task.WhenAll(freeServersTask, proServersTask);
+
+        ApiResponseResult<ServerListResponse> freeServers = freeServersTask.Result;
+        if (!freeServers.Success)
+        {
+            return ApiResponseResult<ServersResponse>.Fail(freeServers.ResponseMessage, freeServers.Error);
+        }
+
+        // A Pro-server fetch failure (e.g. no active purchase) shouldn't hide the free catalog entirely.
+        ApiResponseResult<ServerListResponse> proServers = proServersTask.Result;
+        List<ServerListItem> combined = [.. freeServers.Value.Data];
+        if (proServers.Success)
+        {
+            combined.AddRange(proServers.Value.Data);
+        }
+
+        return ApiResponseResult<ServersResponse>.Ok(freeServers.ResponseMessage, SyncVpnServersResponseMapper.Map(combined));
     }
 
     public async Task<ApiResponseResult<byte[]>> GetServerLoadsAndStatusBinaryStringAsync(string statusId, CancellationToken cancellationToken = default)

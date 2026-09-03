@@ -28,7 +28,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                    xmlns:reportissue="using:SyncVPN.Client.UI.Dialogs.ReportIssue"
                    xmlns:tray="using:SyncVPN.Client.UI.Tray"
                    xmlns:ui="using:SyncVPN.Client.UI"
-                   MinWidth="566"
+                   MinWidth="900"
                    MinHeight="609"
                    mc:Ignorable="d">
 

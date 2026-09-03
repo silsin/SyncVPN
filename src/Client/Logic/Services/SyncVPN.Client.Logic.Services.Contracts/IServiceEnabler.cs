@@ -24,4 +24,6 @@ namespace SyncVPN.Client.Logic.Services.Contracts;
 public interface IServiceEnabler
 {
     Task EnableAsync(IService service);
+
+    Task<bool> TryEnableAsync(IService service);
 }

@@ -86,7 +86,7 @@ public class UnauthorizedResponseHandlerTest
     public async Task SendAsync_ShouldBe_InnerHandlerSendAsync()
     {
         // Arrange
-        UnauthorizedResponseHandler handler = GetUnauthorizedResponseHandler(new MockOfHumanVerificationHandler(_innerHandler));
+        UnauthorizedResponseHandler handler = GetUnauthorizedResponseHandler(new MockOfDelegatingHandler { InnerHandler = _innerHandler });
         HttpClient client = new(handler) { BaseAddress = _baseAddress };
 
         HttpResponseMessage response = new(HttpStatusCode.OK);
@@ -107,7 +107,7 @@ public class UnauthorizedResponseHandlerTest
     public async Task SendAsync_ShouldCall_TokenClient_RefreshTokenAsync_WhenUnauthorized()
     {
         // Arrange
-        UnauthorizedResponseHandler handler = GetUnauthorizedResponseHandler(new MockOfHumanVerificationHandler(_innerHandler));
+        UnauthorizedResponseHandler handler = GetUnauthorizedResponseHandler(new MockOfDelegatingHandler { InnerHandler = _innerHandler });
         HttpClient client = new(handler) { BaseAddress = _baseAddress };
 
         _innerHandler.When(HttpMethod.Get, LOGICALS_API_URL)
@@ -132,7 +132,7 @@ public class UnauthorizedResponseHandlerTest
     private async Task SendAsync_ShouldNotCall_TokenClient_RefreshTokenAsync_WhenCurrentTokenIsInvalid()
     {
         // Arrange
-        UnauthorizedResponseHandler handler = GetUnauthorizedResponseHandler(new MockOfHumanVerificationHandler(_innerHandler));
+        UnauthorizedResponseHandler handler = GetUnauthorizedResponseHandler(new MockOfDelegatingHandler { InnerHandler = _innerHandler });
         HttpClient client = new(handler) { BaseAddress = _baseAddress };
 
         _innerHandler.Expect(HttpMethod.Get, LOGICALS_API_URL)
@@ -179,7 +179,7 @@ public class UnauthorizedResponseHandlerTest
         _tokenClient.RefreshTokenAsync(Arg.Any<CancellationToken>())
             .Throws(exception);
 
-        UnauthorizedResponseHandler handler = GetUnauthorizedResponseHandler(new MockOfHumanVerificationHandler(_innerHandler));
+        UnauthorizedResponseHandler handler = GetUnauthorizedResponseHandler(new MockOfDelegatingHandler { InnerHandler = _innerHandler });
         HttpClient client = new(handler) { BaseAddress = _baseAddress };
 
         _innerHandler.Expect(HttpMethod.Get, LOGICALS_API_URL)
@@ -202,7 +202,7 @@ public class UnauthorizedResponseHandlerTest
         _tokenClient.RefreshTokenAsync(Arg.Any<CancellationToken>())
             .Returns(ApiResponseResult<RefreshTokenResponse>.Ok(
                 new HttpResponseMessage(), new() { AccessToken = NEW_ACCESS_TOKEN, RefreshToken = NEW_REFRESH_TOKEN }));
-        UnauthorizedResponseHandler handler = GetUnauthorizedResponseHandler(new MockOfHumanVerificationHandler(_innerHandler));
+        UnauthorizedResponseHandler handler = GetUnauthorizedResponseHandler(new MockOfDelegatingHandler { InnerHandler = _innerHandler });
         HttpClient client = new(handler) { BaseAddress = _baseAddress };
 
         _innerHandler.Expect(HttpMethod.Get, LOGICALS_API_URL)
@@ -226,7 +226,7 @@ public class UnauthorizedResponseHandlerTest
         _tokenClient.RefreshTokenAsync(Arg.Any<CancellationToken>())
             .Returns(ApiResponseResult<RefreshTokenResponse>.Ok(
                 new HttpResponseMessage(), new() { AccessToken = NEW_ACCESS_TOKEN, RefreshToken = NEW_REFRESH_TOKEN }));
-        UnauthorizedResponseHandler handler = GetUnauthorizedResponseHandler(new MockOfHumanVerificationHandler(_innerHandler));
+        UnauthorizedResponseHandler handler = GetUnauthorizedResponseHandler(new MockOfDelegatingHandler { InnerHandler = _innerHandler });
         HttpClient client = new(handler) { BaseAddress = _baseAddress };
 
         _innerHandler.When(HttpMethod.Get, LOGICALS_API_URL)
@@ -245,7 +245,7 @@ public class UnauthorizedResponseHandlerTest
     public async Task SendAsync_ShouldBe_InnerHandlerSendAsync_WhenRepeatedRequest()
     {
         // Arrange
-        UnauthorizedResponseHandler handler = GetUnauthorizedResponseHandler(new MockOfHumanVerificationHandler(_innerHandler));
+        UnauthorizedResponseHandler handler = GetUnauthorizedResponseHandler(new MockOfDelegatingHandler { InnerHandler = _innerHandler });
         HttpClient client = new(handler) { BaseAddress = _baseAddress };
 
         HttpResponseMessage response = new(HttpStatusCode.OK);
@@ -268,7 +268,7 @@ public class UnauthorizedResponseHandlerTest
         // Arrange
         _tokenClient.RefreshTokenAsync(Arg.Any<CancellationToken>())
             .Returns(ApiResponseResult<RefreshTokenResponse>.Fail(new HttpResponseMessage(HttpStatusCode.BadRequest), "Refresh failed"));
-        UnauthorizedResponseHandler handler = GetUnauthorizedResponseHandler(new MockOfHumanVerificationHandler(_innerHandler));
+        UnauthorizedResponseHandler handler = GetUnauthorizedResponseHandler(new MockOfDelegatingHandler { InnerHandler = _innerHandler });
         HttpClient client = new(handler) { BaseAddress = _baseAddress };
 
         _innerHandler.Expect(HttpMethod.Get, LOGICALS_API_URL)
@@ -291,10 +291,10 @@ public class UnauthorizedResponseHandlerTest
         Breakpoint requestBreakpoint = breakpointHandler.Breakpoint;
         BreakpointTokenClient breakpointTokenClient = new(_tokenClient);
         Breakpoint tokenClientBreakpoint = breakpointTokenClient.Breakpoint;
-        MockOfHumanVerificationHandler humanVerificationHandler =
+        MockOfDelegatingHandler passthroughHandler =
             new() { InnerHandler = breakpointHandler };
         UnauthorizedResponseHandler handler = new(breakpointTokenClient, _appSettings, _logger)
-        { InnerHandler = humanVerificationHandler };
+        { InnerHandler = passthroughHandler };
         HttpClient client = new(handler) { BaseAddress = _baseAddress };
 
         _tokenClient.RefreshTokenAsync(Arg.Any<CancellationToken>())
@@ -482,14 +482,14 @@ public class UnauthorizedResponseHandlerTest
         _innerHandler.VerifyNoOutstandingExpectation();
     }
 
-    private UnauthorizedResponseHandler GetUnauthorizedResponseHandler(HumanVerificationHandlerBase handler)
+    private UnauthorizedResponseHandler GetUnauthorizedResponseHandler(DelegatingHandler handler)
     {
         return new(_tokenClient, _appSettings, _logger) { InnerHandler = handler };
     }
 
     private UnauthorizedResponseHandler GetUnauthorizedResponseHandlerWithBreakpoint(BreakpointHandler breakpointHandler, ITokenClient tokenClient)
     {
-        MockOfHumanVerificationHandler handler = new() { InnerHandler = breakpointHandler };
+        MockOfDelegatingHandler handler = new() { InnerHandler = breakpointHandler };
         return new(tokenClient, _appSettings, _logger) { InnerHandler = handler };
     }
 

@@ -37,4 +37,9 @@ public class VpnCredentialsIpcEntity
 
     [DataMember(Order = 4)]
     public string Password { get; set; }
+
+    // Full ready-to-write WireGuard/OpenVpn config text from the new SyncVPN backend's POST /account.
+    // When set, Certificate/ClientKeyPair are not required - see VpnCredentials.FromProvisionedConfig.
+    [DataMember(Order = 5)]
+    public string ProvisionedConfigText { get; set; }
 }

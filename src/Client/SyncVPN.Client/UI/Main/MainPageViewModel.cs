@@ -17,11 +17,7 @@
  * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using SyncVPN.Client.Common.Messages;
 using SyncVPN.Client.Core.Bases;
 using SyncVPN.Client.Core.Bases.ViewModels;
 using SyncVPN.Client.Core.Messages;
@@ -29,54 +25,21 @@ using SyncVPN.Client.Core.Services.Activation;
 using SyncVPN.Client.Core.Services.Navigation;
 using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Logic.Auth.Contracts;
-using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.Client.UI.Main.Profiles;
 using SyncVPN.Client.UI.Main.Settings;
 
 namespace SyncVPN.Client.UI.Main;
 
-public partial class MainPageViewModel : PageViewModelBase<IMainWindowViewNavigator, IMainViewNavigator>,
-    IEventMessageReceiver<ApplicationStoppedMessage>
+public partial class MainPageViewModel : PageViewModelBase<IMainWindowViewNavigator, IMainViewNavigator>
 {
-    private const double WIDGETBAR_MIN_WIDTH = 72.0;
-    private const double WIDGETBAR_MAX_WIDTH = 110.0;
-
-    private const double EXPAND_SIDEBAR_WINDOW_WIDTH_THRESHOLD = 885;
-    private const double EXPAND_WIDGETBAR_WINDOW_WIDTH_THRESHOLD = 1000;
+    // Fixed sidebar width, kept in sync with SidebarComponentView.xaml's root Border Width.
+    private const double SIDEBAR_TOTAL_WIDTH = 230;
 
     private readonly IEventMessageSender _eventMessageSender;
     private readonly IMainWindowActivator _mainWindowActivator;
-    private readonly ISettings _settings;
     private readonly IUserAuthenticator _userAuthenticator;
 
-    public int SidebarCompactWidth = 62;
-    public int SidebarMinWidth = 200;
-    public int SidebarMaxWidth = 400;
-    public int SidebarDefaultWidth = DefaultSettings.SidebarWidth;
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(EffectiveSidebarWidth))]
-    private bool _isSidebarExpanded;
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(EffectiveSidebarWidth))]
-    private double _sidebarWidth;
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(EffectiveSidebarWidth))]
-    private SplitViewDisplayMode _sidebarDisplayMode = SplitViewDisplayMode.CompactInline;
-
-    [ObservableProperty]
-    private double _widgetBarWidth;
-
-    public double EffectiveSidebarWidth => SidebarDisplayMode switch
-    {
-        SplitViewDisplayMode.Inline when !IsSidebarExpanded => 0,
-        SplitViewDisplayMode.Overlay => 0,
-        SplitViewDisplayMode.CompactInline when !IsSidebarExpanded => SidebarCompactWidth,
-        SplitViewDisplayMode.CompactOverlay => SidebarCompactWidth,
-        _ => SidebarWidth
-    };
+    public double EffectiveSidebarWidth => SIDEBAR_TOTAL_WIDTH;
 
     public bool IsHomePageDisplayed => ChildViewNavigator.GetCurrentPageContext() is null;
 
@@ -85,15 +48,12 @@ public partial class MainPageViewModel : PageViewModelBase<IMainWindowViewNaviga
         IMainWindowViewNavigator parentViewNavigator,
         IMainViewNavigator childViewNavigator,
         IMainWindowActivator mainWindowActivator,
-        ISettings settings,
-        ISettingsViewNavigator settingsViewNavigator,
         IUserAuthenticator userAuthenticator,
         IViewModelHelper viewModelHelper)
         : base(parentViewNavigator, childViewNavigator, viewModelHelper)
     {
         _eventMessageSender = eventMessageSender;
         _mainWindowActivator = mainWindowActivator;
-        _settings = settings;
         _userAuthenticator = userAuthenticator;
     }
 
@@ -115,45 +75,26 @@ public partial class MainPageViewModel : PageViewModelBase<IMainWindowViewNaviga
         }
     }
 
-    public void Receive(ApplicationStoppedMessage message)
-    {
-        SaveSidebarWidth();
-    }
-
     protected override void OnActivated()
     {
         base.OnActivated();
 
-        InvalidateWindowResizeCapabilities();
-        InvalidateSidebarDisplayMode();
-        InvalidateSidebarWidth();
-        InvalidateWidgetBarWidth();
-
-        if (_mainWindowActivator.Window != null)
-        {
-            _mainWindowActivator.Window.SizeChanged += OnMainWindowSizeChanged;
-        }
+        InvalidateWindowChrome();
 
         _eventMessageSender.Send<HomePageDisplayedAfterLoginMessage>();
     }
 
-    private void InvalidateWindowResizeCapabilities()
+    // This page is only ever shown once logged in, so the title bar (and, gated by
+    // it, the min/max/resize caption buttons) should always be visible here. This
+    // self-heals the case where MainWindowActivator.OnInitialized() ran its own
+    // title-bar-visibility check before IUserAuthenticator.IsLoggedIn had resolved
+    // to true yet (e.g. a restored/cached session with no fresh login transition
+    // event to trigger a later re-check).
+    private void InvalidateWindowChrome()
     {
         if (_mainWindowActivator.Window is MainWindow mainWindow)
         {
-            mainWindow.InvalidateWindowResizeCapabilities(canResize: true);
-        }
-    }
-
-    protected override void OnDeactivated()
-    {
-        base.OnDeactivated();
-
-        SaveSidebarWidth();
-
-        if (_mainWindowActivator.Window != null)
-        {
-            _mainWindowActivator.Window.SizeChanged -= OnMainWindowSizeChanged;
+            mainWindow.InvalidateTitleBarVisibility(isTitleBarVisible: true);
         }
     }
 
@@ -165,58 +106,9 @@ public partial class MainPageViewModel : PageViewModelBase<IMainWindowViewNaviga
 
         if (IsHomePageDisplayed)
         {
+            InvalidateWindowChrome();
+
             _eventMessageSender.Send<NavigatedToHomePageMessage>();
         }
-    }
-
-    private void OnMainWindowSizeChanged(object sender, WindowSizeChangedEventArgs args)
-    {
-        InvalidateSidebarDisplayMode();
-        InvalidateWidgetBarWidth();
-    }
-
-    private void InvalidateSidebarDisplayMode()
-    {
-        if (!IsActive || !_userAuthenticator.IsLoggedIn)
-        {
-            return;
-        }
-
-        bool isAboveThreshold = _mainWindowActivator.CurrentWindowSize.Width >= EXPAND_SIDEBAR_WINDOW_WIDTH_THRESHOLD;
-
-        SidebarDisplayMode = isAboveThreshold
-            ? SplitViewDisplayMode.CompactInline
-            : SplitViewDisplayMode.CompactOverlay;
-        IsSidebarExpanded = isAboveThreshold;
-    }
-
-    private void InvalidateWidgetBarWidth()
-    {
-        bool isAboveThreshold = _mainWindowActivator.CurrentWindowSize.Width >= EXPAND_WIDGETBAR_WINDOW_WIDTH_THRESHOLD;
-
-        WidgetBarWidth = isAboveThreshold
-            ? WIDGETBAR_MAX_WIDTH
-            : WIDGETBAR_MIN_WIDTH;
-    }
-
-    private void InvalidateSidebarWidth()
-    {
-        int settingsSidebarWidth = _settings.SidebarWidth;
-
-        int sidebarWidth = settingsSidebarWidth <= 0
-            ? SidebarDefaultWidth
-            : Math.Clamp(settingsSidebarWidth, SidebarMinWidth, SidebarMaxWidth);
-
-        SidebarWidth = sidebarWidth;
-
-        if (settingsSidebarWidth != sidebarWidth)
-        {
-            SaveSidebarWidth();
-        }
-    }
-
-    private void SaveSidebarWidth()
-    {
-        _settings.SidebarWidth = (int)SidebarWidth;
     }
 }

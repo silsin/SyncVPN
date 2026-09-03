@@ -26,14 +26,22 @@ public static class WindowHelper
     private const string DLL = "user32.dll";
 
     public const int GWLP_WNDPROC = -4;
+    public const int GWL_STYLE = -16;
     public const uint WM_ENDSESSION = 0x0016;
     public const uint WM_NCLBUTTONDBLCLK = 0x00A3;
     public const int HTCAPTION = 2;
+
+    public const long WS_MINIMIZEBOX = 0x00020000L;
+    public const long WS_MAXIMIZEBOX = 0x00010000L;
+    public const long WS_SYSMENU = 0x00080000L;
 
     public delegate IntPtr WindowProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
     [DllImport(DLL, SetLastError = true)]
     public static extern IntPtr SetWindowLongPtr(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
+
+    [DllImport(DLL, SetLastError = true)]
+    public static extern IntPtr GetWindowLongPtr(IntPtr hWnd, int nIndex);
 
     [DllImport(DLL, SetLastError = true)]
     public static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);

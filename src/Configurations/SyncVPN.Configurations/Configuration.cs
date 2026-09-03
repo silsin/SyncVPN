@@ -29,6 +29,7 @@ public partial class Configuration : StaticConfiguration, IConfiguration
     public string UserAgent => Get();
     public string ApiVersion => Get();
     public string ServerValidationPublicKey => Get();
+    public string SyncVpnAppToken => Get();
 
     public string GuestHoleVpnUsername => Get();
     public string GuestHoleVpnPassword => Get();

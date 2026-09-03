@@ -1,0 +1,40 @@
+/*
+ * Copyright (c) 2026 Proton AG
+ *
+ * This file is part of SyncVPN.
+ *
+ * SyncVPN is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * SyncVPN is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+
+namespace SyncVPN.Vpn.WireGuard;
+
+// A server-issued WireGuard config (new SyncVPN backend) embeds its own "DNS = ..." line. This patches
+// just that line when the user has a custom DNS override configured, rather than reconstructing the
+// whole config client-side the way WireGuardConfigGenerator does for the legacy Proton path.
+public static class WireGuardConfigDnsPatcher
+{
+    public static string ApplyCustomDnsOverride(string configText, IReadOnlyCollection<string> customDns)
+    {
+        if (customDns is not { Count: > 0 })
+        {
+            return configText;
+        }
+
+        string dnsLine = $"DNS = {string.Join(", ", customDns)}";
+        return Regex.Replace(configText, @"^DNS\s*=.*$", dnsLine, RegexOptions.Multiline);
+    }
+}

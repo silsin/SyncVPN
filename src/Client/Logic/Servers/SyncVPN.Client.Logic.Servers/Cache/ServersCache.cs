@@ -17,6 +17,7 @@
  * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+using SyncVPN.Api.BackendSelection;
 using SyncVPN.Api.Contracts;
 using SyncVPN.Api.Contracts.Servers;
 using SyncVPN.Client.EventMessaging.Contracts;
@@ -48,6 +49,7 @@ public class ServersCache : IServersCache
     private readonly ILogger _logger;
     private readonly IFavoriteServersStorage _favoriteServersStorage;
     private readonly IServerLoadsCalculator _serverLoadsCalculator;
+    private readonly IBackendModeProvider _backendModeProvider;
 
     private readonly ReaderWriterLockSlim _lock = new();
 
@@ -91,7 +93,8 @@ public class ServersCache : IServersCache
         ISettings settings,
         ILogger logger,
         IFavoriteServersStorage favoriteServersLoader,
-        IServerLoadsCalculator serverLoadsCalculator)
+        IServerLoadsCalculator serverLoadsCalculator,
+        IBackendModeProvider backendModeProvider)
     {
         _apiClient = apiClient;
         _entityMapper = entityMapper;
@@ -102,6 +105,7 @@ public class ServersCache : IServersCache
         _logger = logger;
         _favoriteServersStorage = favoriteServersLoader;
         _serverLoadsCalculator = serverLoadsCalculator;
+        _backendModeProvider = backendModeProvider;
     }
 
     public bool IsEmpty()
@@ -250,11 +254,17 @@ public class ServersCache : IServersCache
 
                     _settings.LastLogicalsStatusId = response.Value.StatusId;
 
-                    bool result = await UpdateBinaryLoadsAsync(servers, cancellationToken);
-                    if (!result)
+                    // The new SyncVPN backend has no equivalent to Proton's binary loads/status blob
+                    // (no separate load/score signal at all yet - see the migration plan) - skip that
+                    // fetch entirely rather than let it silently abort the whole update below.
+                    if (!_backendModeProvider.IsNewBackendEnabled(BackendCapability.Servers))
                     {
-                        _logger.Warn<ApiLog>("Loads were not updated.");
-                        return;
+                        bool result = await UpdateBinaryLoadsAsync(servers, cancellationToken);
+                        if (!result)
+                        {
+                            _logger.Warn<ApiLog>("Loads were not updated.");
+                            return;
+                        }
                     }
 
                     string deviceCountryLocation = deviceLocation?.CountryCode ?? string.Empty;
@@ -305,6 +315,12 @@ public class ServersCache : IServersCache
 
     public async Task UpdateLoadsAsync(CancellationToken cancellationToken)
     {
+        if (_backendModeProvider.IsNewBackendEnabled(BackendCapability.Servers))
+        {
+            // No loads endpoint on the new backend yet - nothing to refresh (see the migration plan).
+            return;
+        }
+
         List<Server> servers = Servers.ToList();
 
         bool result = await UpdateBinaryLoadsAsync(servers, cancellationToken);

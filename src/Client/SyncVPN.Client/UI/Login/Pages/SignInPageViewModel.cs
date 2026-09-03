@@ -20,7 +20,6 @@
 using System.Security;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SyncVPN.Api.Contracts;
 using SyncVPN.Client.Contracts.Services.Browsing;
 using SyncVPN.Client.Core.Bases;
 using SyncVPN.Client.Core.Enums;
@@ -31,13 +30,11 @@ using SyncVPN.Client.Logic.Auth;
 using SyncVPN.Client.Logic.Auth.Contracts;
 using SyncVPN.Client.Logic.Auth.Contracts.Enums;
 using SyncVPN.Client.Logic.Auth.Contracts.Models;
-using SyncVPN.Client.Logic.Connection.Contracts.GuestHole;
 using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.Client.UI.Login.Bases;
 using SyncVPN.Client.UI.Login.Enums;
 using SyncVPN.Client.UI.Login.Overlays;
 using SyncVPN.Common.Core.Extensions;
-using SyncVPN.Common.Legacy.Abstract;
 using Windows.System;
 
 namespace SyncVPN.Client.UI.Login.Pages;
@@ -47,8 +44,6 @@ public partial class SignInPageViewModel : LoginPageViewModelBase
     private readonly IUrlsBrowser _urlsBrowser;
     private readonly IUserAuthenticator _userAuthenticator;
     private readonly IEventMessageSender _eventMessageSender;
-    private readonly IApiAvailabilityVerifier _apiAvailabilityVerifier;
-    private readonly IGuestHoleManager _guestHoleManager;
     private readonly ISessionSettings _sessionSettings;
     private readonly IUnauthSessionManager _unauthSessionManager;
     private readonly SsoLoginOverlayViewModel _ssoLoginOverlayViewModel;
@@ -122,8 +117,6 @@ public partial class SignInPageViewModel : LoginPageViewModelBase
         IUrlsBrowser urlsBrowser,
         IUserAuthenticator userAuthenticator,
         IEventMessageSender eventMessageSender,
-        IApiAvailabilityVerifier apiAvailabilityVerifier,
-        IGuestHoleManager guestHoleManager,
         ISessionSettings sessionSettings,
         IUnauthSessionManager unauthSessionManager,
         SsoLoginOverlayViewModel ssoLoginOverlayViewModel,
@@ -134,8 +127,6 @@ public partial class SignInPageViewModel : LoginPageViewModelBase
         _urlsBrowser = urlsBrowser;
         _userAuthenticator = userAuthenticator;
         _eventMessageSender = eventMessageSender;
-        _apiAvailabilityVerifier = apiAvailabilityVerifier;
-        _guestHoleManager = guestHoleManager;
         _sessionSettings = sessionSettings;
         _unauthSessionManager = unauthSessionManager;
         _ssoLoginOverlayViewModel = ssoLoginOverlayViewModel;
@@ -274,26 +265,12 @@ public partial class SignInPageViewModel : LoginPageViewModelBase
         try
         {
             IsToShowCreateAccountSpinner = true;
-            bool isSignUpPageAccessible = await _apiAvailabilityVerifier.IsSignUpPageAccessibleAsync();
-            if (isSignUpPageAccessible)
-            {
-                await OpenCreateAccountPageAsync();
-            }
-            else
-            {
-                await _guestHoleManager.ExecuteAsync<Result>(OpenCreateAccountPageAsync);
-            }
+            await Launcher.LaunchUriAsync(new Uri(_urlsBrowser.CreateAccount));
         }
         finally
         {
             IsToShowCreateAccountSpinner = false;
         }
-    }
-
-    private async Task<Result> OpenCreateAccountPageAsync()
-    {
-        await Launcher.LaunchUriAsync(new Uri(_urlsBrowser.CreateAccount));
-        return Result.Ok();
     }
 
     protected override void OnActivated()

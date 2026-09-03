@@ -44,7 +44,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                           IsActive="False" />
 
             <pathIcons:LockOpenFilled2 x:Name="UnprotectedIcon"
-                                       Foreground="{ThemeResource SignalDangerColorBrush}"
+                                       Foreground="{ThemeResource SignalNeutralColorBrush}"
                                        Visibility="Collapsed" />
 
             <pathIcons:LockFilled x:Name="ProtectedIcon"
@@ -101,6 +101,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                         <StateTrigger IsActive="{x:Bind ViewModel.IsConnecting}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        <Setter Target="ProtectionTitle.Foreground" Value="{ThemeResource SignalWarningColorBrush}" />
                         <Setter Target="LoadingSpinner.IsActive" Value="True" />
                     </VisualState.Setters>
                 </VisualState>
@@ -110,7 +111,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                         <StateTrigger IsActive="{x:Bind ViewModel.IsDisconnected}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="ProtectionTitle.Foreground" Value="{ThemeResource SignalDangerColorBrush}" />
+                        <Setter Target="ProtectionTitle.Foreground" Value="{ThemeResource SignalNeutralColorBrush}" />
                         <Setter Target="UnprotectedIcon.Visibility" Value="Visible" />
                     </VisualState.Setters>
                 </VisualState>

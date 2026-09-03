@@ -23,7 +23,9 @@ namespace SyncVPN.Client.Logic.Services.Contracts;
 
 public interface IServiceManager
 {
+    bool IsServiceEnabled { get; }
     ServiceStatus? GetStatus();
     Task StartAsync();
+    Task<bool> EnableServiceAsync();
     void Stop();
 }

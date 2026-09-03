@@ -39,6 +39,8 @@ public class ServiceManager : IServiceManager
         _serviceEnabler = serviceEnabler;
     }
 
+    public bool IsServiceEnabled => _service.IsEnabled();
+
     public ServiceStatus? GetStatus()
     {
         return _service.GetStatus();
@@ -54,6 +56,11 @@ public class ServiceManager : IServiceManager
         await _serviceEnabler.EnableAsync(_service).ConfigureAwait(false);
 
         await _service.StartAsync(_cancellationTokenSource.Token).ConfigureAwait(false);
+    }
+
+    public Task<bool> EnableServiceAsync()
+    {
+        return _serviceEnabler.TryEnableAsync(_service);
     }
 
     public void Stop()

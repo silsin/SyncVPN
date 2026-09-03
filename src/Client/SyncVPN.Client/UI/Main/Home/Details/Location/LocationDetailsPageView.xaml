@@ -39,6 +39,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <custom:DetailRowButton Grid.Column="0"
@@ -78,6 +79,15 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
 
             <controls:ScramblingTextControl IsScrambling="{x:Bind ViewModel.IsConnecting}"
                                             Text="{x:Bind ViewModel.Isp}" />
+        </custom:DetailRowButton>
+
+        <custom:DetailRowButton Grid.Column="3"
+                                Content="{x:Bind ViewModel.Localizer.Get('Home_ConnectionDetails_FreeServers')}">
+            <custom:DetailRowButton.Flyout>
+                <Flyout>
+                    <flyouts:FreeServersFlyoutView />
+                </Flyout>
+            </custom:DetailRowButton.Flyout>
         </custom:DetailRowButton>
     </Grid>
 

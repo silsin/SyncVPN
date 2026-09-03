@@ -22,7 +22,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:banners="using:SyncVPN.Client.UI.Main.Components.Banners"
-             xmlns:card="using:SyncVPN.Client.UI.Main.Home.Card"
+             xmlns:bottombar="using:SyncVPN.Client.UI.Main.Home.BottomBar"
              xmlns:components="using:SyncVPN.Client.UI.Main.Components"
              xmlns:connection="using:SyncVPN.Client.UI.Main.Home.Details.Connection"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -30,9 +30,9 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
              xmlns:local="using:SyncVPN.Client.UI.Main.Home"
              xmlns:map="using:SyncVPN.Client.UI.Main.Map"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:searchbar="using:SyncVPN.Client.UI.Main.Home.SearchBar"
              xmlns:status="using:SyncVPN.Client.UI.Main.Home.Status"
              xmlns:update="using:SyncVPN.Client.UI.Update"
-             xmlns:widgets="using:SyncVPN.Client.UI.Main.Widgets"
              x:DefaultBindMode="OneWay"
              mc:Ignorable="d">
 
@@ -51,7 +51,6 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
             <ColumnDefinition Width="0" />
             <ColumnDefinition Width="{x:Bind SidebarWidth, Converter={StaticResource DoubleToPixelGridLengthConverter}}" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="{x:Bind WidgetsBarWidth, Converter={StaticResource DoubleToPixelGridLengthConverter}}" />
             <ColumnDefinition Width="0" />
         </Grid.ColumnDefinitions>
 
@@ -62,48 +61,65 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                            MinHeight="32" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <map:MapComponentView x:Name="MapView"
                               IsTabStop="False"
-                              Grid.RowSpan="5"
-                              Grid.ColumnSpan="5"
+                              Grid.RowSpan="6"
+                              Grid.ColumnSpan="4"
                               BottomOffset="{x:Bind MapBottomOffset}"
                               LeftOffset="{x:Bind SidebarWidth}"
-                              RightOffset="{x:Bind WidgetsBarWidth}"
                               TopOffset="{x:Bind MapTopOffset}" />
 
-        <status:ConnectionStatusGradientView Grid.Row="0"
-                                             Grid.RowSpan="4"
+        <!--  Opaque backdrop behind the (transparent, content-blended) OS title bar row,  -->
+        <!--  so it reads as a flat, solid dark bar instead of showing the map through it.  -->
+        <Border Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                Background="{ThemeResource BackgroundNormColorBrush}"
+                IsHitTestVisible="False" />
+
+        <status:ConnectionStatusGradientView Grid.Row="1"
+                                             Grid.RowSpan="3"
                                              Grid.Column="0"
-                                             Grid.ColumnSpan="5"
+                                             Grid.ColumnSpan="4"
                                              IsTabStop="False"
                                              Height="{StaticResource ConnectionStatusGradientHeight}"
                                              VerticalAlignment="Top"
                                              IsHitTestVisible="False" />
 
         <!--  Connection details background  -->
-        <Border Grid.Row="0"
-                Grid.RowSpan="4"
+        <Border Grid.Row="1"
+                Grid.RowSpan="3"
                 Grid.Column="0"
-                Grid.ColumnSpan="5"
+                Grid.ColumnSpan="4"
                 Height="{StaticResource ConnectionDetailsGradientHeight}"
                 VerticalAlignment="Bottom"
                 Background="{ThemeResource ReverseGradientFadingColorBrush}"
                 IsHitTestVisible="False" />
 
-        <!--  Banner container background  -->
+        <!--  Banner + bottom bar container background  -->
         <Border Grid.Row="4"
+                Grid.RowSpan="2"
                 Grid.Column="0"
-                Grid.ColumnSpan="5"
+                Grid.ColumnSpan="4"
                 Background="{ThemeResource ReverseStrongGradientFadingColorBrush}"
                 IsHitTestVisible="False" />
 
-        <card:ConnectionCardComponentView x:Name="ConnectionCardComponent"
-                                          Grid.Row="1"
-                                          Grid.Column="2"
-                                          MaxWidth="{StaticResource MaximumHomePageContentWidth}"
-                                          HorizontalAlignment="Center" />
+        <searchbar:HomeSearchBarComponentView x:Name="HomeSearchBarComponent"
+                                              Grid.Row="1"
+                                              Grid.Column="2"
+                                              MaxWidth="480"
+                                              Margin="0,16,0,0"
+                                              HorizontalAlignment="Center" />
+
+        <bottombar:HomeBottomBarComponentView x:Name="ConnectionCardComponent"
+                                              Grid.Row="5"
+                                              Grid.Column="1"
+                                              Grid.ColumnSpan="2"
+                                              Margin="8,0,8,16"
+                                              HorizontalAlignment="Stretch" />
 
         <components:ConnectionErrorComponent x:Name="ConnectionErrorComponent"
                                              Grid.Row="1"
@@ -114,16 +130,23 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                                              HorizontalAlignment="Center"
                                              VerticalAlignment="Top" />
 
+        <components:ServiceDisabledBannerComponent x:Name="ServiceDisabledBannerComponent"
+                                                    Grid.Row="1"
+                                                    Grid.RowSpan="4"
+                                                    Grid.Column="2"
+                                                    MaxWidth="{StaticResource MaximumHomePageContentWidth}"
+                                                    Margin="0,1,0,0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Top" />
+
         <details:DetailsComponentView x:Name="DetailsComponent"
                                       Grid.Row="3"
                                       Grid.Column="2"
-                                      Grid.ColumnSpan="2"
                                       MaxWidth="{StaticResource MaximumHomePageContentWidth}" />
 
         <StackPanel x:Name="BannersContainer"
                     Grid.Row="4"
                     Grid.Column="2"
-                    Grid.ColumnSpan="2"
                     MaxWidth="{StaticResource MaximumHomePageContentWidth}"
                     Margin="0,0,0,8"
                     HorizontalAlignment="Stretch">
@@ -148,15 +171,6 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
 
         </StackPanel>
 
-        <widgets:SideWidgetsHostComponentView x:Name="SideWidgetsHostComponent"
-                                              Grid.Row="1"
-                                              Grid.RowSpan="2"
-                                              Grid.Column="3"
-                                              Width="{x:Bind WidgetsBarWidth}"
-                                              VerticalAlignment="Top"
-                                              IsHomeDisplayed="{x:Bind IsHomeDisplayed}"
-                                              Visibility="{x:Bind IsHomeDisplayed, Converter={StaticResource BooleanToVisibilityConverter}}" />
-
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="NavigationStates">
                 <VisualState x:Name="OnHomePage">
@@ -165,6 +179,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="ConnectionCardComponent.Opacity" Value="{StaticResource FadeInOpacity}" />
+                        <Setter Target="HomeSearchBarComponent.Opacity" Value="{StaticResource FadeInOpacity}" />
                         <Setter Target="ConnectionErrorComponent.Opacity" Value="{StaticResource FadeInOpacity}" />
                         <Setter Target="MapView.Opacity" Value="{StaticResource FadeInOpacity}" />
                         <Setter Target="DetailsComponent.Opacity" Value="{StaticResource FadeInOpacity}" />
@@ -178,6 +193,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="ConnectionCardComponent.Opacity" Value="{StaticResource FadeOutOpacity}" />
+                        <Setter Target="HomeSearchBarComponent.Opacity" Value="{StaticResource FadeOutOpacity}" />
                         <Setter Target="ConnectionErrorComponent.Opacity" Value="{StaticResource FadeOutOpacity}" />
                         <Setter Target="MapView.Opacity" Value="{StaticResource FadeOutOpacity}" />
                         <Setter Target="DetailsComponent.Opacity" Value="{StaticResource FadeOutOpacity}" />
