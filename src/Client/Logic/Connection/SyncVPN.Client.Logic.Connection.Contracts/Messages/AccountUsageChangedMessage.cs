@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 Proton AG
+ * Copyright (c) 2026 Proton AG
  *
  * This file is part of SyncVPN.
  *
@@ -17,23 +17,10 @@
  * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-using SyncVPN.Client.Core.Bases;
+namespace SyncVPN.Client.Logic.Connection.Contracts.Messages;
 
-namespace SyncVPN.Client.UI.Main.Home.SearchBar;
-
-public sealed partial class HomeSearchBarComponentView : IContextAware
+// Sent by UsageReportingObserver whenever POST /account/usage returns updated running totals, so UI
+// showing account usage (e.g. the sidebar's free-plan card) can refresh without polling settings.
+public class AccountUsageChangedMessage
 {
-    public HomeSearchBarComponentViewModel ViewModel { get; }
-
-    public HomeSearchBarComponentView()
-    {
-        ViewModel = App.GetService<HomeSearchBarComponentViewModel>();
-
-        InitializeComponent();
-    }
-
-    public object GetContext()
-    {
-        return ViewModel;
-    }
 }

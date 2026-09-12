@@ -111,6 +111,16 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                             Style="{StaticResource SecondaryButtonStyle}"
                             Visibility="{x:Bind ViewModel.IsSrpFormType, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
+                    <Button HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            AutomationProperties.AutomationId="LoginWithCodeButton"
+                            AutomationProperties.Name="{x:Bind ViewModel.Localizer.Get('SignIn_Form_LoginWithCode')}"
+                            Command="{x:Bind ViewModel.NavigateToCodeLoginCommand, Mode=OneTime}"
+                            Content="{x:Bind ViewModel.Localizer.Get('SignIn_Form_LoginWithCode')}"
+                            Foreground="{ThemeResource TextNormColorBrush}"
+                            Style="{StaticResource SecondaryButtonStyle}"
+                            Visibility="{x:Bind ViewModel.IsSrpFormType, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
                 </StackPanel>
 
                 <custom:GhostButton HorizontalAlignment="Center"

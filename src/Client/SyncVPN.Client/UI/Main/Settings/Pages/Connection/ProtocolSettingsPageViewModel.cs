@@ -24,6 +24,8 @@ using SyncVPN.Client.Core.Bases;
 using SyncVPN.Client.Core.Services.Activation;
 using SyncVPN.Client.Core.Services.Navigation;
 using SyncVPN.Client.Logic.Connection.Contracts;
+using SyncVPN.Client.Logic.Connection.RequestCreators;
+using SyncVPN.Client.Services.FreeServers;
 using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.Client.Settings.Contracts.RequiredReconnections;
 using SyncVPN.Client.UI.Main.Settings.Bases;
@@ -34,6 +36,7 @@ namespace SyncVPN.Client.UI.Main.Settings.Pages.Connection;
 public partial class ProtocolSettingsPageViewModel : SettingsPageViewModelBase
 {
     private readonly IUrlsBrowser _urlsBrowser;
+    private readonly IFreeServersCache _freeServersCache;
 
     [ObservableProperty]
     [property: SettingName(nameof(ISettings.VpnProtocol))]
@@ -43,6 +46,8 @@ public partial class ProtocolSettingsPageViewModel : SettingsPageViewModelBase
     [NotifyPropertyChangedFor(nameof(IsWireGuardTlsProtocol))]
     [NotifyPropertyChangedFor(nameof(IsOpenVpnUdpProtocol))]
     [NotifyPropertyChangedFor(nameof(IsOpenVpnTcpProtocol))]
+    [NotifyPropertyChangedFor(nameof(IsL2tpProtocol))]
+    [NotifyPropertyChangedFor(nameof(IsSstpProtocol))]
     private VpnProtocol _currentVpnProtocol;
 
     public override string Title => Localizer.Get("Settings_Connection_Protocol");
@@ -85,6 +90,35 @@ public partial class ProtocolSettingsPageViewModel : SettingsPageViewModelBase
         set => SetProtocol(value, VpnProtocol.OpenVpnTcp);
     }
 
+    public bool IsL2tpProtocol
+    {
+        get => IsProtocol(VpnProtocol.L2tp);
+        set => SetProtocol(value, VpnProtocol.L2tp);
+    }
+
+    public bool IsSstpProtocol
+    {
+        get => IsProtocol(VpnProtocol.Sstp);
+        set => SetProtocol(value, VpnProtocol.Sstp);
+    }
+
+    // Smart is a client-side mode, not a wire protocol - always offered. Every other option is hidden
+    // unless at least one cached server actually advertises it (see IFreeServersCache.IsProtocolAvailable,
+    // which fails open while the catalog hasn't loaded yet, so this never renders an empty page on a
+    // cold start). WireGuardTcp/WireGuardTls have no wire protocol at all on this backend, so they're
+    // never available by this rule.
+    public bool IsWireGuardUdpProtocolAvailable => IsProtocolAvailable(VpnProtocol.WireGuardUdp);
+    public bool IsWireGuardTcpProtocolAvailable => IsProtocolAvailable(VpnProtocol.WireGuardTcp);
+    public bool IsWireGuardTlsProtocolAvailable => IsProtocolAvailable(VpnProtocol.WireGuardTls);
+    public bool IsOpenVpnUdpProtocolAvailable => IsProtocolAvailable(VpnProtocol.OpenVpnUdp);
+    public bool IsOpenVpnTcpProtocolAvailable => IsProtocolAvailable(VpnProtocol.OpenVpnTcp);
+    public bool IsL2tpProtocolAvailable => IsProtocolAvailable(VpnProtocol.L2tp);
+    public bool IsSstpProtocolAvailable => IsProtocolAvailable(VpnProtocol.Sstp);
+
+    public bool IsUdpCategoryVisible => IsWireGuardUdpProtocolAvailable || IsOpenVpnUdpProtocolAvailable;
+    public bool IsTcpCategoryVisible => IsWireGuardTcpProtocolAvailable || IsOpenVpnTcpProtocolAvailable || IsWireGuardTlsProtocolAvailable;
+    public bool IsLegacyCategoryVisible => IsL2tpProtocolAvailable || IsSstpProtocolAvailable;
+
     public string LearnMoreUrl => _urlsBrowser.ProtocolsLearnMore;
 
     public ProtocolSettingsPageViewModel(
@@ -96,6 +130,7 @@ public partial class ProtocolSettingsPageViewModel : SettingsPageViewModelBase
         ISettings settings,
         ISettingsConflictResolver settingsConflictResolver,
         IConnectionManager connectionManager,
+        IFreeServersCache freeServersCache,
         IViewModelHelper viewModelHelper)
         : base(requiredReconnectionSettings,
                mainViewNavigator,
@@ -107,6 +142,7 @@ public partial class ProtocolSettingsPageViewModel : SettingsPageViewModelBase
                viewModelHelper)
     {
         _urlsBrowser = urlsBrowser;
+        _freeServersCache = freeServersCache;
 
         PageSettings =
         [
@@ -124,6 +160,13 @@ public partial class ProtocolSettingsPageViewModel : SettingsPageViewModelBase
     protected override void OnRetrieveSettings()
     {
         CurrentVpnProtocol = Settings.VpnProtocol;
+
+        // A previously-picked protocol may no longer be offered by any cached server (catalog changed
+        // since this was last set) - fall back to Smart rather than leaving a hidden option selected.
+        if (CurrentVpnProtocol != VpnProtocol.Smart && !IsProtocolAvailable(CurrentVpnProtocol))
+        {
+            CurrentVpnProtocol = VpnProtocol.Smart;
+        }
     }
 
     private bool IsProtocol(VpnProtocol protocol)
@@ -137,5 +180,11 @@ public partial class ProtocolSettingsPageViewModel : SettingsPageViewModelBase
         {
             CurrentVpnProtocol = protocol;
         }
+    }
+
+    private bool IsProtocolAvailable(VpnProtocol protocol)
+    {
+        string? wireProtocol = SyncVpnAccountClaimMapper.MapToWireProtocol(protocol);
+        return wireProtocol is not null && _freeServersCache.IsProtocolAvailable(wireProtocol);
     }
 }

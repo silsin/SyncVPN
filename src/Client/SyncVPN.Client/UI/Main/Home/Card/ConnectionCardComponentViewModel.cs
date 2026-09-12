@@ -86,7 +86,6 @@ public partial class ConnectionCardComponentViewModel : ActivatableViewModelBase
     [NotifyPropertyChangedFor(nameof(IsConnected))]
     [NotifyPropertyChangedFor(nameof(IsFreeConnectionsTaglineVisible))]
     [NotifyPropertyChangedFor(nameof(IsChangeServerOptionVisible))]
-    [NotifyPropertyChangedFor(nameof(IsChangeDefaultConnectionOptionVisible))]
     [NotifyPropertyChangedFor(nameof(ExitCountry))]
     [NotifyPropertyChangedFor(nameof(EntryCountry))]
     [NotifyPropertyChangedFor(nameof(IsSecureCore))]
@@ -163,8 +162,6 @@ public partial class ConnectionCardComponentViewModel : ActivatableViewModelBase
     public bool IsFreeConnectionsTaglineVisible => IsFreeUser && !IsConnected;
 
     public bool IsChangeServerOptionVisible => IsFreeUser && IsConnected;
-
-    public bool IsChangeDefaultConnectionOptionVisible => !IsFreeUser && IsDisconnected;
 
     public string? ExitCountry =>
         CurrentConnectionStatus switch
@@ -411,7 +408,6 @@ public partial class ConnectionCardComponentViewModel : ActivatableViewModelBase
         OnPropertyChanged(nameof(IsFreeUser));
         OnPropertyChanged(nameof(IsFreeConnectionsTaglineVisible));
         OnPropertyChanged(nameof(IsChangeServerOptionVisible));
-        OnPropertyChanged(nameof(IsChangeDefaultConnectionOptionVisible));
     }
 
     private string GetConnectionCardTitle()

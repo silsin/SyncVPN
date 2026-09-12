@@ -23,6 +23,8 @@
         <ProjectReference Include="..\OperatingSystems\NameResolutionPolicyTable\SyncVPN.OperatingSystems.NRPT.Contracts\SyncVPN.OperatingSystems.NRPT.Contracts.csproj" />
         <ProjectReference Include="..\OperatingSystems\Network\SyncVPN.OperatingSystems.Network.Contracts\SyncVPN.OperatingSystems.Network.Contracts.csproj" />
         <ProjectReference Include="..\OperatingSystems\Processes\SyncVPN.OperatingSystems.Processes.Contracts\SyncVPN.OperatingSystems.Processes.Contracts.csproj" />
+        <ProjectReference Include="..\OperatingSystems\Ras\SyncVPN.OperatingSystems.Ras.Contracts\SyncVPN.OperatingSystems.Ras.Contracts.csproj" />
+        <ProjectReference Include="..\OperatingSystems\Ras\SyncVPN.OperatingSystems.Ras\SyncVPN.OperatingSystems.Ras.csproj" />
         <ProjectReference Include="..\OperatingSystems\Services\SyncVPN.OperatingSystems.Services.Contracts\SyncVPN.OperatingSystems.Services.Contracts.csproj" />
         <ProjectReference Include="..\SyncVPN.Common.Legacy\SyncVPN.Common.Legacy.csproj" />
         <ProjectReference Include="..\SyncVPN.WireGuardDriver\SyncVPN.WireGuardDriver.csproj" />

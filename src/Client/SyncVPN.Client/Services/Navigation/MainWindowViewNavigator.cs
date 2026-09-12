@@ -24,6 +24,7 @@ using SyncVPN.Client.Core.Services.Navigation;
 using SyncVPN.Client.Core.Services.Navigation.Bases;
 using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Logic.Auth.Contracts;
+using SyncVPN.Client.Logic.Auth.Contracts.Enums;
 using SyncVPN.Client.Logic.Auth.Contracts.Messages;
 using SyncVPN.Client.Logic.Servers.Cache;
 using SyncVPN.Client.Logic.Users.Contracts;
@@ -95,6 +96,26 @@ public class MainWindowViewNavigator : ViewNavigatorBase, IMainWindowViewNavigat
 
     public void Receive(AuthenticationStatusChanged message)
     {
+        // LoggingIn/LoggingOut are transient - reacting to them here would send whoever just pressed
+        // "Sign in" (or "Sign in with a code", or auto-login at startup) straight to Main through the
+        // IsGuestAccessEnabled fallback below, before their login attempt has even called the API and
+        // resolved. Only react once the status has actually settled.
+        if (message.AuthenticationStatus is AuthenticationStatus.LoggingIn or AuthenticationStatus.LoggingOut)
+        {
+            return;
+        }
+
+        // A settled LoggedOut while the user is still sitting on the Login flow means a login attempt
+        // they explicitly started (from Settings' "Sign in", not the guest cold-start path - that one
+        // never reaches this handler at all, see AutoLoginUserAsync's no-session branch) just failed.
+        // LoginPageViewModel.Receive(LoginStateChangedMessage) already put the error on screen and kept
+        // them on Sign-In - don't let IsGuestAccessEnabled below yank them back to Main and silently
+        // discard that error the moment they typed the wrong thing.
+        if (message.AuthenticationStatus == AuthenticationStatus.LoggedOut && GetCurrentPageContext() is LoginPageViewModel)
+        {
+            return;
+        }
+
         UIThreadDispatcher.TryEnqueue(async () =>
         {
             await NavigateToDefaultAsync();

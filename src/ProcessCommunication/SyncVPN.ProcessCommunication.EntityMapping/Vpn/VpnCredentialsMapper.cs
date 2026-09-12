@@ -47,6 +47,7 @@ public class VpnCredentialsMapper : IMapper<VpnCredentials, VpnCredentialsIpcEnt
             Username = leftEntity.Username,
             Password = leftEntity.Password,
             ProvisionedConfigText = leftEntity.ProvisionedConfigText,
+            PreSharedKey = leftEntity.PreSharedKey,
         };
     }
 
@@ -55,6 +56,14 @@ public class VpnCredentialsMapper : IMapper<VpnCredentials, VpnCredentialsIpcEnt
         if (rightEntity.ProvisionedConfigText is not null)
         {
             return VpnCredentials.FromProvisionedConfig(rightEntity.ProvisionedConfigText, rightEntity.Username, rightEntity.Password);
+        }
+
+        // L2TP/SSTP credentials carry neither a provisioned config nor a client keypair/certificate -
+        // this combination was never valid before those protocols existed, so its absence here is a
+        // reliable signal to build RAS-based credentials instead of the legacy cert/keypair ones below.
+        if (rightEntity.ClientKeyPair is null)
+        {
+            return VpnCredentials.FromRasCredentials(rightEntity.Username, rightEntity.Password, rightEntity.PreSharedKey);
         }
 
         return new(rightEntity.Certificate?.Pem,

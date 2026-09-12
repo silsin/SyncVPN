@@ -25,7 +25,6 @@ using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Mapsui;
 using Mapsui.Animations;
 using Mapsui.Extensions;
@@ -84,11 +83,14 @@ public sealed partial class MapControl
         typeof(MapControl),
         new PropertyMetadata(null, OnCurrentCountryChanged));
 
-    public static readonly DependencyProperty ConnectCommandProperty = DependencyProperty.Register(
-        nameof(ConnectCommand),
-        typeof(ICommand),
+    // The pin last tapped, kept until the caller connects (or picks a different pin) - unlike
+    // _selectedPin (a private hover-tracking field further down), this survives the pointer moving
+    // away, so a screen-level Connect button elsewhere can act on it after the tap.
+    public static readonly DependencyProperty SelectedCountryProperty = DependencyProperty.Register(
+        nameof(SelectedCountry),
+        typeof(Country),
         typeof(MapControl),
-        new PropertyMetadata(default));
+        new PropertyMetadata(null));
 
     public static readonly DependencyProperty IsConnectingProperty = DependencyProperty.Register(
         nameof(IsConnecting),
@@ -156,11 +158,17 @@ public sealed partial class MapControl
         set => SetValue(CurrentCountryProperty, value);
     }
 
-    public ICommand ConnectCommand
+    public Country? SelectedCountry
     {
-        get => (ICommand)GetValue(ConnectCommandProperty);
-        set => SetValue(ConnectCommandProperty, value);
+        get => (Country?)GetValue(SelectedCountryProperty);
+        set => SetValue(SelectedCountryProperty, value);
     }
+
+    // Fired on every pin tap, in addition to the SelectedCountry DP above - the code-behind
+    // subscribes to this directly (see MapComponentView.xaml.cs) instead of relying solely on
+    // x:Bind Mode=TwoWay against a custom DependencyProperty, so selection reliably reaches the
+    // ViewModel regardless of how that binding behaves.
+    public event EventHandler<Country>? CountrySelected;
 
     public bool IsConnecting
     {
@@ -427,6 +435,9 @@ public sealed partial class MapControl
         InvalidateCurrentCountry();
     }
 
+    // Tapping a pin selects it rather than connecting immediately - SelectedCountry is picked up by a
+    // screen-level Connect button (see MapComponentView.xaml) that the caller shows once something is
+    // selected. This used to call ConnectCommand.Execute(country) directly on tap.
     private void HandleMapClick(object? s, MapInfoEventArgs a)
     {
         if (a.MapInfo?.WorldPosition == null)
@@ -442,7 +453,8 @@ public sealed partial class MapControl
                 searchArea.Contains(point.ToMPoint()) &&
                 Countries.FirstOrDefault(c => c.Code == feature.GetCountryCode()) is Country country)
             {
-                ConnectCommand.Execute(country);
+                SelectedCountry = country;
+                CountrySelected?.Invoke(this, country);
                 break;
             }
         }

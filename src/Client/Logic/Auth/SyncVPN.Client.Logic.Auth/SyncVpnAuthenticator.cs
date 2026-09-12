@@ -102,11 +102,15 @@ public class SyncVpnAuthenticator : ISyncVpnAuthenticator
         }
 
         ApiResponseResult<AuthenticatedDeviceResponse> response = await _apiClient.GetAuthenticatedDeviceAsync(cancellationToken);
-        if (!response.Success)
+        if (!response.Success || response.Value is null)
         {
             ClearSession();
             return AuthResult.Fail(AuthError.GetSessionDetailsFailed, response.Error);
         }
+
+        // Refresh identity in case it changed server-side (name/email/phone/address edited elsewhere) -
+        // ReferralCode is deliberately left untouched here, see StoreIdentity.
+        StoreIdentity(response.Value.Data.User, includeReferralCode: false);
 
         return AuthResult.Ok();
     }
@@ -152,11 +156,33 @@ public class SyncVpnAuthenticator : ISyncVpnAuthenticator
     private void StoreSession(LoginResponse login)
     {
         _settings.SyncVpnDeviceToken = login.Data.Token;
+        StoreIdentity(login.Data.User, includeReferralCode: true);
+    }
+
+    // ReferralCode is only ever populated from a login response - the API contract only documents it as
+    // "always present" there, not on GET /auth/me, so ValidateSessionAsync's refresh leaves it alone
+    // rather than risking silently blanking a real code out with an absent/empty field.
+    private void StoreIdentity(User user, bool includeReferralCode)
+    {
+        _settings.SyncVpnUserName = user.Name;
+        _settings.SyncVpnUserEmail = user.Email;
+        _settings.SyncVpnUserPhone = user.Phone;
+        _settings.SyncVpnUserAddress = user.Address;
+
+        if (includeReferralCode)
+        {
+            _settings.SyncVpnReferralCode = user.ReferralCode;
+        }
     }
 
     private void ClearSession()
     {
         _settings.SyncVpnDeviceToken = null;
+        _settings.SyncVpnUserName = null;
+        _settings.SyncVpnUserEmail = null;
+        _settings.SyncVpnUserPhone = null;
+        _settings.SyncVpnUserAddress = null;
+        _settings.SyncVpnReferralCode = null;
     }
 
     private static string ToPlainString(SecureString secureString)

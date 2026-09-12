@@ -87,6 +87,12 @@ public class PurchasedAccount
     [JsonProperty("openvpn")]
     public OpenVpnConnectionInfo? OpenVpn { get; set; }
 
+    [JsonProperty("l2tp")]
+    public L2tpConnectionInfo? L2tp { get; set; }
+
+    [JsonProperty("sstp")]
+    public SstpConnectionInfo? Sstp { get; set; }
+
     [JsonProperty("expires_at")]
     public DateTimeOffset? ExpiresAt { get; set; }
 

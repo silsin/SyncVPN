@@ -64,15 +64,25 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                         ShouldConstrainToRootBounds="True">
                 <MenuFlyoutItem Command="{x:Bind ViewModel.OpenMyAccountUrlCommand, Mode=OneTime}"
                                         Style="{StaticResource HyperlinkMenuFlyoutItemStyle}"
-                                        Text="{x:Bind ViewModel.Localizer.Get('Settings_Account_Account')}">
+                                        Text="{x:Bind ViewModel.Localizer.Get('Settings_Account_Account')}"
+                                        Visibility="{x:Bind ViewModel.IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <MenuFlyoutItem.Icon>
                         <pathicons:User />
                     </MenuFlyoutItem.Icon>
                 </MenuFlyoutItem>
+                <!--  Guest devices (no real account) have nothing to sign out of - this becomes "Sign in" instead.  -->
                 <MenuFlyoutItem Command="{x:Bind ViewModel.SignOutCommand, Mode=OneTime}"
-                                        Text="{x:Bind ViewModel.Localizer.Get('Settings_Account_SignOut')}">
+                                        Text="{x:Bind ViewModel.Localizer.Get('Settings_Account_SignOut')}"
+                                        Visibility="{x:Bind ViewModel.IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <MenuFlyoutItem.Icon>
                         <pathicons:ArrowOutFromRectangle />
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+                <MenuFlyoutItem Command="{x:Bind ViewModel.SignInCommand, Mode=OneTime}"
+                                        Text="{x:Bind ViewModel.Localizer.Get('Settings_Account_SignIn')}"
+                                        Visibility="{x:Bind ViewModel.IsLoggedIn, Converter={StaticResource NotBooleanToVisibilityConverter}}">
+                    <MenuFlyoutItem.Icon>
+                        <pathicons:ArrowInToRectangle />
                     </MenuFlyoutItem.Icon>
                 </MenuFlyoutItem>
                 <MenuFlyoutItem Command="{x:Bind ViewModel.ExitApplicationCommand, Mode=OneTime}"

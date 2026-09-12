@@ -46,6 +46,22 @@ public readonly struct VpnCredentials
         Username = username;
         Password = password;
         ProvisionedConfigText = provisionedConfigText;
+        PreSharedKey = null;
+    }
+
+    // L2TP/SSTP credentials: PPP username/password (+ IPsec pre-shared key for L2TP) dialed through
+    // Windows RAS - unlike the WireGuard/OpenVpn paths above, there is neither a client keypair/
+    // certificate nor a provisioned config text to fall back on, so this bypasses that constructor's
+    // "one of the two must be present" requirement entirely.
+    private VpnCredentials(string username, string password, string preSharedKey)
+    {
+        ClientCertPem = string.Empty;
+        ClientCertificateExpirationDateUtc = null;
+        ClientKeyPair = null;
+        Username = username;
+        Password = password;
+        ProvisionedConfigText = null;
+        PreSharedKey = preSharedKey;
     }
 
     public VpnCredentials(AsymmetricKeyPair clientKeyPair) : this(string.Empty, null, clientKeyPair, string.Empty, string.Empty)
@@ -64,6 +80,13 @@ public readonly struct VpnCredentials
         return new VpnCredentials(string.Empty, null, null, username, password, provisionedConfigText);
     }
 
+    // L2TP/SSTP account claimed from the new SyncVPN backend's POST /account. preSharedKey is set
+    // for L2TP (IPsec PSK) and left null for SSTP, which has no equivalent.
+    public static VpnCredentials FromRasCredentials(string username, string password, string preSharedKey = null)
+    {
+        return new VpnCredentials(username, password, preSharedKey);
+    }
+
     public string Username { get; }
     public string Password { get; }
 
@@ -71,4 +94,5 @@ public readonly struct VpnCredentials
     public DateTime? ClientCertificateExpirationDateUtc { get; }
     public AsymmetricKeyPair ClientKeyPair { get; }
     public string ProvisionedConfigText { get; }
+    public string PreSharedKey { get; }
 }

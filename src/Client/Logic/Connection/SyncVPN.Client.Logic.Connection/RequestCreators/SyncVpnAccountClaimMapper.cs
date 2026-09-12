@@ -43,10 +43,49 @@ public static class SyncVpnAccountClaimMapper
                     return (SyncVpnProtocols.OpenVpn, SyncVpnTransports.Udp);
                 case VpnProtocol.OpenVpnTcp:
                     return (SyncVpnProtocols.OpenVpn, SyncVpnTransports.Tcp);
+                case VpnProtocol.L2tp:
+                    return (SyncVpnProtocols.L2tp, null);
+                case VpnProtocol.Sstp:
+                    return (SyncVpnProtocols.Sstp, null);
             }
         }
 
         return (SyncVpnProtocols.OpenVpn, SyncVpnTransports.Tcp);
+    }
+
+    // Given a specific server's advertised protocols, picks what it will actually be claimed with:
+    // the user's global preference if that server supports it, otherwise the same
+    // WireGuard-if-present-else-first fallback used when claiming without a specific server in mind.
+    // Unlike ResolveClaimProtocol, this never fails to return something usable - every server has at
+    // least one protocol - and it's honest about the result rather than a preference the caller must
+    // trust blindly, so UI can show the caller what will actually happen.
+    public static string ResolveServerProtocol(VpnProtocol preferredProtocol, IReadOnlyList<string> serverProtocols)
+    {
+        string? preferredWireProtocol = MapToWireProtocol(preferredProtocol);
+        if (preferredWireProtocol is not null && serverProtocols.Contains(preferredWireProtocol))
+        {
+            return preferredWireProtocol;
+        }
+
+        return serverProtocols.Contains(SyncVpnProtocols.WireGuard)
+            ? SyncVpnProtocols.WireGuard
+            : serverProtocols.FirstOrDefault() ?? SyncVpnProtocols.WireGuard;
+    }
+
+    // Smart has no single wire protocol (it's a client-side auto-selection mode), and WireGuardTcp/
+    // WireGuardTls have no equivalent on this backend at all (see ResolveClaimProtocol) - null for all
+    // three. Also used by Settings/profile protocol pickers to decide whether a given VpnProtocol
+    // value corresponds to something the backend can actually offer at all.
+    public static string? MapToWireProtocol(VpnProtocol protocol)
+    {
+        return protocol switch
+        {
+            VpnProtocol.WireGuardUdp => SyncVpnProtocols.WireGuard,
+            VpnProtocol.OpenVpnUdp or VpnProtocol.OpenVpnTcp => SyncVpnProtocols.OpenVpn,
+            VpnProtocol.L2tp => SyncVpnProtocols.L2tp,
+            VpnProtocol.Sstp => SyncVpnProtocols.Sstp,
+            _ => null,
+        };
     }
 
     public static VpnServerIpcEntity[] BuildClaimedServer(PurchasedAccount account)
@@ -78,10 +117,50 @@ public static class SyncVpnAccountClaimMapper
 
     public static VpnCredentialsIpcEntity BuildClaimedCredentials(PurchasedAccount account)
     {
-        string? configText = account.Protocol == SyncVpnProtocols.WireGuard
-            ? account.WireGuard?.Configuration
-            : account.OpenVpn?.Configuration;
+        switch (account.Protocol)
+        {
+            case SyncVpnProtocols.WireGuard:
+                return BuildProvisionedConfigCredentials(account.WireGuard?.Configuration, account.Username, account.Password);
+            case SyncVpnProtocols.OpenVpn:
+                return BuildProvisionedConfigCredentials(account.OpenVpn?.Configuration, account.OpenVpn?.Username ?? account.Username,
+                    account.OpenVpn?.Password ?? account.Password);
+            case SyncVpnProtocols.L2tp:
+                if (account.L2tp is null)
+                {
+                    throw new InvalidOperationException("Claimed SyncVPN account has no L2TP connection details.");
+                }
 
+                return new VpnCredentialsIpcEntity
+                {
+                    Certificate = null,
+                    ClientKeyPair = null,
+                    Username = account.L2tp.Username,
+                    Password = account.L2tp.Password,
+                    ProvisionedConfigText = null,
+                    PreSharedKey = account.L2tp.Secret,
+                };
+            case SyncVpnProtocols.Sstp:
+                if (account.Sstp is null)
+                {
+                    throw new InvalidOperationException("Claimed SyncVPN account has no SSTP connection details.");
+                }
+
+                return new VpnCredentialsIpcEntity
+                {
+                    Certificate = null,
+                    ClientKeyPair = null,
+                    Username = account.Sstp.Username,
+                    Password = account.Sstp.Password,
+                    ProvisionedConfigText = null,
+                    PreSharedKey = null,
+                };
+            default:
+                throw new InvalidOperationException($"Claimed SyncVPN account has an unsupported protocol '{account.Protocol}'.");
+        }
+    }
+
+    private static VpnCredentialsIpcEntity BuildProvisionedConfigCredentials(string? configText, string username, string password)
+    {
         if (string.IsNullOrEmpty(configText))
         {
             throw new InvalidOperationException("Claimed SyncVPN account has no usable connection config.");
@@ -91,8 +170,8 @@ public static class SyncVpnAccountClaimMapper
         {
             Certificate = null,
             ClientKeyPair = null,
-            Username = account.OpenVpn?.Username ?? account.Username,
-            Password = account.OpenVpn?.Password ?? account.Password,
+            Username = username,
+            Password = password,
             ProvisionedConfigText = configText,
         };
     }

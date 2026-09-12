@@ -53,6 +53,7 @@ public class PageViewMapper : ViewMapperBase<PageViewModelBase, Page>, IPageView
         ConfigureMapping<LoginPageViewModel, LoginPageView>();
         ConfigureMapping<SignInPageViewModel, SignInPageView>();
         ConfigureMapping<TwoFactorPageViewModel, TwoFactorPageView>();
+        ConfigureMapping<CodeLoginPageViewModel, CodeLoginPageView>();
         ConfigureMapping<LoadingPageViewModel, LoadingPageView>();
 
         ConfigureMapping<MainPageViewModel, MainPageView>();

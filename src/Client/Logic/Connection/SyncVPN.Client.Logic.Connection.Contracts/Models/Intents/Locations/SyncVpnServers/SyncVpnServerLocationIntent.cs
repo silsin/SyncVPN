@@ -33,14 +33,17 @@ public class SyncVpnServerLocationIntent : LocationIntentBase
     public string Protocol { get; }
     public string? Transport { get; }
 
-    public override bool IsForPaidUsersOnly => false;
+    // False for free servers, true for Pro-only ones - defaults to false since the only two call
+    // sites that predate this parameter (the free-server map pin and row) always target free servers.
+    public override bool IsForPaidUsersOnly { get; }
 
-    public SyncVpnServerLocationIntent(long serverId, string serverName, string protocol, string? transport = null)
+    public SyncVpnServerLocationIntent(long serverId, string serverName, string protocol, string? transport = null, bool isForPaidUsersOnly = false)
     {
         ServerId = serverId;
         ServerName = serverName;
         Protocol = protocol;
         Transport = transport;
+        IsForPaidUsersOnly = isForPaidUsersOnly;
     }
 
     public override bool IsSameAs(ILocationIntent? intent)

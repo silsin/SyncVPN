@@ -42,6 +42,10 @@ public class ProtocolItem : ModelBase
 
     public bool IsOpenVpnTcpProtocol => Protocol == VpnProtocol.OpenVpnTcp;
 
+    public bool IsL2tpProtocol => Protocol == VpnProtocol.L2tp;
+
+    public bool IsSstpProtocol => Protocol == VpnProtocol.Sstp;
+
     public ProtocolItem(
         ILocalizationProvider localizer,
         VpnProtocol vpnProtocol)

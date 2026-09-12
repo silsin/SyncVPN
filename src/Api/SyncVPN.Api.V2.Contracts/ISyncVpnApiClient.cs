@@ -59,6 +59,8 @@ public interface ISyncVpnApiClient
 
     Task<ApiResponseResult<ClaimAccountResponse>> ClaimAccountByCityAsync(ClaimAccountByCityRequest request, CancellationToken cancellationToken = default);
 
+    Task<ApiResponseResult<UsageReportResponse>> ReportUsageAsync(UsageReportRequest request, CancellationToken cancellationToken = default);
+
     Task<ApiResponseResult<AccountDnsFilterResponse>> GetDnsFiltersAsync(CancellationToken cancellationToken = default);
 
     Task<ApiResponseResult<UpdateAccountDnsFiltersResponse>> UpdateDnsFiltersAsync(DnsFilterPatch patch, CancellationToken cancellationToken = default);

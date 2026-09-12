@@ -21,7 +21,6 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
 <Page x:Class="SyncVPN.Client.UI.Main.Sidebar.Connections.ConnectionsPageView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:bases="using:SyncVPN.Client.UI.Main.Sidebar.Connections.Bases.Contracts"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:SyncVPN.Client.UI.Main.Sidebar.Connections"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -29,83 +28,14 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
       AutomationProperties.AutomationId="ConnectionsPage"
       AutomationProperties.Name="{x:Bind ViewModel.Localizer.Get('Automation_Properties_Sidebar_Connections_Page')}"
       NavigationCacheMode="Required"
+      Background="{ThemeResource BackgroundNormColorBrush}"
       mc:Ignorable="d">
 
-    <Page.Resources>
-
-        <DataTemplate x:Key="ConnectionPageItemTemplate"
-                      x:DataType="bases:IConnectionPage">
-            <ListViewItem Padding="16,0"
-                          HorizontalAlignment="Left"
-                          AutomationProperties.AutomationControlType="ListItem"
-                          AutomationProperties.AutomationId="ConnectionsPageItem"
-                          AutomationProperties.Name="{x:Bind Header}"
-                          IsSelected="{x:Bind IsActivePage}"
-                          Visibility="{x:Bind IsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Grid ColumnSpacing="8">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <ContentControl Grid.Column="0"
-                                    IsTabStop="False"
-                                    Margin="-2,0,0,1"
-                                    VerticalAlignment="Center"
-                                    Content="{x:Bind Icon, Mode=OneTime}" />
-                    <TextBlock Grid.Column="1"
-                               VerticalAlignment="Center"
-                               Text="{x:Bind Header}" />
-                </Grid>
-            </ListViewItem>
-        </DataTemplate>
-
-        <DataTemplate x:Key="ShortcutItemTemplate"
-                      x:DataType="bases:IConnectionPage">
-            <Border Height="{ThemeResource ListViewItemMinHeight}"
-                    Visibility="{x:Bind IsAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <TextBlock VerticalAlignment="Center"
-                       Foreground="{ThemeResource TextHintColorBrush}"
-                       Style="{StaticResource CaptionTextBlockStyle}"
-                       Text="{x:Bind ShortcutText, Mode=OneTime}" />
-            </Border>
-
-        </DataTemplate>
-
-    </Page.Resources>
-
-    <Grid RowSpacing="16"
-          ColumnSpacing="8">
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
-
-        <ItemsControl Grid.Row="0"
-                      IsTabStop="False"
-                      Grid.Column="1"
-                      ItemTemplate="{StaticResource ShortcutItemTemplate}"
-                      ItemsSource="{x:Bind ViewModel.ConnectionPages, Mode=OneTime}" 
-                      IsHitTestVisible="False"/>
-
-        <ListView x:Name="ConnectionsPagesList"
-                  Grid.Row="0"
-                  Grid.Column="0"
-                  AutomationProperties.AutomationControlType="List"
-                  AutomationProperties.AutomationId="ConnectionsPagesList"
-                  ItemTemplate="{StaticResource ConnectionPageItemTemplate}"
-                  ItemsSource="{x:Bind ViewModel.ConnectionPages, Mode=OneTime}"
-                  SelectedItem="{x:Bind ViewModel.SelectedConnectionPage, Mode=TwoWay}" />
+    <Grid Background="{ThemeResource BackgroundNormColorBrush}">
 
         <Frame x:Name="ConnectionsNavigationFrame"
-               Grid.Row="1"
-               Grid.Column="0"
-               Grid.ColumnSpan="2"
                IsNavigationStackEnabled="{x:Bind Navigator.IsNavigationStackEnabled}" />
+
     </Grid>
 
 </Page>

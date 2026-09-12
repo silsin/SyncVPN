@@ -31,17 +31,21 @@ public class VpnProtocolDimensionMapper : DimensionMapperBase, IVpnProtocolDimen
     private const string WIREGUARD_UDP = "wireguard_udp";
     private const string WIREGUARD_TCP = "wireguard_tcp";
     private const string WIREGUARD_TLS = "wireguard_tls";
+    private const string L2TP = "l2tp";
+    private const string SSTP = "sstp";
 
     public string Map(VpnProtocol? protocol)
     {
         return protocol switch
         {
-            VpnProtocol.Smart => SMART, 
+            VpnProtocol.Smart => SMART,
             VpnProtocol.OpenVpnUdp => OPENVPN_UDP,
             VpnProtocol.OpenVpnTcp => OPENVPN_TCP,
             VpnProtocol.WireGuardUdp => WIREGUARD_UDP,
             VpnProtocol.WireGuardTcp => WIREGUARD_TCP,
             VpnProtocol.WireGuardTls => WIREGUARD_TLS,
+            VpnProtocol.L2tp => L2TP,
+            VpnProtocol.Sstp => SSTP,
             _ => NOT_AVAILABLE
         };
     }

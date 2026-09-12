@@ -21,6 +21,9 @@ using SyncVPN.Api.BackendSelection;
 using SyncVPN.Api.Contracts;
 using SyncVPN.Api.V2.Contracts;
 using SyncVPN.Api.V2.Contracts.Account;
+using SyncVPN.Api.V2.Contracts.Servers;
+using SyncVPN.Client.Contracts.Messages;
+using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Logic.Auth.Contracts;
 using SyncVPN.Client.Logic.Auth.Contracts.Models;
 using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents;
@@ -52,6 +55,7 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
     private readonly IConnectionCertificateManager _connectionCertificateManager;
     private readonly IBackendModeProvider _backendModeProvider;
     private readonly ISyncVpnApiClient _syncVpnApiClient;
+    private readonly IEventMessageSender _eventMessageSender;
     private readonly Lazy<IUserAuthenticator> _userAuthenticator;
 
     public ConnectionRequestCreator(
@@ -66,6 +70,7 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
         IMainSettingsRequestCreator mainSettingsRequestCreator,
         IBackendModeProvider backendModeProvider,
         ISyncVpnApiClient syncVpnApiClient,
+        IEventMessageSender eventMessageSender,
         Lazy<IUserAuthenticator> userAuthenticator)
         : base(logger, settings, entityMapper, featureFlagsObserver, mainSettingsRequestCreator)
     {
@@ -76,6 +81,7 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
         _connectionCertificateManager = connectionCertificateManager;
         _backendModeProvider = backendModeProvider;
         _syncVpnApiClient = syncVpnApiClient;
+        _eventMessageSender = eventMessageSender;
         _userAuthenticator = userAuthenticator;
     }
 
@@ -96,8 +102,9 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
         VpnConfigIpcEntity config = GetVpnConfig(settings, connectionIntent);
         List<VpnProtocol> preferredProtocols = EntityMapper.Map<VpnProtocolIpcEntity, VpnProtocol>(config.PreferredProtocols);
         ServerListResult serverListResult = GetServerListResult(connectionIntent, preferredProtocols);
-        (VpnServerIpcEntity[] servers, VpnCredentialsIpcEntity credentials) =
+        (VpnServerIpcEntity[] servers, VpnCredentialsIpcEntity credentials, int? sstpPort) =
             await ResolveServersAndCredentialsAsync(connectionIntent, serverListResult.PhysicalServers, preferredProtocols);
+        ApplyClaimedSstpPort(config, sstpPort);
         bool areAllServersExcluded = servers.Length == 0 && serverListResult.Diagnostic.AreAllCandidatesExcluded;
 
         ConnectionRequestIpcEntity request = new()
@@ -118,7 +125,7 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
     // servers/credentials come from two independent sources (the cached server catalog + a certificate
     // request). On the new SyncVPN backend, a single POST /account call returns both at once for a
     // chosen candidate server - see the migration plan's VpnProvisioning phase.
-    protected async Task<(VpnServerIpcEntity[] Servers, VpnCredentialsIpcEntity Credentials)> ResolveServersAndCredentialsAsync(
+    protected async Task<(VpnServerIpcEntity[] Servers, VpnCredentialsIpcEntity Credentials, int? SstpPort)> ResolveServersAndCredentialsAsync(
         IConnectionIntent connectionIntent, IReadOnlyList<PhysicalServer> candidates, IList<VpnProtocol> preferredProtocols)
     {
         // A specific new-backend server was already chosen (e.g. from the Free Servers list) - claim
@@ -134,10 +141,21 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
             return await ClaimAccountAsync(candidates, preferredProtocols);
         }
 
-        return (PhysicalServersToVpnServerIpcEntities(candidates), await GetVpnCredentialsAsync());
+        return (PhysicalServersToVpnServerIpcEntities(candidates), await GetVpnCredentialsAsync(), null);
     }
 
-    private async Task<(VpnServerIpcEntity[] Servers, VpnCredentialsIpcEntity Credentials)> ClaimAccountAsync(
+    // The SSTP port is chosen server-side per claim (one of the server's three configured ports) and
+    // has no equivalent client Settings entry - GetVpnConfig builds Ports from Settings before the
+    // claim response is known, so the caller patches it in afterwards using this.
+    protected static void ApplyClaimedSstpPort(VpnConfigIpcEntity config, int? sstpPort)
+    {
+        if (sstpPort is not null)
+        {
+            config.Ports[VpnProtocolIpcEntity.Sstp] = [sstpPort.Value];
+        }
+    }
+
+    private async Task<(VpnServerIpcEntity[] Servers, VpnCredentialsIpcEntity Credentials, int? SstpPort)> ClaimAccountAsync(
         SyncVpnServerLocationIntent intent)
     {
         ApiResponseResult<ClaimAccountResponse> response = await _syncVpnApiClient.ClaimAccountAsync(
@@ -149,12 +167,21 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
         }
 
         PurchasedAccount account = response.Value.Data.Account;
-        return (SyncVpnAccountClaimMapper.BuildClaimedServer(account), SyncVpnAccountClaimMapper.BuildClaimedCredentials(account));
+        return (SyncVpnAccountClaimMapper.BuildClaimedServer(account), SyncVpnAccountClaimMapper.BuildClaimedCredentials(account), account.Sstp?.Port);
     }
 
-    private async Task<(VpnServerIpcEntity[] Servers, VpnCredentialsIpcEntity Credentials)> ClaimAccountAsync(
+    private async Task<(VpnServerIpcEntity[] Servers, VpnCredentialsIpcEntity Credentials, int? SstpPort)> ClaimAccountAsync(
         IReadOnlyList<PhysicalServer> candidates, IList<VpnProtocol> preferredProtocols)
     {
+        // A guest device (no Proton account/session) never has any legacy candidates - Countries,
+        // "Fastest server", etc. all resolve through the old Server cache, which is always empty here.
+        // Rather than crash the connect attempt, fall back to claiming a new-backend free server
+        // directly, same as clicking a specific free-server row already does.
+        if (candidates.Count == 0 && !_userAuthenticator.Value.IsLoggedIn)
+        {
+            return await ClaimFreeServerAsync();
+        }
+
         if (candidates.Count == 0 || !long.TryParse(candidates[0].Id, out long serverId))
         {
             throw new InvalidOperationException("Cannot claim a SyncVPN account: no candidate server available.");
@@ -171,7 +198,45 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
         }
 
         PurchasedAccount account = response.Value.Data.Account;
-        return (SyncVpnAccountClaimMapper.BuildClaimedServer(account), SyncVpnAccountClaimMapper.BuildClaimedCredentials(account));
+        return (SyncVpnAccountClaimMapper.BuildClaimedServer(account), SyncVpnAccountClaimMapper.BuildClaimedCredentials(account), account.Sstp?.Port);
+    }
+
+    private async Task<(VpnServerIpcEntity[] Servers, VpnCredentialsIpcEntity Credentials, int? SstpPort)> ClaimFreeServerAsync()
+    {
+        ApiResponseResult<ServerListResponse> serversResponse = await _syncVpnApiClient.GetServersAsync();
+        ServerListItem? server = serversResponse.Value?.Data.FirstOrDefault();
+
+        if (serversResponse.Failure || server is null)
+        {
+            throw new InvalidOperationException("Cannot claim a SyncVPN account: no free server available.");
+        }
+
+        // Unlike a specific free-server row/pin click, this generic "fastest server" path has no server
+        // chosen ahead of time to pan the map to - do it here, now that one has actually been picked.
+        if (server.Location != null)
+        {
+            _eventMessageSender.Send(new MapLocationSelectedMessage
+            {
+                Latitude = server.Location.Lat,
+                Longitude = server.Location.Long,
+                CountryCode = server.Country.ShortName
+            });
+        }
+
+        string protocol = server.Protocols.Contains(SyncVpnProtocols.WireGuard)
+            ? SyncVpnProtocols.WireGuard
+            : server.Protocols.FirstOrDefault() ?? SyncVpnProtocols.WireGuard;
+
+        ApiResponseResult<ClaimAccountResponse> response = await _syncVpnApiClient.ClaimAccountAsync(
+            new ClaimAccountRequest { ServerId = server.Id, Protocol = protocol });
+
+        if (response.Failure || response.Value is null)
+        {
+            throw new InvalidOperationException($"Failed to claim a SyncVPN account: {response.Error}");
+        }
+
+        PurchasedAccount account = response.Value.Data.Account;
+        return (SyncVpnAccountClaimMapper.BuildClaimedServer(account), SyncVpnAccountClaimMapper.BuildClaimedCredentials(account), account.Sstp?.Port);
     }
 
     protected ServerListResult GetServerListResult(IConnectionIntent connectionIntent, IList<VpnProtocol> preferredProtocols)

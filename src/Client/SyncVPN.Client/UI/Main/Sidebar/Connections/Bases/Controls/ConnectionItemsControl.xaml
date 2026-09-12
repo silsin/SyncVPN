@@ -82,15 +82,32 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                                     Foreground="{ThemeResource TextWeakColorBrush}"
                                     Visibility="{Binding Content, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource NotNullToVisibilityConverter}}" />
 
-                    <TextBlock Grid.Column="1"
-                               AutomationProperties.AutomationId="ConnectionItemsHeader"
-                               VerticalAlignment="Center"
-                               IsTabStop="False"
-                               Foreground="{ThemeResource TextWeakColorBrush}"
-                               Style="{StaticResource BodyTextBlockStyle}"
-                               Text="{x:Bind Header}"
-                               TextTrimming="CharacterEllipsis"
-                               TextWrapping="NoWrap" />
+                    <StackPanel Grid.Column="1"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                Spacing="8">
+
+                        <TextBlock AutomationProperties.AutomationId="ConnectionItemsHeader"
+                                   VerticalAlignment="Center"
+                                   IsTabStop="False"
+                                   Foreground="{x:Bind IsFreeServersGroup, Converter={StaticResource BooleanToVpnGreenForegroundConverter}}"
+                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   Text="{x:Bind Header}"
+                                   TextTrimming="CharacterEllipsis"
+                                   TextWrapping="NoWrap" />
+
+                        <Border Background="#332563EB"
+                                CornerRadius="4"
+                                Padding="6,2"
+                                VerticalAlignment="Center"
+                                Visibility="{x:Bind IsPremiumLocationsGroup, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <TextBlock Style="{StaticResource CaptionTextBlockStyle}"
+                                       Foreground="#A78BFA"
+                                       FontWeight="SemiBold"
+                                       Text="{x:Bind Localizer.Get('Countries_PremiumBadge')}" />
+                        </Border>
+
+                    </StackPanel>
 
                     <custom:GhostButton Grid.Column="2"
                                         Margin="8,0,0,0"
@@ -464,6 +481,182 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
 
         </DataTemplate>
 
+        <Style x:Key="SyncVpnServerRowButtonStyle"
+              TargetType="Button">
+            <Setter Property="Padding" Value="14,12" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="{ThemeResource BackgroundWeakColorBrush}" />
+            <Setter Property="BorderBrush" Value="{ThemeResource BorderWeakColorBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="14" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="RowBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}">
+                            <ContentPresenter Padding="{TemplateBinding Padding}"
+                                              Content="{TemplateBinding Content}"
+                                              HorizontalContentAlignment="Stretch" />
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="PointerOver">
+                                        <VisualState.Setters>
+                                            <Setter Target="RowBorder.Background" Value="{ThemeResource BackgroundStrongColorBrush}" />
+                                            <Setter Target="RowBorder.BorderBrush" Value="{ThemeResource BorderFocusColorBrush}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Target="RowBorder.Background" Value="{ThemeResource BackgroundStrongColorBrush}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="SyncVpnServerLocationItemTemplate"
+                      x:DataType="countries:SyncVpnServerLocationItem">
+
+            <!--  Two-layer card: the Button IS the whole clickable row (SelectCommand only pans the map to  -->
+            <!--  this server - the screen-level Connect button on the Home page is what actually connects),  -->
+            <!--  and a hit-test-invisible green accent border is layered on top only while this is the live  -->
+            <!--  connection, so the row itself never needs a second, competing "connect" affordance.  -->
+            <Grid Margin="0,3">
+
+                <Button Style="{StaticResource SyncVpnServerRowButtonStyle}"
+                       AutomationProperties.Name="{x:Bind Header}"
+                       Command="{x:Bind SelectCommand, Mode=OneTime}"
+                       Opacity="{x:Bind IsRestricted, Converter={StaticResource BooleanToReducedOpacityConverter}}"
+                       ToolTipService.ToolTip="{x:Bind ToolTip}">
+
+                    <Grid ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0"
+                               Width="40"
+                               Height="40"
+                               BorderThickness="1"
+                               BorderBrush="{ThemeResource BorderWeakColorBrush}"
+                               CornerRadius="20">
+                            <custom:SimpleCountryFlag Width="24"
+                                                      CountryCode="{x:Bind CountryCode}"
+                                                      FlagType="Country" />
+                        </Border>
+
+                        <StackPanel Grid.Column="1"
+                                   VerticalAlignment="Center"
+                                   Spacing="3">
+
+                            <StackPanel Orientation="Horizontal"
+                                       Spacing="6">
+                                <TextBlock Style="{StaticResource BodyMediumStrongTextBlockStyle}"
+                                          Text="{x:Bind Header}"
+                                          TextTrimming="CharacterEllipsis"
+                                          TextWrapping="NoWrap" />
+                                <icons:ActiveDot Width="9"
+                                                 Height="9"
+                                                 VerticalAlignment="Center"
+                                                 Visibility="{x:Bind IsActiveConnection, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                <pathicons:Wrench VerticalAlignment="Center"
+                                                  Foreground="{ThemeResource TextWeakColorBrush}"
+                                                  Size="Pixels16"
+                                                  Visibility="{x:Bind IsUnderMaintenance, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </StackPanel>
+
+                            <TextBlock Foreground="{ThemeResource TextWeakColorBrush}"
+                                      Style="{StaticResource CaptionTextBlockStyle}"
+                                      Text="{x:Bind Description}"
+                                      TextTrimming="CharacterEllipsis"
+                                      TextWrapping="NoWrap"
+                                      Visibility="{x:Bind IsDescriptionVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                        </StackPanel>
+
+                        <!--  Either a Premium/lock badge for Pro-tier rows or a live ping/signal readout for free  -->
+                        <!--  ones. ProtocolLabel (what this row will actually connect with) is intentionally not  -->
+                        <!--  shown here per user request - it's still computed on the model for other call sites.  -->
+                        <StackPanel Grid.Column="2"
+                                   VerticalAlignment="Center"
+                                   Orientation="Horizontal"
+                                   Spacing="10">
+
+                            <StackPanel Orientation="Horizontal"
+                                       Spacing="6"
+                                       Visibility="{x:Bind IsPro, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <pathicons:LockFilled VerticalAlignment="Center"
+                                                      Foreground="#A78BFA"
+                                                      Size="Pixels16" />
+                                <TextBlock VerticalAlignment="Center"
+                                          FontWeight="SemiBold"
+                                          Foreground="#A78BFA"
+                                          Style="{StaticResource CaptionTextBlockStyle}"
+                                          Text="{x:Bind Localizer.Get('Countries_PremiumLocation_Label')}" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"
+                                       Spacing="8"
+                                       Visibility="{x:Bind IsPro, Converter={StaticResource NotBooleanToVisibilityConverter}}">
+
+                                <TextBlock VerticalAlignment="Center"
+                                          Style="{StaticResource BodyMediumStrongTextBlockStyle}"
+                                          Foreground="{ThemeResource VpnGreenColorBrush}"
+                                          Text="{x:Bind PingText}" />
+
+                                <StackPanel VerticalAlignment="Center"
+                                           Orientation="Horizontal"
+                                           Spacing="2">
+                                    <Border Width="3"
+                                           Height="6"
+                                           VerticalAlignment="Bottom"
+                                           Background="{ThemeResource VpnGreenColorBrush}"
+                                           CornerRadius="1" />
+                                    <Border Width="3"
+                                           Height="9"
+                                           VerticalAlignment="Bottom"
+                                           Background="{ThemeResource VpnGreenColorBrush}"
+                                           CornerRadius="1" />
+                                    <Border Width="3"
+                                           Height="12"
+                                           VerticalAlignment="Bottom"
+                                           Background="{ThemeResource VpnGreenColorBrush}"
+                                           CornerRadius="1" />
+                                    <Border Width="3"
+                                           Height="15"
+                                           VerticalAlignment="Bottom"
+                                           Background="{ThemeResource VpnGreenColorBrush}"
+                                           CornerRadius="1" />
+                                </StackPanel>
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </Grid>
+
+                </Button>
+
+                <Border BorderThickness="1.5"
+                       CornerRadius="14"
+                       BorderBrush="{ThemeResource VpnGreenColorBrush}"
+                       IsHitTestVisible="False"
+                       Visibility="{x:Bind IsActiveConnection, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+            </Grid>
+
+        </DataTemplate>
+
         <DataTemplate x:Key="GenericGatewayLocationItemTemplate"
                       x:DataType="gateways:GenericGatewayLocationItem">
 
@@ -726,7 +919,8 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                                                   ProfileConnectionItemTemplate="{StaticResource ProfileConnectionItemTemplate}"
                                                   RecentConnectionItemTemplate="{StaticResource RecentConnectionItemTemplate}"
                                                   ServerLocationItemTemplate="{StaticResource ServerLocationItemTemplate}"
-                                                  StateLocationItemTemplate="{StaticResource StateLocationItemTemplate}" />
+                                                  StateLocationItemTemplate="{StaticResource StateLocationItemTemplate}"
+                                                  SyncVpnServerLocationItemTemplate="{StaticResource SyncVpnServerLocationItemTemplate}" />
 
     </UserControl.Resources>
 

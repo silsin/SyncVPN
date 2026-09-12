@@ -30,17 +30,25 @@ internal class VpnProtocolWrapper : ISingleVpnConnection
 {
     private readonly ISingleVpnConnection _openVpnConnection;
     private readonly ISingleVpnConnection _wireGuardConnection;
+    private readonly ISingleVpnConnection _l2tpConnection;
+    private readonly ISingleVpnConnection _sstpConnection;
 
     private VpnProtocol _vpnProtocol;
 
     public VpnProtocolWrapper(ISingleVpnConnection openVpnConnection,
-        ISingleVpnConnection wireGuardConnection)
+        ISingleVpnConnection wireGuardConnection,
+        ISingleVpnConnection l2tpConnection,
+        ISingleVpnConnection sstpConnection)
     {
         _openVpnConnection = openVpnConnection;
         _wireGuardConnection = wireGuardConnection;
+        _l2tpConnection = l2tpConnection;
+        _sstpConnection = sstpConnection;
 
         _openVpnConnection.StateChanged += OnStateChanged;
         _wireGuardConnection.StateChanged += OnStateChanged;
+        _l2tpConnection.StateChanged += OnStateChanged;
+        _sstpConnection.StateChanged += OnStateChanged;
     }
 
     public event EventHandler<EventArgs<VpnState>> StateChanged;
@@ -50,11 +58,15 @@ internal class VpnProtocolWrapper : ISingleVpnConnection
         {
             _openVpnConnection.ConnectionDetailsChanged += value;
             _wireGuardConnection.ConnectionDetailsChanged += value;
+            _l2tpConnection.ConnectionDetailsChanged += value;
+            _sstpConnection.ConnectionDetailsChanged += value;
         }
         remove
         {
             _openVpnConnection.ConnectionDetailsChanged -= value;
             _wireGuardConnection.ConnectionDetailsChanged -= value;
+            _l2tpConnection.ConnectionDetailsChanged -= value;
+            _sstpConnection.ConnectionDetailsChanged -= value;
         }
     }
 
@@ -72,6 +84,8 @@ internal class VpnProtocolWrapper : ISingleVpnConnection
         {
             _openVpnConnection.Disconnect(error);
             _wireGuardConnection.Disconnect(error);
+            _l2tpConnection.Disconnect(error);
+            _sstpConnection.Disconnect(error);
             OnStateChanged(this, new EventArgs<VpnState>(new VpnState(VpnStatus.Disconnected, _vpnProtocol)));
         }
         else
@@ -100,9 +114,12 @@ internal class VpnProtocolWrapper : ISingleVpnConnection
         StateChanged?.Invoke(this, e);
     }
 
-    private ISingleVpnConnection VpnConnection => _vpnProtocol.IsWireGuard()
-        ? _wireGuardConnection
-        : _vpnProtocol.IsOpenVpn()
-            ? _openVpnConnection
-            : null;
+    private ISingleVpnConnection VpnConnection => _vpnProtocol switch
+    {
+        _ when _vpnProtocol.IsWireGuard() => _wireGuardConnection,
+        _ when _vpnProtocol.IsOpenVpn() => _openVpnConnection,
+        VpnProtocol.L2tp => _l2tpConnection,
+        VpnProtocol.Sstp => _sstpConnection,
+        _ => null,
+    };
 }

@@ -18,21 +18,17 @@
  */
 
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Media;
 using SyncVPN.Client.Core.Bases;
-using SyncVPN.Client.Core.Services.Activation;
 
-namespace SyncVPN.Client.UI.Main.Home.Details.Flyouts;
+namespace SyncVPN.Client.UI.Main.Home.FreeServers;
 
-public sealed partial class FreeServersFlyoutView : IContextAware
+public sealed partial class HomeFreeServersSectionView : IContextAware
 {
-    public FreeServersFlyoutViewModel ViewModel { get; }
+    public HomeFreeServersSectionViewModel ViewModel { get; }
 
-    public FreeServersFlyoutView()
+    public HomeFreeServersSectionView()
     {
-        ViewModel = App.GetService<FreeServersFlyoutViewModel>();
+        ViewModel = App.GetService<HomeFreeServersSectionViewModel>();
 
         InitializeComponent();
 
@@ -53,26 +49,5 @@ public sealed partial class FreeServersFlyoutView : IContextAware
     private void OnUnloaded(object sender, RoutedEventArgs e)
     {
         ViewModel.Deactivate();
-    }
-
-    private void OnServerClicked(object sender, ItemClickEventArgs e)
-    {
-        if (e.ClickedItem is not FreeServerItem item)
-        {
-            return;
-        }
-
-        ViewModel.ConnectCommand.Execute(item);
-
-        // Close the enclosing Flyout - there's no direct reference to it from this nested UserControl,
-        // so close whatever popup is currently open on the main window (the Flyout's own popup).
-        Window? mainWindow = App.GetService<IMainWindowActivator>().Window;
-        if (mainWindow is not null)
-        {
-            foreach (Popup popup in VisualTreeHelper.GetOpenPopups(mainWindow))
-            {
-                popup.IsOpen = false;
-            }
-        }
     }
 }

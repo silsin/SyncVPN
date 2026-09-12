@@ -41,4 +41,8 @@ public class User
 
     [JsonProperty("google_obfuscated_account_id")]
     public string GoogleObfuscatedAccountId { get; set; } = string.Empty;
+
+    // Always present on a successful /auth/login (and code-login/2FA-verify) response.
+    [JsonProperty("referral_code")]
+    public string ReferralCode { get; set; } = string.Empty;
 }

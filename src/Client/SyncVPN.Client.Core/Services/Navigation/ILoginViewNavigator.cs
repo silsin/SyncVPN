@@ -31,5 +31,7 @@ public interface ILoginViewNavigator : IViewNavigator
 
     Task<bool> NavigateToTwoFactorViewAsync();
 
+    Task<bool> NavigateToCodeLoginViewAsync();
+
     Task<bool> NavigateToLoadingViewAsync();
 }

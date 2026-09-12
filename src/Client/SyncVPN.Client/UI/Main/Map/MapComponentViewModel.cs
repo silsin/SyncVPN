@@ -33,9 +33,12 @@ using SyncVPN.Client.Logic.Connection.Contracts.Messages;
 using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents;
 using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations;
 using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations.Countries;
+using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations.SyncVpnServers;
+using SyncVPN.Client.Logic.Connection.RequestCreators;
 using SyncVPN.Client.Logic.Servers;
 using SyncVPN.Client.Logic.Servers.Cache;
 using SyncVPN.Client.Logic.Servers.Contracts.Messages;
+using SyncVPN.Client.Services.FreeServers;
 using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.Client.Settings.Contracts.Messages;
 using SyncVPN.StatisticalEvents.Contracts.Dimensions;
@@ -46,10 +49,12 @@ public partial class MapComponentViewModel : ViewModelBase,
     IEventMessageReceiver<ConnectionStatusChangedMessage>,
     IEventMessageReceiver<SettingChangedMessage>,
     IEventMessageReceiver<MainWindowVisibilityChangedMessage>,
-    IEventMessageReceiver<ServerListChangedMessage>
+    IEventMessageReceiver<ServerListChangedMessage>,
+    IEventMessageReceiver<MapLocationSelectedMessage>
 {
     private readonly ISettings _settings;
     private readonly IServersCache _serversCache;
+    private readonly IFreeServersCache _freeServersCache;
     private readonly IConnectionManager _connectionManager;
     private readonly ICoordinatesProvider _coordinatesProvider;
     private readonly IUpsellCarouselWindowActivator _upsellCarouselWindowActivator;
@@ -64,6 +69,19 @@ public partial class MapComponentViewModel : ViewModelBase,
     [ObservableProperty]
     private Country? _currentCountry;
 
+    // Set by MapControl when the user taps a pin (two-way bound - see MapComponentView.xaml); the
+    // screen's own Connect button (not a per-pin one) acts on this instead of connecting on tap.
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasSelectedCountry))]
+    [NotifyPropertyChangedFor(nameof(ConnectButtonText))]
+    private Country? _selectedCountry;
+
+    public bool HasSelectedCountry => SelectedCountry is not null;
+
+    public string ConnectButtonText => SelectedCountry is not null
+        ? string.Format(Localizer.Get("Map_ConnectTo"), SelectedCountry.Name)
+        : string.Empty;
+
     public bool IsConnecting => _connectionManager.IsConnecting;
     public bool IsConnected => _connectionManager.IsConnected;
     public bool IsDisconnected => _connectionManager.IsDisconnected;
@@ -71,6 +89,7 @@ public partial class MapComponentViewModel : ViewModelBase,
     public MapComponentViewModel(
         ISettings settings,
         IServersCache serversCache,
+        IFreeServersCache freeServersCache,
         IConnectionManager connectionManager,
         ICoordinatesProvider coordinatesProvider,
         IUpsellCarouselWindowActivator upsellCarouselWindowActivator,
@@ -80,6 +99,7 @@ public partial class MapComponentViewModel : ViewModelBase,
     {
         _settings = settings;
         _serversCache = serversCache;
+        _freeServersCache = freeServersCache;
         _connectionManager = connectionManager;
         _coordinatesProvider = coordinatesProvider;
         _upsellCarouselWindowActivator = upsellCarouselWindowActivator;
@@ -93,6 +113,16 @@ public partial class MapComponentViewModel : ViewModelBase,
         ExecuteOnUIThread(() =>
         {
             InvalidateActiveCountry();
+
+            // A pending selection (map pin tap, or a Free servers list row - see the other Receive
+            // overload below) is only meant to drive the screen-level Connect button up until a
+            // connection attempt actually starts - once it has (whether for this selection or another
+            // path entirely, e.g. the list row's own inline Connect button), showing "Connect to X" here
+            // would be stale.
+            if (message.ConnectionStatus != ConnectionStatus.Disconnected)
+            {
+                SelectedCountry = null;
+            }
 
             OnPropertyChanged(nameof(IsConnecting));
             OnPropertyChanged(nameof(IsConnected));
@@ -122,6 +152,36 @@ public partial class MapComponentViewModel : ViewModelBase,
         {
             InvalidateCountries();
             InvalidateActiveCountry();
+        });
+    }
+
+    // Fired the instant a free-server row is clicked (see SyncVpnServerLocationItem), well before
+    // any live ConnectionStatusChangedMessage could arrive - lets the map pan immediately on click instead
+    // of waiting on the native service to report a connection.
+    public void Receive(MapLocationSelectedMessage message)
+    {
+        ExecuteOnUIThread(() =>
+        {
+            CurrentCountry = new Country
+            {
+                Code = message.CountryCode,
+                Latitude = message.Latitude,
+                Longitude = message.Longitude,
+                IsUnderMaintenance = false
+            };
+
+            // A row click (as opposed to this message being sent to just pan the map to an
+            // already-auto-picked "fastest server") is a deliberate selection - surface it through the
+            // same SelectedCountry the map's own pin taps use, so the screen-level Connect button shows
+            // it too. Looked up from Countries (built in InvalidateCountries) rather than using
+            // CurrentCountry above directly, since only that entry carries the free-server metadata
+            // (FreeServerId/Name/Protocol) ConnectAsync below needs to connect to this exact server.
+            if (message.IsExplicitSelection)
+            {
+                SelectedCountry = Countries.FirstOrDefault(c =>
+                    c.IsFreeServer && c.Latitude == message.Latitude && c.Longitude == message.Longitude)
+                    ?? CurrentCountry;
+            }
         });
     }
 
@@ -156,7 +216,7 @@ public partial class MapComponentViewModel : ViewModelBase,
 
     private void InvalidateCountries()
     {
-        Countries = _serversCache.Countries
+        List<Country> countries = _serversCache.Countries
             .Select(c =>
             {
                 (double Latitude, double Longitude)? coordinates = _coordinatesProvider.GetCoordinates(c);
@@ -173,17 +233,77 @@ public partial class MapComponentViewModel : ViewModelBase,
             })
             .OfType<Country>()
             .ToList();
+
+        // New-backend servers (GET /servers + GET /servers/pro, merged - see IFreeServersCache) carry
+        // their own city-level coordinates, independent of the legacy per-country pins above - shown at
+        // their exact location rather than the country's centroid, and skipped (not zeroed to 0,0) when
+        // the backend hasn't populated location yet. Pro servers still get a pin (FreeServerIsForPaidUsersOnly
+        // = true) - ConnectAsync below gates those behind the paid-plan upsell, same as a genuinely free
+        // one (Free == 1) never does.
+        countries.AddRange(_freeServersCache.GetServers()
+            .Where(s => s.Location != null)
+            .Select(s =>
+            {
+                string protocol = SyncVpnAccountClaimMapper.ResolveServerProtocol(_settings.VpnProtocol, s.Protocols);
+
+                return new Country
+                {
+                    Name = s.Name,
+                    Code = s.Country.ShortName,
+                    Latitude = s.Location!.Lat,
+                    Longitude = s.Location.Long,
+                    IsUnderMaintenance = false,
+                    IsFreeServer = true,
+                    FreeServerId = s.Id,
+                    FreeServerName = s.Name,
+                    FreeServerProtocol = protocol,
+                    FreeServerIsForPaidUsersOnly = s.Free == 0
+                };
+            }));
+
+        Countries = countries;
     }
 
     [RelayCommand]
     private Task ConnectAsync(Country country)
     {
+        if (country == null)
+        {
+            return Task.CompletedTask;
+        }
+
+        // Clear the selection now that a connect attempt is underway - covers both the map's own
+        // Connect button (which passed this same country) and any other future caller, so a stale
+        // "Connect to X" doesn't linger once X is being connected to (or an upsell/maintenance dialog
+        // takes over below).
+        if (SelectedCountry == country)
+        {
+            SelectedCountry = null;
+        }
+
+        // New-backend server pins connect straight to this exact server (SyncVpnServerLocationIntent),
+        // matching the server rows elsewhere (Countries sidebar, Home free-servers section) - a genuinely
+        // free one skips the paid-plan upsell gate entirely, but a Pro one still needs it.
+        if (country.IsFreeServer)
+        {
+            if (country.FreeServerIsForPaidUsersOnly && !_settings.VpnPlan.IsPaid)
+            {
+                return _upsellCarouselWindowActivator.ActivateAsync(UpsellFeatureType.WorldwideCoverage);
+            }
+
+            return _connectionManager.ConnectAsync(
+                VpnTriggerDimension.Map,
+                new ConnectionIntent(new SyncVpnServerLocationIntent(
+                    country.FreeServerId, country.FreeServerName, country.FreeServerProtocol,
+                    isForPaidUsersOnly: country.FreeServerIsForPaidUsersOnly)));
+        }
+
         if (!_settings.VpnPlan.IsPaid)
         {
             return _upsellCarouselWindowActivator.ActivateAsync(UpsellFeatureType.WorldwideCoverage);
         }
 
-        if (country == null || country.IsUnderMaintenance)
+        if (country.IsUnderMaintenance)
         {
             return _mainWindowOverlayActivator.ShowMessageAsync(new()
             {

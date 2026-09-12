@@ -21,6 +21,8 @@ using System.Security;
 using SyncVPN.Api.BackendSelection;
 using SyncVPN.Api.Contracts;
 using SyncVPN.Api.Contracts.Users;
+using SyncVPN.Api.V2.Contracts;
+using SyncVPN.Api.V2.Contracts.Transactions;
 using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Logic.Auth.Contracts;
 using SyncVPN.Client.Logic.Auth.Contracts.Enums;
@@ -68,6 +70,7 @@ public class UserAuthenticator : IUserAuthenticator,
     private readonly IClientConfigObserver _clientConfigObserver;
     private readonly IBackendModeProvider _backendModeProvider;
     private readonly ISyncVpnAuthenticator _syncVpnAuthenticator;
+    private readonly ISyncVpnApiClient _syncVpnApiClient;
 
     private CancellationTokenSource _cts = new();
 
@@ -100,7 +103,8 @@ public class UserAuthenticator : IUserAuthenticator,
         IFeatureFlagsObserver featureFlagsObserver,
         IClientConfigObserver clientConfigObserver,
         IBackendModeProvider backendModeProvider,
-        ISyncVpnAuthenticator syncVpnAuthenticator)
+        ISyncVpnAuthenticator syncVpnAuthenticator,
+        ISyncVpnApiClient syncVpnApiClient)
     {
         _logger = logger;
         _apiClient = apiClient;
@@ -122,6 +126,7 @@ public class UserAuthenticator : IUserAuthenticator,
         _clientConfigObserver = clientConfigObserver;
         _backendModeProvider = backendModeProvider;
         _syncVpnAuthenticator = syncVpnAuthenticator;
+        _syncVpnApiClient = syncVpnApiClient;
 
         _tokenClient.RefreshTokenExpired += OnTokenExpiredAsync;
     }
@@ -484,6 +489,19 @@ public class UserAuthenticator : IUserAuthenticator,
             return;
         }
 
+        // This fires when the Proton *unauth* session's refresh token fails - that session only exists
+        // to keep feature flags/client config/guest hole/announcements working (see
+        // OnSyncVpnLoginSucceeded's Phase 5 note), even for a user whose real session lives entirely on
+        // the new backend. Its refresh failing is routine (it isn't tied to any real account) and must
+        // not be mistaken for *this* user's SyncVpnDeviceToken having expired - that would silently log
+        // a logged-in SyncVPN user out every time this fires, which is exactly what was happening before
+        // this check existed. Just recreate the unauth session and leave the real session alone.
+        if (IsSyncVpnAuthEnabled && _syncVpnAuthenticator.HasAuthenticatedSessionData())
+        {
+            await _unauthSessionManager.RecreateAsync(CancellationToken.None);
+            return;
+        }
+
         await LogoutAsync(LogoutReason.SessionExpired);
     }
 
@@ -507,7 +525,35 @@ public class UserAuthenticator : IUserAuthenticator,
 
         Task.WhenAll(
             _featureFlagsObserver.UpdateAsync(_cts.Token),
-            _clientConfigObserver.UpdateAsync(_cts.Token)).FireAndForget();
+            _clientConfigObserver.UpdateAsync(_cts.Token),
+            InvalidateSyncVpnPlanAsync(_cts.Token)).FireAndForget();
+    }
+
+    // The new backend has no endpoint that reports a logged-in account's plan/subscription status on
+    // its own. Server/account availability (GET /account, GET /servers/pro) is a DIFFERENT concern from
+    // plan status - the server catalog can be empty (maintenance, no capacity, region gaps) for reasons
+    // that have nothing to do with whether this account has paid, so it must never be used to decide
+    // Free vs. Paid. The billing ledger (GET /transactions) is the actual source of truth: a completed,
+    // not-yet-expired transaction means this account is currently Paid, independent of what servers are
+    // or aren't available right now.
+    private async Task InvalidateSyncVpnPlanAsync(CancellationToken cancellationToken)
+    {
+        ApiResponseResult<TransactionListResponse> response = await _syncVpnApiClient.GetTransactionsAsync(page: 1, cancellationToken: cancellationToken);
+
+        bool isPaid = response.Success && response.Value is not null && response.Value.Data.Any(transaction =>
+            string.Equals(transaction.Status, "completed", StringComparison.OrdinalIgnoreCase)
+            && (transaction.ExpiresAt is null || transaction.ExpiresAt > DateTimeOffset.UtcNow));
+
+        VpnPlan oldPlan = _settings.VpnPlan;
+        VpnPlan newPlan = isPaid
+            ? new VpnPlan("SyncVPN Pro", "vpn_pro", maxTier: 1, isB2B: false)
+            : VpnPlan.Default;
+
+        if (!oldPlan.Equals(newPlan))
+        {
+            _settings.VpnPlan = newPlan;
+            _eventMessageSender.Send(new VpnPlanChangedMessage(oldPlan, newPlan));
+        }
     }
 
     private async Task<AuthResult> CompleteLoginAsync(bool isAutoLogin, bool isToSendLoggedInEvent)

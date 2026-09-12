@@ -29,6 +29,7 @@ using SyncVPN.Client.Logic.Recents.Contracts.Messages;
 using SyncVPN.Client.Logic.Servers.Contracts;
 using SyncVPN.Client.Logic.Servers.Contracts.Messages;
 using SyncVPN.Client.Logic.Users.Contracts.Messages;
+using SyncVPN.Client.Services.FreeServers;
 using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.Client.UI.Main.Sidebar.Connections.Bases.Contracts;
 using SyncVPN.Client.UI.Main.Sidebar.Connections.Countries;
@@ -47,6 +48,7 @@ public class ConnectionsViewNavigator : ViewNavigatorBase, IConnectionsViewNavig
 {
     private readonly IRecentConnectionsManager _recentConnectionsManager;
     private readonly IServersLoader _serversLoader;
+    private readonly IFreeServersCache _freeServersCache;
     private readonly ISettings _settings;
 
     public override FrameLoadedBehavior LoadBehavior { get; protected set; } = FrameLoadedBehavior.NavigateToDefaultViewIfEmpty;
@@ -57,17 +59,22 @@ public class ConnectionsViewNavigator : ViewNavigatorBase, IConnectionsViewNavig
         IUIThreadDispatcher uiThreadDispatcher,
         IRecentConnectionsManager recentConnectionsManager,
         IServersLoader serversLoader,
+        IFreeServersCache freeServersCache,
         ISettings settings)
         : base(logger, pageViewMapper, uiThreadDispatcher)
     {
         _recentConnectionsManager = recentConnectionsManager;
         _serversLoader = serversLoader;
+        _freeServersCache = freeServersCache;
         _settings = settings;
     }
 
+    // The legacy Proton catalog is empty for an anonymous/free-tier session (it requires a login), but
+    // the new SyncVPN backend's free-server catalog doesn't - so the Countries tab must stay reachable
+    // when only that one is populated, not just when the legacy list has entries.
     public bool CanNavigateToCountriesView()
     {
-        return _serversLoader.HasAnyCountries();
+        return _serversLoader.HasAnyCountries() || _freeServersCache.GetServers().Count > 0;
     }
 
     public async Task<bool> NavigateToCountriesViewAsync(CountriesConnectionType initialType = CountriesConnectionType.All)

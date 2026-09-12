@@ -24,6 +24,7 @@ using SyncVPN.Client.Core.Services.Navigation;
 using SyncVPN.Client.Core.Services.Navigation.Bases;
 using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Logic.Auth.Contracts;
+using SyncVPN.Client.Logic.Auth.Contracts.Enums;
 using SyncVPN.Client.Logic.Auth.Contracts.Messages;
 using SyncVPN.Client.UI.Dialogs.Tray.Pages;
 using SyncVPN.Logging.Contracts;
@@ -72,6 +73,20 @@ public class TrayAppViewNavigator : ViewNavigatorBase, ITrayAppViewNavigator,
 
     public void Receive(AuthenticationStatusChanged message)
     {
+        // See MainWindowViewNavigator.Receive - same premature-navigation risk from the transient
+        // LoggingIn/LoggingOut statuses via the IsGuestAccessEnabled fallback below.
+        if (message.AuthenticationStatus is AuthenticationStatus.LoggingIn or AuthenticationStatus.LoggingOut)
+        {
+            return;
+        }
+
+        // A failed login attempt from the tray's own sign-in page shouldn't get silently swallowed by
+        // the guest-access fallback either - see MainWindowViewNavigator.Receive.
+        if (message.AuthenticationStatus == AuthenticationStatus.LoggedOut && GetCurrentPageContext() is TrayLoginPageViewModel)
+        {
+            return;
+        }
+
         UIThreadDispatcher.TryEnqueue(async () =>
         {
             await NavigateToDefaultAsync();

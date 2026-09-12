@@ -42,4 +42,8 @@ public class VpnCredentialsIpcEntity
     // When set, Certificate/ClientKeyPair are not required - see VpnCredentials.FromProvisionedConfig.
     [DataMember(Order = 5)]
     public string ProvisionedConfigText { get; set; }
+
+    // IPsec pre-shared key, set only for L2TP - see VpnCredentials.FromRasCredentials.
+    [DataMember(Order = 6)]
+    public string PreSharedKey { get; set; }
 }

@@ -22,12 +22,14 @@ using SyncVPN.Api.V2.Contracts.Servers;
 
 namespace SyncVPN.Client.Logic.Purchases.Contracts;
 
-// GET /servers - the new backend's free-server catalog, for a standalone free-servers list. Distinct
-// from IServersLoader (SyncVPN.Client.Logic.Servers.Contracts), which owns the legacy Proton
-// Physical/Logical server model that the existing sidebar/search/map UI renders - the two models
-// aren't compatible (this one has no Tier/Features/Load), so this is intentionally a separate surface
-// rather than feeding into the legacy list.
+// GET /servers and GET /servers/pro - the new backend's server catalog. Distinct from IServersLoader
+// (SyncVPN.Client.Logic.Servers.Contracts), which owns the legacy Proton Physical/Logical server model -
+// the two models aren't compatible (this one has no Tier/Features/Load). Rows built from this are
+// rendered directly inside the Countries sidebar list (see SyncVpnServerLocationItem) rather than
+// mapped onto the legacy Server model.
 public interface IFreeServersProvider
 {
     Task<ApiResponseResult<ServerListResponse>> GetFreeServersAsync(CancellationToken cancellationToken = default);
+
+    Task<ApiResponseResult<ServerListResponse>> GetProServersAsync(CancellationToken cancellationToken = default);
 }

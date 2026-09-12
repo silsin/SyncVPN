@@ -203,10 +203,18 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                                                               Command="{x:Bind ViewModel.SelectOpenVpnUdpProtocolCommand, Mode=OneTime}"
                                                               IsActive="{x:Bind ViewModel.SelectedProtocol.IsOpenVpnUdpProtocol}"
                                                               Text="{x:Bind ViewModel.Localizer.Get('VpnProtocol_OpenVPN_Udp')}"/>
-                            <custom:ActivatableMenuFlyoutItem AutomationProperties.AutomationId="OpenVpnTcpProtocolMenuItem" 
+                            <custom:ActivatableMenuFlyoutItem AutomationProperties.AutomationId="OpenVpnTcpProtocolMenuItem"
                                                               Command="{x:Bind ViewModel.SelectOpenVpnTcpProtocolCommand, Mode=OneTime}"
                                                               IsActive="{x:Bind ViewModel.SelectedProtocol.IsOpenVpnTcpProtocol}"
                                                               Text="{x:Bind ViewModel.Localizer.Get('VpnProtocol_OpenVPN_Tcp')}"/>
+                            <custom:ActivatableMenuFlyoutItem AutomationProperties.AutomationId="L2tpProtocolMenuItem"
+                                                              Command="{x:Bind ViewModel.SelectL2tpProtocolCommand, Mode=OneTime}"
+                                                              IsActive="{x:Bind ViewModel.SelectedProtocol.IsL2tpProtocol}"
+                                                              Text="{x:Bind ViewModel.Localizer.Get('VpnProtocol_L2tp')}"/>
+                            <custom:ActivatableMenuFlyoutItem AutomationProperties.AutomationId="SstpProtocolMenuItem"
+                                                              Command="{x:Bind ViewModel.SelectSstpProtocolCommand, Mode=OneTime}"
+                                                              IsActive="{x:Bind ViewModel.SelectedProtocol.IsSstpProtocol}"
+                                                              Text="{x:Bind ViewModel.Localizer.Get('VpnProtocol_Sstp')}"/>
                         </MenuFlyout>
                     </custom:GhostButton.Flyout>
                 </custom:GhostButton>

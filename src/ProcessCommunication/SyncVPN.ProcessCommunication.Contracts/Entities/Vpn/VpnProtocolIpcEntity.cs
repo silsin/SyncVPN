@@ -40,4 +40,10 @@ public enum VpnProtocolIpcEntity
 
     [EnumMember]
     WireGuardTls,
+
+    [EnumMember]
+    L2tp,
+
+    [EnumMember]
+    Sstp,
 }

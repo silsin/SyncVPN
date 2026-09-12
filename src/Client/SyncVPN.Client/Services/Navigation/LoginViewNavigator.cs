@@ -68,6 +68,11 @@ public class LoginViewNavigator : ViewNavigatorBase, ILoginViewNavigator,
         return NavigateToAsync<TwoFactorPageViewModel>();
     }
 
+    public Task<bool> NavigateToCodeLoginViewAsync()
+    {
+        return NavigateToAsync<CodeLoginPageViewModel>();
+    }
+
     public override Task<bool> NavigateToDefaultAsync()
     {
         return _userAuthenticator.AuthenticationStatus switch

@@ -29,19 +29,29 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
              x:DefaultBindMode="OneWay"
              mc:Ignorable="d">
 
-    <Grid RowSpacing="12">
+    <ContentControl Padding="12"
+                    IsTabStop="False"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Style="{StaticResource TranslucentPaneContentControlStyle}">
 
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
+        <Grid RowSpacing="12"
+              VerticalAlignment="Top">
 
-        <status:ConnectionStatusHeaderView Grid.Row="0"
-                                           Margin="10,4,10,0" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <Frame x:Name="DetailsNavigationFrame"
-               Grid.Row="1"
-               IsNavigationStackEnabled="{x:Bind Navigator.IsNavigationStackEnabled}" />
-    </Grid>
+            <status:ConnectionStatusHeaderView Grid.Row="0"
+                                               Margin="10,4,10,0"
+                                               UseSimplifiedVersion="True" />
+
+            <Frame x:Name="DetailsNavigationFrame"
+                   Grid.Row="1"
+                   IsNavigationStackEnabled="{x:Bind Navigator.IsNavigationStackEnabled}" />
+        </Grid>
+
+    </ContentControl>
 
 </UserControl>

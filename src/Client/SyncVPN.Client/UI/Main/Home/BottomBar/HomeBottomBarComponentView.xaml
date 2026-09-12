@@ -23,7 +23,6 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:custom="using:SyncVPN.Client.Common.UI.Controls.Custom"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:dc="using:SyncVPN.Client.UI.Main.Home.Card.DefaultConnections"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pathicons="using:SyncVPN.Client.Common.UI.Assets.Icons.PathIcons"
              x:DefaultBindMode="OneWay"
@@ -77,12 +76,16 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
             </StackPanel>
 
             <Grid>
+                <!--  Always visible (not hidden while connecting/connected) - ViewModel.ConnectCommand's own  -->
+                <!--  CanExecute (CanConnect: IsDisconnected && service enabled) disables it automatically  -->
+                <!--  instead. Cancel/Disconnect are handled by the persistent Connect button at the top of  -->
+                <!--  the map now, so those two chips below are no longer shown here (they'd otherwise overlap  -->
+                <!--  this one, which no longer collapses).  -->
                 <Button x:Name="QuickConnectConnectButton"
                         AutomationProperties.AutomationId="HomeQuickConnectConnectButton"
                         Command="{x:Bind ViewModel.ConnectCommand, Mode=OneTime}"
                         IsEnabledChanged="OnButtonIsEnabledChanged"
-                        Style="{StaticResource QuickConnectChipButtonStyle}"
-                        Visibility="{x:Bind ViewModel.IsDisconnected, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        Style="{StaticResource QuickConnectChipButtonStyle}">
                     <Grid ColumnSpacing="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -117,11 +120,6 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                                    Style="{StaticResource BodyMediumStrongTextBlockStyle}"
                                    Text="{x:Bind ViewModel.Title}"
                                    TextTrimming="CharacterEllipsis" />
-
-                        <dc:DefaultConnectionSelectorView Grid.Column="2"
-                                                          VerticalAlignment="Center"
-                                                          ToolTipService.ToolTip="{x:Bind ViewModel.Localizer.Get('Home_ConnectionCard_ChangeDefaultConnection')}"
-                                                          Visibility="{x:Bind ViewModel.IsChangeDefaultConnectionOptionVisible}" />
                     </Grid>
                 </Button>
 
@@ -130,7 +128,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                         Command="{x:Bind ViewModel.CancelConnectionCommand, Mode=OneTime}"
                         IsEnabledChanged="OnButtonIsEnabledChanged"
                         Style="{StaticResource QuickConnectChipButtonStyle}"
-                        Visibility="{x:Bind ViewModel.IsConnecting, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        Visibility="Collapsed">
                     <StackPanel Orientation="Horizontal"
                                 Spacing="10">
                         <custom:ComplexCountryFlag Width="{StaticResource QuickConnectFlagWidth}"
@@ -152,7 +150,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                         Command="{x:Bind ViewModel.DisconnectCommand, Mode=OneTime}"
                         IsEnabledChanged="OnButtonIsEnabledChanged"
                         Style="{StaticResource QuickConnectChipButtonStyle}"
-                        Visibility="{x:Bind ViewModel.IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        Visibility="Collapsed">
                     <StackPanel Orientation="Horizontal"
                                 Spacing="10">
                         <custom:ComplexCountryFlag Width="{StaticResource QuickConnectFlagWidth}"

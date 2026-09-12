@@ -83,9 +83,9 @@ internal class NetworkAdapterStatusWrapper : ISingleVpnConnection
         _credentials = credentials;
         _config = config;
 
-        if (_endpoint.VpnProtocol.IsWireGuard())
+        if (_endpoint.VpnProtocol.IsWireGuard() || _endpoint.VpnProtocol.IsRasBased())
         {
-            _logger.Info<ConnectLog>("WireGuard protocol selected. No network adapters to check.");
+            _logger.Info<ConnectLog>($"{_endpoint.VpnProtocol} protocol selected. No network adapters to check.");
             Connect();
         }
         else
@@ -260,6 +260,10 @@ internal class NetworkAdapterStatusWrapper : ISingleVpnConnection
             case VpnProtocol.OpenVpnTcp:
                 HandleOpenVpnError(vpnState);
                 break;
+            case VpnProtocol.L2tp:
+            case VpnProtocol.Sstp:
+                HandleRasError(vpnState);
+                break;
             case VpnProtocol.Smart:
                 HandleWireGuardError(vpnState);
                 HandleOpenVpnError(vpnState);
@@ -274,6 +278,12 @@ internal class NetworkAdapterStatusWrapper : ISingleVpnConnection
     }
 
     private void HandleOpenVpnError(VpnState vpnState)
+    {
+        _logger.Warn<NetworkLog>($"Connection error '{vpnState.Error}' while using " +
+            $"protocol '{vpnState.VpnProtocol}'.");
+    }
+
+    private void HandleRasError(VpnState vpnState)
     {
         _logger.Warn<NetworkLog>($"Connection error '{vpnState.Error}' while using " +
             $"protocol '{vpnState.VpnProtocol}'.");

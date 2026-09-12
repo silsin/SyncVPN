@@ -43,6 +43,8 @@ public class ConnectionItemTemplateSelector : DataTemplateSelector
 
     public DataTemplate? ServerLocationItemTemplate { get; set; }
 
+    public DataTemplate? SyncVpnServerLocationItemTemplate { get; set; }
+
     public DataTemplate? GenericGatewayLocationItemTemplate { get; set; }
 
     public DataTemplate? GatewayLocationItemTemplate { get; set; }
@@ -74,6 +76,7 @@ public class ConnectionItemTemplateSelector : DataTemplateSelector
             StateLocationItemBase => StateLocationItemTemplate,
             CityLocationItemBase => CityLocationItemTemplate,
             ServerLocationItemBase => ServerLocationItemTemplate,
+            SyncVpnServerLocationItem => SyncVpnServerLocationItemTemplate,
 
             _ => throw new NotSupportedException($"Connection item {item} is not recognized"),
         };

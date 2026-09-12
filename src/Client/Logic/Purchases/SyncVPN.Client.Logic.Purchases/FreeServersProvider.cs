@@ -37,4 +37,9 @@ public class FreeServersProvider : IFreeServersProvider
     {
         return _apiClient.GetServersAsync(cancellationToken);
     }
+
+    public Task<ApiResponseResult<ServerListResponse>> GetProServersAsync(CancellationToken cancellationToken = default)
+    {
+        return _apiClient.GetProServersAsync(cancellationToken);
+    }
 }

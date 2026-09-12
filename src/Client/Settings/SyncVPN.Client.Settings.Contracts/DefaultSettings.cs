@@ -29,7 +29,7 @@ namespace SyncVPN.Client.Settings.Contracts;
 public static class DefaultSettings
 {
     public static string Theme = "Dark";
-    public static int WindowWidth = 1016;
+    public static int WindowWidth = 1336;
     public static int WindowHeight = 659;
     public static string Language = "en-US";
     public static VpnProtocol VpnProtocol = VpnProtocol.Smart;

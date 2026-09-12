@@ -32,4 +32,21 @@ public static class VpnProtocolExtensions
     {
         return protocol is VpnProtocol.OpenVpnUdp or VpnProtocol.OpenVpnTcp;
     }
+
+    public static bool IsL2tp(this VpnProtocol protocol)
+    {
+        return protocol is VpnProtocol.L2tp;
+    }
+
+    public static bool IsSstp(this VpnProtocol protocol)
+    {
+        return protocol is VpnProtocol.Sstp;
+    }
+
+    // L2TP and SSTP are both dialed through Windows RAS, which auto-provisions its own virtual
+    // adapter - unlike OpenVpn's TUN/TAP, there is no adapter to create/check before connecting.
+    public static bool IsRasBased(this VpnProtocol protocol)
+    {
+        return protocol is VpnProtocol.L2tp or VpnProtocol.Sstp;
+    }
 }

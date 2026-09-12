@@ -188,6 +188,16 @@ public class VpnEndpointScanner : IEndpointScanner
             case VpnProtocol.WireGuardUdp:
                 isAlive = await IsUdpEndpointAliveAsync(ip, port, server.X25519PublicKey.Base64, cancellationToken);
                 break;
+            case VpnProtocol.Sstp:
+                // SSTP is TCP, same as the other TCP-based protocols above.
+                isAlive = await IsTcpEndpointAliveAsync(ip, port, cancellationToken);
+                break;
+            case VpnProtocol.L2tp:
+                // The existing UDP probe needs a WireGuard-style X25519 pubkey payload that claimed
+                // L2TP accounts never have, and a bare open-UDP-port check isn't a meaningful
+                // reachability signal for IPsec anyway - defer real reachability to the RAS dial itself.
+                isAlive = true;
+                break;
         }
 
         return isAlive ? new VpnEndpoint(new VpnHost(server.Name, ip, server.Label, server.X25519PublicKey, server.Signature, server.IsIpv6Supported, null),

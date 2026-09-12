@@ -91,7 +91,7 @@ public sealed partial class ConnectionItemsControl
     {
         Focus(FocusState.Programmatic);
     }
-        
+
     public void ResetContentScroll()
     {
         if (ConnectionItemsList?.Items.Count > 0)

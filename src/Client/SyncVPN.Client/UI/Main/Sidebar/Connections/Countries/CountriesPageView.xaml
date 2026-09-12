@@ -21,72 +21,188 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
 <Page x:Class="SyncVPN.Client.UI.Main.Sidebar.Connections.Countries.CountriesPageView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:all="using:SyncVPN.Client.UI.Main.Sidebar.Connections.Countries.All"
-      xmlns:bases="using:SyncVPN.Client.UI.Main.Sidebar.Connections.Bases.Contracts"
       xmlns:controls="using:SyncVPN.Client.UI.Main.Sidebar.Connections.Bases.Controls"
+      xmlns:custom="using:SyncVPN.Client.Common.UI.Controls.Custom"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="using:SyncVPN.Client.UI.Main.Sidebar.Connections.Countries"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:p2p="using:SyncVPN.Client.UI.Main.Sidebar.Connections.Countries.P2P"
-      xmlns:securecore="using:SyncVPN.Client.UI.Main.Sidebar.Connections.Countries.SecureCore"
-      xmlns:selectors="using:SyncVPN.Client.Selectors"
-      xmlns:tor="using:SyncVPN.Client.UI.Main.Sidebar.Connections.Countries.Tor"
+      xmlns:pathicons="using:SyncVPN.Client.Common.UI.Assets.Icons.PathIcons"
       x:DefaultBindMode="OneWay"
       AutomationProperties.AutomationId="CountriesPage"
       AutomationProperties.Name="{x:Bind ViewModel.Localizer.Get('Automation_Properties_Sidebar_Connections_Countries_Page')}"
       NavigationCacheMode="Required"
       mc:Ignorable="d">
 
-    <Page.Resources>
-        <Thickness x:Key="PivotItemContentMargin">-12,8,-12,0</Thickness>
-
-        <DataTemplate x:Key="AllCountriesItemTemplate">
-            <all:AllCountriesComponentView Margin="{StaticResource PivotItemContentMargin}" />
-        </DataTemplate>
-
-        <DataTemplate x:Key="SecureCoreCountriesItemTemplate">
-            <securecore:SecureCoreCountriesComponentView Margin="{StaticResource PivotItemContentMargin}" />
-        </DataTemplate>
-
-        <DataTemplate x:Key="P2PCountriesItemTemplate">
-            <p2p:P2PCountriesComponentView Margin="{StaticResource PivotItemContentMargin}" />
-        </DataTemplate>
-
-        <DataTemplate x:Key="TorCountriesItemTemplate">
-            <tor:TorCountriesComponentView Margin="{StaticResource PivotItemContentMargin}" />
-        </DataTemplate>
-
-        <selectors:CountriesComponentItemTemplateSelector x:Key="CountriesComponentItemTemplateSelector"
-                                                          AllCountriesItemTemplate="{StaticResource AllCountriesItemTemplate}"
-                                                          P2PCountriesItemTemplate="{StaticResource P2PCountriesItemTemplate}"
-                                                          SecureCoreCountriesItemTemplate="{StaticResource SecureCoreCountriesItemTemplate}"
-                                                          TorCountriesItemTemplate="{StaticResource TorCountriesItemTemplate}" />
-    </Page.Resources>
-
-    <Grid>
+    <Grid Margin="16,0"
+          RowSpacing="8">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Pivot Grid.Row="0"
-               x:Name="CountriesPivot"
-               AutomationProperties.AutomationControlType="Tab"
-               AutomationProperties.AutomationId="CountriesFeaturesList"
-               ItemTemplateSelector="{StaticResource CountriesComponentItemTemplateSelector}"
-               ItemsSource="{x:Bind ViewModel.CountriesComponents, Mode=OneTime}"
-               SelectedItem="{x:Bind ViewModel.SelectedCountriesComponent, Mode=TwoWay}">
-            <Pivot.HeaderTemplate>
-                <DataTemplate x:DataType="bases:ICountriesComponent">
-                    <TextBlock Text="{x:Bind Header}"
-                               FontFamily="{ThemeResource ContentControlThemeFontFamily}" />
-                </DataTemplate>
-            </Pivot.HeaderTemplate>
-        </Pivot>
+        <!--  Header: back + title + upgrade shortcut  -->
+        <Grid Grid.Row="0"
+              ColumnSpacing="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <custom:GhostButton Grid.Column="0"
+                                AutomationProperties.AutomationId="CountriesBackButton"
+                                Command="{x:Bind ViewModel.NavigateBackCommand, Mode=OneTime}">
+                <custom:GhostButton.LeftIcon>
+                    <pathicons:ArrowLeft Size="Pixels16" />
+                </custom:GhostButton.LeftIcon>
+            </custom:GhostButton>
+
+            <TextBlock Grid.Column="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Style="{StaticResource TitleTextBlockStyle}"
+                       Text="{x:Bind ViewModel.Header}" />
+
+            <custom:GhostButton Grid.Column="2"
+                                AutomationProperties.AutomationId="CountriesUpgradeButton"
+                                Command="{x:Bind ViewModel.UpgradeCommand, Mode=OneTime}"
+                                Visibility="{x:Bind ViewModel.IsFreePlanBannerVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <custom:GhostButton.LeftIcon>
+                    <pathicons:Rocket Size="Pixels16"
+                                      Foreground="{ThemeResource VpnGreenColorBrush}" />
+                </custom:GhostButton.LeftIcon>
+            </custom:GhostButton>
+        </Grid>
+
+        <custom:SearchTextBox Grid.Row="1"
+                              HorizontalAlignment="Stretch"
+                              PlaceholderText="{x:Bind ViewModel.Localizer.Get('Countries_Search_Placeholder')}"
+                              Style="{StaticResource SearchTextBoxStyle}"
+                              Text="{x:Bind ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <!--  Free-plan info banner (real Settings.VpnPlan.IsPaid state, not fake data)  -->
+        <Border Grid.Row="2"
+                Padding="12"
+                Background="Transparent"
+                BorderBrush="{ThemeResource VpnGreenColorBrush}"
+                BorderThickness="1"
+                CornerRadius="8"
+                Visibility="{x:Bind ViewModel.IsFreePlanBannerVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid ColumnSpacing="12"
+                  RowSpacing="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <pathicons:InfoCircle Grid.Row="0"
+                                     Grid.RowSpan="2"
+                                     Grid.Column="0"
+                                     VerticalAlignment="Top"
+                                     Margin="0,2,0,0"
+                                     Foreground="{ThemeResource VpnGreenColorBrush}"
+                                     Size="Pixels20" />
+
+                <StackPanel Grid.Row="0"
+                            Grid.Column="1"
+                            Orientation="Horizontal"
+                            Spacing="4">
+                    <TextBlock Style="{StaticResource BodyMediumStrongTextBlockStyle}"
+                               Text="{x:Bind ViewModel.Localizer.Get('Countries_FreePlanBanner_TitlePrefix')}" />
+                    <TextBlock Style="{StaticResource BodyMediumStrongTextBlockStyle}"
+                               Foreground="{ThemeResource VpnGreenColorBrush}"
+                               Text="{x:Bind ViewModel.Localizer.Get('Countries_FreePlanBanner_PlanName')}" />
+                </StackPanel>
+
+                <Grid Grid.Row="1"
+                      Grid.Column="1"
+                      ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               Style="{StaticResource CaptionTextBlockStyle}"
+                               Foreground="{ThemeResource TextWeakColorBrush}"
+                               Text="{x:Bind ViewModel.Localizer.Get('Countries_FreePlanBanner_Description')}"
+                               TextWrapping="Wrap" />
+
+                    <HyperlinkButton Grid.Column="1"
+                                     Padding="0"
+                                     VerticalAlignment="Bottom"
+                                     Command="{x:Bind ViewModel.UpgradeCommand, Mode=OneTime}">
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="2">
+                            <TextBlock Style="{StaticResource CaptionStrongTextBlockStyle}"
+                                       Foreground="{ThemeResource VpnGreenColorBrush}"
+                                       Text="{x:Bind ViewModel.Localizer.Get('Countries_FreePlanBanner_UpgradeNow')}" />
+                            <pathicons:ChevronRight Size="Pixels16"
+                                                   Foreground="{ThemeResource VpnGreenColorBrush}" />
+                        </StackPanel>
+                    </HyperlinkButton>
+                </Grid>
+            </Grid>
+        </Border>
 
         <controls:ConnectionItemsControl x:Name="ConnectionItemsControl"
-                                         Grid.Row="1"
+                                         Grid.Row="3"
                                          ItemsSource="{x:Bind ViewModel.GroupsCvs.View, Mode=OneTime}" />
+
+        <!--  Bottom upgrade banner (pinned, not part of the scrollable list)  -->
+        <Border Grid.Row="4"
+                Margin="0,0,0,16"
+                Padding="16"
+                Background="{ThemeResource PaneOverlayBackgroundColorBrush}"
+                BorderBrush="{ThemeResource PaneOverlayBorderColorBrush}"
+                BorderThickness="1"
+                CornerRadius="8"
+                Visibility="{x:Bind ViewModel.IsFreePlanBannerVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid ColumnSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0"
+                        Width="40"
+                        Height="40"
+                        BorderBrush="{ThemeResource BorderWeakColorBrush}"
+                        BorderThickness="1"
+                        CornerRadius="20">
+                    <pathicons:Rocket HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Foreground="{ThemeResource VpnGreenColorBrush}"
+                                      Size="Pixels20" />
+                </Border>
+
+                <StackPanel Grid.Column="1"
+                            VerticalAlignment="Center"
+                            Spacing="2">
+                    <TextBlock Style="{StaticResource BodyMediumStrongTextBlockStyle}"
+                               Text="{x:Bind ViewModel.Localizer.Get('Countries_BottomBanner_Title')}" />
+                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}"
+                               Foreground="{ThemeResource TextWeakColorBrush}"
+                               Text="{x:Bind ViewModel.Localizer.Get('Countries_BottomBanner_Description')}"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+
+                <Button Grid.Column="2"
+                        VerticalAlignment="Center"
+                        AutomationProperties.AutomationId="CountriesBottomUpgradeButton"
+                        Command="{x:Bind ViewModel.UpgradeCommand, Mode=OneTime}"
+                        Content="{x:Bind ViewModel.Localizer.Get('Sidebar_FreePlanCard_Upgrade')}"
+                        Style="{StaticResource SecondaryButtonStyle}" />
+            </Grid>
+        </Border>
 
     </Grid>
 

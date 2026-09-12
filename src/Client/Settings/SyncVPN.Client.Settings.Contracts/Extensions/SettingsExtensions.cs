@@ -30,6 +30,9 @@ public static class SettingsExtensions
 
     public static string GetUsername(this ISettings settings)
     {
-        return settings.Username ?? settings.UserDisplayName ?? string.Empty;
+        // Legacy (SRP/SSO) sessions populate Username/UserDisplayName; a SyncVPN-backend session (see
+        // SyncVpnAuthenticator.StoreSession) never touches those and only sets SyncVpnUserName instead -
+        // without this fallback, the Settings account button would show a blank name for those users.
+        return settings.Username ?? settings.UserDisplayName ?? settings.SyncVpnUserName ?? string.Empty;
     }
 }

@@ -40,11 +40,18 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
             <Setter Property="Background" Value="{ThemeResource BorderWeakColorBrush}" />
         </Style>
 
+        <SolidColorBrush x:Key="SidebarSelectedItemBackgroundBrush" Color="{ThemeResource VpnGreenColor}" Opacity="0.12" />
+
         <Style x:Key="SidebarSelectedItemBackgroundStyle" TargetType="Border">
-            <Setter Property="Background" Value="{ThemeResource VpnGreenWeakColorBrush}" />
-            <Setter Property="BorderBrush" Value="{ThemeResource VpnGreenColorBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Background" Value="{StaticResource SidebarSelectedItemBackgroundBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="7,12,12,7" />
+        </Style>
+
+        <Style x:Key="SidebarUnselectedItemBackgroundStyle" TargetType="Border">
+            <Setter Property="Background" Value="{ThemeResource TransparentColorBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="7,12,12,7" />
         </Style>
 
         <!--  "FREE" tag on feature rows (Secure Core, NetShield)  -->
@@ -120,6 +127,8 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                 <Grid>
                     <Border Style="{StaticResource SidebarSelectedItemBackgroundStyle}"
                             Visibility="{x:Bind ViewModel.IsHomeSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <Border Style="{StaticResource SidebarUnselectedItemBackgroundStyle}"
+                            Visibility="{x:Bind ViewModel.IsHomeSelected, Converter={StaticResource NotBooleanToVisibilityConverter}}" />
                     <custom:GhostButton HorizontalAlignment="Stretch"
                                         HorizontalContentAlignment="Left"
                                         Padding="{StaticResource SidebarNavItemPadding}"
@@ -137,6 +146,8 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                 <Grid>
                     <Border Style="{StaticResource SidebarSelectedItemBackgroundStyle}"
                             Visibility="{x:Bind ViewModel.IsCountriesSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <Border Style="{StaticResource SidebarUnselectedItemBackgroundStyle}"
+                            Visibility="{x:Bind ViewModel.IsCountriesSelected, Converter={StaticResource NotBooleanToVisibilityConverter}}" />
                     <custom:GhostButton HorizontalAlignment="Stretch"
                                         HorizontalContentAlignment="Left"
                                         Padding="{StaticResource SidebarNavItemPadding}"
@@ -156,6 +167,8 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                 <Grid>
                     <Border Style="{StaticResource SidebarSelectedItemBackgroundStyle}"
                             Visibility="{x:Bind ViewModel.IsSecureCoreSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <Border Style="{StaticResource SidebarUnselectedItemBackgroundStyle}"
+                            Visibility="{x:Bind ViewModel.IsSecureCoreSelected, Converter={StaticResource NotBooleanToVisibilityConverter}}" />
                     <custom:GhostButton HorizontalAlignment="Stretch"
                                         HorizontalContentAlignment="Stretch"
                                         Padding="{StaticResource SidebarNavItemPadding}"
@@ -188,6 +201,8 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                 <Grid>
                     <Border Style="{StaticResource SidebarSelectedItemBackgroundStyle}"
                             Visibility="{x:Bind ViewModel.IsNetShieldSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <Border Style="{StaticResource SidebarUnselectedItemBackgroundStyle}"
+                            Visibility="{x:Bind ViewModel.IsNetShieldSelected, Converter={StaticResource NotBooleanToVisibilityConverter}}" />
                     <custom:GhostButton HorizontalAlignment="Stretch"
                                         HorizontalContentAlignment="Stretch"
                                         Padding="{StaticResource SidebarNavItemPadding}"
@@ -222,6 +237,8 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                 <Grid>
                     <Border Style="{StaticResource SidebarSelectedItemBackgroundStyle}"
                             Visibility="{x:Bind ViewModel.IsSettingsSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    <Border Style="{StaticResource SidebarUnselectedItemBackgroundStyle}"
+                            Visibility="{x:Bind ViewModel.IsSettingsSelected, Converter={StaticResource NotBooleanToVisibilityConverter}}" />
                     <custom:GhostButton HorizontalAlignment="Stretch"
                                         HorizontalContentAlignment="Left"
                                         Padding="{StaticResource SidebarNavItemPadding}"
@@ -259,25 +276,6 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                     <TextBlock Style="{StaticResource BodyMediumStrongTextBlockStyle}"
                                Foreground="{ThemeResource VpnGreenColorBrush}"
                                Text="{x:Bind ViewModel.DailyDataUsageText}" />
-
-                    <ProgressBar Margin="0,4,0,0"
-                                 Foreground="{ThemeResource VpnGreenColorBrush}"
-                                 Maximum="{x:Bind ViewModel.DailyDataUsageMaximum}"
-                                 Value="{x:Bind ViewModel.DailyDataUsageValue}" />
-
-                    <TextBlock Style="{StaticResource CaptionTextBlockStyle}"
-                               Foreground="{ThemeResource TextHintColorBrush}"
-                               Text="{x:Bind ViewModel.DailyDataUsedText}" />
-
-                    <StackPanel Orientation="Horizontal"
-                                Spacing="4">
-                        <TextBlock Style="{StaticResource CaptionTextBlockStyle}"
-                                   Foreground="{ThemeResource TextWeakColorBrush}"
-                                   Text="{x:Bind ViewModel.Localizer.Get('Sidebar_FreePlanCard_ResetsInLabel')}" />
-                        <TextBlock Style="{StaticResource CaptionTextBlockStyle}"
-                                   Foreground="{ThemeResource TextNormColorBrush}"
-                                   Text="{x:Bind ViewModel.ResetsInText}" />
-                    </StackPanel>
 
                     <Button Margin="0,8,0,0"
                             HorizontalAlignment="Stretch"

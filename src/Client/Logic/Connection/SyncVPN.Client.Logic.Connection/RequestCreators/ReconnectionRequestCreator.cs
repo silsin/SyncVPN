@@ -19,6 +19,7 @@
 
 using SyncVPN.Api.BackendSelection;
 using SyncVPN.Api.V2.Contracts;
+using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Logic.Auth.Contracts;
 using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents;
 using SyncVPN.Client.Logic.Connection.Contracts.RequestCreators;
@@ -48,6 +49,7 @@ public class ReconnectionRequestCreator : ConnectionRequestCreator, IReconnectio
         IMainSettingsRequestCreator mainSettingsRequestCreator,
         IBackendModeProvider backendModeProvider,
         ISyncVpnApiClient syncVpnApiClient,
+        IEventMessageSender eventMessageSender,
         Lazy<IUserAuthenticator> userAuthenticator)
         : base(logger,
                settings,
@@ -60,6 +62,7 @@ public class ReconnectionRequestCreator : ConnectionRequestCreator, IReconnectio
                mainSettingsRequestCreator,
                backendModeProvider,
                syncVpnApiClient,
+               eventMessageSender,
                userAuthenticator)
     { }
 
@@ -80,8 +83,9 @@ public class ReconnectionRequestCreator : ConnectionRequestCreator, IReconnectio
 
         List<VpnProtocol> preferredProtocols = EntityMapper.Map<VpnProtocolIpcEntity, VpnProtocol>(config.PreferredProtocols);
         ServerListResult serverListResult = GetReconnectionServerListResult(connectionIntent, preferredProtocols);
-        (VpnServerIpcEntity[] servers, VpnCredentialsIpcEntity credentials) =
+        (VpnServerIpcEntity[] servers, VpnCredentialsIpcEntity credentials, int? sstpPort) =
             await ResolveServersAndCredentialsAsync(connectionIntent, serverListResult.PhysicalServers, preferredProtocols);
+        ApplyClaimedSstpPort(config, sstpPort);
         bool areAllServersExcluded = servers.Length == 0 && serverListResult.Diagnostic.AreAllCandidatesExcluded;
 
         ConnectionRequestIpcEntity request = new()

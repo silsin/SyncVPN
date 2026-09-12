@@ -43,6 +43,7 @@ public enum ConnectionGroupType
     TorServers,
     Servers,
     FreeServers,
+    PremiumLocations,
 
     PinnedRecents,
     Recents

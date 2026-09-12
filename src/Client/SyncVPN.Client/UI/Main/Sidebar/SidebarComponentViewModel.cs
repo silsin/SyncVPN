@@ -26,6 +26,7 @@ using SyncVPN.Client.Core.Enums;
 using SyncVPN.Client.Core.Services.Activation;
 using SyncVPN.Client.Core.Services.Navigation;
 using SyncVPN.Client.EventMessaging.Contracts;
+using SyncVPN.Client.Logic.Connection.Contracts.Messages;
 using SyncVPN.Client.Logic.Users.Contracts.Messages;
 using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.Client.UI.Main.Settings;
@@ -36,7 +37,8 @@ using SyncVPN.Client.UI.Main.Sidebar.Connections.Countries;
 namespace SyncVPN.Client.UI.Main.Sidebar;
 
 public partial class SidebarComponentViewModel : ActivatableViewModelBase,
-    IEventMessageReceiver<VpnPlanChangedMessage>
+    IEventMessageReceiver<VpnPlanChangedMessage>,
+    IEventMessageReceiver<AccountUsageChangedMessage>
 {
     private readonly IMainViewNavigator _mainViewNavigator;
     private readonly IConnectionsViewNavigator _connectionsViewNavigator;
@@ -68,17 +70,11 @@ public partial class SidebarComponentViewModel : ActivatableViewModelBase,
 
     public bool IsSettingsSelected => SelectedSection == SidebarSection.Settings;
 
-    // The following are static placeholders: this app has no daily-data-quota
-    // tracking backend, so these values aren't wired to any real usage data.
-    public string DailyDataUsageText => "512 MB / 512 MB";
-
-    public double DailyDataUsageValue => 512;
-
-    public double DailyDataUsageMaximum => 512;
-
-    public string DailyDataUsedText => "0%";
-
-    public string ResetsInText => "23:59:59";
+    // Real running totals from POST /account/usage (see UsageReportingObserver), persisted so there's a
+    // figure to show immediately on startup rather than nothing while waiting for the first report of the
+    // session. There's no quota/cap or reset time in that API - just the account's cumulative usage - so
+    // this shows total data used, not a "used of X, resets in Y" figure.
+    public string DailyDataUsageText => FormatMb((_settings.SyncVpnAccountSentMb ?? 0) + (_settings.SyncVpnAccountReceivedMb ?? 0));
 
     public SidebarComponentViewModel(
         IMainViewNavigator mainViewNavigator,
@@ -104,6 +100,18 @@ public partial class SidebarComponentViewModel : ActivatableViewModelBase,
     public void Receive(VpnPlanChangedMessage message)
     {
         ExecuteOnUIThread(InvalidatePlan);
+    }
+
+    public void Receive(AccountUsageChangedMessage message)
+    {
+        ExecuteOnUIThread(() => OnPropertyChanged(nameof(DailyDataUsageText)));
+    }
+
+    private static string FormatMb(double totalMb)
+    {
+        return totalMb >= 1024
+            ? $"{totalMb / 1024:0.##} GB"
+            : $"{totalMb:0.#} MB";
     }
 
     [RelayCommand]

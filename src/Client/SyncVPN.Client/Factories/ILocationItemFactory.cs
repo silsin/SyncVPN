@@ -17,6 +17,7 @@
  * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+using ServerListItem = SyncVPN.Api.V2.Contracts.Servers.ServerListItem;
 using SyncVPN.Client.Contracts.Enums;
 using SyncVPN.Client.Core.Enums;
 using SyncVPN.Client.Logic.Connection.Contracts.Enums;
@@ -41,6 +42,8 @@ public interface ILocationItemFactory
     CityLocationItem GetCity(City city, bool showBaseLocation = false, bool isSearchItem = false);
 
     ServerLocationItem GetServer(Server server, bool isSearchItem = false);
+
+    SyncVpnServerLocationItem GetSyncVpnServer(ServerListItem server);
 
     SecureCoreCountryLocationItem GetSecureCoreCountry(Country country, bool isSearchItem = false);
 

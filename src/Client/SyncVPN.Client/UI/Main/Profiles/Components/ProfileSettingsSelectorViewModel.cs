@@ -28,9 +28,11 @@ using SyncVPN.Client.Core.Bases.ViewModels;
 using SyncVPN.Client.Core.Services.Activation;
 using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Factories;
+using SyncVPN.Client.Logic.Connection.RequestCreators;
 using SyncVPN.Client.Logic.Profiles.Contracts.Models;
 using SyncVPN.Client.Logic.Users.Contracts.Messages;
 using SyncVPN.Client.Models.Settings;
+using SyncVPN.Client.Services.FreeServers;
 using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.Client.Settings.Contracts.Enums;
 using SyncVPN.Client.Settings.Contracts.RequiredReconnections;
@@ -48,6 +50,7 @@ public partial class ProfileSettingsSelectorViewModel : ViewModelBase,
     private readonly IRequiredReconnectionSettings _requiredReconnectionSettings;
     private readonly IMainWindowOverlayActivator _mainWindowOverlayActivator;
     private readonly IUrlsBrowser _urlsBrowser;
+    private readonly IFreeServersCache _freeServersCache;
 
     private IProfileSettings _originalProfileSettings = ProfileSettings.Default;
 
@@ -96,7 +99,8 @@ public partial class ProfileSettingsSelectorViewModel : ViewModelBase,
         ICommonItemFactory commonItemFactory,
         IRequiredReconnectionSettings requiredReconnectionSettings,
         IMainWindowOverlayActivator mainWindowOverlayActivator,
-        IUrlsBrowser urlsBrowser)
+        IUrlsBrowser urlsBrowser,
+        IFreeServersCache freeServersCache)
         : base(viewModelHelper)
     {
         _settings = settings;
@@ -104,6 +108,7 @@ public partial class ProfileSettingsSelectorViewModel : ViewModelBase,
         _requiredReconnectionSettings = requiredReconnectionSettings;
         _mainWindowOverlayActivator = mainWindowOverlayActivator;
         _urlsBrowser = urlsBrowser;
+        _freeServersCache = freeServersCache;
     }
 
     public IProfileSettings GetProfileSettings()
@@ -156,14 +161,23 @@ public partial class ProfileSettingsSelectorViewModel : ViewModelBase,
         });
     }
 
-    private static IEnumerable<VpnProtocol> GetProtocolsByOrder()
+    // Smart is always offered (client-side mode, not a wire protocol); every other value is hidden
+    // unless at least one cached server actually advertises it - mirrors ProtocolSettingsPageViewModel's
+    // filtering so both protocol pickers in the app always agree on what's actually connectable.
+    private IEnumerable<VpnProtocol> GetProtocolsByOrder()
     {
         yield return VpnProtocol.Smart;
-        yield return VpnProtocol.WireGuardUdp;
-        yield return VpnProtocol.WireGuardTcp;
-        yield return VpnProtocol.WireGuardTls;
-        yield return VpnProtocol.OpenVpnUdp;
-        yield return VpnProtocol.OpenVpnTcp;
+
+        foreach (VpnProtocol protocol in (VpnProtocol[])
+                 [VpnProtocol.WireGuardUdp, VpnProtocol.WireGuardTcp, VpnProtocol.WireGuardTls,
+                  VpnProtocol.OpenVpnUdp, VpnProtocol.OpenVpnTcp, VpnProtocol.L2tp, VpnProtocol.Sstp])
+        {
+            string? wireProtocol = SyncVpnAccountClaimMapper.MapToWireProtocol(protocol);
+            if (wireProtocol is not null && _freeServersCache.IsProtocolAvailable(wireProtocol))
+            {
+                yield return protocol;
+            }
+        }
     }
 
     private static IEnumerable<NetShieldMode?> GetNetShieldModesByOrder()
@@ -372,6 +386,18 @@ public partial class ProfileSettingsSelectorViewModel : ViewModelBase,
     private void SelectOpenVpnTcpProtocol()
     {
         SelectProtocol(VpnProtocol.OpenVpnTcp);
+    }
+
+    [RelayCommand]
+    private void SelectL2tpProtocol()
+    {
+        SelectProtocol(VpnProtocol.L2tp);
+    }
+
+    [RelayCommand]
+    private void SelectSstpProtocol()
+    {
+        SelectProtocol(VpnProtocol.Sstp);
     }
 
     private void SelectProtocol(VpnProtocol protocol)

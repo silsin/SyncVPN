@@ -38,7 +38,10 @@ public class UserHashGenerator : IUserHashGenerator
 
     public string? Generate()
     {
-        string? userId = _globalSettings.UserId;
-        return userId is null ? null : _sha1Calculator.Hash(userId);
+        // Falls back to the (also persistent) SyncVpnDeviceId when nobody is logged in, so
+        // per-user settings (UserFileReaderWriter) still have somewhere to persist for the
+        // anonymous free-tier flow instead of failing every write - see UserFileReaderWriter.
+        string? id = _globalSettings.UserId ?? _globalSettings.SyncVpnDeviceId;
+        return id is null ? null : _sha1Calculator.Hash(id);
     }
 }

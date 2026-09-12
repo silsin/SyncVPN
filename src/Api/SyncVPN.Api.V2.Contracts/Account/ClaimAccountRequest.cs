@@ -23,7 +23,8 @@ namespace SyncVPN.Api.V2.Contracts.Account;
 
 // POST /account - claims (creates, retrieves, or changes) the current device's VPN account on a
 // specific server. An empty request retrieves the existing active account for this Deviceid, if any.
-// Transport is required for OpenVpn and must be omitted for WireGuard, per the API contract.
+// Transport is only valid for OpenVpn and must be omitted for WireGuard, L2tp, and Sstp, per the API
+// contract.
 public class ClaimAccountRequest
 {
     [JsonProperty("server_id", NullValueHandling = NullValueHandling.Ignore)]
@@ -58,6 +59,8 @@ public static class SyncVpnProtocols
 {
     public const string WireGuard = "WireGuard";
     public const string OpenVpn = "OpenVpn";
+    public const string L2tp = "L2tp";
+    public const string Sstp = "Sstp";
 }
 
 public static class SyncVpnTransports

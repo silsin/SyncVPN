@@ -22,9 +22,11 @@ using SyncVPN.Client.Contracts.Services.Browsing;
 using SyncVPN.Client.Contracts.Services.Lifecycle;
 using SyncVPN.Client.Core.Bases;
 using SyncVPN.Client.Core.Bases.ViewModels;
+using SyncVPN.Client.Core.Services.Navigation;
 using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Localization.Extensions;
 using SyncVPN.Client.Logic.Auth.Contracts;
+using SyncVPN.Client.Logic.Auth.Contracts.Messages;
 using SyncVPN.Client.Logic.Users.Contracts.Messages;
 using SyncVPN.Client.Services.SignoutHandling;
 using SyncVPN.Client.Settings.Contracts;
@@ -33,12 +35,15 @@ using SyncVPN.Client.Settings.Contracts.Extensions;
 namespace SyncVPN.Client.UI.Main.Settings.Pages;
 
 public partial class UserDetailsComponentViewModel : PageViewModelBase,
-    IEventMessageReceiver<VpnPlanChangedMessage>
+    IEventMessageReceiver<VpnPlanChangedMessage>,
+    IEventMessageReceiver<AuthenticationStatusChanged>
 {
     private readonly IUrlsBrowser _urlsBrowser;
     private readonly ISignOutHandler _signoutHandler;
     private readonly ISettings _settings;
     private readonly IWebAuthenticator _webAuthenticator;
+    private readonly IUserAuthenticator _userAuthenticator;
+    private readonly IMainWindowViewNavigator _mainWindowViewNavigator;
     private readonly IAppExitInvoker _appExitInvoker;
 
     public string Username => _settings.GetUsername();
@@ -49,11 +54,18 @@ public partial class UserDetailsComponentViewModel : PageViewModelBase,
 
     public bool IsProtonPlan => _settings.VpnPlan.IsProtonPlan;
 
+    // Guest devices (no real Proton/SyncVPN account - just the new backend's free-server access) have no
+    // account page to open and nothing to sign out of - the flyout hides "Account" and swaps "Sign out"
+    // for "Sign in" for them.
+    public bool IsLoggedIn => _userAuthenticator.IsLoggedIn;
+
     public UserDetailsComponentViewModel(
         IUrlsBrowser urlsBrowser,
         ISignOutHandler signoutHandler,
         ISettings settings,
         IWebAuthenticator webAuthenticator,
+        IUserAuthenticator userAuthenticator,
+        IMainWindowViewNavigator mainWindowViewNavigator,
         IAppExitInvoker appExitInvoker,
         IViewModelHelper viewModelHelper)
         : base(viewModelHelper)
@@ -62,17 +74,33 @@ public partial class UserDetailsComponentViewModel : PageViewModelBase,
         _signoutHandler = signoutHandler;
         _settings = settings;
         _webAuthenticator = webAuthenticator;
+        _userAuthenticator = userAuthenticator;
+        _mainWindowViewNavigator = mainWindowViewNavigator;
         _appExitInvoker = appExitInvoker;
     }
 
     public void Receive(VpnPlanChangedMessage message)
     {
-        ExecuteOnUIThread(() =>
-        {
-            OnPropertyChanged(nameof(IsVpnPlan));
-            OnPropertyChanged(nameof(IsProtonPlan));
-            OnPropertyChanged(nameof(VpnPlan));
-        });
+        ExecuteOnUIThread(RefreshAccountState);
+    }
+
+    // VpnPlanChangedMessage above covers legacy logins (their plan-refresh step sends it), but
+    // OnSyncVpnLoginSucceeded (UserAuthenticator.cs) never sends it - only AuthenticationStatusChanged is
+    // reliably raised for every login path, SyncVPN included. Without this, a successful SyncVPN sign-in
+    // (password or code) would leave this button showing "guest"/"Sign in" indefinitely, even though
+    // IUserAuthenticator.IsLoggedIn already flipped to true internally.
+    public void Receive(AuthenticationStatusChanged message)
+    {
+        ExecuteOnUIThread(RefreshAccountState);
+    }
+
+    private void RefreshAccountState()
+    {
+        OnPropertyChanged(nameof(IsVpnPlan));
+        OnPropertyChanged(nameof(IsProtonPlan));
+        OnPropertyChanged(nameof(VpnPlan));
+        OnPropertyChanged(nameof(IsLoggedIn));
+        OnPropertyChanged(nameof(Username));
     }
 
     protected override void OnLanguageChanged()
@@ -98,5 +126,11 @@ public partial class UserDetailsComponentViewModel : PageViewModelBase,
     private Task SignOutAsync()
     {
         return _signoutHandler.SignOutAsync();
+    }
+
+    [RelayCommand]
+    private Task SignInAsync()
+    {
+        return _mainWindowViewNavigator.NavigateToLoginViewAsync();
     }
 }

@@ -43,6 +43,10 @@ public partial class ConnectionGroup : List<ConnectionItemBase>
 
     public string Header => Localizer.GetConnectionGroupName(GroupType, ItemsCount);
 
+    public bool IsFreeServersGroup => GroupType == ConnectionGroupType.FreeServers;
+
+    public bool IsPremiumLocationsGroup => GroupType == ConnectionGroupType.PremiumLocations;
+
     public virtual bool IsInfoButtonVisible => GroupType.IsInfoButtonVisible();
 
     public virtual bool IsServerLoadInfoButtonVisible => !IsInfoButtonVisible && GroupType.IsServerLoadInfoButtonVisible();

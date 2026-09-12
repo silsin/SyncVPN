@@ -55,6 +55,7 @@ public class ConnectionLogicModule : Module
         builder.RegisterType<ConnectionStatisticalEventsManager>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<RestrictionsObserver>().AsImplementedInterfaces().SingleInstance().AutoActivate();
         builder.RegisterType<ExclusionChecker>().AsImplementedInterfaces().SingleInstance();
+        builder.RegisterType<UsageReportingObserver>().AsImplementedInterfaces().AutoActivate().SingleInstance();
 
         RegisterRequestCreators(builder);
         RegisterServerListGenerators(builder);

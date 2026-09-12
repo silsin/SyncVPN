@@ -54,6 +54,7 @@ using SyncVPN.Client.Services.Dispatching;
 using SyncVPN.Client.Services.DnsFilters;
 using SyncVPN.Client.Services.Edition;
 using SyncVPN.Client.Services.Enabling;
+using SyncVPN.Client.Services.FreeServers;
 using SyncVPN.Client.Services.Lifecycle;
 using SyncVPN.Client.Services.LocationExclusion;
 using SyncVPN.Client.Services.Mapping;
@@ -90,13 +91,13 @@ using SyncVPN.Client.UI.Main.Features.NetShield;
 using SyncVPN.Client.UI.Main.Features.PortForwarding;
 using SyncVPN.Client.UI.Main.Features.SplitTunneling;
 using SyncVPN.Client.UI.Main.Home;
+using SyncVPN.Client.UI.Main.Home.FreeServers;
 using SyncVPN.Client.UI.Main.Home.Card;
 using SyncVPN.Client.UI.Main.Home.Card.DefaultConnections;
 using SyncVPN.Client.UI.Main.Home.Details;
 using SyncVPN.Client.UI.Main.Home.Details.Connection;
 using SyncVPN.Client.UI.Main.Home.Details.Flyouts;
 using SyncVPN.Client.UI.Main.Home.Details.Location;
-using SyncVPN.Client.UI.Main.Home.SearchBar;
 using SyncVPN.Client.UI.Main.Home.Status;
 using SyncVPN.Client.UI.Main.Home.Upsell;
 using SyncVPN.Client.UI.Main.Map;
@@ -234,6 +235,8 @@ public class AppModule : Module
         builder.RegisterType<Bootstrapper>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<AppProtocolActivator>().AsImplementedInterfaces().SingleInstance().AutoActivate();
         builder.RegisterType<AppStartupActivator>().AsImplementedInterfaces().SingleInstance().AutoActivate();
+        builder.RegisterType<FreeServersCache>().AsImplementedInterfaces().SingleInstance();
+        builder.RegisterType<FreeServersObserver>().AsImplementedInterfaces().SingleInstance().AutoActivate();
         builder.RegisterType<PageViewMapper>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<OverlayViewMapper>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<UIThreadDispatcher>().AsImplementedInterfaces().SingleInstance();
@@ -334,6 +337,7 @@ public class AppModule : Module
         RegisterViewModel<LoginPageViewModel>(builder);
         RegisterViewModel<SignInPageViewModel>(builder);
         RegisterViewModel<TwoFactorPageViewModel>(builder);
+        RegisterViewModel<CodeLoginPageViewModel>(builder);
         RegisterViewModel<LoadingPageViewModel>(builder);
         RegisterViewModel<DisableKillSwitchBannerViewModel>(builder);
 
@@ -357,8 +361,8 @@ public class AppModule : Module
         RegisterViewModel<TorCountriesComponentViewModel>(builder);
         RegisterViewModel<SearchResultsPageViewModel>(builder);
         RegisterViewModel<HomeComponentViewModel>(builder);
+        RegisterViewModel<HomeFreeServersSectionViewModel>(builder);
         RegisterViewModel<MapComponentViewModel>(builder).AutoActivate();
-        RegisterViewModel<HomeSearchBarComponentViewModel>(builder);
         RegisterViewModel<ConnectionCardComponentViewModel>(builder);
         RegisterViewModel<DefaultConnectionSelectorViewModel>(builder);
         RegisterViewModel<ChangeServerComponentViewModel>(builder);
@@ -454,7 +458,6 @@ public class AppModule : Module
         RegisterViewModel<CountryFlyoutViewModel>(builder);
         RegisterViewModel<IspFlyoutViewModel>(builder);
         RegisterViewModel<ServerLoadFlyoutViewModel>(builder);
-        RegisterViewModel<FreeServersFlyoutViewModel>(builder);
         RegisterViewModel<ProtocolFlyoutViewModel>(builder);
         RegisterViewModel<VolumeFlyoutViewModel>(builder).AutoActivate();
         RegisterViewModel<SpeedFlyoutViewModel>(builder).AutoActivate();

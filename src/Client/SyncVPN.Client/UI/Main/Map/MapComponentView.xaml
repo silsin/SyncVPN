@@ -27,9 +27,13 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
              x:DefaultBindMode="OneWay"
              mc:Ignorable="d">
 
-    <map:MapControl Countries="{x:Bind ViewModel.Countries}"
+    <!--  No overlay button here - HomeComponentView (the only place this is used) layers opaque/  -->
+    <!--  gradient chrome (title bar backdrop, status gradient) on top of this control, so a button  -->
+    <!--  added here would render underneath that chrome instead of being visible. See MapConnectButton  -->
+    <!--  in HomeComponentView.xaml, added after those overlays instead.  -->
+    <map:MapControl x:Name="Map"
+                    Countries="{x:Bind ViewModel.Countries}"
                     CurrentCountry="{x:Bind ViewModel.CurrentCountry}"
-                    ConnectCommand="{x:Bind ViewModel.ConnectCommand}"
                     IsConnected="{x:Bind ViewModel.IsConnected}"
                     IsConnecting="{x:Bind ViewModel.IsConnecting}"
                     IsDisconnected="{x:Bind ViewModel.IsDisconnected}"

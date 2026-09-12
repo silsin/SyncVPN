@@ -164,10 +164,64 @@ public class GlobalSettings : IGlobalSettings
         set => _globalCache.SetReferenceType(value, SettingEncryption.Unencrypted);
     }
 
+    public string? SyncVpnPushToken
+    {
+        get => _globalCache.GetReferenceType<string>(SettingEncryption.Unencrypted);
+        set => _globalCache.SetReferenceType(value, SettingEncryption.Unencrypted);
+    }
+
+    public string? SyncVpnOneSignalSubscriptionId
+    {
+        get => _globalCache.GetReferenceType<string>(SettingEncryption.Unencrypted);
+        set => _globalCache.SetReferenceType(value, SettingEncryption.Unencrypted);
+    }
+
     public string? SyncVpnDeviceToken
     {
         get => _globalCache.GetReferenceType<string>(SettingEncryption.Encrypted);
         set => _globalCache.SetReferenceType(value, SettingEncryption.Encrypted);
+    }
+
+    public string? SyncVpnUserName
+    {
+        get => _globalCache.GetReferenceType<string>(SettingEncryption.Encrypted);
+        set => _globalCache.SetReferenceType(value, SettingEncryption.Encrypted);
+    }
+
+    public string? SyncVpnUserEmail
+    {
+        get => _globalCache.GetReferenceType<string>(SettingEncryption.Encrypted);
+        set => _globalCache.SetReferenceType(value, SettingEncryption.Encrypted);
+    }
+
+    public string? SyncVpnUserPhone
+    {
+        get => _globalCache.GetReferenceType<string>(SettingEncryption.Encrypted);
+        set => _globalCache.SetReferenceType(value, SettingEncryption.Encrypted);
+    }
+
+    public string? SyncVpnUserAddress
+    {
+        get => _globalCache.GetReferenceType<string>(SettingEncryption.Encrypted);
+        set => _globalCache.SetReferenceType(value, SettingEncryption.Encrypted);
+    }
+
+    public string? SyncVpnReferralCode
+    {
+        get => _globalCache.GetReferenceType<string>(SettingEncryption.Unencrypted);
+        set => _globalCache.SetReferenceType(value, SettingEncryption.Unencrypted);
+    }
+
+    public double? SyncVpnAccountSentMb
+    {
+        get => _globalCache.GetValueType<double>(SettingEncryption.Unencrypted);
+        set => _globalCache.SetValueType(value, SettingEncryption.Unencrypted);
+    }
+
+    public double? SyncVpnAccountReceivedMb
+    {
+        get => _globalCache.GetValueType<double>(SettingEncryption.Unencrypted);
+        set => _globalCache.SetValueType(value, SettingEncryption.Unencrypted);
     }
 
     public bool AreAutomaticUpdatesEnabled

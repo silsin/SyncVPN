@@ -27,10 +27,10 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
              xmlns:connection="using:SyncVPN.Client.UI.Main.Home.Details.Connection"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:details="using:SyncVPN.Client.UI.Main.Home.Details"
+             xmlns:freeservers="using:SyncVPN.Client.UI.Main.Home.FreeServers"
              xmlns:local="using:SyncVPN.Client.UI.Main.Home"
              xmlns:map="using:SyncVPN.Client.UI.Main.Map"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:searchbar="using:SyncVPN.Client.UI.Main.Home.SearchBar"
              xmlns:status="using:SyncVPN.Client.UI.Main.Home.Status"
              xmlns:update="using:SyncVPN.Client.UI.Update"
              x:DefaultBindMode="OneWay"
@@ -43,6 +43,8 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
         <x:Double x:Key="FadeInOpacity">1</x:Double>
         <x:Double x:Key="FadeOutOpacity">0.4</x:Double>
 
+        <x:Double x:Key="FreeServersSectionWidth">320.0</x:Double>
+
         <Duration x:Key="OpacityAnimationDuration">0:0:5</Duration>
     </UserControl.Resources>
 
@@ -51,7 +53,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
             <ColumnDefinition Width="0" />
             <ColumnDefinition Width="{x:Bind SidebarWidth, Converter={StaticResource DoubleToPixelGridLengthConverter}}" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="0" />
+            <ColumnDefinition Width="320" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -70,6 +72,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                               Grid.ColumnSpan="4"
                               BottomOffset="{x:Bind MapBottomOffset}"
                               LeftOffset="{x:Bind SidebarWidth}"
+                              RightOffset="{StaticResource FreeServersSectionWidth}"
                               TopOffset="{x:Bind MapTopOffset}" />
 
         <!--  Opaque backdrop behind the (transparent, content-blended) OS title bar row,  -->
@@ -99,6 +102,101 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                 Background="{ThemeResource ReverseGradientFadingColorBrush}"
                 IsHitTestVisible="False" />
 
+        <!--  Persistent Connect card, always visible at the top of the map. Placed here rather than inside  -->
+        <!--  MapComponentView itself so it renders after (on top of) the opaque title-bar backdrop and  -->
+        <!--  status gradient above, which would otherwise cover it.  -->
+        <Border x:Name="MapConnectButtonContainer"
+               Grid.Row="1"
+               Grid.Column="2"
+               Margin="0,16,0,0"
+               Padding="20,16"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top"
+               BorderBrush="{ThemeResource PaneOverlayBorderColorBrush}"
+               BorderThickness="1"
+               CornerRadius="16">
+
+            <!--  A plain low-alpha fill rather than AcrylicBrush (used elsewhere in the app for this same  -->
+            <!--  "glass panel" look) - Acrylic's live blur depends on DWM compositor support that isn't  -->
+            <!--  available in every environment (e.g. some Remote Desktop sessions), where it silently  -->
+            <!--  falls back to a fully opaque FallbackColor instead of blurring. A semi-transparent solid  -->
+            <!--  color has no such fallback - it always shows the map through it.  -->
+            <Border.Background>
+                <SolidColorBrush Opacity="0.18" Color="{ThemeResource BackgroundNormColor}" />
+            </Border.Background>
+
+
+            <StackPanel HorizontalAlignment="Center"
+                       Spacing="12">
+
+                <!--  A pin tap (MapView.ViewModel.SelectedCountry, set in MapComponentView.xaml.cs) or picking  -->
+                <!--  a server from the Free servers list (MapLocationSelectedMessage, see  -->
+                <!--  MapComponentViewModel) both feed MapView.ViewModel.SelectedCountry - name it here above  -->
+                <!--  the button, taking priority over the default/Cancel/Disconnect group below.  -->
+                <StackPanel HorizontalAlignment="Center"
+                           Spacing="2"
+                           Visibility="{x:Bind MapView.ViewModel.HasSelectedCountry, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock HorizontalAlignment="Center"
+                              Foreground="{ThemeResource TextWeakColorBrush}"
+                              Style="{StaticResource CaptionTextBlockStyle}"
+                              Text="{x:Bind ConnectionCardComponent.ViewModel.Localizer.Get('Map_SelectedLocation_Label')}" />
+                    <TextBlock MaxWidth="260"
+                              HorizontalAlignment="Center"
+                              Style="{StaticResource BodyMediumStrongTextBlockStyle}"
+                              Text="{x:Bind MapView.ViewModel.SelectedCountry.Name}"
+                              TextTrimming="CharacterEllipsis"
+                              TextWrapping="NoWrap" />
+                </StackPanel>
+
+                <Button x:Name="MapSelectedConnectButton"
+                        MinWidth="220"
+                        AutomationProperties.AutomationId="MapSelectedConnectButton"
+                        Command="{x:Bind MapView.ViewModel.ConnectCommand, Mode=OneTime}"
+                        CommandParameter="{x:Bind MapView.ViewModel.SelectedCountry}"
+                        Content="{x:Bind ConnectionCardComponent.ViewModel.Localizer.Get('Common_Actions_Connect')}"
+                        Style="{StaticResource LargePrimaryButtonStyle}"
+                        Visibility="{x:Bind MapView.ViewModel.HasSelectedCountry, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                <StackPanel Spacing="12"
+                           Visibility="{x:Bind MapView.ViewModel.HasSelectedCountry, Converter={StaticResource NotBooleanToVisibilityConverter}}">
+
+                    <!--  Only meaningful while actually disconnected - once connecting/connected the buttons  -->
+                    <!--  below already make the state obvious, so this would just be redundant clutter.  -->
+                    <TextBlock HorizontalAlignment="Center"
+                              Foreground="{ThemeResource TextWeakColorBrush}"
+                              Style="{StaticResource CaptionTextBlockStyle}"
+                              Text="{x:Bind ConnectionCardComponent.ViewModel.Localizer.Get('Map_PleaseSelectServer_Label')}"
+                              Visibility="{x:Bind ConnectionCardComponent.ViewModel.IsDisconnected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                    <Grid>
+                        <Button x:Name="MapDefaultConnectButton"
+                                MinWidth="220"
+                                AutomationProperties.AutomationId="MapDefaultConnectButton"
+                                Command="{x:Bind ConnectionCardComponent.ViewModel.ConnectCommand, Mode=OneTime}"
+                                Content="{x:Bind ConnectionCardComponent.ViewModel.Localizer.Get('Common_Actions_Connect')}"
+                                Style="{StaticResource LargePrimaryButtonStyle}"
+                                Visibility="{x:Bind ConnectionCardComponent.ViewModel.IsDisconnected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                        <Button x:Name="MapCancelConnectionButton"
+                                MinWidth="220"
+                                AutomationProperties.AutomationId="MapCancelConnectionButton"
+                                Command="{x:Bind ConnectionCardComponent.ViewModel.CancelConnectionCommand, Mode=OneTime}"
+                                Content="{x:Bind ConnectionCardComponent.ViewModel.Localizer.Get('Common_Actions_Cancel')}"
+                                Style="{StaticResource LargePrimaryButtonStyle}"
+                                Visibility="{x:Bind ConnectionCardComponent.ViewModel.IsConnecting, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                        <Button x:Name="MapDisconnectButton"
+                                MinWidth="220"
+                                AutomationProperties.AutomationId="MapDisconnectButton"
+                                Command="{x:Bind ConnectionCardComponent.ViewModel.DisconnectCommand, Mode=OneTime}"
+                                Content="{x:Bind ConnectionCardComponent.ViewModel.Localizer.Get('Common_Actions_Disconnect')}"
+                                Style="{StaticResource LargePrimaryButtonStyle}"
+                                Visibility="{x:Bind ConnectionCardComponent.ViewModel.IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
         <!--  Banner + bottom bar container background  -->
         <Border Grid.Row="4"
                 Grid.RowSpan="2"
@@ -107,12 +205,26 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                 Background="{ThemeResource ReverseStrongGradientFadingColorBrush}"
                 IsHitTestVisible="False" />
 
-        <searchbar:HomeSearchBarComponentView x:Name="HomeSearchBarComponent"
-                                              Grid.Row="1"
-                                              Grid.Column="2"
-                                              MaxWidth="480"
-                                              Margin="0,16,0,0"
-                                              HorizontalAlignment="Center" />
+        <Grid Grid.Row="1"
+              Grid.RowSpan="5"
+              Grid.Column="3"
+              Margin="0,16,16,16"
+              RowSpacing="12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <freeservers:HomeFreeServersSectionView x:Name="HomeFreeServersSection"
+                                                    Grid.Row="0"
+                                                    HorizontalAlignment="Stretch"
+                                                    VerticalAlignment="Stretch" />
+
+            <details:DetailsComponentView x:Name="DetailsComponent"
+                                          Grid.Row="1"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch" />
+        </Grid>
 
         <bottombar:HomeBottomBarComponentView x:Name="ConnectionCardComponent"
                                               Grid.Row="5"
@@ -129,20 +241,6 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                                              Margin="0,1,0,0"
                                              HorizontalAlignment="Center"
                                              VerticalAlignment="Top" />
-
-        <components:ServiceDisabledBannerComponent x:Name="ServiceDisabledBannerComponent"
-                                                    Grid.Row="1"
-                                                    Grid.RowSpan="4"
-                                                    Grid.Column="2"
-                                                    MaxWidth="{StaticResource MaximumHomePageContentWidth}"
-                                                    Margin="0,1,0,0"
-                                                    HorizontalAlignment="Center"
-                                                    VerticalAlignment="Top" />
-
-        <details:DetailsComponentView x:Name="DetailsComponent"
-                                      Grid.Row="3"
-                                      Grid.Column="2"
-                                      MaxWidth="{StaticResource MaximumHomePageContentWidth}" />
 
         <StackPanel x:Name="BannersContainer"
                     Grid.Row="4"
@@ -179,9 +277,10 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="ConnectionCardComponent.Opacity" Value="{StaticResource FadeInOpacity}" />
-                        <Setter Target="HomeSearchBarComponent.Opacity" Value="{StaticResource FadeInOpacity}" />
+                        <Setter Target="HomeFreeServersSection.Opacity" Value="{StaticResource FadeInOpacity}" />
                         <Setter Target="ConnectionErrorComponent.Opacity" Value="{StaticResource FadeInOpacity}" />
                         <Setter Target="MapView.Opacity" Value="{StaticResource FadeInOpacity}" />
+                        <Setter Target="MapConnectButtonContainer.Opacity" Value="{StaticResource FadeInOpacity}" />
                         <Setter Target="DetailsComponent.Opacity" Value="{StaticResource FadeInOpacity}" />
                         <Setter Target="BannersContainer.Opacity" Value="{StaticResource FadeInOpacity}" />
                         <Setter Target="DetailsComponent.IsEnabled" Value="True" />
@@ -193,9 +292,10 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="ConnectionCardComponent.Opacity" Value="{StaticResource FadeOutOpacity}" />
-                        <Setter Target="HomeSearchBarComponent.Opacity" Value="{StaticResource FadeOutOpacity}" />
+                        <Setter Target="HomeFreeServersSection.Opacity" Value="{StaticResource FadeOutOpacity}" />
                         <Setter Target="ConnectionErrorComponent.Opacity" Value="{StaticResource FadeOutOpacity}" />
                         <Setter Target="MapView.Opacity" Value="{StaticResource FadeOutOpacity}" />
+                        <Setter Target="MapConnectButtonContainer.Opacity" Value="{StaticResource FadeOutOpacity}" />
                         <Setter Target="DetailsComponent.Opacity" Value="{StaticResource FadeOutOpacity}" />
                         <Setter Target="BannersContainer.Opacity" Value="{StaticResource FadeOutOpacity}" />
                         <Setter Target="DetailsComponent.IsEnabled" Value="False" />

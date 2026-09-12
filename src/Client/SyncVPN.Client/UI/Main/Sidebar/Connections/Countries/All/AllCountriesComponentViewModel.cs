@@ -20,8 +20,10 @@
 using SyncVPN.Client.Core.Bases;
 using SyncVPN.Client.Core.Enums;
 using SyncVPN.Client.Factories;
+using SyncVPN.Client.Logic.Auth.Contracts;
 using SyncVPN.Client.Logic.Servers.Contracts;
 using SyncVPN.Client.Models.Connections;
+using SyncVPN.Client.Services.FreeServers;
 using SyncVPN.Client.Services.Upselling;
 using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.Client.UI.Main.Sidebar.Connections.Bases.ViewModels;
@@ -31,6 +33,9 @@ namespace SyncVPN.Client.UI.Main.Sidebar.Connections.Countries.All;
 
 public class AllCountriesComponentViewModel : CountriesComponentViewModelBase
 {
+    private readonly IFreeServersCache _freeServersCache;
+    private readonly IUserAuthenticator _userAuthenticator;
+
     public override CountriesConnectionType ConnectionType { get; } = CountriesConnectionType.All;
 
     public override string Header => Localizer.Get("Countries_All");
@@ -41,12 +46,16 @@ public class AllCountriesComponentViewModel : CountriesComponentViewModelBase
 
     public override bool IsInfoBannerVisible => false;
 
+    public bool IsFreePlanBannerVisible => !Settings.VpnPlan.IsPaid;
+
     protected override ModalSource UpsellModalSource => ModalSource.Countries;
 
     public AllCountriesComponentViewModel(
         ISettings settings,
         IServersLoader serversLoader,
         ILocationItemFactory locationItemFactory,
+        IFreeServersCache freeServersCache,
+        IUserAuthenticator userAuthenticator,
         IViewModelHelper viewModelHelper,
         IAccountUpgradeUrlLauncher accountUpgradeUrlLauncher)
         : base(settings,
@@ -54,18 +63,36 @@ public class AllCountriesComponentViewModel : CountriesComponentViewModelBase
                locationItemFactory,
                viewModelHelper,
                accountUpgradeUrlLauncher)
-    { }
+    {
+        _freeServersCache = freeServersCache;
+        _userAuthenticator = userAuthenticator;
+    }
 
     public override IEnumerable<ConnectionItemBase> GetItems()
     {
+        // Anonymous/logged-out sessions only ever have the new backend's free-server catalog to show -
+        // no legacy Proton countries (requires login), no plan to gate Pro rows against - so only the
+        // free subset is shown; a Pro row here would imply an unlockable server with nothing behind it.
+        if (!_userAuthenticator.IsLoggedIn)
+        {
+            return _freeServersCache.GetServers()
+                                     .Where(s => s.Free == 1)
+                                     .Select(s => LocationItemFactory.GetSyncVpnServer(s));
+        }
+
         IEnumerable<ConnectionItemBase> genericCountries = base.GetItems();
 
         IEnumerable<ConnectionItemBase> countries =
             ServersLoader.GetCountries()
                          .Select(c => LocationItemFactory.GetCountry(c));
 
+        IEnumerable<ConnectionItemBase> syncVpnServers =
+            _freeServersCache.GetServers()
+                              .Select(s => LocationItemFactory.GetSyncVpnServer(s));
+
         return genericCountries
-            .Concat(countries);
+            .Concat(countries)
+            .Concat(syncVpnServers);
     }
 
     protected override void DismissInfoBanner()

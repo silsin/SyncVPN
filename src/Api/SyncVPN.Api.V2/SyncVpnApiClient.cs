@@ -90,35 +90,35 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
 
     public async Task<ApiResponseResult<ServerListResponse>> GetProServersAsync(CancellationToken cancellationToken = default)
     {
-        using HttpRequestMessage request = CreateRequest(HttpMethod.Get, "servers/pro", requireDeviceToken: true);
+        using HttpRequestMessage request = CreateRequest(HttpMethod.Get, "servers/pro");
         using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
         return await ReadResponseAsync<ServerListResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<FavoriteServersResponse>> GetFavoriteServersAsync(CancellationToken cancellationToken = default)
     {
-        using HttpRequestMessage request = CreateRequest(HttpMethod.Get, "servers/favorites", requireDeviceToken: true);
+        using HttpRequestMessage request = CreateRequest(HttpMethod.Get, "servers/favorites");
         using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
         return await ReadResponseAsync<FavoriteServersResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<FavoriteServerActionResponse>> AddFavoriteServerAsync(long serverId, CancellationToken cancellationToken = default)
     {
-        using HttpRequestMessage request = CreateRequest(HttpMethod.Post, $"servers/{serverId}/favorite", requireDeviceToken: true);
+        using HttpRequestMessage request = CreateRequest(HttpMethod.Post, $"servers/{serverId}/favorite");
         using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
         return await ReadResponseAsync<FavoriteServerActionResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<RemoveFavoriteServerResponse>> RemoveFavoriteServerAsync(long serverId, CancellationToken cancellationToken = default)
     {
-        using HttpRequestMessage request = CreateRequest(HttpMethod.Delete, $"servers/{serverId}/favorite", requireDeviceToken: true);
+        using HttpRequestMessage request = CreateRequest(HttpMethod.Delete, $"servers/{serverId}/favorite");
         using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
         return await ReadResponseAsync<RemoveFavoriteServerResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<RateServerResponse>> RateServerAsync(long serverId, int rate, CancellationToken cancellationToken = default)
     {
-        using HttpRequestMessage request = CreateRequest(HttpMethod.Post, $"servers/{serverId}/rate", requireDeviceToken: true);
+        using HttpRequestMessage request = CreateRequest(HttpMethod.Post, $"servers/{serverId}/rate");
         request.Content = new StringContent(JsonConvert.SerializeObject(new RateServerRequest { Rate = rate }), Encoding.UTF8, "application/json");
 
         using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
@@ -137,11 +137,22 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
 
     private async Task<ApiResponseResult<ClaimAccountResponse>> PostClaimAccountAsync(string path, object requestBody, CancellationToken cancellationToken)
     {
-        using HttpRequestMessage httpRequest = CreateRequest(HttpMethod.Post, path, requireDeviceToken: true);
+        using HttpRequestMessage httpRequest = CreateRequest(HttpMethod.Post, path);
         httpRequest.Content = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
 
         using HttpResponseMessage response = await _httpClient.SendAsync(httpRequest, cancellationToken);
         return await ReadResponseAsync<ClaimAccountResponse>(response, cancellationToken);
+    }
+
+    public async Task<ApiResponseResult<UsageReportResponse>> ReportUsageAsync(UsageReportRequest request, CancellationToken cancellationToken = default)
+    {
+        // Free accounts don't need a Bearer for this call, but a logged-in Pro device must send one -
+        // CreateRequest attaches it automatically whenever one is stored; the backend enforces the Pro requirement.
+        using HttpRequestMessage httpRequest = CreateRequest(HttpMethod.Post, "account/usage");
+        httpRequest.Content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+
+        using HttpResponseMessage response = await _httpClient.SendAsync(httpRequest, cancellationToken);
+        return await ReadResponseAsync<UsageReportResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<AccountDnsFilterResponse>> GetDnsFiltersAsync(CancellationToken cancellationToken = default)
@@ -153,11 +164,11 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
 
     public async Task<ApiResponseResult<UpdateAccountDnsFiltersResponse>> UpdateDnsFiltersAsync(DnsFilterPatch patch, CancellationToken cancellationToken = default)
     {
-        // Pro-gated: requires Authorization: Bearer <DeviceToken> in addition to Deviceid. Until Phase 4
-        // (auth) lands, SyncVpnDeviceToken is null and this will 401 - callers should surface that as
-        // "not logged in" rather than a generic failure.
+        // Pro-gated: requires Authorization: Bearer <DeviceToken> in addition to Deviceid, attached
+        // automatically by CreateRequest. A logged-out device (no SyncVpnDeviceToken) will 401 - callers
+        // should surface that as "not logged in" rather than a generic failure.
         UpdateAccountDnsFiltersRequest requestBody = new() { Filters = patch };
-        using HttpRequestMessage request = CreateRequest(HttpMethod.Patch, "account/dns-filters", requireDeviceToken: true);
+        using HttpRequestMessage request = CreateRequest(HttpMethod.Patch, "account/dns-filters");
         request.Content = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
 
         using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
@@ -174,9 +185,9 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
     public async Task<ApiResponseResult<PurchaseResponse>> SubmitPurchaseAsync(PurchaseRequest request, CancellationToken cancellationToken = default)
     {
         // Guest purchases don't require a device token, but a logged-in device should still send its
-        // bearer if it has one so the backend can attach the purchase to that user - attach
-        // opportunistically rather than requiring it.
-        using HttpRequestMessage httpRequest = CreateRequest(HttpMethod.Post, "purchases", attachDeviceTokenIfAvailable: true);
+        // bearer if it has one so the backend can attach the purchase to that user - CreateRequest
+        // attaches it automatically whenever one is stored, rather than requiring it.
+        using HttpRequestMessage httpRequest = CreateRequest(HttpMethod.Post, "purchases");
         httpRequest.Content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
         using HttpResponseMessage response = await _httpClient.SendAsync(httpRequest, cancellationToken);
@@ -185,7 +196,7 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
 
     public async Task<ApiResponseResult<TransactionListResponse>> GetTransactionsAsync(int page = 1, CancellationToken cancellationToken = default)
     {
-        using HttpRequestMessage request = CreateRequest(HttpMethod.Get, $"transactions?page={page}", requireDeviceToken: true);
+        using HttpRequestMessage request = CreateRequest(HttpMethod.Get, $"transactions?page={page}");
         using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
         return await ReadResponseAsync<TransactionListResponse>(response, cancellationToken);
     }
@@ -234,19 +245,25 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
 
     public async Task<ApiResponseResult<AuthenticatedDeviceResponse>> GetAuthenticatedDeviceAsync(CancellationToken cancellationToken = default)
     {
-        using HttpRequestMessage request = CreateRequest(HttpMethod.Get, "auth/me", requireDeviceToken: true);
+        using HttpRequestMessage request = CreateRequest(HttpMethod.Get, "auth/me");
         using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
         return await ReadResponseAsync<AuthenticatedDeviceResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<LogoutResponse>> LogoutAsync(CancellationToken cancellationToken = default)
     {
-        using HttpRequestMessage request = CreateRequest(HttpMethod.Post, "auth/logout", requireDeviceToken: true);
+        using HttpRequestMessage request = CreateRequest(HttpMethod.Post, "auth/logout");
         using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
         return await ReadResponseAsync<LogoutResponse>(response, cancellationToken);
     }
 
-    private HttpRequestMessage CreateRequest(HttpMethod method, string path, bool requireDeviceToken = false, bool attachDeviceTokenIfAvailable = false)
+    // Every call through here (i.e. every endpoint except RegisterDeviceAsync, which predates having a
+    // Deviceid at all) automatically carries the Bearer DeviceToken whenever one is stored, regardless of
+    // whether that particular endpoint strictly requires it - a device that's logged in should identify
+    // itself on every request, not just the ones an individual call site remembered to opt into. Pro-gated
+    // endpoints (e.g. PATCH account/dns-filters) still simply 401 on their own if the token turns out to
+    // be missing or invalid; this just guarantees it's never missing purely because a call site forgot to ask.
+    private HttpRequestMessage CreateRequest(HttpMethod method, string path)
     {
         HttpRequestMessage request = new(method, path);
 
@@ -255,7 +272,7 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
             request.Headers.Add(DeviceIdHeaderName, deviceId);
         }
 
-        if ((requireDeviceToken || attachDeviceTokenIfAvailable) && _settings.SyncVpnDeviceToken is { Length: > 0 } deviceToken)
+        if (_settings.SyncVpnDeviceToken is { Length: > 0 } deviceToken)
         {
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", deviceToken);
         }

@@ -35,6 +35,22 @@ public class Country
 
     public bool IsUnderMaintenance { get; set; } = true;
 
+    // Set for pins backed by the new SyncVPN backend's server catalog (free or Pro) rather than a
+    // legacy Proton country - lets the connect handler target this exact server directly instead of
+    // the country. Naming predates Pro servers also using this catalog; see FreeServerIsForPaidUsersOnly
+    // for whether this specific pin still needs the paid-plan upsell gate.
+    public bool IsFreeServer { get; set; } = false;
+
+    public long FreeServerId { get; set; }
+
+    public string FreeServerName { get; set; } = string.Empty;
+
+    public string FreeServerProtocol { get; set; } = string.Empty;
+
+    // True for a Pro-tier server pin - the connect handler must still gate these behind the paid-plan
+    // upsell for a non-paid user, unlike a genuinely free server (Free == 1), which never gates.
+    public bool FreeServerIsForPaidUsersOnly { get; set; } = false;
+
     public MPoint GetMapPoint()
     {
         return SphericalMercator.FromLonLat(Longitude, Latitude).ToMPoint();

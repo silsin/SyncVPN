@@ -73,9 +73,38 @@ public interface IGlobalSettings
     // succeeded at least once (only happens when NewBackendOverride/the remote flag enables it).
     string? SyncVpnDeviceId { get; set; }
 
+    // Windows has no FCM/APNs or OneSignal SDK integration, so there's no real push token/subscription
+    // id to report to POST /devices/register. These hold a locally-generated GUID each, persisted so it
+    // stays stable across app restarts instead of being regenerated (and re-registered) every launch.
+    string? SyncVpnPushToken { get; set; }
+
+    string? SyncVpnOneSignalSubscriptionId { get; set; }
+
     // Bearer DeviceToken from the new SyncVPN backend's login flow (Phase 4). Null until a device has
     // logged in - Pro-gated calls like PATCH /account/dns-filters require it and will 401 without it.
     string? SyncVpnDeviceToken { get; set; }
+
+    // User identity mirrored from the login response's `data.user` (POST /auth/login, /auth/code-login,
+    // /auth/2fa/verify) and refreshed on every successful GET /auth/me (SyncVpnAuthenticator.ValidateSessionAsync).
+    // Null until first login; cleared together with SyncVpnDeviceToken on logout/invalid session.
+    string? SyncVpnUserName { get; set; }
+
+    string? SyncVpnUserEmail { get; set; }
+
+    string? SyncVpnUserPhone { get; set; }
+
+    string? SyncVpnUserAddress { get; set; }
+
+    // Always present on a successful login - not refreshed by GET /auth/me (that endpoint's User doesn't
+    // necessarily repeat it), so this only ever changes on a fresh login.
+    string? SyncVpnReferralCode { get; set; }
+
+    // Running totals last reported back by POST /account/usage (UsageReportingObserver). Null until the
+    // first successful report - persisted so the sidebar has a real figure to show immediately on the
+    // next app start rather than momentarily showing nothing while waiting for a fresh report.
+    double? SyncVpnAccountSentMb { get; set; }
+
+    double? SyncVpnAccountReceivedMb { get; set; }
 
     Dictionary<string, Dictionary<string, string?>>? LegacySettingsByUsername { get; set; }
 }

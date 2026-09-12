@@ -17,9 +17,11 @@
  * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+using ServerListItem = SyncVPN.Api.V2.Contracts.Servers.ServerListItem;
 using SyncVPN.Client.Core.Enums;
 using SyncVPN.Client.Contracts.Enums;
 using SyncVPN.Client.Core.Services.Activation;
+using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Localization.Contracts;
 using SyncVPN.Client.Logic.Connection.Contracts;
 using SyncVPN.Client.Logic.Connection.Contracts.Enums;
@@ -29,6 +31,7 @@ using SyncVPN.Client.Logic.Servers.Contracts.Models;
 using SyncVPN.Client.Models.Connections;
 using SyncVPN.Client.Models.Connections.Countries;
 using SyncVPN.Client.Models.Connections.Gateways;
+using SyncVPN.Client.Settings.Contracts;
 
 namespace SyncVPN.Client.Factories;
 
@@ -40,6 +43,8 @@ public class LocationItemFactory : ILocationItemFactory
     private readonly IMainWindowOverlayActivator _overlayActivator;
     private readonly IUpsellCarouselWindowActivator _upsellCarouselWindowActivator;
     private readonly IConnectionGroupFactory _connectionGroupFactory;
+    private readonly IEventMessageSender _eventMessageSender;
+    private readonly ISettings _settings;
 
     public LocationItemFactory(
         ILocalizationProvider localizer,
@@ -47,7 +52,9 @@ public class LocationItemFactory : ILocationItemFactory
         IConnectionManager connectionManager,
         IMainWindowOverlayActivator overlayActivator,
         IUpsellCarouselWindowActivator upsellCarouselWindowActivator,
-        IConnectionGroupFactory connectionGroupFactory)
+        IConnectionGroupFactory connectionGroupFactory,
+        IEventMessageSender eventMessageSender,
+        ISettings settings)
     {
         _localizer = localizer;
         _serversLoader = serversLoader;
@@ -55,6 +62,8 @@ public class LocationItemFactory : ILocationItemFactory
         _overlayActivator = overlayActivator;
         _upsellCarouselWindowActivator = upsellCarouselWindowActivator;
         _connectionGroupFactory = connectionGroupFactory;
+        _eventMessageSender = eventMessageSender;
+        _settings = settings;
     }
 
     public GenericCountryLocationItem GetGenericCountry(
@@ -140,6 +149,18 @@ public class LocationItemFactory : ILocationItemFactory
             _upsellCarouselWindowActivator,
             server,
             isSearchItem);
+    }
+
+    public SyncVpnServerLocationItem GetSyncVpnServer(ServerListItem server)
+    {
+        return new SyncVpnServerLocationItem(
+            _localizer,
+            _serversLoader,
+            _connectionManager,
+            _upsellCarouselWindowActivator,
+            _eventMessageSender,
+            _settings,
+            server);
     }
 
     public SecureCoreCountryLocationItem GetSecureCoreCountry(Country country, bool isSearchItem = false)

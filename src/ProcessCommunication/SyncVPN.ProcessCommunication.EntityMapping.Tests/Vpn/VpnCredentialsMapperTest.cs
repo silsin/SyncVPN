@@ -147,4 +147,62 @@ public class VpnCredentialsMapperTest
         Assert.AreEqual(entityToTest.Username, result.Username);
         Assert.AreEqual(entityToTest.Password, result.Password);
     }
+
+    [TestMethod]
+    public void TestMapLeftToRight_WithPreSharedKey()
+    {
+        VpnCredentials entityToTest = VpnCredentials.FromRasCredentials("l2tp-user", "l2tp-pass", "l2tp-psk");
+
+        VpnCredentialsIpcEntity result = _mapper.Map(entityToTest);
+
+        Assert.IsNotNull(result);
+        Assert.AreEqual(entityToTest.Username, result.Username);
+        Assert.AreEqual(entityToTest.Password, result.Password);
+        Assert.AreEqual(entityToTest.PreSharedKey, result.PreSharedKey);
+        Assert.IsNull(result.ProvisionedConfigText);
+    }
+
+    [TestMethod]
+    public void TestMapRightToLeft_WithPreSharedKey_NoKeyPairOrConfigTextRequired()
+    {
+        VpnCredentialsIpcEntity entityToTest = new()
+        {
+            Certificate = null,
+            ClientKeyPair = null,
+            Username = "l2tp-user",
+            Password = "l2tp-pass",
+            ProvisionedConfigText = null,
+            PreSharedKey = "l2tp-psk",
+        };
+
+        VpnCredentials result = _mapper.Map(entityToTest);
+
+        Assert.IsNotNull(result);
+        Assert.AreEqual(entityToTest.Username, result.Username);
+        Assert.AreEqual(entityToTest.Password, result.Password);
+        Assert.AreEqual(entityToTest.PreSharedKey, result.PreSharedKey);
+        Assert.IsNull(result.ClientKeyPair);
+    }
+
+    [TestMethod]
+    public void TestMapRightToLeft_WithNoKeyPairAndNoPreSharedKey_SstpStyleCredentials()
+    {
+        VpnCredentialsIpcEntity entityToTest = new()
+        {
+            Certificate = null,
+            ClientKeyPair = null,
+            Username = "sstp-user",
+            Password = "sstp-pass",
+            ProvisionedConfigText = null,
+            PreSharedKey = null,
+        };
+
+        VpnCredentials result = _mapper.Map(entityToTest);
+
+        Assert.IsNotNull(result);
+        Assert.AreEqual(entityToTest.Username, result.Username);
+        Assert.AreEqual(entityToTest.Password, result.Password);
+        Assert.IsNull(result.PreSharedKey);
+        Assert.IsNull(result.ClientKeyPair);
+    }
 }

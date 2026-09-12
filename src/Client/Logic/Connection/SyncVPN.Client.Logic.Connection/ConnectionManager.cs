@@ -145,9 +145,32 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
 
         _logger.Info<ConnectTriggerLog>($"[CONNECTION_PROCESS] Connection attempt to: {connectionIntent}. Triggered by {connectionTrigger}.", stackTraceDepth: 2);
 
-        ConnectionRequestIpcEntity request = await _connectionRequestCreator.CreateAsync(connectionIntent);
+        ConnectionRequestIpcEntity? request = await TryCreateRequestAsync(() => _connectionRequestCreator.CreateAsync(connectionIntent));
+        if (request is null)
+        {
+            return;
+        }
 
         await SendRequestIfValidAsync(request);
+    }
+
+    // Building the request can fail outside the usual VpnError validation path below - e.g. the new
+    // SyncVPN backend's POST /account rejecting the claim (rate limited, maintenance, etc.) throws
+    // rather than producing a request to validate. Catching here keeps that failure from reaching the
+    // UI as an unhandled exception (which crashes the whole app) - it's surfaced the same way as any
+    // other connection failure instead, via the existing ConnectionErrorMessage/error banner.
+    private async Task<ConnectionRequestIpcEntity?> TryCreateRequestAsync(Func<Task<ConnectionRequestIpcEntity>> createRequest)
+    {
+        try
+        {
+            return await createRequest();
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            _logger.Error<ConnectionErrorLog>("Failed to create the connection request.", ex);
+            _eventMessageSender.Send(new ConnectionErrorMessage { VpnError = VpnError.Unknown });
+            return null;
+        }
     }
 
     public async Task ConnectToGuestHoleAsync()
@@ -247,7 +270,11 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
 
         _logger.Info<ConnectTriggerLog>($"[CONNECTION_PROCESS] Reconnection attempt to: {connectionIntent}. Triggered by {reconnectionTrigger}.", stackTraceDepth: 1);
 
-        ConnectionRequestIpcEntity request = await _reconnectionRequestCreator.CreateAsync(connectionIntent);
+        ConnectionRequestIpcEntity? request = await TryCreateRequestAsync(() => _reconnectionRequestCreator.CreateAsync(connectionIntent));
+        if (request is null)
+        {
+            return false;
+        }
 
         return await SendRequestIfValidAsync(request);
     }

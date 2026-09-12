@@ -29,6 +29,8 @@ using SyncVPN.Logging.Contracts;
 using SyncVPN.OperatingSystems.Network.Contracts;
 using SyncVPN.OperatingSystems.Network.Contracts.Monitors;
 using SyncVPN.OperatingSystems.Processes.Contracts;
+using SyncVPN.OperatingSystems.Ras;
+using SyncVPN.OperatingSystems.Ras.Contracts;
 using SyncVPN.OperatingSystems.Services.Contracts;
 using SyncVPN.Vpn.Common;
 using SyncVPN.Vpn.Connection;
@@ -144,7 +146,8 @@ public class Module
                                         new PortForwardingWrapper(
                                             logger,
                                             portMappingProtocolClient,
-                                            new VpnProtocolWrapper(GetOpenVpnConnection(c), GetWireguardConnection(c))))))))));
+                                            new VpnProtocolWrapper(GetOpenVpnConnection(c), GetWireguardConnection(c),
+                                                GetL2tpConnection(c), GetSstpConnection(c))))))))));
     }
 
     private ISingleVpnConnection GetWireguardConnection(IComponentContext c)
@@ -175,6 +178,18 @@ public class Module
                 new WintunTrafficManager(staticConfig.WireGuard.PipeName),
                 new StatusManager(logger, staticConfig.WireGuard.LogFilePath),
                 wireGuardServerRouteManager));
+    }
+
+    private ISingleVpnConnection GetL2tpConnection(IComponentContext c)
+    {
+        ILogger logger = c.Resolve<ILogger>();
+        return new L2tpConnection(logger, () => new RasConnection(logger));
+    }
+
+    private ISingleVpnConnection GetSstpConnection(IComponentContext c)
+    {
+        ILogger logger = c.Resolve<ILogger>();
+        return new SstpConnection(logger, () => new RasConnection(logger));
     }
 
     private ISingleVpnConnection GetOpenVpnConnection(IComponentContext c)

@@ -18,6 +18,7 @@
  */
 
 using Microsoft.UI.Xaml;
+using SyncVPN.Client.Common.UI.Controls.Map;
 using SyncVPN.Client.Core.Bases;
 
 namespace SyncVPN.Client.UI.Main.Map;
@@ -74,11 +75,24 @@ public sealed partial class MapComponentView : IContextAware
 
     public MapComponentViewModel ViewModel { get; }
 
+    // Re-raised from the inner MapControl so HomeComponentView (the only place this is used) can
+    // subscribe directly in code-behind, instead of reading it back out via an x:Bind property path
+    // through this control - see HomeComponentView.xaml.cs.
+    public event EventHandler<Country>? CountrySelected;
+
     public MapComponentView()
     {
         ViewModel = App.GetService<MapComponentViewModel>();
 
         InitializeComponent();
+
+        Map.CountrySelected += OnMapCountrySelected;
+    }
+
+    private void OnMapCountrySelected(object? sender, Country country)
+    {
+        ViewModel.SelectedCountry = country;
+        CountrySelected?.Invoke(this, country);
     }
 
     public object GetContext()

@@ -69,6 +69,26 @@ public class SyncVpnAccountClaimMapperTest
     }
 
     [TestMethod]
+    public void ResolveClaimProtocol_ReturnsL2tp_WhenL2tpIsPreferred()
+    {
+        (string protocol, string? transport) = SyncVpnAccountClaimMapper.ResolveClaimProtocol(
+            [VpnProtocol.L2tp, VpnProtocol.OpenVpnTcp]);
+
+        Assert.AreEqual(SyncVpnProtocols.L2tp, protocol);
+        Assert.IsNull(transport);
+    }
+
+    [TestMethod]
+    public void ResolveClaimProtocol_ReturnsSstp_WhenSstpIsPreferred()
+    {
+        (string protocol, string? transport) = SyncVpnAccountClaimMapper.ResolveClaimProtocol(
+            [VpnProtocol.Sstp, VpnProtocol.OpenVpnTcp]);
+
+        Assert.AreEqual(SyncVpnProtocols.Sstp, protocol);
+        Assert.IsNull(transport);
+    }
+
+    [TestMethod]
     public void BuildClaimedServer_UsesHostnameAndSkipsSignatureValidation()
     {
         PurchasedAccount account = new() { ServerHostname = "de.example.com", ServerIp = "198.51.100.30" };
@@ -149,5 +169,104 @@ public class SyncVpnAccountClaimMapperTest
         PurchasedAccount account = new() { Protocol = SyncVpnProtocols.WireGuard, WireGuard = null };
 
         Assert.ThrowsExactly<InvalidOperationException>(() => SyncVpnAccountClaimMapper.BuildClaimedCredentials(account));
+    }
+
+    [TestMethod]
+    public void BuildClaimedCredentials_UsesUsernamePasswordAndSecret_ForL2tpAccount()
+    {
+        PurchasedAccount account = new()
+        {
+            Protocol = SyncVpnProtocols.L2tp,
+            L2tp = new L2tpConnectionInfo { Server = "de.example.com", Username = "l2tp-user", Password = "l2tp-pass", Secret = "l2tp-psk" },
+        };
+
+        VpnCredentialsIpcEntity credentials = SyncVpnAccountClaimMapper.BuildClaimedCredentials(account);
+
+        Assert.AreEqual("l2tp-user", credentials.Username);
+        Assert.AreEqual("l2tp-pass", credentials.Password);
+        Assert.AreEqual("l2tp-psk", credentials.PreSharedKey);
+        Assert.IsNull(credentials.ProvisionedConfigText);
+        Assert.IsNull(credentials.ClientKeyPair);
+    }
+
+    [TestMethod]
+    public void BuildClaimedCredentials_Throws_WhenL2tpDetailsAreMissing()
+    {
+        PurchasedAccount account = new() { Protocol = SyncVpnProtocols.L2tp, L2tp = null };
+
+        Assert.ThrowsExactly<InvalidOperationException>(() => SyncVpnAccountClaimMapper.BuildClaimedCredentials(account));
+    }
+
+    [TestMethod]
+    public void BuildClaimedCredentials_UsesUsernameAndPassword_ForSstpAccount()
+    {
+        PurchasedAccount account = new()
+        {
+            Protocol = SyncVpnProtocols.Sstp,
+            Sstp = new SstpConnectionInfo { Server = "de.example.com", Username = "sstp-user", Password = "sstp-pass", Port = 443 },
+        };
+
+        VpnCredentialsIpcEntity credentials = SyncVpnAccountClaimMapper.BuildClaimedCredentials(account);
+
+        Assert.AreEqual("sstp-user", credentials.Username);
+        Assert.AreEqual("sstp-pass", credentials.Password);
+        Assert.IsNull(credentials.PreSharedKey);
+        Assert.IsNull(credentials.ProvisionedConfigText);
+        Assert.IsNull(credentials.ClientKeyPair);
+    }
+
+    [TestMethod]
+    public void BuildClaimedCredentials_Throws_WhenSstpDetailsAreMissing()
+    {
+        PurchasedAccount account = new() { Protocol = SyncVpnProtocols.Sstp, Sstp = null };
+
+        Assert.ThrowsExactly<InvalidOperationException>(() => SyncVpnAccountClaimMapper.BuildClaimedCredentials(account));
+    }
+
+    [TestMethod]
+    public void BuildClaimedCredentials_Throws_ForUnsupportedProtocol()
+    {
+        PurchasedAccount account = new() { Protocol = "SomeFutureProtocol" };
+
+        Assert.ThrowsExactly<InvalidOperationException>(() => SyncVpnAccountClaimMapper.BuildClaimedCredentials(account));
+    }
+
+    [TestMethod]
+    public void ResolveServerProtocol_UsesPreference_WhenServerSupportsIt()
+    {
+        string protocol = SyncVpnAccountClaimMapper.ResolveServerProtocol(
+            VpnProtocol.OpenVpnTcp, [SyncVpnProtocols.WireGuard, SyncVpnProtocols.OpenVpn]);
+
+        Assert.AreEqual(SyncVpnProtocols.OpenVpn, protocol);
+    }
+
+    [TestMethod]
+    public void ResolveServerProtocol_FallsBackToWireGuard_WhenPreferenceUnsupported()
+    {
+        string protocol = SyncVpnAccountClaimMapper.ResolveServerProtocol(
+            VpnProtocol.L2tp, [SyncVpnProtocols.WireGuard, SyncVpnProtocols.OpenVpn]);
+
+        Assert.AreEqual(SyncVpnProtocols.WireGuard, protocol);
+    }
+
+    [TestMethod]
+    public void ResolveServerProtocol_FallsBackToFirstAvailable_WhenPreferenceUnsupportedAndNoWireGuard()
+    {
+        string protocol = SyncVpnAccountClaimMapper.ResolveServerProtocol(
+            VpnProtocol.L2tp, [SyncVpnProtocols.OpenVpn, SyncVpnProtocols.Sstp]);
+
+        Assert.AreEqual(SyncVpnProtocols.OpenVpn, protocol);
+    }
+
+    [TestMethod]
+    [DataRow(VpnProtocol.Smart)]
+    [DataRow(VpnProtocol.WireGuardTcp)]
+    [DataRow(VpnProtocol.WireGuardTls)]
+    public void ResolveServerProtocol_FallsBack_ForProtocolsWithNoWireEquivalent(VpnProtocol preferredProtocol)
+    {
+        string protocol = SyncVpnAccountClaimMapper.ResolveServerProtocol(
+            preferredProtocol, [SyncVpnProtocols.OpenVpn]);
+
+        Assert.AreEqual(SyncVpnProtocols.OpenVpn, protocol);
     }
 }

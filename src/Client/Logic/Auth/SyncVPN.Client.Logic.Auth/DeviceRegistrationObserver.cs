@@ -17,12 +17,15 @@
  * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+using System.Globalization;
+using System.Runtime.InteropServices;
 using SyncVPN.Api.BackendSelection;
 using SyncVPN.Api.Contracts;
 using SyncVPN.Api.V2.Contracts;
 using SyncVPN.Api.V2.Contracts.Devices;
 using SyncVPN.Client.Common.Observers;
 using SyncVPN.Client.Settings.Contracts;
+using SyncVPN.Configurations.Contracts;
 using SyncVPN.IssueReporting.Contracts;
 using SyncVPN.Logging.Contracts;
 using SyncVPN.Logging.Contracts.Events.ApiLogs;
@@ -38,18 +41,21 @@ public class DeviceRegistrationObserver : ObserverBase
     private readonly IBackendModeProvider _backendModeProvider;
     private readonly ISyncVpnApiClient _apiClient;
     private readonly ISettings _settings;
+    private readonly IConfiguration _config;
 
     public DeviceRegistrationObserver(
         ILogger logger,
         IIssueReporter issueReporter,
         IBackendModeProvider backendModeProvider,
         ISyncVpnApiClient apiClient,
-        ISettings settings)
+        ISettings settings,
+        IConfiguration config)
         : base(logger, issueReporter)
     {
         _backendModeProvider = backendModeProvider;
         _apiClient = apiClient;
         _settings = settings;
+        _config = config;
 
         TriggerAction.Run();
     }
@@ -62,7 +68,25 @@ public class DeviceRegistrationObserver : ObserverBase
         }
 
         string deviceId = _settings.SyncVpnDeviceId ?? Guid.NewGuid().ToString();
-        RegisterDeviceRequest request = new() { DeviceId = deviceId, Language = _settings.Language };
+
+        // No FCM/APNs or OneSignal SDK on Windows - these are locally-generated, persisted GUIDs, not
+        // real push tokens (see IGlobalSettings.SyncVpnPushToken).
+        string pushToken = _settings.SyncVpnPushToken ?? Guid.NewGuid().ToString();
+        string oneSignalSubscriptionId = _settings.SyncVpnOneSignalSubscriptionId ?? Guid.NewGuid().ToString();
+
+        RegisterDeviceRequest request = new()
+        {
+            DeviceId = deviceId,
+            Language = _settings.Language,
+            Name = Environment.MachineName,
+            AppVersion = _config.ClientVersion,
+            OsVersion = Environment.OSVersion.Version.ToString(),
+            Architecture = RuntimeInformation.OSArchitecture.ToString().ToLowerInvariant(),
+            Locale = CultureInfo.CurrentUICulture.Name,
+            Timezone = TimeZoneInfo.Local.Id,
+            PushToken = pushToken,
+            OneSignalSubscriptionId = oneSignalSubscriptionId,
+        };
 
         Logger.Info<ApiLog>("Registering device with the new SyncVPN backend.");
 
@@ -70,6 +94,8 @@ public class DeviceRegistrationObserver : ObserverBase
         if (response.Success)
         {
             _settings.SyncVpnDeviceId = deviceId;
+            _settings.SyncVpnPushToken = pushToken;
+            _settings.SyncVpnOneSignalSubscriptionId = oneSignalSubscriptionId;
         }
         else
         {

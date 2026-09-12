@@ -426,6 +426,8 @@ public static class LocalizationExtensions
             VpnProtocol.WireGuardUdp => localizer.Get("VpnProtocol_WireGuard_Udp"),
             VpnProtocol.WireGuardTcp => localizer.Get("VpnProtocol_WireGuard_Tcp"),
             VpnProtocol.WireGuardTls => localizer.Get("VpnProtocol_WireGuard_Tls"),
+            VpnProtocol.L2tp => localizer.Get("VpnProtocol_L2tp"),
+            VpnProtocol.Sstp => localizer.Get("VpnProtocol_Sstp"),
             _ => string.Empty
         };
     }
@@ -439,6 +441,8 @@ public static class LocalizationExtensions
             VpnProtocol.WireGuardUdp => localizer.Get("VpnProtocol_WireGuard_Udp_Description"),
             VpnProtocol.WireGuardTcp => localizer.Get("VpnProtocol_WireGuard_Tcp_Description"),
             VpnProtocol.WireGuardTls => localizer.Get("VpnProtocol_WireGuard_Tls_Description"),
+            VpnProtocol.L2tp => localizer.Get("VpnProtocol_L2tp_Description"),
+            VpnProtocol.Sstp => localizer.Get("VpnProtocol_Sstp_Description"),
             _ => string.Empty
         };
     }
@@ -509,6 +513,7 @@ public static class LocalizationExtensions
             ConnectionGroupType.Cities => "Connections_Cities",
             ConnectionGroupType.Servers => "Connections_Servers",
             ConnectionGroupType.FreeServers => "Connections_Free_Servers",
+            ConnectionGroupType.PremiumLocations => "Connections_Premium_Locations",
             ConnectionGroupType.SecureCoreCountries => "Connections_SecureCore_Countries",
             ConnectionGroupType.SecureCoreCountryPairs or
             ConnectionGroupType.SecureCoreServers => "Connections_SecureCore_Servers",
@@ -531,7 +536,8 @@ public static class LocalizationExtensions
             or ConnectionGroupType.SecureCoreServers
             or ConnectionGroupType.P2PServers
             or ConnectionGroupType.TorServers
-            or ConnectionGroupType.FreeServers;
+            or ConnectionGroupType.FreeServers
+            or ConnectionGroupType.PremiumLocations;
 
         return shouldHideItemsCount
             ? localizer.GetPlural(localizationKey, itemsCount)

@@ -82,11 +82,13 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                     </RadioButton>
 
                     <TextBlock Style="{StaticResource ProtocolTypeTextBlockStyle}"
-                               Text="{x:Bind ViewModel.Localizer.Get('Settings_Protocols_UdpCategory')}" />
+                               Text="{x:Bind ViewModel.Localizer.Get('Settings_Protocols_UdpCategory')}"
+                               Visibility="{x:Bind ViewModel.IsUdpCategoryVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                     <RadioButton AutomationProperties.AutomationId="WireGuardUdpProtocolRadioButton"
                                  IsChecked="{x:Bind ViewModel.IsWireGuardUdpProtocol, Mode=TwoWay}"
-                                 Style="{StaticResource ProtocolRadioButtonStyle}">
+                                 Style="{StaticResource ProtocolRadioButtonStyle}"
+                                 Visibility="{x:Bind ViewModel.IsWireGuardUdpProtocolAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <StackPanel>
                             <TextBlock Style="{StaticResource BodyTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Localizer.Get('Settings_Protocols_WireGuardUdp_Title')}" />
@@ -100,7 +102,8 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
 
                     <RadioButton AutomationProperties.AutomationId="OpenVpnUdpProtocolRadioButton"
                                  IsChecked="{x:Bind ViewModel.IsOpenVpnUdpProtocol, Mode=TwoWay}"
-                                 Style="{StaticResource ProtocolRadioButtonStyle}">
+                                 Style="{StaticResource ProtocolRadioButtonStyle}"
+                                 Visibility="{x:Bind ViewModel.IsOpenVpnUdpProtocolAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <StackPanel>
                             <TextBlock Style="{StaticResource BodyTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Localizer.Get('Settings_Protocols_OpenVpnUdp_Title')}" />
@@ -113,11 +116,13 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                     </RadioButton>
 
                     <TextBlock Style="{StaticResource ProtocolTypeTextBlockStyle}"
-                               Text="{x:Bind ViewModel.Localizer.Get('Settings_Protocols_TcpCategory')}" />
+                               Text="{x:Bind ViewModel.Localizer.Get('Settings_Protocols_TcpCategory')}"
+                               Visibility="{x:Bind ViewModel.IsTcpCategoryVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                     <RadioButton AutomationProperties.AutomationId="WireGuardTcpProtocolRadioButton"
                                  IsChecked="{x:Bind ViewModel.IsWireGuardTcpProtocol, Mode=TwoWay}"
-                                 Style="{StaticResource ProtocolRadioButtonStyle}">
+                                 Style="{StaticResource ProtocolRadioButtonStyle}"
+                                 Visibility="{x:Bind ViewModel.IsWireGuardTcpProtocolAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <StackPanel>
                             <TextBlock Style="{StaticResource BodyTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Localizer.Get('Settings_Protocols_WireGuardTcp_Title')}" />
@@ -131,7 +136,8 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
 
                     <RadioButton AutomationProperties.AutomationId="OpenVpnTcpProtocolRadioButton"
                                  IsChecked="{x:Bind ViewModel.IsOpenVpnTcpProtocol, Mode=TwoWay}"
-                                 Style="{StaticResource ProtocolRadioButtonStyle}">
+                                 Style="{StaticResource ProtocolRadioButtonStyle}"
+                                 Visibility="{x:Bind ViewModel.IsOpenVpnTcpProtocolAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <StackPanel>
                             <TextBlock Style="{StaticResource BodyTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Localizer.Get('Settings_Protocols_OpenVpnTcp_Title')}" />
@@ -145,7 +151,8 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
 
                     <RadioButton AutomationProperties.AutomationId="WireGuardTlsProtocolRadioButton"
                                  IsChecked="{x:Bind ViewModel.IsWireGuardTlsProtocol, Mode=TwoWay}"
-                                 Style="{StaticResource ProtocolRadioButtonStyle}">
+                                 Style="{StaticResource ProtocolRadioButtonStyle}"
+                                 Visibility="{x:Bind ViewModel.IsWireGuardTlsProtocolAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <StackPanel>
                             <TextBlock Style="{StaticResource BodyTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Localizer.Get('Settings_Protocols_WireGuardTls_Title')}" />
@@ -153,6 +160,40 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                             <TextBlock Foreground="{ThemeResource TextWeakColorBrush}"
                                        Style="{StaticResource CaptionTextBlockStyle}"
                                        Text="{x:Bind ViewModel.Localizer.Get('Settings_Protocols_WireGuardTls_Description')}"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <TextBlock Style="{StaticResource ProtocolTypeTextBlockStyle}"
+                               Text="{x:Bind ViewModel.Localizer.Get('Settings_Protocols_LegacyCategory')}"
+                               Visibility="{x:Bind ViewModel.IsLegacyCategoryVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                    <RadioButton AutomationProperties.AutomationId="L2tpProtocolRadioButton"
+                                 IsChecked="{x:Bind ViewModel.IsL2tpProtocol, Mode=TwoWay}"
+                                 Style="{StaticResource ProtocolRadioButtonStyle}"
+                                 Visibility="{x:Bind ViewModel.IsL2tpProtocolAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                       Text="{x:Bind ViewModel.Localizer.Get('Settings_Protocols_L2tp_Title')}" />
+
+                            <TextBlock Foreground="{ThemeResource TextWeakColorBrush}"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Text="{x:Bind ViewModel.Localizer.Get('Settings_Protocols_L2tp_Description')}"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </RadioButton>
+
+                    <RadioButton AutomationProperties.AutomationId="SstpProtocolRadioButton"
+                                 IsChecked="{x:Bind ViewModel.IsSstpProtocol, Mode=TwoWay}"
+                                 Style="{StaticResource ProtocolRadioButtonStyle}"
+                                 Visibility="{x:Bind ViewModel.IsSstpProtocolAvailable, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                       Text="{x:Bind ViewModel.Localizer.Get('Settings_Protocols_Sstp_Title')}" />
+
+                            <TextBlock Foreground="{ThemeResource TextWeakColorBrush}"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Text="{x:Bind ViewModel.Localizer.Get('Settings_Protocols_Sstp_Description')}"
                                        TextWrapping="Wrap" />
                         </StackPanel>
                     </RadioButton>

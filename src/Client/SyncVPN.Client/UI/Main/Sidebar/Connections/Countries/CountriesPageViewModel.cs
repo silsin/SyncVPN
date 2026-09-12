@@ -18,11 +18,13 @@
  */
 
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI.Xaml.Controls;
 using SyncVPN.Client.Common.UI.Assets.Icons.Base;
 using SyncVPN.Client.Common.UI.Assets.Icons.PathIcons;
 using SyncVPN.Client.Core.Bases;
 using SyncVPN.Client.Core.Enums;
+using SyncVPN.Client.Core.Services.Activation;
 using SyncVPN.Client.Core.Services.Navigation;
 using SyncVPN.Client.Factories;
 using SyncVPN.Client.Logic.Connection.Contracts;
@@ -36,8 +38,14 @@ namespace SyncVPN.Client.UI.Main.Sidebar.Connections.Countries;
 
 public partial class CountriesPageViewModel : ConnectionPageViewModelBase
 {
+    private readonly IMainViewNavigator _mainViewNavigator;
+    private readonly IUpsellCarouselWindowActivator _upsellCarouselWindowActivator;
+
     [ObservableProperty]
     private ICountriesComponent _selectedCountriesComponent;
+
+    [ObservableProperty]
+    private string _searchText = string.Empty;
 
     public override string Header => Localizer.Get("Countries");
 
@@ -49,8 +57,12 @@ public partial class CountriesPageViewModel : ConnectionPageViewModelBase
 
     public override bool IsAvailable => ParentViewNavigator.CanNavigateToCountriesView();
 
+    public bool IsFreePlanBannerVisible => !Settings.VpnPlan.IsPaid;
+
     public CountriesPageViewModel(
         IConnectionsViewNavigator parentViewNavigator,
+        IMainViewNavigator mainViewNavigator,
+        IUpsellCarouselWindowActivator upsellCarouselWindowActivator,
         ISettings settings,
         IServersLoader serversLoader,
         IConnectionManager connectionManager,
@@ -64,9 +76,24 @@ public partial class CountriesPageViewModel : ConnectionPageViewModelBase
                connectionGroupFactory,
                viewModelHelper)
     {
+        _mainViewNavigator = mainViewNavigator;
+        _upsellCarouselWindowActivator = upsellCarouselWindowActivator;
+
         CountriesComponents = new(countriesComponents.OrderBy(p => p.SortIndex));
 
         _selectedCountriesComponent = CountriesComponents.First();
+    }
+
+    [RelayCommand]
+    private Task NavigateBackAsync()
+    {
+        return _mainViewNavigator.NavigateToHomeViewAsync();
+    }
+
+    [RelayCommand]
+    private Task UpgradeAsync()
+    {
+        return _upsellCarouselWindowActivator.ActivateAsync(UpsellFeatureType.WorldwideCoverage);
     }
 
     protected override void OnLoggedIn()
@@ -88,7 +115,16 @@ public partial class CountriesPageViewModel : ConnectionPageViewModelBase
 
     protected override IEnumerable<ConnectionItemBase> GetItems()
     {
-        return SelectedCountriesComponent.GetItems();
+        IEnumerable<ConnectionItemBase> items = SelectedCountriesComponent.GetItems();
+
+        if (string.IsNullOrWhiteSpace(SearchText))
+        {
+            return items;
+        }
+
+        return items.Where(item =>
+            item.Header.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+            || item.Description.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
     }
 
     private void GoToCountryFeature(CountriesConnectionType connectionType)
@@ -98,6 +134,11 @@ public partial class CountriesPageViewModel : ConnectionPageViewModelBase
     }
 
     partial void OnSelectedCountriesComponentChanged(ICountriesComponent value)
+    {
+        FetchItems();
+    }
+
+    partial void OnSearchTextChanged(string value)
     {
         FetchItems();
     }

@@ -1879,6 +1879,15 @@
   <data name="Settings_Protocols_Explanation" xml:space="preserve">
     <value>A VPN protocol determines how data moves between a VPN server and your device.</value>
   </data>
+  <data name="Settings_Protocols_L2tp_Description" xml:space="preserve">
+    <value>A widely supported legacy protocol. L2TP is generally slower and less secure than newer protocols.</value>
+  </data>
+  <data name="Settings_Protocols_L2tp_Title" xml:space="preserve">
+    <value>L2TP/IPsec</value>
+  </data>
+  <data name="Settings_Protocols_LegacyCategory" xml:space="preserve">
+    <value>Legacy</value>
+  </data>
   <data name="Settings_Protocols_OpenVpnTcp_Description" xml:space="preserve">
     <value>Established, well-tested, and secure. OpenVPN is reliable in poor network conditions, but may not be as fast as other protocols.</value>
   </data>
@@ -1896,6 +1905,12 @@
   </data>
   <data name="Settings_Protocols_Smart_Title" xml:space="preserve">
     <value>Smart</value>
+  </data>
+  <data name="Settings_Protocols_Sstp_Description" xml:space="preserve">
+    <value>A legacy protocol that can bypass some firewalls by using standard web traffic ports.</value>
+  </data>
+  <data name="Settings_Protocols_Sstp_Title" xml:space="preserve">
+    <value>SSTP</value>
   </data>
   <data name="Settings_Protocols_TcpCategory" xml:space="preserve">
     <value>Reliability (TCP)</value>
@@ -1924,6 +1939,9 @@
   <data name="Settings_RestoreDefault" xml:space="preserve">
     <value>Restore default settings</value>
   </data>
+  <data name="Settings_SelectedProtocol_L2tp" xml:space="preserve">
+    <value>L2TP/IPsec</value>
+  </data>
   <data name="Settings_SelectedProtocol_OpenVpnTcp" xml:space="preserve">
     <value>OpenVPN (TCP)</value>
   </data>
@@ -1932,6 +1950,9 @@
   </data>
   <data name="Settings_SelectedProtocol_Smart" xml:space="preserve">
     <value>Smart</value>
+  </data>
+  <data name="Settings_SelectedProtocol_Sstp" xml:space="preserve">
+    <value>SSTP</value>
   </data>
   <data name="Settings_SelectedProtocol_WireGuardUdp" xml:space="preserve">
     <value>WireGuard (UDP)</value>
@@ -1957,12 +1978,19 @@
   <data name="Settings_Account_SignOut" xml:space="preserve">
     <value>Sign out</value>
   </data>
+  <data name="Settings_Account_SignIn" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
   <data name="Settings_Account_Exit" xml:space="preserve">
     <value>Exit the app</value>
   </data>
   <data name="SignIn_Form_CreateAccount" xml:space="preserve">
     <value>Create account</value>
     <comment>A button inside sign in form</comment>
+  </data>
+  <data name="SignIn_Form_LoginWithCode" xml:space="preserve">
+    <value>Sign in with a code</value>
+    <comment>A button inside sign in form - navigates to a screen that exchanges a 16-character login code (e.g. from a guest purchase) for a session, via POST /auth/code-login.</comment>
   </data>
   <data name="SignIn_Form_Password" xml:space="preserve">
     <value>Password</value>
@@ -1983,6 +2011,21 @@
   <data name="Login_TwoFactorForm_Authenticate" xml:space="preserve">
     <value>Authenticate</value>
     <comment>Authenticate button inside two factor form during login</comment>
+  </data>
+  <data name="Login_CodeLoginForm_Title" xml:space="preserve">
+    <value>Sign in with a code</value>
+  </data>
+  <data name="Login_CodeLoginForm_Subtitle" xml:space="preserve">
+    <value>Enter the 16-character login code you received</value>
+  </data>
+  <data name="Login_CodeLoginForm_Placeholder" xml:space="preserve">
+    <value>16-character login code</value>
+  </data>
+  <data name="Login_CodeLoginForm_CodeError" xml:space="preserve">
+    <value>Enter a valid 16-character code</value>
+  </data>
+  <data name="Login_CodeLoginForm_Continue" xml:space="preserve">
+    <value>Sign in</value>
   </data>
   <data name="Login_TwoFactorForm_Subtitle" xml:space="preserve">
     <value>6-digit authentication code</value>
@@ -2402,6 +2445,9 @@
   <data name="Countries_All" xml:space="preserve">
     <value>All</value>
   </data>
+  <data name="Home_FreeServers_Title" xml:space="preserve">
+    <value>Free servers</value>
+  </data>
   <data name="Countries_P2P" xml:space="preserve">
     <value>P2P</value>
   </data>
@@ -2419,6 +2465,33 @@
   </data>
   <data name="Countries_Tor_Description" xml:space="preserve">
     <value>Use the Tor network over your VPN connection for extra privacy.</value>
+  </data>
+  <data name="Countries_FreePlanBanner_TitlePrefix" xml:space="preserve">
+    <value>You are using the</value>
+  </data>
+  <data name="Countries_FreePlanBanner_PlanName" xml:space="preserve">
+    <value>Free Plan.</value>
+  </data>
+  <data name="Countries_Search_Placeholder" xml:space="preserve">
+    <value>Search country or city</value>
+  </data>
+  <data name="Countries_FreePlanBanner_Description" xml:space="preserve">
+    <value>Only selected locations are available. Upgrade to Premium for all locations and faster speeds.</value>
+  </data>
+  <data name="Countries_FreePlanBanner_UpgradeNow" xml:space="preserve">
+    <value>Upgrade Now</value>
+  </data>
+  <data name="Countries_PremiumBadge" xml:space="preserve">
+    <value>PREMIUM</value>
+  </data>
+  <data name="Countries_PremiumLocation_Label" xml:space="preserve">
+    <value>Premium</value>
+  </data>
+  <data name="Countries_BottomBanner_Title" xml:space="preserve">
+    <value>Go Premium. Unlock the world.</value>
+  </data>
+  <data name="Countries_BottomBanner_Description" xml:space="preserve">
+    <value>Unlimited data, 100+ locations, faster speeds, and priority support.</value>
   </data>
   <data name="Overlay_P2P_Title" xml:space="preserve">
     <value>P2P</value>
@@ -2650,6 +2723,18 @@
   <data name="VpnProtocol_WireGuard_Tls_Description" xml:space="preserve">
     <value>Overcomes VPN blocks by hiding your connection from censors</value>
   </data>
+  <data name="VpnProtocol_L2tp" xml:space="preserve">
+    <value>L2TP/IPsec</value>
+  </data>
+  <data name="VpnProtocol_L2tp_Description" xml:space="preserve">
+    <value>A widely supported legacy protocol</value>
+  </data>
+  <data name="VpnProtocol_Sstp" xml:space="preserve">
+    <value>SSTP</value>
+  </data>
+  <data name="VpnProtocol_Sstp_Description" xml:space="preserve">
+    <value>A legacy protocol that can bypass some firewalls</value>
+  </data>
   <data name="SignIn_Form_Email" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -2776,7 +2861,7 @@
     <value>Free plan</value>
   </data>
   <data name="Sidebar_FreePlanCard_DailyData" xml:space="preserve">
-    <value>Daily data</value>
+    <value>Data used</value>
   </data>
   <data name="Sidebar_FreePlanCard_ResetsInLabel" xml:space="preserve">
     <value>Resets in:</value>
@@ -2784,8 +2869,8 @@
   <data name="Sidebar_FreePlanCard_Upgrade" xml:space="preserve">
     <value>Upgrade to Premium</value>
   </data>
-  <data name="Home_Map_Search_Placeholder" xml:space="preserve">
-    <value>Search for a location</value>
+  <data name="Home_FreeServers_Search_Placeholder" xml:space="preserve">
+    <value>Search servers</value>
   </data>
   <data name="Home_QuickConnect_Label" xml:space="preserve">
     <value>Quick Connect</value>
@@ -3456,10 +3541,16 @@
     <value>Servers</value>
   </data>
   <data name="Connections_Free_Servers_One" xml:space="preserve">
-    <value>Free server</value>
+    <value>Free location</value>
   </data>
   <data name="Connections_Free_Servers_Other" xml:space="preserve">
-    <value>Free servers</value>
+    <value>Free locations</value>
+  </data>
+  <data name="Connections_Premium_Locations_One" xml:space="preserve">
+    <value>Premium location</value>
+  </data>
+  <data name="Connections_Premium_Locations_Other" xml:space="preserve">
+    <value>Premium locations</value>
   </data>
   <data name="Connections_P2P_Countries_One" xml:space="preserve">
     <value>P2P country ({0})</value>
@@ -3945,6 +4036,14 @@
   <data name="Map_ConnectTo" xml:space="preserve">
     <value>Connect - {0}</value>
     <comment>A label inside a map pin tooltip. {0} is a placeholder for country, state or city. (eg. "Connect - United States", "Connect - New York")</comment>
+  </data>
+  <data name="Map_SelectedLocation_Label" xml:space="preserve">
+    <value>Selected location</value>
+    <comment>Small header label above the selected server/country name in the map's floating connect card.</comment>
+  </data>
+  <data name="Map_PleaseSelectServer_Label" xml:space="preserve">
+    <value>Please select a server</value>
+    <comment>Prompt shown in the map's floating connect card when no server/country is selected yet and the user is disconnected.</comment>
   </data>
   <data name="NpsSurvey_Title" xml:space="preserve">
     <value>SyncVPN - Survey</value>

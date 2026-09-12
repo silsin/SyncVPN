@@ -132,6 +132,14 @@ public abstract class ConnectionRequestCreatorBase : RequestCreatorBase
         }
     }
 
+    // L2TP's port is fixed (not user-configurable, unlike the WireGuard/OpenVpn port lists above).
+    // SSTP has no meaningful default - its real port is server-assigned and only known after the
+    // account claim response comes back, at which point ConnectionRequestCreator.ApplyClaimedSstpPort
+    // overwrites this placeholder. Both entries exist mainly so VpnEndpointScanner's
+    // `ports.ContainsKey(protocol)` check doesn't skip scanning these protocols entirely.
+    private static readonly int[] _l2tpPorts = [1701];
+    private static readonly int[] _sstpPorts = [443];
+
     private Dictionary<VpnProtocolIpcEntity, int[]> GetPorts()
     {
         return new()
@@ -141,6 +149,8 @@ public abstract class ConnectionRequestCreatorBase : RequestCreatorBase
             { VpnProtocolIpcEntity.WireGuardTls, Settings.WireGuardTlsPorts },
             { VpnProtocolIpcEntity.OpenVpnUdp, Settings.OpenVpnUdpPorts },
             { VpnProtocolIpcEntity.OpenVpnTcp, Settings.OpenVpnTcpPorts },
+            { VpnProtocolIpcEntity.L2tp, _l2tpPorts },
+            { VpnProtocolIpcEntity.Sstp, _sstpPorts },
         };
     }
 

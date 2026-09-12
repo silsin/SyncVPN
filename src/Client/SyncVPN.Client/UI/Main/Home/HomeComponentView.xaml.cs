@@ -92,24 +92,19 @@ public sealed partial class HomeComponentView : IContextAware
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         ViewModel.Activate();
-        DetailsComponent.SizeChanged += InvalidateMapOffsets;
         ConnectionCardComponent.SizeChanged += InvalidateMapOffsets;
         BannersContainer.SizeChanged += InvalidateMapOffsets;
-        HomeSearchBarComponent.SizeChanged += InvalidateMapOffsets;
     }
 
     private void InvalidateMapOffsets(object sender, SizeChangedEventArgs e)
     {
-        MapBottomOffset = DetailsComponent.ActualHeight + BannersContainer.ActualHeight + ConnectionCardComponent.ActualHeight;
-        MapTopOffset = HomeSearchBarComponent.ActualHeight;
+        MapBottomOffset = BannersContainer.ActualHeight + ConnectionCardComponent.ActualHeight;
     }
 
     private void OnUnloaded(object sender, RoutedEventArgs e)
     {
         ViewModel.Deactivate();
-        DetailsComponent.SizeChanged -= InvalidateMapOffsets;
         ConnectionCardComponent.SizeChanged -= InvalidateMapOffsets;
         BannersContainer.SizeChanged -= InvalidateMapOffsets;
-        HomeSearchBarComponent.SizeChanged -= InvalidateMapOffsets;
     }
 }
