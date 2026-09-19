@@ -17,6 +17,7 @@
  * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+using SyncVPN.Api.BackendSelection;
 using SyncVPN.Client.Contracts.Services.Browsing;
 using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Logic.Auth.Contracts;
@@ -32,6 +33,7 @@ public class AccountUpgradeUrlLauncher : IAccountUpgradeUrlLauncher,
     private readonly IUpsellSuccessReporter _upsellSuccessReporter;
     private readonly IUrlsBrowser _urlsBrowser;
     private readonly IWebAuthenticator _webAuthenticator;
+    private readonly IBackendModeProvider _backendModeProvider;
 
     private string? _currentAttemptUrl;
     private ModalSource? _currentAttemptModalSource;
@@ -41,17 +43,26 @@ public class AccountUpgradeUrlLauncher : IAccountUpgradeUrlLauncher,
         IUpsellUpgradeAttemptReporter upsellUpgradeAttemptReporter,
         IUpsellSuccessReporter upsellSuccessReporter,
         IUrlsBrowser urlsBrowser,
-        IWebAuthenticator webAuthenticator)
+        IWebAuthenticator webAuthenticator,
+        IBackendModeProvider backendModeProvider)
     {
         _upsellUpgradeAttemptReporter = upsellUpgradeAttemptReporter;
         _upsellSuccessReporter = upsellSuccessReporter;
         _urlsBrowser = urlsBrowser;
         _webAuthenticator = webAuthenticator;
+        _backendModeProvider = backendModeProvider;
     }
 
+    // A device-registered guest (see MainWindowViewNavigator.IsGuestAccessEnabled) has no Proton account
+    // to fork a session for - _webAuthenticator.GetUpgradeAccountUrlAsync's auth-fork silently fails for
+    // one and falls back to the bare Proton account URL, so "Upgrade" was opening account.protonvpn.com
+    // instead of anything SyncVPN-branded. While the new backend is enabled, send everyone to the SyncVPN
+    // pricing page instead of ever asking Proton for an upgrade URL.
     public async Task OpenAsync(ModalSource modalSource, string? reference = null)
     {
-        string url = await _webAuthenticator.GetUpgradeAccountUrlAsync(modalSource, reference);
+        string url = _backendModeProvider.IsNewBackendEnabled(BackendCapability.DeviceRegistration)
+            ? _urlsBrowser.CreateAccount
+            : await _webAuthenticator.GetUpgradeAccountUrlAsync(modalSource, reference);
 
         Open(url, modalSource, reference);
     }

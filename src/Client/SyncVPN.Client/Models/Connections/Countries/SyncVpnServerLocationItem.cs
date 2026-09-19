@@ -17,9 +17,11 @@
  * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SyncVPN.Api.V2.Contracts.Account;
 using SyncVPN.Api.V2.Contracts.Servers;
+using SyncVPN.Client.Common.Dispatching;
 using SyncVPN.Client.Contracts.Enums;
 using SyncVPN.Client.Contracts.Messages;
 using SyncVPN.Client.Core.Services.Activation;
@@ -32,6 +34,7 @@ using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations;
 using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations.SyncVpnServers;
 using SyncVPN.Client.Logic.Connection.RequestCreators;
 using SyncVPN.Client.Logic.Servers.Contracts;
+using SyncVPN.Client.Services.ServerPing;
 using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.StatisticalEvents.Contracts.Dimensions;
 
@@ -51,6 +54,8 @@ namespace SyncVPN.Client.Models.Connections.Countries;
 public partial class SyncVpnServerLocationItem : LocationItemBase
 {
     private readonly IEventMessageSender _eventMessageSender;
+    private readonly IServerPingService _serverPingService;
+    private readonly IUIThreadDispatcher _uiThreadDispatcher;
 
     public ServerListItem Server { get; }
 
@@ -69,10 +74,11 @@ public partial class SyncVpnServerLocationItem : LocationItemBase
     // relabel it (matches how every other row's connect behavior is snapshotted at list-build time).
     public string ProtocolLabel { get; }
 
-    // Static placeholder: the new backend's server catalog has no latency/signal measurement wired up
-    // yet (same as SidebarComponentViewModel's DailyDataUsage fields), so this isn't measuring anything
-    // real - it exists only to match the reference design's row layout.
-    public string PingText => "12 ms";
+    // Real measured round-trip time to this server, fetched lazily (see InvalidatePingAsync) since the
+    // public catalog carries no IP to ping until the server is claimed - see IServerPingService. Empty
+    // until measured (or if the server couldn't be reached) rather than showing a made-up number.
+    [ObservableProperty]
+    private string _pingText = string.Empty;
 
     public bool IsPro => Server.Free == 0;
 
@@ -92,6 +98,8 @@ public partial class SyncVpnServerLocationItem : LocationItemBase
         IConnectionManager connectionManager,
         IUpsellCarouselWindowActivator upsellCarouselWindowActivator,
         IEventMessageSender eventMessageSender,
+        IServerPingService serverPingService,
+        IUIThreadDispatcher uiThreadDispatcher,
         ISettings settings,
         ServerListItem server)
         : base(localizer,
@@ -101,15 +109,28 @@ public partial class SyncVpnServerLocationItem : LocationItemBase
                isSearchItem: false)
     {
         _eventMessageSender = eventMessageSender;
+        _serverPingService = serverPingService;
+        _uiThreadDispatcher = uiThreadDispatcher;
         Server = server;
         Header = server.Name;
         Description = server.City is not null ? $"{server.City}, {server.Country.Name}" : server.Country.Name;
         IsDescriptionVisible = !string.IsNullOrEmpty(Description);
 
-        string protocol = SyncVpnAccountClaimMapper.ResolveServerProtocol(settings.VpnProtocol, server.Protocols);
+        (string protocol, string? transport) = SyncVpnAccountClaimMapper.ResolveServerProtocolAndTransport(settings.VpnProtocol, server.Protocols);
         ProtocolLabel = GetProtocolLabel(protocol);
 
-        LocationIntent = new SyncVpnServerLocationIntent(server.Id, server.Name, protocol, isForPaidUsersOnly: server.Free == 0);
+        LocationIntent = new SyncVpnServerLocationIntent(server.Id, server.Name, protocol, transport, isForPaidUsersOnly: server.Free == 0);
+
+        _ = InvalidatePingAsync(protocol);
+    }
+
+    // Fire-and-forget by design: this row must render immediately with PingText blank, not block
+    // construction on a network round trip. IServerPingService caches by ServerId, so this is at most
+    // one claim+ping per server for the whole process lifetime, however many times a row is rebuilt.
+    private async Task InvalidatePingAsync(string protocol)
+    {
+        int? pingMs = await _serverPingService.GetPingMsAsync(Server.Id, protocol, transport: null);
+        _uiThreadDispatcher.TryEnqueue(() => PingText = pingMs.HasValue ? $"{pingMs} ms" : string.Empty);
     }
 
     private string GetProtocolLabel(string wireProtocol)

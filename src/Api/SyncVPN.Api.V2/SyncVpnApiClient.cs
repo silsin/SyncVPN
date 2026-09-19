@@ -30,6 +30,7 @@ using SyncVPN.Api.V2.Contracts;
 using SyncVPN.Api.V2.Contracts.Account;
 using SyncVPN.Api.V2.Contracts.Auth;
 using SyncVPN.Api.V2.Contracts.Billing;
+using SyncVPN.Api.V2.Contracts.CheckoutLinks;
 using SyncVPN.Api.V2.Contracts.Devices;
 using SyncVPN.Api.V2.Contracts.Dns;
 using SyncVPN.Api.V2.Contracts.Plans;
@@ -56,6 +57,9 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
     {
         _httpClient = new HttpClient { BaseAddress = hostProvider.GetBaseUri() };
         _httpClient.DefaultRequestHeaders.Add(AppTokenHeaderName, appTokenProvider.GetAppToken());
+        // Without this, some error responses (e.g. an invalid app token) fall back to an HTML page
+        // instead of JSON - see SyncVpnApiClient.GetWebLoginStatusAsync's 404 case.
+        _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
         _settings = settings;
     }
 
@@ -194,6 +198,28 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
         return await ReadResponseAsync<PurchaseResponse>(response, cancellationToken);
     }
 
+    public async Task<ApiResponseResult<CheckoutLinkResponse>> CreateCheckoutLinkAsync(CheckoutLinkRequest request, CancellationToken cancellationToken = default)
+    {
+        // Guests can request action=purchase without a Bearer; action=renew requires one, attached
+        // automatically by CreateRequest whenever a device token is stored.
+        using HttpRequestMessage httpRequest = CreateRequest(HttpMethod.Post, "checkout-links");
+        httpRequest.Content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+
+        using HttpResponseMessage response = await _httpClient.SendAsync(httpRequest, cancellationToken);
+        return await ReadResponseAsync<CheckoutLinkResponse>(response, cancellationToken);
+    }
+
+    // poll_token travels in the JSON body (not a header or query string) so it never lands in an
+    // access log - same reasoning as GetWebLoginStatusAsync.
+    public async Task<ApiResponseResult<CheckoutStatusResponse>> GetCheckoutLinkStatusAsync(CheckoutStatusRequest request, CancellationToken cancellationToken = default)
+    {
+        using HttpRequestMessage httpRequest = CreateRequest(HttpMethod.Post, "checkout-links/status");
+        httpRequest.Content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+
+        using HttpResponseMessage response = await _httpClient.SendAsync(httpRequest, cancellationToken);
+        return await ReadResponseAsync<CheckoutStatusResponse>(response, cancellationToken);
+    }
+
     public async Task<ApiResponseResult<TransactionListResponse>> GetTransactionsAsync(int page = 1, CancellationToken cancellationToken = default)
     {
         using HttpRequestMessage request = CreateRequest(HttpMethod.Get, $"transactions?page={page}");
@@ -232,6 +258,27 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
 
         LoginResponse? login = JsonConvert.DeserializeObject<LoginResponse>(body);
         return ApiResponseResult<LoginAttemptResponse>.Ok(response, new LoginAttemptResponse { RequiresTwoFactor = false, Login = login });
+    }
+
+    // Starts a browser-based login attempt for this (already-registered) device - the Deviceid header
+    // is attached automatically by CreateRequest from _settings.SyncVpnDeviceId. No request body.
+    public async Task<ApiResponseResult<WebAppLoginResponse>> StartWebLoginAsync(CancellationToken cancellationToken = default)
+    {
+        using HttpRequestMessage request = CreateRequest(HttpMethod.Post, "auth/web-app");
+        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        return await ReadResponseAsync<WebAppLoginResponse>(response, cancellationToken);
+    }
+
+    // poll_token travels in the JSON body (not a header or query string) so it never lands in an
+    // access log - see WebAppLoginData.PollToken.
+    public async Task<ApiResponseResult<WebAppLoginStatusResponse>> GetWebLoginStatusAsync(string key, string pollToken, CancellationToken cancellationToken = default)
+    {
+        using HttpRequestMessage request = CreateRequest(HttpMethod.Post, "auth/web-app/status");
+        WebAppLoginStatusRequest body = new() { Key = key, PollToken = pollToken };
+        request.Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
+
+        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        return await ReadResponseAsync<WebAppLoginStatusResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<LoginResponse>> VerifyTwoFactorAsync(TwoFactorVerifyRequest request, CancellationToken cancellationToken = default)

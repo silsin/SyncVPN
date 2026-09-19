@@ -45,6 +45,12 @@ public class SyncVpnErrorResponse
     [JsonProperty("requires_device_registration")]
     public bool RequiresDeviceRegistration { get; set; }
 
+    [JsonProperty("requires_email")]
+    public bool RequiresEmail { get; set; }
+
+    [JsonProperty("requires_language")]
+    public bool RequiresLanguage { get; set; }
+
     [JsonProperty("force_logout")]
     public bool ForceLogout { get; set; }
 
@@ -92,4 +98,11 @@ public static class SyncVpnErrorCodes
     public const string PurchaseAlreadyCompleted = "PURCHASE_ALREADY_COMPLETED";
     public const string SalesDisabled = "SALES_DISABLED";
     public const string RenewalsDisabled = "RENEWALS_DISABLED";
+
+    // POST /checkout-links 409 codes.
+    public const string PlanUnavailable = "PLAN_UNAVAILABLE";
+    public const string PurchaseIdentityConflict = "PURCHASE_IDENTITY_CONFLICT";
+    public const string InvalidRenewal = "INVALID_RENEWAL";
+    public const string ActiveSubscriptionExists = "ACTIVE_SUBSCRIPTION_EXISTS";
+    public const string RenewalRequired = "RENEWAL_REQUIRED";
 }

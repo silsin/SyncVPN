@@ -24,6 +24,7 @@ using SyncVPN.Api.Contracts;
 using SyncVPN.Api.V2.Contracts;
 using SyncVPN.Api.V2.Contracts.Devices;
 using SyncVPN.Client.Common.Observers;
+using SyncVPN.Client.Logic.Auth.Contracts;
 using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.Configurations.Contracts;
 using SyncVPN.IssueReporting.Contracts;
@@ -42,6 +43,7 @@ public class DeviceRegistrationObserver : ObserverBase
     private readonly ISyncVpnApiClient _apiClient;
     private readonly ISettings _settings;
     private readonly IConfiguration _config;
+    private readonly IDeviceIdentifierProvider _deviceIdentifierProvider;
 
     public DeviceRegistrationObserver(
         ILogger logger,
@@ -49,13 +51,15 @@ public class DeviceRegistrationObserver : ObserverBase
         IBackendModeProvider backendModeProvider,
         ISyncVpnApiClient apiClient,
         ISettings settings,
-        IConfiguration config)
+        IConfiguration config,
+        IDeviceIdentifierProvider deviceIdentifierProvider)
         : base(logger, issueReporter)
     {
         _backendModeProvider = backendModeProvider;
         _apiClient = apiClient;
         _settings = settings;
         _config = config;
+        _deviceIdentifierProvider = deviceIdentifierProvider;
 
         TriggerAction.Run();
     }
@@ -67,7 +71,10 @@ public class DeviceRegistrationObserver : ObserverBase
             return;
         }
 
-        string deviceId = _settings.SyncVpnDeviceId ?? Guid.NewGuid().ToString();
+        // Falls back to a stable, hardware-derived id (not a random one) so a device that lost its
+        // settings (e.g. this app was uninstalled and reinstalled) re-registers under the same id
+        // instead of the backend seeing it as a brand new device every time.
+        string deviceId = _settings.SyncVpnDeviceId ?? _deviceIdentifierProvider.GetStableDeviceId();
 
         // No FCM/APNs or OneSignal SDK on Windows - these are locally-generated, persisted GUIDs, not
         // real push tokens (see IGlobalSettings.SyncVpnPushToken).

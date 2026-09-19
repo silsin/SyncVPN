@@ -70,4 +70,12 @@ public class SerializableLocationIntent
     public SelectionStrategy? Strategy { get; set; }
 
     public ServerInfo? ServerToExclude { get; set; }
+
+    // SyncVpnServerLocationIntent-only: the new SyncVPN backend's per-server intent has no legacy
+    // equivalent to reuse (Server above only carries Id/Name), so these round-trip its remaining fields.
+    public string? Protocol { get; set; }
+
+    public string? Transport { get; set; }
+
+    public bool? IsForPaidUsersOnly { get; set; }
 }

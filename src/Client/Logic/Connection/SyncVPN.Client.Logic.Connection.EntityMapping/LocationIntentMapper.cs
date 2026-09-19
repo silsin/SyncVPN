@@ -25,6 +25,7 @@ using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations.Gateway
 using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations.GatewayServers;
 using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations.Servers;
 using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations.States;
+using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations.SyncVpnServers;
 using SyncVPN.Client.Logic.Connection.Contracts.SerializableEntities.Intents;
 using SyncVPN.EntityMapping.Contracts;
 
@@ -66,6 +67,7 @@ public class LocationIntentMapper : IMapper<ILocationIntent, SerializableLocatio
                 SingleGatewayLocationIntent intent => _entityMapper.Map<SingleGatewayLocationIntent, SerializableLocationIntent>(intent),
                 MultiGatewayLocationIntent intent => _entityMapper.Map<MultiGatewayLocationIntent, SerializableLocationIntent>(intent),
                 FreeServerLocationIntent intent => _entityMapper.Map<FreeServerLocationIntent, SerializableLocationIntent>(intent),
+                SyncVpnServerLocationIntent intent => _entityMapper.Map<SyncVpnServerLocationIntent, SerializableLocationIntent>(intent),
 
                 _ => throw new NotImplementedException($"No mapping is implemented for {leftEntity.GetType().FullName}"),
             };
@@ -110,6 +112,7 @@ public class LocationIntentMapper : IMapper<ILocationIntent, SerializableLocatio
                 nameof(SingleGatewayLocationIntent) => _entityMapper.Map<SerializableLocationIntent, SingleGatewayLocationIntent>(rightEntity),
                 nameof(MultiGatewayLocationIntent) => _entityMapper.Map<SerializableLocationIntent, MultiGatewayLocationIntent>(rightEntity),
                 nameof(FreeServerLocationIntent) => _entityMapper.Map<SerializableLocationIntent, FreeServerLocationIntent>(rightEntity),
+                nameof(SyncVpnServerLocationIntent) => _entityMapper.Map<SerializableLocationIntent, SyncVpnServerLocationIntent>(rightEntity),
 
                 _ => throw new NotImplementedException($"No mapping is implemented for {rightEntity.TypeName}"),
             };

@@ -52,5 +52,6 @@ public enum ModalSource
     CarouselTor,
     Account,
     Tor,
-    Tray
-}          
+    Tray,
+    Store
+}

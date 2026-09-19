@@ -33,6 +33,7 @@ using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations.Gateway
 using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations.GatewayServers;
 using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations.Servers;
 using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations.States;
+using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations.SyncVpnServers;
 using SyncVPN.Client.Logic.Profiles.Contracts.Models;
 using SyncVPN.Client.Logic.Users.Contracts.Messages;
 using SyncVPN.Client.Settings.Contracts;
@@ -104,6 +105,7 @@ public static class LocalizationExtensions
             GatewayServerLocationIntentBase intent => localizer.GetGatewayName(intent.Gateway.GatewayName),
 
             FreeServerLocationIntent intent => localizer.GetFreeServerName(intent.Strategy),
+            SyncVpnServerLocationIntent intent => intent.ServerName,
             _ => localizer.Get("Country_Fastest")
         };
     }

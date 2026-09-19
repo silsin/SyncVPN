@@ -84,6 +84,9 @@ public partial class ConnectionCardComponentViewModel : ActivatableViewModelBase
     [NotifyPropertyChangedFor(nameof(IsDisconnected))]
     [NotifyPropertyChangedFor(nameof(IsConnecting))]
     [NotifyPropertyChangedFor(nameof(IsConnected))]
+    [NotifyPropertyChangedFor(nameof(IsConnectingViaThisButton))]
+    [NotifyPropertyChangedFor(nameof(ShowConnectButton))]
+    [NotifyPropertyChangedFor(nameof(ShowCancelButton))]
     [NotifyPropertyChangedFor(nameof(IsFreeConnectionsTaglineVisible))]
     [NotifyPropertyChangedFor(nameof(IsChangeServerOptionVisible))]
     [NotifyPropertyChangedFor(nameof(ExitCountry))]
@@ -156,6 +159,16 @@ public partial class ConnectionCardComponentViewModel : ActivatableViewModelBase
     public bool IsConnecting => CurrentConnectionStatus == ConnectionStatus.Connecting;
 
     public bool IsConnected => CurrentConnectionStatus == ConnectionStatus.Connected;
+
+    // True only while the in-progress connection was actually started via THIS button (ConnectCommand
+    // below), as opposed to the Map's own MapSelectedConnectButton - lets this button stay visible but
+    // disabled instead of disappearing when it's the one the user pressed, while the other surface
+    // keeps offering Cancel. See MapComponentViewModel.IsConnectingFromMapSelection for the mirror.
+    public bool IsConnectingViaThisButton => IsConnecting && _connectionManager.CurrentConnectionTrigger == VpnTriggerDimension.ConnectionCard;
+
+    public bool ShowConnectButton => IsDisconnected || IsConnectingViaThisButton;
+
+    public bool ShowCancelButton => IsConnecting && !IsConnectingViaThisButton;
 
     public bool IsFreeUser => !_settings.VpnPlan.IsPaid;
 

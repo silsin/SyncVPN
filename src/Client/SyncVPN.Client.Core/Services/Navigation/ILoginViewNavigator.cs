@@ -33,5 +33,7 @@ public interface ILoginViewNavigator : IViewNavigator
 
     Task<bool> NavigateToCodeLoginViewAsync();
 
+    Task<bool> NavigateToWebLoginViewAsync();
+
     Task<bool> NavigateToLoadingViewAsync();
 }

@@ -82,6 +82,18 @@ public class MainWindowViewNavigator : ViewNavigatorBase, IMainWindowViewNavigat
 
     public override Task<bool> NavigateToDefaultAsync()
     {
+        // IsGuestAccessEnabled means the new SyncVPN backend's server catalog (IFreeServersCache) is
+        // what's actually driving this app, not the legacy Proton _serversCache below - that stays
+        // permanently empty for a SyncVpn-only account, since it's never populated from this backend.
+        // Checking it regardless of login state (as the code used to do for IsLoggedIn) meant a real,
+        // successfully logged-in SyncVPN user was unconditionally routed to "No VPN connections
+        // available" the moment IsLoggedIn actually became true, even with a full Pro server catalog
+        // sitting in IFreeServersCache - this already contradicted this class's own comment above.
+        if (IsGuestAccessEnabled)
+        {
+            return NavigateToMainViewAsync();
+        }
+
         if (_userAuthenticator.IsLoggedIn)
         {
             return _serversCache.HasNoServers()
@@ -89,9 +101,7 @@ public class MainWindowViewNavigator : ViewNavigatorBase, IMainWindowViewNavigat
                 : NavigateToMainViewAsync();
         }
 
-        return IsGuestAccessEnabled
-            ? NavigateToMainViewAsync()
-            : NavigateToLoginViewAsync();
+        return NavigateToLoginViewAsync();
     }
 
     public void Receive(AuthenticationStatusChanged message)

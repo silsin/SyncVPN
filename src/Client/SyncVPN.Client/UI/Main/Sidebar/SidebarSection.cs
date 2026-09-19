@@ -25,5 +25,6 @@ public enum SidebarSection
     Countries,
     SecureCore,
     NetShield,
-    Settings
+    Settings,
+    Store
 }

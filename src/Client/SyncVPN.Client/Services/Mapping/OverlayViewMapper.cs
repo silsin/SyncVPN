@@ -28,6 +28,7 @@ using SyncVPN.Client.UI.Overlays.Information.Notification;
 using SyncVPN.Client.UI.Overlays.Welcome;
 using SyncVPN.Client.UI.Overlays.WhatsNew;
 using SyncVPN.Client.UI.Overlays.Selection;
+using SyncVPN.Client.UI.Overlays.Store;
 
 namespace SyncVPN.Client.Services.Mapping;
 
@@ -54,5 +55,7 @@ public class OverlayViewMapper : ViewMapperBase<OverlayViewModelBase, ContentDia
 
         ConfigureMapping<IpSelectorOverlayViewModel, IpSelectorOverlayView>();
         ConfigureMapping<AppSelectorOverlayViewModel, AppSelectorOverlayView>();
+
+        ConfigureMapping<StoreGuestEmailOverlayViewModel, StoreGuestEmailOverlayView>();
     }
 }

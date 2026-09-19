@@ -37,6 +37,16 @@ public interface ISyncVpnAuthenticator
     // token - the code-login counterpart to LoginUserAsync's email+password flow.
     Task<AuthResult> LoginWithCodeAsync(string code, CancellationToken cancellationToken);
 
+    // Starts a browser-based login attempt (POST /auth/web-app) for this already-registered device.
+    // On success, the caller opens the returned VerificationUrl in the browser and then calls
+    // WaitForWebLoginAsync with the same result to wait for it to complete.
+    Task<WebLoginStartResult> StartWebLoginAsync(CancellationToken cancellationToken);
+
+    // Polls POST /auth/web-app/status (at attempt.PollInterval) until the browser-based login from
+    // StartWebLoginAsync is authorized, the attempt expires (~5 minutes, enforced server-side), or
+    // cancellationToken is cancelled.
+    Task<AuthResult> WaitForWebLoginAsync(WebLoginStartResult attempt, CancellationToken cancellationToken);
+
     Task<AuthResult> SendTwoFactorCodeAsync(string code, CancellationToken cancellationToken);
 
     Task<AuthResult> ValidateSessionAsync(CancellationToken cancellationToken);

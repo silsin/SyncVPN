@@ -18,9 +18,7 @@
  */
 
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
 using SyncVPN.Client.Core.Bases;
-using SyncVPN.Client.Extensions;
 using SyncVPN.Client.UI.Main.Home.Card;
 
 namespace SyncVPN.Client.UI.Main.Home.BottomBar;
@@ -52,14 +50,5 @@ public sealed partial class HomeBottomBarComponentView : IContextAware
     private void OnUnloaded(object sender, RoutedEventArgs e)
     {
         ViewModel.Deactivate();
-    }
-
-    private void OnButtonIsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
-    {
-        // This code makes sure the button to connect/cancel/disconnect receives focus automatically when enabled
-        if (sender is Button button && button.IsEnabled && this.IsParentWindowFocused())
-        {
-            button.Focus(FocusState.Programmatic);
-        }
     }
 }

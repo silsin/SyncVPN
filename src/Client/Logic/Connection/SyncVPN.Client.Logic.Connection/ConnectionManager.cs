@@ -28,14 +28,17 @@ using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents;
 using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Features;
 using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations;
 using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations.FreeServers;
+using SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations.SyncVpnServers;
 using SyncVPN.Client.Logic.Connection.Contracts.RequestCreators;
 using SyncVPN.Client.Logic.Connection.Extensions;
 using SyncVPN.Client.Logic.Connection.GuestHole;
 using SyncVPN.Client.Logic.Connection.Statistics;
 using SyncVPN.Client.Logic.Servers.Contracts;
+using SyncVPN.Client.Logic.Servers.Contracts.Enums;
 using SyncVPN.Client.Logic.Servers.Contracts.Models;
 using SyncVPN.Client.Logic.Services.Contracts;
 using SyncVPN.Client.Settings.Contracts;
+using SyncVPN.Common.Core.Extensions;
 using SyncVPN.Common.Core.Networking;
 using SyncVPN.Crypto.Contracts;
 using SyncVPN.EntityMapping.Contracts;
@@ -59,6 +62,15 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
 {
     private readonly TimeSpan _reconnectInterval = TimeSpan.FromMinutes(1);
     private readonly Random _random = new();
+
+    // Safety net for when the native service's own connect/ping-and-retry logic never reaches a
+    // terminal state at all (e.g. a native reachability probe that doesn't honor its own timeout - see
+    // UdpPingClient.PingAsync) - without this, a stuck probe leaves the UI on "Connecting" forever with
+    // no error and no way out except a manual disconnect. 45s is generous enough to not preempt a
+    // legitimately slow multi-server fallback, since VpnEndpointScanner already bounds each individual
+    // probe to a few seconds.
+    private static readonly TimeSpan ConnectingWatchdogTimeout = TimeSpan.FromSeconds(45);
+    private CancellationTokenSource? _connectingWatchdogCts;
 
     private readonly ILogger _logger;
     private readonly ISettings _settings;
@@ -90,6 +102,7 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
     public ConnectionStatus ConnectionStatus { get; private set; }
     public IConnectionIntent? CurrentConnectionIntent { get; private set; }
     public ConnectionDetails? CurrentConnectionDetails { get; private set; }
+    public VpnTriggerDimension? CurrentConnectionTrigger { get; private set; }
 
     public bool IsDisconnected => ConnectionStatus == ConnectionStatus.Disconnected;
     public bool IsConnecting => ConnectionStatus == ConnectionStatus.Connecting;
@@ -142,6 +155,7 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
         connectionIntent = ChangeConnectionIntent(connectionIntent, CreateNewIntentIfUserPlanIsFree);
 
         CurrentConnectionIntent = connectionIntent;
+        CurrentConnectionTrigger = connectionTrigger;
 
         _logger.Info<ConnectTriggerLog>($"[CONNECTION_PROCESS] Connection attempt to: {connectionIntent}. Triggered by {connectionTrigger}.", stackTraceDepth: 2);
 
@@ -268,6 +282,17 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
 
         CurrentConnectionIntent = connectionIntent;
 
+        // An Auto reconnect (retrying the next candidate endpoint, recovering from a transient error) is
+        // a transparent continuation of whichever button originally started this attempt, not a new
+        // action - it must not steal that button's "I started this" disabled state (see
+        // ConnectionCardComponentViewModel.IsConnectingViaThisButton) by overwriting it here. Only a
+        // reconnect with a real, non-Auto trigger (e.g. NewConnection from a settings/profile change)
+        // represents a genuinely fresh attempt worth re-recording.
+        if (reconnectionTrigger != VpnTriggerDimension.Auto)
+        {
+            CurrentConnectionTrigger = reconnectionTrigger;
+        }
+
         _logger.Info<ConnectTriggerLog>($"[CONNECTION_PROCESS] Reconnection attempt to: {connectionIntent}. Triggered by {reconnectionTrigger}.", stackTraceDepth: 1);
 
         ConnectionRequestIpcEntity? request = await TryCreateRequestAsync(() => _reconnectionRequestCreator.CreateAsync(connectionIntent));
@@ -286,6 +311,7 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
         _logger.Info<ConnectTriggerLog>($"[CONNECTION_PROCESS] Disconnection attempt. Triggered by {disconnectionTrigger}.", stackTraceDepth: 2);
 
         CurrentConnectionIntent = null;
+        CurrentConnectionTrigger = null;
 
         DisconnectionRequestIpcEntity request = _disconnectionRequestCreator.Create();
 
@@ -309,6 +335,32 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
                 VpnProtocol vpnProtocol = _entityMapper.Map<VpnProtocolIpcEntity, VpnProtocol>(message.VpnProtocol);
                 Server? server = GetCurrentServer(message, vpnProtocol);
                 PhysicalServer? physicalServer = server?.Servers.FirstOrDefault(FilterPhysicalServerByVpnState(message, vpnProtocol));
+
+                // A SyncVPN-catalog server only ever exists in the new backend's catalog - it can never
+                // be found by GetCurrentServer above, which only searches _serversLoader's legacy Proton
+                // cache. Without this, every single SyncVPN server connection actually succeeded at the
+                // native/tunnel level (a real EndpointIp was reported) but fell into the "Server is null"
+                // branch below on every status update, endlessly reconnecting until the native service
+                // gave out - surfacing to the user as a generic Unknown (VpnError 14) failure for a
+                // connection that had genuinely worked.
+                //
+                // Two intents can lead here: SyncVpnServerLocationIntent (one specific server picked by
+                // id, e.g. from the map) carries its own ServerId/ServerName; FreeServerLocationIntent
+                // ("Fastest"/"Random" free server, e.g. the Connection Card's default button) is a
+                // strategy rather than a specific server, so it has neither - the native status report's
+                // own Label/EndpointIp is the only identity available for that case (VPNWIN-2105).
+                if (server is null)
+                {
+                    if (connectionIntent.Location is SyncVpnServerLocationIntent syncVpnIntent)
+                    {
+                        (server, physicalServer) = BuildSyncVpnServer(syncVpnIntent.ServerId.ToString(), syncVpnIntent.ServerName, syncVpnIntent.IsForPaidUsersOnly, message);
+                    }
+                    else if (connectionIntent.Location is FreeServerLocationIntent && !string.IsNullOrEmpty(message.EndpointIp))
+                    {
+                        string displayName = string.IsNullOrEmpty(message.Label) ? message.EndpointIp : message.Label;
+                        (server, physicalServer) = BuildSyncVpnServer(message.EndpointIp, displayName, isForPaidUsersOnly: false, message);
+                    }
+                }
 
                 if (server is not null && physicalServer is not null)
                 {
@@ -368,6 +420,53 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
         return _serversLoader.GetServers().FirstOrDefault(s => s.Servers.Any(FilterPhysicalServerByVpnState(state, vpnProtocol)));
     }
 
+    // Built entirely from data already available here (an identity - either the intent's own, or the
+    // native status report's Label/EndpointIp when the intent doesn't carry one - plus the native
+    // service's own status report) rather than looked up anywhere, since this server doesn't exist in
+    // any legacy cache to look up from. Geographic fields (City/State/ExitCountry/etc.) are
+    // intentionally left blank - this layer has no access to the new backend's server catalog
+    // (IFreeServersCache lives in a higher layer than this project) to fill them in correctly; only
+    // what's needed for a valid, non-crashing ConnectionDetails is populated.
+    private static (Server Server, PhysicalServer PhysicalServer) BuildSyncVpnServer(string id, string name, bool isForPaidUsersOnly, VpnStateIpcEntity state)
+    {
+        PhysicalServer physicalServer = new()
+        {
+            Id = id,
+            EntryIp = state.EndpointIp,
+            ExitIp = state.EndpointIp,
+            Domain = state.Label,
+            Label = state.Label,
+            Status = 1,
+            X25519PublicKey = string.Empty,
+            Signature = string.Empty,
+        };
+
+        Server server = new()
+        {
+            Id = id,
+            Name = name,
+            City = string.Empty,
+            State = string.Empty,
+            EntryCountry = string.Empty,
+            ExitCountry = string.Empty,
+            HostCountry = string.Empty,
+            Domain = state.Label,
+            Status = 1,
+            Tier = isForPaidUsersOnly ? ServerTiers.Basic : ServerTiers.Free,
+            Features = default,
+            Load = 0,
+            Score = 0,
+            Servers = [physicalServer],
+            IsVirtual = false,
+            GatewayName = string.Empty,
+            StatusReference = new StatusReference(),
+            EntryLocation = new GeoLocation(),
+            ExitLocation = new GeoLocation(),
+        };
+
+        return (server, physicalServer);
+    }
+
     private Func<PhysicalServer, bool> FilterPhysicalServerByVpnState(VpnStateIpcEntity state, VpnProtocol vpnProtocol)
     {
         return physicalServer => physicalServer.Label == state.Label
@@ -394,9 +493,30 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
 
         ConnectionStatus = MapConnectionStatus(status, error);
 
+        // ActionRequired (waiting on a 2FA code) also maps to ConnectionStatus.Connecting, but that's
+        // bounded by the user typing, not the service - it must never be auto-timed-out. Arm state is
+        // tracked by whether the CTS exists rather than by the previous ConnectionStatus, since both
+        // Pinging and ActionRequired map to the same Connecting value and would otherwise make a
+        // 2FA-then-back-to-connecting transition fail to re-arm.
+        bool shouldWatchdogBeArmed = ConnectionStatus == ConnectionStatus.Connecting && status != VpnStatusIpcEntity.ActionRequired;
+
+        if (shouldWatchdogBeArmed && _connectingWatchdogCts is null)
+        {
+            ArmConnectingWatchdog();
+        }
+        else if (!shouldWatchdogBeArmed && _connectingWatchdogCts is not null)
+        {
+            DisarmConnectingWatchdog();
+        }
+
         _eventMessageSender.Send(new ConnectionStatusChangedMessage(ConnectionStatus));
 
         _logger.Info<ConnectTriggerLog>($"[CONNECTION_PROCESS] Status updated to {ConnectionStatus}{(_isGuestHoleActive ? " (Guest hole)" : string.Empty)}.{(IsConnected ? $" Connected to server {CurrentConnectionDetails?.ServerName}" : string.Empty)}");
+
+        if (error != VpnErrorTypeIpcEntity.None)
+        {
+            _logger.Error<ConnectTriggerLog>($"[CONNECTION_PROCESS] Connection error reason: '{error}' (native status '{status}', server '{CurrentConnectionDetails?.ServerName}').");
+        }
 
         _statisticalEventManager.OnVpnStateChanged(status, error, CurrentConnectionDetails);
     }
@@ -406,6 +526,50 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
         return status == VpnStatusIpcEntity.ActionRequired && error.IsTwoFactorError()
             ? ConnectionStatus.Connecting
             : _entityMapper.Map<VpnStatusIpcEntity, ConnectionStatus>(status);
+    }
+
+    private void ArmConnectingWatchdog()
+    {
+        _connectingWatchdogCts = new CancellationTokenSource();
+
+        RunConnectingWatchdogAsync(_connectingWatchdogCts.Token).FireAndForget();
+    }
+
+    private void DisarmConnectingWatchdog()
+    {
+        _connectingWatchdogCts?.Cancel();
+        _connectingWatchdogCts?.Dispose();
+        _connectingWatchdogCts = null;
+    }
+
+    private async Task RunConnectingWatchdogAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            await Task.Delay(ConnectingWatchdogTimeout, cancellationToken);
+        }
+        catch (OperationCanceledException)
+        {
+            return;
+        }
+
+        await OnConnectingWatchdogElapsedAsync();
+    }
+
+    private async Task OnConnectingWatchdogElapsedAsync()
+    {
+        _logger.Warn<ConnectTriggerLog>(
+            $"[CONNECTION_PROCESS] Still Connecting {ConnectingWatchdogTimeout.TotalSeconds:0}s after the attempt started with no terminal status from the service - giving up and disconnecting.");
+
+        DisarmConnectingWatchdog();
+
+        _statisticalEventManager.SetDisconnectionAttempt(VpnTriggerDimension.Auto, ConnectionStatus);
+
+        CurrentConnectionIntent = null;
+        CurrentConnectionTrigger = null;
+
+        DisconnectionRequestIpcEntity request = _disconnectionRequestCreator.Create(VpnError.PingTimeoutError);
+        await _vpnServiceCaller.DisconnectAsync(request);
     }
 
     public void Receive(ConnectionDetailsIpcEntity message)

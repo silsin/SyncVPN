@@ -84,6 +84,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
             <Setter Property="Background" Value="{ThemeResource VpnGreenWeakColorBrush}" />
             <Setter Property="BorderBrush" Value="{ThemeResource VpnGreenColorBrush}" />
             <Setter Property="Foreground" Value="{ThemeResource VpnGreenColorBrush}" />
+            <Setter Property="Padding" Value="10,8" />
         </Style>
     </UserControl.Resources>
 
@@ -279,15 +280,24 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
 
                     <Button Margin="0,8,0,0"
                             HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Center"
+                            HorizontalContentAlignment="Stretch"
                             AutomationProperties.AutomationId="SidebarUpgradeToPremiumButton"
                             Command="{x:Bind ViewModel.UpgradeToPremiumCommand, Mode=OneTime}"
                             Style="{StaticResource SidebarUpgradeButtonStyle}">
-                        <StackPanel Orientation="Horizontal"
-                                    Spacing="6">
-                            <pathicons:Rocket Size="Pixels16" />
-                            <TextBlock Text="{x:Bind ViewModel.Localizer.Get('Sidebar_FreePlanCard_Upgrade')}" />
-                        </StackPanel>
+                        <Grid ColumnSpacing="6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <pathicons:Rocket Grid.Column="0"
+                                              VerticalAlignment="Center"
+                                              Size="Pixels16" />
+                            <TextBlock Grid.Column="1"
+                                       VerticalAlignment="Center"
+                                       TextAlignment="Center"
+                                       TextWrapping="Wrap"
+                                       Text="{x:Bind ViewModel.Localizer.Get('Sidebar_FreePlanCard_Upgrade')}" />
+                        </Grid>
                     </Button>
                 </StackPanel>
             </Border>

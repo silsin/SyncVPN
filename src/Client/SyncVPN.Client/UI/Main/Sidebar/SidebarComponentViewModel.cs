@@ -23,7 +23,6 @@ using Microsoft.UI.Xaml.Navigation;
 using SyncVPN.Client.Core.Bases;
 using SyncVPN.Client.Core.Bases.ViewModels;
 using SyncVPN.Client.Core.Enums;
-using SyncVPN.Client.Core.Services.Activation;
 using SyncVPN.Client.Core.Services.Navigation;
 using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Logic.Connection.Contracts.Messages;
@@ -33,6 +32,7 @@ using SyncVPN.Client.UI.Main.Settings;
 using SyncVPN.Client.UI.Main.Settings.Connection;
 using SyncVPN.Client.UI.Main.Sidebar.Connections;
 using SyncVPN.Client.UI.Main.Sidebar.Connections.Countries;
+using SyncVPN.Client.UI.Main.Store;
 
 namespace SyncVPN.Client.UI.Main.Sidebar;
 
@@ -44,7 +44,6 @@ public partial class SidebarComponentViewModel : ActivatableViewModelBase,
     private readonly IConnectionsViewNavigator _connectionsViewNavigator;
     private readonly ISettingsViewNavigator _settingsViewNavigator;
     private readonly ISettings _settings;
-    private readonly IUpsellCarouselWindowActivator _upsellCarouselWindowActivator;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsHomeSelected))]
@@ -52,6 +51,7 @@ public partial class SidebarComponentViewModel : ActivatableViewModelBase,
     [NotifyPropertyChangedFor(nameof(IsSecureCoreSelected))]
     [NotifyPropertyChangedFor(nameof(IsNetShieldSelected))]
     [NotifyPropertyChangedFor(nameof(IsSettingsSelected))]
+    [NotifyPropertyChangedFor(nameof(IsStoreSelected))]
     private SidebarSection _selectedSection = SidebarSection.Home;
 
     [ObservableProperty]
@@ -70,6 +70,8 @@ public partial class SidebarComponentViewModel : ActivatableViewModelBase,
 
     public bool IsSettingsSelected => SelectedSection == SidebarSection.Settings;
 
+    public bool IsStoreSelected => SelectedSection == SidebarSection.Store;
+
     // Real running totals from POST /account/usage (see UsageReportingObserver), persisted so there's a
     // figure to show immediately on startup rather than nothing while waiting for the first report of the
     // session. There's no quota/cap or reset time in that API - just the account's cumulative usage - so
@@ -81,7 +83,6 @@ public partial class SidebarComponentViewModel : ActivatableViewModelBase,
         IConnectionsViewNavigator connectionsViewNavigator,
         ISettingsViewNavigator settingsViewNavigator,
         ISettings settings,
-        IUpsellCarouselWindowActivator upsellCarouselWindowActivator,
         IViewModelHelper viewModelHelper)
         : base(viewModelHelper)
     {
@@ -89,7 +90,6 @@ public partial class SidebarComponentViewModel : ActivatableViewModelBase,
         _connectionsViewNavigator = connectionsViewNavigator;
         _settingsViewNavigator = settingsViewNavigator;
         _settings = settings;
-        _upsellCarouselWindowActivator = upsellCarouselWindowActivator;
 
         _mainViewNavigator.Navigated += OnMainNavigated;
         _settingsViewNavigator.Navigated += OnSettingsNavigated;
@@ -152,9 +152,10 @@ public partial class SidebarComponentViewModel : ActivatableViewModelBase,
     }
 
     [RelayCommand]
-    private Task UpgradeToPremiumAsync()
+    private async Task UpgradeToPremiumAsync()
     {
-        return _upsellCarouselWindowActivator.ActivateAsync(UpsellFeatureType.WorldwideCoverage);
+        SelectedSection = SidebarSection.Store;
+        await _mainViewNavigator.NavigateToStoreViewAsync();
     }
 
     private void OnMainNavigated(object sender, NavigationEventArgs e)
@@ -166,6 +167,9 @@ public partial class SidebarComponentViewModel : ActivatableViewModelBase,
                 break;
             case SettingsPageViewModel:
                 InvalidateSettingsSection();
+                break;
+            case StorePageViewModel:
+                SelectedSection = SidebarSection.Store;
                 break;
             case null:
                 SelectedSection = SidebarSection.Home;

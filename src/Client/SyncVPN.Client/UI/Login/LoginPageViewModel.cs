@@ -125,12 +125,12 @@ public partial class LoginPageViewModel : PageViewModelBase<IMainWindowViewNavig
 
                         case AuthError.TwoFactorAuthFailed:
                             SetErrorMessage(Localizer.Get("Login_Error_TwoFactorFailed"));
-                            await ChildViewNavigator.NavigateToSignInViewAsync();
+                            await ChildViewNavigator.NavigateToWebLoginViewAsync();
                             break;
 
                         case AuthError.WebAuthnNotSupported:
                             SetErrorMessage(Localizer.Get("Login_Error_WebAuthnNotSupported"));
-                            await ChildViewNavigator.NavigateToSignInViewAsync();
+                            await ChildViewNavigator.NavigateToWebLoginViewAsync();
                             break;
 
                         case AuthError.NoVpnAccess:
@@ -144,11 +144,11 @@ public partial class LoginPageViewModel : PageViewModelBase<IMainWindowViewNavig
                     break;
 
                 case LoginState.TwoFactorCancelled:
-                    await ChildViewNavigator.NavigateToSignInViewAsync();
+                    await ChildViewNavigator.NavigateToWebLoginViewAsync();
                     break;
 
                 case LoginState.Error:
-                    await ChildViewNavigator.NavigateToSignInViewAsync();
+                    await ChildViewNavigator.NavigateToWebLoginViewAsync();
                     HandleAuthError(message);
                     break;
             }
@@ -176,8 +176,8 @@ public partial class LoginPageViewModel : PageViewModelBase<IMainWindowViewNavig
         {
             if (message.PropertyName == nameof(ISettings.IsKillSwitchEnabled) &&
                 !_settings.IsKillSwitchEnabled &&
-                ParentViewNavigator.GetCurrentPageContext() is LoginPageViewModel && 
-                ChildViewNavigator.GetCurrentPageContext() is SignInPageViewModel)
+                ParentViewNavigator.GetCurrentPageContext() is LoginPageViewModel &&
+                ChildViewNavigator.GetCurrentPageContext() is SignInPageViewModel or WebLoginPageViewModel)
             {
                 SetMessage(Localizer.Get("SignIn_KillSwitch_Disabled"), Severity.Success);
             }

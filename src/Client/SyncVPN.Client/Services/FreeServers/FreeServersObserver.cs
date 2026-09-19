@@ -69,15 +69,34 @@ public class FreeServersObserver : ObserverBase, IEventMessageReceiver<VpnPlanCh
 
     protected override async Task OnTriggerAsync()
     {
-        ApiResponseResult<ServerListResponse> response = _settings.VpnPlan.IsPaid
+        bool isPaid = _settings.VpnPlan.IsPaid;
+        ApiResponseResult<ServerListResponse> response = isPaid
             ? await _freeServersProvider.GetProServersAsync()
             : await _freeServersProvider.GetFreeServersAsync();
 
         if (!response.Success || response.Value is null)
         {
-            Logger.Warn<ApiLog>($"Failed to fetch the {(_settings.VpnPlan.IsPaid ? "Pro" : "free")}-server catalog: {response.Error}");
-            return;
+            Logger.Warn<ApiLog>($"Failed to fetch the {(isPaid ? "Pro" : "free")}-server catalog: {response.Error}");
+
+            // A stale/wrong VpnPlan (e.g. a plan reset racing this trigger) must not leave the catalog
+            // empty - fall back to the free list rather than showing no servers at all.
+            if (isPaid)
+            {
+                isPaid = false;
+                response = await _freeServersProvider.GetFreeServersAsync();
+                if (!response.Success || response.Value is null)
+                {
+                    Logger.Warn<ApiLog>($"Failed to fetch the free-server catalog as a fallback: {response.Error}");
+                    return;
+                }
+            }
+            else
+            {
+                return;
+            }
         }
+
+        Logger.Info<ApiLog>($"Cached {response.Value.Data.Count} server(s) from the {(isPaid ? "Pro" : "free")}-server catalog.");
 
         _freeServersCache.SetServers(response.Value.Data);
 

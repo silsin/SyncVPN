@@ -30,6 +30,12 @@ public interface IConnectionManager
     ConnectionDetails? CurrentConnectionDetails { get; }
     IConnectionIntent? CurrentConnectionIntent { get; }
 
+    // Which button/surface started the connection attempt currently in progress (e.g. Map vs.
+    // ConnectionCard) - null once disconnected. Lets the two Connect buttons that can independently
+    // start a connection tell "I started this" apart from "something else did", so the one that was
+    // pressed can stay visible-but-disabled instead of hiding, while the other still offers Cancel.
+    VpnTriggerDimension? CurrentConnectionTrigger { get; }
+
     bool IsDisconnected { get; }
     bool IsConnecting { get; }
     bool IsConnected { get; }

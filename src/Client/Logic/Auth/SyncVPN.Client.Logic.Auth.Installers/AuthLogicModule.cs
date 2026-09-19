@@ -37,6 +37,7 @@ public class AuthLogicModule : Module
         builder.RegisterType<ConnectionCertificateUpdater>().AsImplementedInterfaces().AutoActivate().SingleInstance();
         builder.RegisterType<DeviceRegistrationObserver>().AsImplementedInterfaces().AutoActivate().SingleInstance();
         builder.RegisterType<UserHashGenerator>().AsImplementedInterfaces().SingleInstance();
+        builder.RegisterType<DeviceIdentifierProvider>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<WebAuthenticator>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<UserSession>().AsImplementedInterfaces().SingleInstance();
     }

@@ -219,8 +219,77 @@ public class UserAuthenticator : IUserAuthenticator,
         return result;
     }
 
+    // Starts a browser-based login attempt (POST /auth/web-app). Sets LoggingIn immediately, same as
+    // every other login method, so the Loading page's spinner (and its Cancel button) covers this call
+    // too - even though there's nothing to show the user yet, since the browser only opens once this
+    // returns successfully.
+    public async Task<WebLoginStartResult> StartWebLoginAsync()
+    {
+        SetAuthenticationStatus(AuthenticationStatus.LoggingIn);
+        ResetCancellationTokenIfCancelled();
+
+        await _unauthSessionManager.CreateIfDoesNotExistAsync(_cts.Token);
+
+        try
+        {
+            WebLoginStartResult result = await _syncVpnAuthenticator.StartWebLoginAsync(_cts.Token);
+            if (!result.Success)
+            {
+                SetAuthenticationStatus(AuthenticationStatus.LoggedOut);
+            }
+
+            return result;
+        }
+        catch (Exception) when (_cts.IsCancellationRequested)
+        {
+            HandleAuthCancellation();
+
+            return WebLoginStartResult.FromAuthResult(AuthResult.Fail(AuthError.None));
+        }
+    }
+
+    // Called after the caller (WebLoginPageViewModel) has opened attempt.VerificationUrl in the
+    // browser - waits for the user to complete login there, polling POST /auth/web-app/status at
+    // attempt.PollInterval until it succeeds, the attempt expires, or this._cts is cancelled (e.g. via
+    // CancelAuth from the Loading page's Cancel button).
+    public async Task<AuthResult> WaitForWebLoginAsync(WebLoginStartResult attempt)
+    {
+        try
+        {
+            AuthResult result = await _syncVpnAuthenticator.WaitForWebLoginAsync(attempt, _cts.Token);
+            if (result.Success)
+            {
+                OnSyncVpnLoginSucceeded();
+                SetAuthenticationStatus(AuthenticationStatus.LoggedIn);
+            }
+            else
+            {
+                SetAuthenticationStatus(AuthenticationStatus.LoggedOut);
+            }
+
+            return result;
+        }
+        catch (Exception) when (_cts.IsCancellationRequested)
+        {
+            HandleAuthCancellation();
+
+            return AuthResult.Fail(AuthError.None);
+        }
+    }
+
     public void Receive(NoVpnConnectionsAssignedMessage message)
     {
+        // VpnPlanUpdater sends this for ANY failure of the legacy GET /vpn/v2 plan check, including a
+        // plain 401 - which is exactly what that legacy endpoint returns for a SyncVpn-only account (it
+        // has no legacy Proton VPN plan at all). Stomping AuthenticationStatus here for such an account
+        // pins it at 'LoggingIn' forever (nothing ever transitions it back), which silently breaks
+        // IsLoggedIn / the Settings sign-out UI. Server/account signals must never drive login state -
+        // see UserAuthenticator's other IsSyncVpnAuthEnabled guards for the same rule.
+        if (IsSyncVpnAuthEnabled)
+        {
+            return;
+        }
+
         SetAuthenticationStatus(AuthenticationStatus.LoggingIn);
     }
 
@@ -412,6 +481,10 @@ public class UserAuthenticator : IUserAuthenticator,
             {
                 OnSyncVpnLoginSucceeded();
             }
+            else
+            {
+                ResetVpnPlanIfStale();
+            }
 
             SetAuthenticationStatus(result.Success ? AuthenticationStatus.LoggedIn : AuthenticationStatus.LoggedOut);
             return result;
@@ -424,8 +497,27 @@ public class UserAuthenticator : IUserAuthenticator,
         }
         else
         {
+            // A guest/logged-out cold start never calls SetAuthenticationStatus (it's already LoggedOut
+            // by default) - without this, a plan left stale by an earlier logout (before the reset below
+            // existed, or from a session that expired outside the app) has nothing left to ever correct
+            // it, and the UI keeps showing Pro forever even though there is no session at all.
+            ResetVpnPlanIfStale();
+
             await _unauthSessionManager.CreateIfDoesNotExistAsync(_cts.Token);
             return AuthResult.Ok();
+        }
+    }
+
+    // Server/account availability must never drive login OR plan state - this only ever resets the plan
+    // to Free when there is definitively no authenticated SyncVpn session, mirroring LogoutAsync's own
+    // reset so every "not logged in" path ends up with a consistent plan instead of a leftover stale one.
+    private void ResetVpnPlanIfStale()
+    {
+        VpnPlan oldPlan = _settings.VpnPlan;
+        if (!oldPlan.Equals(VpnPlan.Default))
+        {
+            _settings.VpnPlan = VpnPlan.Default;
+            _eventMessageSender.Send(new VpnPlanChangedMessage(oldPlan, VpnPlan.Default));
         }
     }
 
@@ -444,6 +536,8 @@ public class UserAuthenticator : IUserAuthenticator,
             {
                 await _syncVpnAuthenticator.LogoutAsync(CancellationToken.None);
                 IsAutoLogin = null;
+                ResetVpnPlanIfStale();
+
                 SetAuthenticationStatus(AuthenticationStatus.LoggedOut, reason);
                 return;
             }

@@ -193,7 +193,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                     IsEnabledChanged="OnButtonIsEnabledChanged"
                     Style="{StaticResource LargePrimaryButtonStyle}"
                     TabIndex="4"
-                    Visibility="{x:Bind ViewModel.IsDisconnected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    Visibility="{x:Bind ViewModel.ShowConnectButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
             <Button x:Name="ConnectionCardCancelButton"
                     MinWidth="{StaticResource MinButtonWidth}"
@@ -204,7 +204,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                     IsEnabledChanged="OnButtonIsEnabledChanged"
                     Style="{StaticResource LargeDisruptiveSecondaryButtonStyle}"
                     TabIndex="5"
-                    Visibility="{x:Bind ViewModel.IsConnecting, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                    Visibility="{x:Bind ViewModel.ShowCancelButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
             <Button x:Name="ConnectionCardDisconnectButton"
                     MinWidth="{StaticResource MinButtonWidth}"

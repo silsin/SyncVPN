@@ -123,7 +123,7 @@ public partial class CodeLoginPageViewModel : LoginPageViewModelBase
     [RelayCommand]
     private Task<bool> GoBackAsync()
     {
-        return ParentViewNavigator.NavigateToSignInViewAsync();
+        return ParentViewNavigator.NavigateToWebLoginViewAsync();
     }
 
     partial void OnCodeChanged(string value)

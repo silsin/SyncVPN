@@ -126,6 +126,8 @@
     <None Remove="UI\Main\Sidebar\Connections\Recents\RecentsPageView.xaml" />
     <None Remove="UI\Main\Sidebar\Search\SearchResultsPageView.xaml" />
     <None Remove="UI\Main\Sidebar\SidebarComponentView.xaml" />
+    <None Remove="UI\Main\Store\StorePageView.xaml" />
+    <None Remove="UI\Overlays\Store\StoreGuestEmailOverlayView.xaml" />
     <None Remove="UI\Main\Widgets\SideWidgetsHostComponentView.xaml" />
     <None Remove="UI\NavigationMasterControllerView.xaml" />
     <None Remove="UI\Overlays\Information\ProfileOverlayView.xaml" />
@@ -605,6 +607,18 @@
 
   <ItemGroup>
     <Page Update="UI\Main\Home\Card\ConnectionCardComponentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Main\Store\StorePageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Overlays\Store\StoreGuestEmailOverlayView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

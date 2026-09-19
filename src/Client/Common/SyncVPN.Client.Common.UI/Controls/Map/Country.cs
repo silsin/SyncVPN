@@ -47,6 +47,10 @@ public class Country
 
     public string FreeServerProtocol { get; set; } = string.Empty;
 
+    // Only meaningful when FreeServerProtocol is "OpenVpn" - POST /account rejects an OpenVpn claim
+    // with no transport at all, unlike WireGuard/L2tp/Sstp which have none.
+    public string? FreeServerTransport { get; set; }
+
     // True for a Pro-tier server pin - the connect handler must still gate these behind the paid-plan
     // upsell for a non-paid user, unlike a genuinely free server (Free == 1), which never gates.
     public bool FreeServerIsForPaidUsersOnly { get; set; } = false;

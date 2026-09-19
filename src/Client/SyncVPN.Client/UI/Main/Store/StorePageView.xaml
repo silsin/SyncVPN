@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright (c) 2026 Proton AG
+
+This file is part of SyncVPN.
+
+SyncVPN is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+SyncVPN is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<Page x:Class="SyncVPN.Client.UI.Main.Store.StorePageView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:aprop="using:SyncVPN.Client.Common.UI.AttachedProperties"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:pathicons="using:SyncVPN.Client.Common.UI.Assets.Icons.PathIcons"
+      xmlns:selectors="using:SyncVPN.Client.Selectors"
+      xmlns:store="using:SyncVPN.Client.UI.Main.Store"
+      x:DefaultBindMode="OneWay"
+      AutomationProperties.AutomationId="StorePage"
+      AutomationProperties.Name="{x:Bind ViewModel.Title}"
+      NavigationCacheMode="Required"
+      Background="{ThemeResource BackgroundNormColorBrush}"
+      mc:Ignorable="d">
+
+    <Page.Resources>
+
+        <Style x:Key="StorePlanCardBaseStyle" TargetType="Border">
+            <Setter Property="Padding" Value="24,20" />
+            <Setter Property="CornerRadius" Value="16" />
+        </Style>
+
+        <Style x:Key="StorePlanIconBadgeStyle" TargetType="Border">
+            <Setter Property="Width" Value="48" />
+            <Setter Property="Height" Value="48" />
+            <Setter Property="CornerRadius" Value="24" />
+        </Style>
+
+        <Style x:Key="StorePillBadgeStyle" TargetType="Border">
+            <Setter Property="Padding" Value="10,4" />
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+        </Style>
+
+        <Style x:Key="StorePlanNameTextStyle" BasedOn="{StaticResource BodyStrongTextBlockStyle}" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="17" />
+        </Style>
+
+        <Style x:Key="StorePlanPriceTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+
+        <Style x:Key="StoreRecommendedButtonStyle" BasedOn="{StaticResource PrimaryButtonStyle}" TargetType="Button">
+            <Setter Property="Background" Value="{ThemeResource VpnGreenColorBrush}" />
+            <Setter Property="MinWidth" Value="128" />
+        </Style>
+
+        <Style x:Key="StoreDefaultButtonStyle" BasedOn="{StaticResource PrimaryButtonStyle}" TargetType="Button">
+            <Setter Property="MinWidth" Value="128" />
+        </Style>
+
+        <!--  A plan that is neither the user's current plan nor the recommended (longest-cycle) one.  -->
+        <DataTemplate x:Key="DefaultPlanCardTemplate" x:DataType="store:StorePlanItem">
+            <Border Background="{ThemeResource PaneOverlayBackgroundColorBrush}"
+                    BorderBrush="{ThemeResource PaneOverlayBorderColorBrush}"
+                    BorderThickness="1"
+                    Style="{StaticResource StorePlanCardBaseStyle}">
+
+                <Grid ColumnSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border x:Name="proxyDefault"
+                            aprop:AncestorSource.AncestorType="ItemsControl" />
+
+                    <Border Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Background="{ThemeResource BackgroundStrongColorBrush}"
+                            Style="{StaticResource StorePlanIconBadgeStyle}">
+                        <pathicons:Shield2CheckFilled Foreground="{ThemeResource TextWeakColorBrush}"
+                                                      Size="Pixels24" />
+                    </Border>
+
+                    <StackPanel Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Spacing="6">
+                        <TextBlock Style="{StaticResource StorePlanNameTextStyle}"
+                                   Text="{x:Bind Name, Mode=OneTime}" />
+                        <TextBlock Foreground="{ThemeResource TextWeakColorBrush}"
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   Text="{x:Bind BillingCycleDisplay, Mode=OneTime}" />
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="6"
+                                    Visibility="{x:Bind HasDevicesInfo, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneTime}">
+                            <pathicons:CheckmarkCircleFilled Foreground="{ThemeResource VpnGreenColorBrush}"
+                                                             Size="Pixels16" />
+                            <TextBlock Foreground="{ThemeResource TextWeakColorBrush}"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Text="{x:Bind DevicesText, Mode=OneTime}" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2"
+                                VerticalAlignment="Center"
+                                Spacing="12">
+                        <TextBlock Style="{StaticResource StorePlanPriceTextStyle}"
+                                   Text="{x:Bind PriceDisplay, Mode=OneTime}" />
+                        <Button HorizontalAlignment="Right"
+                                AutomationProperties.AutomationId="StorePlanUpgradeButton"
+                                Command="{Binding DataContext.DataContext.UpgradeCommand, ElementName=proxyDefault}"
+                                CommandParameter="{x:Bind Mode=OneTime}"
+                                Content="{x:Bind UpgradeButtonText, Mode=OneTime}"
+                                IsEnabled="{Binding DataContext.DataContext.IsProcessingCheckout, ElementName=proxyDefault, Converter={StaticResource NotBooleanToBooleanConverter}}"
+                                Style="{StaticResource StoreDefaultButtonStyle}" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!--  The best-value plan (longest billing cycle) - filled green card with a "Recommended" pill.  -->
+        <DataTemplate x:Key="RecommendedPlanCardTemplate" x:DataType="store:StorePlanItem">
+            <Border Background="{ThemeResource VpnGreenWeakColorBrush}"
+                    BorderBrush="{ThemeResource VpnGreenColorBrush}"
+                    BorderThickness="2"
+                    Style="{StaticResource StorePlanCardBaseStyle}">
+
+                <StackPanel Spacing="16">
+
+                    <Border Background="{ThemeResource VpnGreenColorBrush}"
+                            Style="{StaticResource StorePillBadgeStyle}">
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="4">
+                            <pathicons:StarFilled Foreground="White"
+                                                  Size="Pixels16" />
+                            <TextBlock FontWeight="Bold"
+                                       Foreground="White"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Text="{x:Bind RecommendedBadgeText, Mode=OneTime}" />
+                        </StackPanel>
+                    </Border>
+
+                    <Grid ColumnSpacing="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border x:Name="proxyRecommended"
+                                aprop:AncestorSource.AncestorType="ItemsControl" />
+
+                        <Border Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Background="{ThemeResource VpnGreenColorBrush}"
+                                Style="{StaticResource StorePlanIconBadgeStyle}">
+                            <pathicons:StarFilled Foreground="White"
+                                                  Size="Pixels24" />
+                        </Border>
+
+                        <StackPanel Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Spacing="6">
+                            <TextBlock Style="{StaticResource StorePlanNameTextStyle}"
+                                       Text="{x:Bind Name, Mode=OneTime}" />
+                            <TextBlock Foreground="{ThemeResource TextWeakColorBrush}"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Text="{x:Bind BillingCycleDisplay, Mode=OneTime}" />
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="6"
+                                        Visibility="{x:Bind HasDevicesInfo, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneTime}">
+                                <pathicons:CheckmarkCircleFilled Foreground="{ThemeResource VpnGreenColorBrush}"
+                                                                 Size="Pixels16" />
+                                <TextBlock Foreground="{ThemeResource TextWeakColorBrush}"
+                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                           Text="{x:Bind DevicesText, Mode=OneTime}" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    Spacing="12">
+                            <TextBlock Style="{StaticResource StorePlanPriceTextStyle}"
+                                       Text="{x:Bind PriceDisplay, Mode=OneTime}" />
+                            <Button HorizontalAlignment="Right"
+                                    AutomationProperties.AutomationId="StorePlanUpgradeButton"
+                                    Command="{Binding DataContext.DataContext.UpgradeCommand, ElementName=proxyRecommended}"
+                                    CommandParameter="{x:Bind Mode=OneTime}"
+                                    Content="{x:Bind UpgradeButtonText, Mode=OneTime}"
+                                    IsEnabled="{Binding DataContext.DataContext.IsProcessingCheckout, ElementName=proxyRecommended, Converter={StaticResource NotBooleanToBooleanConverter}}"
+                                    Style="{StaticResource StoreRecommendedButtonStyle}" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <!--  The plan the user is already on - outlined, with a "Your plan" pill instead of a CTA.  -->
+        <DataTemplate x:Key="CurrentPlanCardTemplate" x:DataType="store:StorePlanItem">
+            <Border Background="{ThemeResource PaneOverlayBackgroundColorBrush}"
+                    BorderBrush="{ThemeResource VpnGreenColorBrush}"
+                    BorderThickness="1"
+                    Style="{StaticResource StorePlanCardBaseStyle}">
+
+                <StackPanel Spacing="16">
+
+                    <Border Background="{ThemeResource VpnGreenWeakColorBrush}"
+                            BorderBrush="{ThemeResource VpnGreenColorBrush}"
+                            BorderThickness="1"
+                            Style="{StaticResource StorePillBadgeStyle}">
+                        <StackPanel Orientation="Horizontal"
+                                    Spacing="4">
+                            <pathicons:CheckmarkCircleFilled Foreground="{ThemeResource VpnGreenColorBrush}"
+                                                             Size="Pixels16" />
+                            <TextBlock FontWeight="Bold"
+                                       Foreground="{ThemeResource VpnGreenColorBrush}"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Text="{x:Bind CurrentPlanBadgeText, Mode=OneTime}" />
+                        </StackPanel>
+                    </Border>
+
+                    <Grid ColumnSpacing="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border Grid.Column="0"
+                                VerticalAlignment="Center"
+                                Background="{ThemeResource VpnGreenWeakColorBrush}"
+                                Style="{StaticResource StorePlanIconBadgeStyle}">
+                            <pathicons:CheckmarkCircleFilled Foreground="{ThemeResource VpnGreenColorBrush}"
+                                                             Size="Pixels24" />
+                        </Border>
+
+                        <StackPanel Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Spacing="6">
+                            <TextBlock Style="{StaticResource StorePlanNameTextStyle}"
+                                       Text="{x:Bind Name, Mode=OneTime}" />
+                            <TextBlock Foreground="{ThemeResource TextWeakColorBrush}"
+                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                       Text="{x:Bind BillingCycleDisplay, Mode=OneTime}" />
+                        </StackPanel>
+
+                        <TextBlock Grid.Column="2"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource StorePlanPriceTextStyle}"
+                                   Text="{x:Bind PriceDisplay, Mode=OneTime}" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <selectors:StorePlanCardTemplateSelector x:Key="StorePlanCardTemplateSelector"
+                                                 CurrentPlanTemplate="{StaticResource CurrentPlanCardTemplate}"
+                                                 DefaultPlanTemplate="{StaticResource DefaultPlanCardTemplate}"
+                                                 RecommendedPlanTemplate="{StaticResource RecommendedPlanCardTemplate}" />
+    </Page.Resources>
+
+    <Grid Margin="32,28"
+          RowSpacing="4">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    Spacing="12">
+            <Border Width="40"
+                    Height="40"
+                    Background="{ThemeResource VpnGreenWeakColorBrush}"
+                    CornerRadius="10">
+                <pathicons:BagPercentFilled Foreground="{ThemeResource VpnGreenColorBrush}"
+                                            Size="Pixels20" />
+            </Border>
+            <TextBlock VerticalAlignment="Center"
+                       AutomationProperties.HeadingLevel="Level1"
+                       Style="{StaticResource TitleTextBlockStyle}"
+                       Text="{x:Bind ViewModel.Title}" />
+        </StackPanel>
+
+        <TextBlock Grid.Row="1"
+                   Margin="0,8,0,0"
+                   Foreground="{ThemeResource TextWeakColorBrush}"
+                   Style="{StaticResource BodyTextBlockStyle}"
+                   Text="{x:Bind ViewModel.Localizer.Get('Store_Page_Subtitle')}" />
+
+        <StackPanel Grid.Row="2"
+                    Margin="0,16,0,20"
+                    Orientation="Horizontal"
+                    Spacing="8">
+            <TextBlock VerticalAlignment="Center"
+                       Foreground="{ThemeResource TextWeakColorBrush}"
+                       Style="{StaticResource CaptionTextBlockStyle}"
+                       Text="{x:Bind ViewModel.Localizer.Get('Store_CurrentPlan_Label')}" />
+            <Border Background="{ThemeResource VpnGreenWeakColorBrush}"
+                    BorderBrush="{ThemeResource VpnGreenColorBrush}"
+                    BorderThickness="1"
+                    CornerRadius="4"
+                    Padding="6,1">
+                <TextBlock FontWeight="Bold"
+                           Foreground="{ThemeResource VpnGreenColorBrush}"
+                           Style="{StaticResource CaptionTextBlockStyle}"
+                           Text="{x:Bind ViewModel.CurrentPlanLabel}" />
+            </Border>
+        </StackPanel>
+
+        <Grid Grid.Row="3">
+
+            <ProgressRing HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          IsActive="{x:Bind ViewModel.IsLoading}"
+                          Visibility="{x:Bind ViewModel.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Spacing="12"
+                        Visibility="{x:Bind ViewModel.HasLoadError, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <TextBlock HorizontalAlignment="Center"
+                           Style="{StaticResource BodyTextBlockStyle}"
+                           Text="{x:Bind ViewModel.LoadErrorMessage}"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap" />
+                <Button HorizontalAlignment="Center"
+                        Command="{x:Bind ViewModel.RetryLoadPlansCommand, Mode=OneTime}"
+                        Content="{x:Bind ViewModel.Localizer.Get('Store_LoadError_RetryButton')}"
+                        Style="{StaticResource SecondaryButtonStyle}" />
+            </StackPanel>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          Visibility="{x:Bind ViewModel.IsLoading, Converter={StaticResource NotBooleanToVisibilityConverter}}">
+                <ItemsControl ItemTemplateSelector="{StaticResource StorePlanCardTemplateSelector}"
+                              DataContext="{x:Bind ViewModel}"
+                              ItemsSource="{x:Bind ViewModel.Plans}"
+                              TabFocusNavigation="Cycle">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Spacing="14" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

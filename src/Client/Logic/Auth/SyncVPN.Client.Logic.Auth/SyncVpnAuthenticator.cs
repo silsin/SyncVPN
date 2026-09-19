@@ -25,6 +25,7 @@ using System.Threading.Tasks;
 using SyncVPN.Api.Contracts;
 using SyncVPN.Api.V2.Contracts;
 using SyncVPN.Api.V2.Contracts.Auth;
+using SyncVPN.Api.V2.Contracts.Devices;
 using SyncVPN.Client.Logic.Auth.Contracts.Enums;
 using SyncVPN.Client.Logic.Auth.Contracts.Models;
 using SyncVPN.Client.Settings.Contracts;
@@ -71,6 +72,58 @@ public class SyncVpnAuthenticator : ISyncVpnAuthenticator
         ApiResponseResult<LoginAttemptResponse> response = await _apiClient.CodeLoginAsync(request, cancellationToken);
 
         return HandleLoginAttempt(response);
+    }
+
+    // A bad/zero server-provided poll_interval must never turn into a tight poll loop.
+    private static readonly TimeSpan MinWebLoginPollInterval = TimeSpan.FromSeconds(1);
+
+    public async Task<WebLoginStartResult> StartWebLoginAsync(CancellationToken cancellationToken)
+    {
+        ApiResponseResult<WebAppLoginResponse> response = await _apiClient.StartWebLoginAsync(cancellationToken);
+
+        if (!response.Success || response.Value?.Data is not { } data || string.IsNullOrEmpty(data.PollToken))
+        {
+            return WebLoginStartResult.FromAuthResult(AuthResult.Fail(response.Error));
+        }
+
+        TimeSpan pollInterval = data.PollInterval > 0 ? TimeSpan.FromSeconds(data.PollInterval) : MinWebLoginPollInterval;
+        return WebLoginStartResult.Ok(data.VerificationUrl, data.Key, data.PollToken, pollInterval);
+    }
+
+    public async Task<AuthResult> WaitForWebLoginAsync(WebLoginStartResult attempt, CancellationToken cancellationToken)
+    {
+        TimeSpan pollInterval = attempt.PollInterval < MinWebLoginPollInterval ? MinWebLoginPollInterval : attempt.PollInterval;
+
+        while (true)
+        {
+            ApiResponseResult<WebAppLoginStatusResponse> response =
+                await _apiClient.GetWebLoginStatusAsync(attempt.Key, attempt.PollToken, cancellationToken);
+
+            if (!response.Success)
+            {
+                return AuthResult.Fail(response.Error);
+            }
+
+            if (string.Equals(response.Value?.Data?.State, "authorized", StringComparison.OrdinalIgnoreCase) &&
+                response.Value?.Data is { Token.Length: > 0 } authorizedData)
+            {
+                StoreSession(new LoginResponse
+                {
+                    Status = true,
+                    Data = new LoginResponseData
+                    {
+                        Token = authorizedData.Token!,
+                        TokenType = authorizedData.TokenType ?? string.Empty,
+                        User = authorizedData.User ?? new User(),
+                        Device = authorizedData.Device ?? new Device(),
+                        Devices = authorizedData.Devices ?? [],
+                    }
+                });
+                return AuthResult.Ok();
+            }
+
+            await Task.Delay(pollInterval, cancellationToken);
+        }
     }
 
     public async Task<AuthResult> SendTwoFactorCodeAsync(string code, CancellationToken cancellationToken)

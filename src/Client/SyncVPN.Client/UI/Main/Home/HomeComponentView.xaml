@@ -154,6 +154,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                         Command="{x:Bind MapView.ViewModel.ConnectCommand, Mode=OneTime}"
                         CommandParameter="{x:Bind MapView.ViewModel.SelectedCountry}"
                         Content="{x:Bind ConnectionCardComponent.ViewModel.Localizer.Get('Common_Actions_Connect')}"
+                        IsEnabled="{x:Bind MapView.ViewModel.IsConnectingFromMapSelection, Converter={StaticResource NotBooleanToBooleanConverter}}"
                         Style="{StaticResource LargePrimaryButtonStyle}"
                         Visibility="{x:Bind MapView.ViewModel.HasSelectedCountry, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
@@ -168,14 +169,36 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                               Text="{x:Bind ConnectionCardComponent.ViewModel.Localizer.Get('Map_PleaseSelectServer_Label')}"
                               Visibility="{x:Bind ConnectionCardComponent.ViewModel.IsDisconnected, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
+                    <!--  Once Connect is pressed, MapView.ViewModel.SelectedCountry (and so the name block  -->
+                    <!--  above) is deliberately cleared - without this, the panel dropped straight from  -->
+                    <!--  showing the server name to a bare Cancel/Disconnect button with no name anywhere,  -->
+                    <!--  which read as the server having been forgotten mid-connect. ConnectionCardComponent's  -->
+                    <!--  own Title already resolves correctly for Connecting/Connected (see  -->
+                    <!--  GetConnectionIntentTitle/GetConnectionDetailsTitle), so it's the reliable source here.  -->
+                    <StackPanel HorizontalAlignment="Center"
+                               Spacing="2"
+                               Visibility="{x:Bind ConnectionCardComponent.ViewModel.IsDisconnected, Converter={StaticResource NotBooleanToVisibilityConverter}}">
+                        <TextBlock HorizontalAlignment="Center"
+                                  Foreground="{ThemeResource TextWeakColorBrush}"
+                                  Style="{StaticResource CaptionTextBlockStyle}"
+                                  Text="{x:Bind ConnectionCardComponent.ViewModel.Localizer.Get('Map_SelectedLocation_Label')}" />
+                        <TextBlock MaxWidth="260"
+                                  HorizontalAlignment="Center"
+                                  Style="{StaticResource BodyMediumStrongTextBlockStyle}"
+                                  Text="{x:Bind ConnectionCardComponent.ViewModel.Title}"
+                                  TextTrimming="CharacterEllipsis"
+                                  TextWrapping="NoWrap" />
+                    </StackPanel>
+
                     <Grid>
                         <Button x:Name="MapDefaultConnectButton"
                                 MinWidth="220"
                                 AutomationProperties.AutomationId="MapDefaultConnectButton"
-                                Command="{x:Bind ConnectionCardComponent.ViewModel.ConnectCommand, Mode=OneTime}"
+                                Command="{x:Bind MapView.ViewModel.ConnectCommand, Mode=OneTime}"
                                 Content="{x:Bind ConnectionCardComponent.ViewModel.Localizer.Get('Common_Actions_Connect')}"
+                                IsEnabled="{x:Bind MapView.ViewModel.IsConnectingFromMapSelection, Converter={StaticResource NotBooleanToBooleanConverter}}"
                                 Style="{StaticResource LargePrimaryButtonStyle}"
-                                Visibility="{x:Bind ConnectionCardComponent.ViewModel.IsDisconnected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                Visibility="{x:Bind MapView.ViewModel.ShowConnectButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                         <Button x:Name="MapCancelConnectionButton"
                                 MinWidth="220"
@@ -183,7 +206,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                                 Command="{x:Bind ConnectionCardComponent.ViewModel.CancelConnectionCommand, Mode=OneTime}"
                                 Content="{x:Bind ConnectionCardComponent.ViewModel.Localizer.Get('Common_Actions_Cancel')}"
                                 Style="{StaticResource LargePrimaryButtonStyle}"
-                                Visibility="{x:Bind ConnectionCardComponent.ViewModel.IsConnecting, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                Visibility="{x:Bind MapView.ViewModel.ShowCancelButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                         <Button x:Name="MapDisconnectButton"
                                 MinWidth="220"
@@ -226,10 +249,12 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                                           VerticalAlignment="Stretch" />
         </Grid>
 
+        <!--  Column 2 only (not spanning into column 1, the sidebar's own column) - Quick Connect/Fastest  -->
+        <!--  server/Pick country must never start inside the sidebar's column span, or their left portion  -->
+        <!--  renders behind the sidebar's own opaque panel instead of being clipped by it cleanly.  -->
         <bottombar:HomeBottomBarComponentView x:Name="ConnectionCardComponent"
                                               Grid.Row="5"
-                                              Grid.Column="1"
-                                              Grid.ColumnSpan="2"
+                                              Grid.Column="2"
                                               Margin="8,0,8,16"
                                               HorizontalAlignment="Stretch" />
 

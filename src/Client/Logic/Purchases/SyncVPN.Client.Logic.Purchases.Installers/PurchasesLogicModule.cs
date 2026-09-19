@@ -32,5 +32,6 @@ public class PurchasesLogicModule : Module
         builder.RegisterType<TransactionHistoryProvider>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<ServerFavoritesClient>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<PurchaseService>().AsImplementedInterfaces().SingleInstance();
+        builder.RegisterType<CheckoutLinkService>().AsImplementedInterfaces().SingleInstance();
     }
 }

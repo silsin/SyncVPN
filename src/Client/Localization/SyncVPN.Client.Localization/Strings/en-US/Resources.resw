@@ -2012,6 +2012,12 @@
     <value>Authenticate</value>
     <comment>Authenticate button inside two factor form during login</comment>
   </data>
+  <data name="Login_WebLoginForm_Title" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="Login_WebLoginForm_Subtitle" xml:space="preserve">
+    <value>Continue in your browser to finish signing in.</value>
+  </data>
   <data name="Login_CodeLoginForm_Title" xml:space="preserve">
     <value>Sign in with a code</value>
   </data>
@@ -4093,5 +4099,92 @@
   </data>
   <data name="ExcludedLocations_TeachingTip_CloseButton" xml:space="preserve">
     <value>Maybe later</value>
+  </data>
+  <data name="Store_Page_Title" xml:space="preserve">
+    <value>Store</value>
+  </data>
+  <data name="Store_Page_Subtitle" xml:space="preserve">
+    <value>Find the plan that fits how you use SyncVPN.</value>
+  </data>
+  <data name="Store_CurrentPlan_Label" xml:space="preserve">
+    <value>Your current plan:</value>
+  </data>
+  <data name="Store_Plan_CurrentPlanBadge" xml:space="preserve">
+    <value>Your plan</value>
+  </data>
+  <data name="Store_Plan_RecommendedBadge" xml:space="preserve">
+    <value>Recommended</value>
+  </data>
+  <data name="Store_Plan_UpgradeButton" xml:space="preserve">
+    <value>Get plan</value>
+  </data>
+  <data name="Store_Plan_Cycle_Monthly" xml:space="preserve">
+    <value>Billed monthly</value>
+  </data>
+  <data name="Store_Plan_Cycle_Yearly" xml:space="preserve">
+    <value>Billed yearly</value>
+  </data>
+  <data name="Store_Plan_Cycle_NMonths_One" xml:space="preserve">
+    <value>Billed every {0} month</value>
+  </data>
+  <data name="Store_Plan_Cycle_NMonths_Other" xml:space="preserve">
+    <value>Billed every {0} months</value>
+  </data>
+  <data name="Store_Plan_Devices_One" xml:space="preserve">
+    <value>{0} device</value>
+  </data>
+  <data name="Store_Plan_Devices_Other" xml:space="preserve">
+    <value>{0} devices</value>
+  </data>
+  <data name="Store_LoadError_Message" xml:space="preserve">
+    <value>We couldn't load the available plans.</value>
+  </data>
+  <data name="Store_LoadError_RetryButton" xml:space="preserve">
+    <value>Try again</value>
+  </data>
+  <data name="Store_GuestEmail_Title" xml:space="preserve">
+    <value>Enter your email</value>
+  </data>
+  <data name="Store_GuestEmail_Description" xml:space="preserve">
+    <value>We'll send your receipt and account details to this address.</value>
+  </data>
+  <data name="Store_GuestEmail_FieldLabel" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="Store_GuestEmail_Placeholder" xml:space="preserve">
+    <value>name@example.com</value>
+  </data>
+  <data name="Store_GuestEmail_Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="Store_Checkout_ErrorTitle" xml:space="preserve">
+    <value>Couldn't start checkout</value>
+  </data>
+  <data name="Store_Checkout_ErrorMessage" xml:space="preserve">
+    <value>Something went wrong while preparing your checkout. Please try again.</value>
+  </data>
+  <data name="Store_Checkout_WaitingTitle" xml:space="preserve">
+    <value>Waiting for payment</value>
+  </data>
+  <data name="Store_Checkout_WaitingMessage" xml:space="preserve">
+    <value>Complete your payment in the browser. This will update automatically once it's confirmed.</value>
+  </data>
+  <data name="Store_Checkout_SuccessTitle" xml:space="preserve">
+    <value>Purchase complete</value>
+  </data>
+  <data name="Store_Checkout_SuccessMessage" xml:space="preserve">
+    <value>Your SyncVPN plan is now active.</value>
+  </data>
+  <data name="Store_Checkout_LoginFailedMessage" xml:space="preserve">
+    <value>Your purchase was completed, but we couldn't sign you in automatically. Please sign in from the login screen.</value>
+  </data>
+  <data name="Store_Checkout_ExpiredMessage" xml:space="preserve">
+    <value>This checkout link has expired. Please try again.</value>
+  </data>
+  <data name="Store_Checkout_FailedMessage" xml:space="preserve">
+    <value>Your payment could not be completed. Please try again.</value>
+  </data>
+  <data name="Store_Checkout_RefundedMessage" xml:space="preserve">
+    <value>This purchase was refunded.</value>
   </data>
 </root>

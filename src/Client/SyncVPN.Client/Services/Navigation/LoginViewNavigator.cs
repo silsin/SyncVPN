@@ -73,13 +73,21 @@ public class LoginViewNavigator : ViewNavigatorBase, ILoginViewNavigator,
         return NavigateToAsync<CodeLoginPageViewModel>();
     }
 
+    public Task<bool> NavigateToWebLoginViewAsync()
+    {
+        return NavigateToAsync<WebLoginPageViewModel>();
+    }
+
     public override Task<bool> NavigateToDefaultAsync()
     {
         return _userAuthenticator.AuthenticationStatus switch
         {
             AuthenticationStatus.LoggingIn or
             AuthenticationStatus.LoggingOut => NavigateToLoadingViewAsync(),
-            _ => NavigateToSignInViewAsync()
+            // The browser+poll flow (see WebLoginPageViewModel) is now the default sign-in entry point,
+            // replacing SignInPageViewModel - that page (and SSO/code login) stays wired but is no
+            // longer reachable from here.
+            _ => NavigateToWebLoginViewAsync()
         };
     }
 

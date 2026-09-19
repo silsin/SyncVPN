@@ -19,6 +19,8 @@
 
 using SyncVPN.Api.V2.Contracts.Account;
 using SyncVPN.Common.Core.Networking;
+using SyncVPN.Crypto.Contracts;
+using SyncVPN.ProcessCommunication.Contracts.Entities.Crypto;
 using SyncVPN.ProcessCommunication.Contracts.Entities.Vpn;
 
 namespace SyncVPN.Client.Logic.Connection.RequestCreators;
@@ -72,6 +74,28 @@ public static class SyncVpnAccountClaimMapper
             : serverProtocols.FirstOrDefault() ?? SyncVpnProtocols.WireGuard;
     }
 
+    // Same protocol pick as ResolveServerProtocol, plus the Transport (udp/tcp) that POST /account
+    // requires whenever the resolved protocol is OpenVpn - the backend rejects an OpenVpn claim with no
+    // transport at all ("The transport field is required"), unlike WireGuard/L2tp/Sstp which have none.
+    // Used by every call site that connects straight to one specific server (a map pin or a free-server
+    // list row) rather than through ResolveClaimProtocol's candidate-list claim.
+    public static (string Protocol, string? Transport) ResolveServerProtocolAndTransport(VpnProtocol preferredProtocol, IReadOnlyList<string> serverProtocols)
+    {
+        string protocol = ResolveServerProtocol(preferredProtocol, serverProtocols);
+
+        if (protocol != SyncVpnProtocols.OpenVpn)
+        {
+            return (protocol, null);
+        }
+
+        // preferredProtocol names the transport directly when it's what actually got resolved to
+        // OpenVpn; for the WireGuard-else-first fallback path (e.g. preferredProtocol is Smart, or this
+        // server doesn't support the user's preferred transport), default to udp - the more commonly
+        // supported OpenVpn transport.
+        string transport = preferredProtocol == VpnProtocol.OpenVpnTcp ? SyncVpnTransports.Tcp : SyncVpnTransports.Udp;
+        return (protocol, transport);
+    }
+
     // Smart has no single wire protocol (it's a client-side auto-selection mode), and WireGuardTcp/
     // WireGuardTls have no equivalent on this backend at all (see ResolveClaimProtocol) - null for all
     // three. Also used by Settings/profile protocol pickers to decide whether a given VpnProtocol
@@ -103,7 +127,14 @@ public static class SyncVpnAccountClaimMapper
                 Name = host,
                 Ip = account.ServerIp ?? string.Empty,
                 Label = string.Empty,
-                X25519PublicKey = null,
+                // Without this, VpnEndpointScanner.EndpointCandidates skips WireGuardUdp/OpenVpnUdp
+                // entirely for this server (it treats a null key as "can't ping this protocol") and
+                // falls back to TCP port probes the server never actually listens on - the endpoint
+                // scan then always fails with PingTimeoutError before a real connection is ever
+                // attempted, regardless of network conditions.
+                X25519PublicKey = string.IsNullOrEmpty(account.ServerPublicKey)
+                    ? null
+                    : new ServerPublicKeyIpcEntity(new PublicKey(account.ServerPublicKey, KeyAlgorithm.X25519)),
                 Signature = string.Empty,
                 IsIpv6Supported = false,
                 RelayIpByProtocol = null,

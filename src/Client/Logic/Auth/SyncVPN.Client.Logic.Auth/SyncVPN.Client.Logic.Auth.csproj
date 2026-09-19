@@ -17,6 +17,7 @@
         <ProjectReference Include="..\..\..\..\Api\SyncVPN.Api.BackendSelection\SyncVPN.Api.BackendSelection.csproj" />
         <ProjectReference Include="..\..\..\..\Api\SyncVPN.Api.V2.Contracts\SyncVPN.Api.V2.Contracts.csproj" />
         <ProjectReference Include="..\..\..\..\OperatingSystems\WebAuthn\SyncVPN.OperatingSystems.WebAuthn.Contracts\SyncVPN.OperatingSystems.WebAuthn.Contracts.csproj" />
+        <ProjectReference Include="..\..\..\..\OperatingSystems\Registries\SyncVPN.OperatingSystems.Registries.Contracts\SyncVPN.OperatingSystems.Registries.Contracts.csproj" />
         <ProjectReference Include="..\..\..\Common\SyncVPN.Client.Common\SyncVPN.Client.Common.csproj" />
         <ProjectReference Include="..\..\..\EventMessaging\SyncVPN.Client.EventMessaging.Contracts\SyncVPN.Client.EventMessaging.Contracts.csproj" />
         <ProjectReference Include="..\..\..\Settings\SyncVPN.Client.Settings.Contracts\SyncVPN.Client.Settings.Contracts.csproj" />

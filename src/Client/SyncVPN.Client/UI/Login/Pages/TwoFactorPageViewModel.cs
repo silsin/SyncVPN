@@ -188,7 +188,7 @@ public partial class TwoFactorPageViewModel : LoginPageViewModelBase
             await _guestHoleManager.DisconnectAsync();
         }
 
-        return await ParentViewNavigator.NavigateToSignInViewAsync();
+        return await ParentViewNavigator.NavigateToWebLoginViewAsync();
     }
 
     private void InvalidateTwoFactorMode()

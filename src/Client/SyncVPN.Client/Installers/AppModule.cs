@@ -55,6 +55,7 @@ using SyncVPN.Client.Services.DnsFilters;
 using SyncVPN.Client.Services.Edition;
 using SyncVPN.Client.Services.Enabling;
 using SyncVPN.Client.Services.FreeServers;
+using SyncVPN.Client.Services.ServerPing;
 using SyncVPN.Client.Services.Lifecycle;
 using SyncVPN.Client.Services.LocationExclusion;
 using SyncVPN.Client.Services.Mapping;
@@ -121,10 +122,12 @@ using SyncVPN.Client.UI.Main.Sidebar.Connections.Gateways;
 using SyncVPN.Client.UI.Main.Sidebar.Connections.Profiles;
 using SyncVPN.Client.UI.Main.Sidebar.Connections.Recents;
 using SyncVPN.Client.UI.Main.Sidebar.Search;
+using SyncVPN.Client.UI.Main.Store;
 using SyncVPN.Client.UI.Main.Widgets;
 using SyncVPN.Client.UI.Overlays.Information;
 using SyncVPN.Client.UI.Overlays.Information.Notification;
 using SyncVPN.Client.UI.Overlays.Selection;
+using SyncVPN.Client.UI.Overlays.Store;
 using SyncVPN.Client.UI.Overlays.Upsell;
 using SyncVPN.Client.UI.Overlays.Welcome;
 using SyncVPN.Client.UI.Overlays.WhatsNew;
@@ -237,6 +240,7 @@ public class AppModule : Module
         builder.RegisterType<AppStartupActivator>().AsImplementedInterfaces().SingleInstance().AutoActivate();
         builder.RegisterType<FreeServersCache>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<FreeServersObserver>().AsImplementedInterfaces().SingleInstance().AutoActivate();
+        builder.RegisterType<ServerPingService>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<PageViewMapper>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<OverlayViewMapper>().AsImplementedInterfaces().SingleInstance();
         builder.RegisterType<UIThreadDispatcher>().AsImplementedInterfaces().SingleInstance();
@@ -336,6 +340,7 @@ public class AppModule : Module
 
         RegisterViewModel<LoginPageViewModel>(builder);
         RegisterViewModel<SignInPageViewModel>(builder);
+        RegisterViewModel<WebLoginPageViewModel>(builder);
         RegisterViewModel<TwoFactorPageViewModel>(builder);
         RegisterViewModel<CodeLoginPageViewModel>(builder);
         RegisterViewModel<LoadingPageViewModel>(builder);
@@ -351,6 +356,7 @@ public class AppModule : Module
         RegisterViewModel<NoServersPageViewModel>(builder);
         RegisterViewModel<SidebarComponentViewModel>(builder).AutoActivate();
         RegisterViewModel<ConnectionsPageViewModel>(builder);
+        RegisterViewModel<StorePageViewModel>(builder);
         RegisterViewModel<RecentsPageViewModel>(builder);
         RegisterViewModel<ProfilesPageViewModel>(builder);
         RegisterViewModel<GatewaysPageViewModel>(builder);
@@ -444,6 +450,7 @@ public class AppModule : Module
         RegisterViewModel<WhatsNewOverlayViewModel>(builder);
         RegisterViewModel<IpSelectorOverlayViewModel>(builder);
         RegisterViewModel<AppSelectorOverlayViewModel>(builder);
+        RegisterViewModel<StoreGuestEmailOverlayViewModel>(builder);
 
         RegisterViewModel<KillSwitchIconViewModel>(builder);
         RegisterViewModel<ProtocolIconViewModel>(builder);

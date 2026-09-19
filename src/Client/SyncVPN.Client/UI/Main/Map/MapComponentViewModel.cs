@@ -41,6 +41,7 @@ using SyncVPN.Client.Logic.Servers.Contracts.Messages;
 using SyncVPN.Client.Services.FreeServers;
 using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.Client.Settings.Contracts.Messages;
+using SyncVPN.Logging.Contracts.Events.AppLogs;
 using SyncVPN.StatisticalEvents.Contracts.Dimensions;
 
 namespace SyncVPN.Client.UI.Main.Map;
@@ -76,6 +77,16 @@ public partial class MapComponentViewModel : ViewModelBase,
     [NotifyPropertyChangedFor(nameof(ConnectButtonText))]
     private Country? _selectedCountry;
 
+    partial void OnSelectedCountryChanged(Country? value)
+    {
+        if (value is null)
+        {
+            return;
+        }
+
+        Logger.Info<AppLog>("Map: server item selected - " + DescribeCountry(value));
+    }
+
     public bool HasSelectedCountry => SelectedCountry is not null;
 
     public string ConnectButtonText => SelectedCountry is not null
@@ -85,6 +96,17 @@ public partial class MapComponentViewModel : ViewModelBase,
     public bool IsConnecting => _connectionManager.IsConnecting;
     public bool IsConnected => _connectionManager.IsConnected;
     public bool IsDisconnected => _connectionManager.IsDisconnected;
+
+    // True only while the in-progress connection was started via one of THIS map's own buttons - either
+    // MapSelectedConnectButton (a specific pin picked) or MapDefaultConnectButton (no pin picked, falls
+    // back to fastest - see ConnectAsync(Country) below) - lets that button stay visible but disabled
+    // instead of disappearing, while the OTHER surface (the bottom bar's Fastest server card) is the one
+    // that switches to Cancel. See ConnectionCardComponentViewModel.IsConnectingViaThisButton for the mirror.
+    public bool IsConnectingFromMapSelection => IsConnecting && _connectionManager.CurrentConnectionTrigger == VpnTriggerDimension.Map;
+
+    public bool ShowConnectButton => IsDisconnected || IsConnectingFromMapSelection;
+
+    public bool ShowCancelButton => IsConnecting && !IsConnectingFromMapSelection;
 
     public MapComponentViewModel(
         ISettings settings,
@@ -118,8 +140,13 @@ public partial class MapComponentViewModel : ViewModelBase,
             // overload below) is only meant to drive the screen-level Connect button up until a
             // connection attempt actually starts - once it has (whether for this selection or another
             // path entirely, e.g. the list row's own inline Connect button), showing "Connect to X" here
-            // would be stale.
-            if (message.ConnectionStatus != ConnectionStatus.Disconnected)
+            // would be stale. The one exception is while OUR OWN selection's Connect button is what
+            // started this attempt (trigger == Map) - there it must stay put (see
+            // IsConnectingFromMapSelection) instead of vanishing mid-connect.
+            bool isOwnSelectionConnecting = message.ConnectionStatus == ConnectionStatus.Connecting
+                && _connectionManager.CurrentConnectionTrigger == VpnTriggerDimension.Map;
+
+            if (message.ConnectionStatus != ConnectionStatus.Disconnected && !isOwnSelectionConnecting)
             {
                 SelectedCountry = null;
             }
@@ -127,6 +154,9 @@ public partial class MapComponentViewModel : ViewModelBase,
             OnPropertyChanged(nameof(IsConnecting));
             OnPropertyChanged(nameof(IsConnected));
             OnPropertyChanged(nameof(IsDisconnected));
+            OnPropertyChanged(nameof(IsConnectingFromMapSelection));
+            OnPropertyChanged(nameof(ShowConnectButton));
+            OnPropertyChanged(nameof(ShowCancelButton));
         });
     }
 
@@ -201,10 +231,10 @@ public partial class MapComponentViewModel : ViewModelBase,
             case ConnectionStatus.Connected:
             case ConnectionStatus.Connecting:
                 {
-                    string? countryCode = _connectionManager.CurrentConnectionDetails?.ExitCountryCode;
-                    if (!string.IsNullOrEmpty(countryCode))
+                    Country? activeCountry = ResolveActiveCountry();
+                    if (activeCountry != null)
                     {
-                        CurrentCountry = Countries.FirstOrDefault(c => c.Code == countryCode);
+                        CurrentCountry = activeCountry;
                     }
                     break;
                 }
@@ -212,6 +242,27 @@ public partial class MapComponentViewModel : ViewModelBase,
                 CurrentCountry = Countries.FirstOrDefault(c => c.Code == _settings.DeviceLocation?.CountryCode);
                 break;
         }
+    }
+
+    // The new SyncVPN backend's per-server intent (SyncVpnServerLocationIntent) carries only a
+    // ServerId, no country - and ConnectionManager.BuildSyncVpnServer leaves the synthesized Server's
+    // ExitCountry blank, since that layer has no access to the free-servers catalog to fill it in (see
+    // its own comment). So CurrentConnectionDetails.ExitCountryCode is always empty for these servers,
+    // which used to mean the map never highlighted the pin actually being connected to. Falling back to
+    // matching CurrentConnectionIntent's ServerId against our own Countries list (built from
+    // IFreeServersCache, which this layer does have access to) is what lets the correct pin animate
+    // through connecting/connected for them.
+    private Country? ResolveActiveCountry()
+    {
+        string? countryCode = _connectionManager.CurrentConnectionDetails?.ExitCountryCode;
+        if (!string.IsNullOrEmpty(countryCode))
+        {
+            return Countries.FirstOrDefault(c => c.Code == countryCode);
+        }
+
+        return _connectionManager.CurrentConnectionIntent?.Location is SyncVpnServerLocationIntent syncVpnIntent
+            ? Countries.FirstOrDefault(c => c.IsFreeServer && c.FreeServerId == syncVpnIntent.ServerId)
+            : null;
     }
 
     private void InvalidateCountries()
@@ -244,7 +295,7 @@ public partial class MapComponentViewModel : ViewModelBase,
             .Where(s => s.Location != null)
             .Select(s =>
             {
-                string protocol = SyncVpnAccountClaimMapper.ResolveServerProtocol(_settings.VpnProtocol, s.Protocols);
+                (string protocol, string? transport) = SyncVpnAccountClaimMapper.ResolveServerProtocolAndTransport(_settings.VpnProtocol, s.Protocols);
 
                 return new Country
                 {
@@ -257,6 +308,7 @@ public partial class MapComponentViewModel : ViewModelBase,
                     FreeServerId = s.Id,
                     FreeServerName = s.Name,
                     FreeServerProtocol = protocol,
+                    FreeServerTransport = transport,
                     FreeServerIsForPaidUsersOnly = s.Free == 0
                 };
             }));
@@ -269,17 +321,25 @@ public partial class MapComponentViewModel : ViewModelBase,
     {
         if (country == null)
         {
-            return Task.CompletedTask;
+            // No pin picked (tap or Free-servers row) - fall back to the app's usual "fastest" pick,
+            // same as the main Connect button uses via ConnectionManager.ConnectAsync's own null
+            // fallback (ConnectionIntent.Default / FreeDefault, per the user's plan). The map itself
+            // then picks up and highlights whichever server actually got picked once ConnectionRequestCreator
+            // resolves it - see ClaimFreeServerAsync's MapLocationSelectedMessage and
+            // MapComponentViewModel.ResolveActiveCountry.
+            Logger.Info<AppLog>("Map: Connect pressed with no server selected - falling back to fastest.");
+            return _connectionManager.ConnectAsync(VpnTriggerDimension.Map);
         }
 
-        // Clear the selection now that a connect attempt is underway - covers both the map's own
-        // Connect button (which passed this same country) and any other future caller, so a stale
-        // "Connect to X" doesn't linger once X is being connected to (or an upsell/maintenance dialog
-        // takes over below).
-        if (SelectedCountry == country)
-        {
-            SelectedCountry = null;
-        }
+        Logger.Info<AppLog>("Map: Connect pressed - " + DescribeCountry(country));
+
+        // Deliberately NOT clearing SelectedCountry here - Receive(ConnectionStatusChangedMessage)
+        // already clears it once the status actually leaves Disconnected, which is the same message
+        // ConnectionCardComponentViewModel reacts to for its own Connect/Cancel/Disconnect button group.
+        // Clearing it synchronously here instead used to flip HasSelectedCountry to false immediately on
+        // press, swapping the card over to that OTHER view model's state before its IsConnecting had
+        // caught up - flashing "Please select a server" for a frame until the real status change arrived
+        // a moment later. Waiting for the shared message keeps both in lockstep.
 
         // New-backend server pins connect straight to this exact server (SyncVpnServerLocationIntent),
         // matching the server rows elsewhere (Countries sidebar, Home free-servers section) - a genuinely
@@ -295,6 +355,7 @@ public partial class MapComponentViewModel : ViewModelBase,
                 VpnTriggerDimension.Map,
                 new ConnectionIntent(new SyncVpnServerLocationIntent(
                     country.FreeServerId, country.FreeServerName, country.FreeServerProtocol,
+                    transport: country.FreeServerTransport,
                     isForPaidUsersOnly: country.FreeServerIsForPaidUsersOnly)));
         }
 
@@ -314,5 +375,13 @@ public partial class MapComponentViewModel : ViewModelBase,
         }
 
         return _connectionManager.ConnectAsync(VpnTriggerDimension.Map, new ConnectionIntent(SingleCountryLocationIntent.From(country.Code)));
+    }
+
+    private static string DescribeCountry(Country country)
+    {
+        return $"Name='{country.Name}', Code='{country.Code}', IsFreeServer={country.IsFreeServer}, " +
+               $"FreeServerId={country.FreeServerId}, FreeServerName='{country.FreeServerName}', " +
+               $"FreeServerProtocol='{country.FreeServerProtocol}', ForPaidUsersOnly={country.FreeServerIsForPaidUsersOnly}, " +
+               $"IsUnderMaintenance={country.IsUnderMaintenance}, Lat={country.Latitude}, Lng={country.Longitude}";
     }
 }

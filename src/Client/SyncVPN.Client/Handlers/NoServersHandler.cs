@@ -17,6 +17,7 @@
  * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+using SyncVPN.Api.BackendSelection;
 using SyncVPN.Client.Common.Dispatching;
 using SyncVPN.Client.Core.Services.Navigation;
 using SyncVPN.Client.EventMessaging.Contracts;
@@ -49,6 +50,7 @@ public class NoServersHandler : IHandler,
     private readonly IUserAuthenticator _userAuthenticator;
     private readonly IMainWindowViewNavigator _mainWindowViewNavigator;
     private readonly IConnectionManager _connectionManager;
+    private readonly IBackendModeProvider _backendModeProvider;
 
     public NoServersHandler(
         ILogger logger,
@@ -57,7 +59,8 @@ public class NoServersHandler : IHandler,
         IUIThreadDispatcher uiThreadDispatcher,
         IUserAuthenticator userAuthenticator,
         IMainWindowViewNavigator mainWindowViewNavigator,
-        IConnectionManager connectionManager)
+        IConnectionManager connectionManager,
+        IBackendModeProvider backendModeProvider)
     {
         _logger = logger;
         _settings = settings;
@@ -66,10 +69,25 @@ public class NoServersHandler : IHandler,
         _userAuthenticator = userAuthenticator;
         _mainWindowViewNavigator = mainWindowViewNavigator;
         _connectionManager = connectionManager;
+        _backendModeProvider = backendModeProvider;
     }
+
+    // See MainWindowViewNavigator.IsGuestAccessEnabled - when the new SyncVPN backend's server catalog
+    // (IFreeServersCache) is what's actually driving this app, the legacy _serversCache this handler
+    // otherwise keys off stays permanently empty for a SyncVpn-only account. Without this guard, this
+    // handler force-navigated a real, successfully logged-in SyncVPN user (with a full server catalog
+    // sitting in IFreeServersCache) straight to "No VPN connections available" and disconnected them,
+    // every single time ServerListChangedMessage fired - which is exactly what happens right after login,
+    // since FreeServersObserver sends it once the Pro/free catalog fetch completes.
+    private bool IsGuestAccessEnabled => _backendModeProvider.IsNewBackendEnabled(BackendCapability.DeviceRegistration);
 
     public async void Receive(ServerListChangedMessage message)
     {
+        if (IsGuestAccessEnabled)
+        {
+            return;
+        }
+
         if (!_userAuthenticator.IsLoggedIn)
         {
             return;
@@ -118,6 +136,11 @@ public class NoServersHandler : IHandler,
 
     public async void Receive(NoVpnConnectionsAssignedMessage message)
     {
+        if (IsGuestAccessEnabled)
+        {
+            return;
+        }
+
         await _uiThreadDispatcher.TryEnqueueAsync(HandleNoServersAsync);
     }
 }

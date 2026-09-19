@@ -38,6 +38,7 @@ using SyncVPN.Common.Legacy.Vpn;
 using SyncVPN.Crypto.Contracts;
 using SyncVPN.EntityMapping.Contracts;
 using SyncVPN.Logging.Contracts;
+using SyncVPN.Logging.Contracts.Events.AppLogs;
 using SyncVPN.Logging.Contracts.Events.UserCertificateLogs;
 using SyncVPN.ProcessCommunication.Contracts.Entities.Crypto;
 using SyncVPN.ProcessCommunication.Contracts.Entities.LocalAgent;
@@ -163,10 +164,12 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
 
         if (response.Failure || response.Value is null)
         {
+            Logger.Error<AppLog>($"SyncVPN backend claim failed for ServerId={intent.ServerId}: {response.Error}");
             throw new InvalidOperationException($"Failed to claim a SyncVPN account: {response.Error}");
         }
 
         PurchasedAccount account = response.Value.Data.Account;
+        LogClaimedAccount(account);
         return (SyncVpnAccountClaimMapper.BuildClaimedServer(account), SyncVpnAccountClaimMapper.BuildClaimedCredentials(account), account.Sstp?.Port);
     }
 
@@ -194,10 +197,12 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
 
         if (response.Failure || response.Value is null)
         {
+            Logger.Error<AppLog>($"SyncVPN backend claim failed for ServerId={serverId}: {response.Error}");
             throw new InvalidOperationException($"Failed to claim a SyncVPN account: {response.Error}");
         }
 
         PurchasedAccount account = response.Value.Data.Account;
+        LogClaimedAccount(account);
         return (SyncVpnAccountClaimMapper.BuildClaimedServer(account), SyncVpnAccountClaimMapper.BuildClaimedCredentials(account), account.Sstp?.Port);
     }
 
@@ -232,11 +237,23 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
 
         if (response.Failure || response.Value is null)
         {
+            Logger.Error<AppLog>($"SyncVPN backend claim failed for ServerId={server.Id}: {response.Error}");
             throw new InvalidOperationException($"Failed to claim a SyncVPN account: {response.Error}");
         }
 
         PurchasedAccount account = response.Value.Data.Account;
+        LogClaimedAccount(account);
         return (SyncVpnAccountClaimMapper.BuildClaimedServer(account), SyncVpnAccountClaimMapper.BuildClaimedCredentials(account), account.Sstp?.Port);
+    }
+
+    // Logs only the claimed server's public identity/routing data (host, ip, protocol, plan) - never
+    // Username/Password/PrivateKey/Config, which are live credentials for this claimed account.
+    private void LogClaimedAccount(PurchasedAccount account)
+    {
+        Logger.Info<AppLog>($"SyncVPN backend claim succeeded: ServerId={account.ServerId}, Name='{account.Name}', " +
+            $"Country='{account.Country}', ServerHostname='{account.ServerHostname}', ServerIp='{account.ServerIp}', " +
+            $"Protocol='{account.Protocol}', Transport='{account.Transport}', Free={account.Free}, PlanId={account.PlanId}, " +
+            $"ExpiresAt={account.ExpiresAt}");
     }
 
     protected ServerListResult GetServerListResult(IConnectionIntent connectionIntent, IList<VpnProtocol> preferredProtocols)

@@ -27,6 +27,7 @@ using SyncVPN.Client.Logic.Connection.Contracts.Enums;
 using SyncVPN.Client.Logic.Connection.Contracts.Messages;
 using SyncVPN.Client.UI.Main.Settings;
 using SyncVPN.Client.UI.Main.Sidebar.Connections;
+using SyncVPN.Client.UI.Main.Store;
 using SyncVPN.Logging.Contracts;
 
 namespace SyncVPN.Client.Services.Navigation;
@@ -90,6 +91,11 @@ public class MainViewNavigator : ViewNavigatorBase, IMainViewNavigator,
         }
 
         return navigated;
+    }
+
+    public Task<bool> NavigateToStoreViewAsync()
+    {
+        return NavigateToAsync<StorePageViewModel>();
     }
 
     public override Task<bool> NavigateToDefaultAsync()

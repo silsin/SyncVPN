@@ -19,6 +19,7 @@
 
 using ServerListItem = SyncVPN.Api.V2.Contracts.Servers.ServerListItem;
 using SyncVPN.Client.Core.Enums;
+using SyncVPN.Client.Common.Dispatching;
 using SyncVPN.Client.Contracts.Enums;
 using SyncVPN.Client.Core.Services.Activation;
 using SyncVPN.Client.EventMessaging.Contracts;
@@ -31,6 +32,7 @@ using SyncVPN.Client.Logic.Servers.Contracts.Models;
 using SyncVPN.Client.Models.Connections;
 using SyncVPN.Client.Models.Connections.Countries;
 using SyncVPN.Client.Models.Connections.Gateways;
+using SyncVPN.Client.Services.ServerPing;
 using SyncVPN.Client.Settings.Contracts;
 
 namespace SyncVPN.Client.Factories;
@@ -44,6 +46,8 @@ public class LocationItemFactory : ILocationItemFactory
     private readonly IUpsellCarouselWindowActivator _upsellCarouselWindowActivator;
     private readonly IConnectionGroupFactory _connectionGroupFactory;
     private readonly IEventMessageSender _eventMessageSender;
+    private readonly IServerPingService _serverPingService;
+    private readonly IUIThreadDispatcher _uiThreadDispatcher;
     private readonly ISettings _settings;
 
     public LocationItemFactory(
@@ -54,6 +58,8 @@ public class LocationItemFactory : ILocationItemFactory
         IUpsellCarouselWindowActivator upsellCarouselWindowActivator,
         IConnectionGroupFactory connectionGroupFactory,
         IEventMessageSender eventMessageSender,
+        IServerPingService serverPingService,
+        IUIThreadDispatcher uiThreadDispatcher,
         ISettings settings)
     {
         _localizer = localizer;
@@ -63,6 +69,8 @@ public class LocationItemFactory : ILocationItemFactory
         _upsellCarouselWindowActivator = upsellCarouselWindowActivator;
         _connectionGroupFactory = connectionGroupFactory;
         _eventMessageSender = eventMessageSender;
+        _serverPingService = serverPingService;
+        _uiThreadDispatcher = uiThreadDispatcher;
         _settings = settings;
     }
 
@@ -159,6 +167,8 @@ public class LocationItemFactory : ILocationItemFactory
             _connectionManager,
             _upsellCarouselWindowActivator,
             _eventMessageSender,
+            _serverPingService,
+            _uiThreadDispatcher,
             _settings,
             server);
     }

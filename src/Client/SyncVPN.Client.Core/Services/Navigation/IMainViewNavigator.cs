@@ -33,4 +33,6 @@ public interface IMainViewNavigator : IViewNavigator
     Task<bool> NavigateToProfilesViewAsync();
 
     Task<bool> NavigateToSecureCoreViewAsync();
+
+    Task<bool> NavigateToStoreViewAsync();
 }

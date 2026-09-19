@@ -23,6 +23,7 @@ using SyncVPN.Api.Contracts;
 using SyncVPN.Api.V2.Contracts.Account;
 using SyncVPN.Api.V2.Contracts.Auth;
 using SyncVPN.Api.V2.Contracts.Billing;
+using SyncVPN.Api.V2.Contracts.CheckoutLinks;
 using SyncVPN.Api.V2.Contracts.Devices;
 using SyncVPN.Api.V2.Contracts.Dns;
 using SyncVPN.Api.V2.Contracts.Plans;
@@ -69,11 +70,19 @@ public interface ISyncVpnApiClient
 
     Task<ApiResponseResult<PurchaseResponse>> SubmitPurchaseAsync(PurchaseRequest request, CancellationToken cancellationToken = default);
 
+    Task<ApiResponseResult<CheckoutLinkResponse>> CreateCheckoutLinkAsync(CheckoutLinkRequest request, CancellationToken cancellationToken = default);
+
+    Task<ApiResponseResult<CheckoutStatusResponse>> GetCheckoutLinkStatusAsync(CheckoutStatusRequest request, CancellationToken cancellationToken = default);
+
     Task<ApiResponseResult<TransactionListResponse>> GetTransactionsAsync(int page = 1, CancellationToken cancellationToken = default);
 
     Task<ApiResponseResult<LoginAttemptResponse>> LoginAsync(LoginRequest request, CancellationToken cancellationToken = default);
 
     Task<ApiResponseResult<LoginAttemptResponse>> CodeLoginAsync(CodeLoginRequest request, CancellationToken cancellationToken = default);
+
+    Task<ApiResponseResult<WebAppLoginResponse>> StartWebLoginAsync(CancellationToken cancellationToken = default);
+
+    Task<ApiResponseResult<WebAppLoginStatusResponse>> GetWebLoginStatusAsync(string key, string pollToken, CancellationToken cancellationToken = default);
 
     Task<ApiResponseResult<LoginResponse>> VerifyTwoFactorAsync(TwoFactorVerifyRequest request, CancellationToken cancellationToken = default);
 

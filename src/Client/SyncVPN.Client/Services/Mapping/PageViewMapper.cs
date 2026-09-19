@@ -43,6 +43,7 @@ using SyncVPN.Client.UI.Main.Sidebar.Connections.Gateways;
 using SyncVPN.Client.UI.Main.Sidebar.Connections.Profiles;
 using SyncVPN.Client.UI.Main.Sidebar.Connections.Recents;
 using SyncVPN.Client.UI.Main.Sidebar.Search;
+using SyncVPN.Client.UI.Main.Store;
 
 namespace SyncVPN.Client.Services.Mapping;
 
@@ -52,6 +53,7 @@ public class PageViewMapper : ViewMapperBase<PageViewModelBase, Page>, IPageView
     {
         ConfigureMapping<LoginPageViewModel, LoginPageView>();
         ConfigureMapping<SignInPageViewModel, SignInPageView>();
+        ConfigureMapping<WebLoginPageViewModel, WebLoginPageView>();
         ConfigureMapping<TwoFactorPageViewModel, TwoFactorPageView>();
         ConfigureMapping<CodeLoginPageViewModel, CodeLoginPageView>();
         ConfigureMapping<LoadingPageViewModel, LoadingPageView>();
@@ -84,6 +86,7 @@ public class PageViewMapper : ViewMapperBase<PageViewModelBase, Page>, IPageView
         ConfigureMapping<PortForwardingPageViewModel, PortForwardingPageView>();
         ConfigureMapping<SplitTunnelingPageViewModel, SplitTunnelingPageView>();
         ConfigureMapping<DnsFiltersPageViewModel, DnsFiltersPageView>();
+        ConfigureMapping<StorePageViewModel, StorePageView>();
 
         ConfigureMapping<ReportIssueCategoriesPageViewModel, ReportIssueCategoriesPageView>();
         ConfigureMapping<ReportIssueCategoryPageViewModel, ReportIssueCategoryPageView>();

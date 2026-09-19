@@ -43,6 +43,14 @@ public interface IUserAuthenticator
     // for a SyncVPN device session - no legacy Proton equivalent, always goes to the new backend.
     Task<AuthResult> LoginWithCodeAsync(string code);
 
+    // Starts a browser-based login attempt. On success, the caller opens the returned VerificationUrl
+    // in the browser and then calls WaitForWebLoginAsync with the same result.
+    Task<WebLoginStartResult> StartWebLoginAsync();
+
+    // Waits for the browser-based login from StartWebLoginAsync to complete, polling the backend until
+    // it does, the attempt expires, or CancelAuth is called.
+    Task<AuthResult> WaitForWebLoginAsync(WebLoginStartResult attempt);
+
     Task<AuthResult> SendTwoFactorCodeAsync(string code);
     Task<AuthResult> AuthenticateWithSecurityKeyAsync();
 
