@@ -42,7 +42,7 @@ namespace SyncVPN.Api.Tests.Handlers;
 [TestClass]
 public class UnauthorizedResponseHandlerTest
 {
-    private const string BASE_API_URL = "https://api.protonvpn.ch";
+    private const string BASE_API_URL = "https://api.syncvpn.com";
     private const string LOGICALS_ENDPOINT = "/logicals";
     private const string VPN_INFO_ENDPOINT = "/vpn";
     private const string PROFILES_ENDPOINT = "/profiles";

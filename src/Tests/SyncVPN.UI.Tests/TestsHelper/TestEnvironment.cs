@@ -63,13 +63,13 @@ public class TestEnvironment : BaseTest
         return $"Windows {Environment.OSVersion.Version.Major}";
     }
 
-    public static string GetProtonClientFolder()
+    public static string GetClientFolder()
     {
         string versionFolder = $"v{GetAppVersion()}";
         return Path.Combine(TestConstants.AppFolderPath, versionFolder);
     }
 
-    public static string GetDevProtonClientFolder()
+    public static string GetDevClientFolder()
     {
         string directoryName = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
             ?? throw new Exception("Failed to get executing assembly location.");
@@ -79,6 +79,6 @@ public class TestEnvironment : BaseTest
 
     public static string GetServiceLogsPath()
     {
-        return Path.Combine(GetProtonClientFolder(), "ServiceData", "Logs", "service-logs.txt");
+        return Path.Combine(GetClientFolder(), "ServiceData", "Logs", "service-logs.txt");
     }
 }

@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Önerilir</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>Uygulamayı son sürüme güncelleyerek VPN hizmetinizden en iyi şekilde yararlanın.</value>
@@ -1682,10 +1682,10 @@ Hata kodu: {0}</value>
     <value>İlerlemek için Windows Hizmetini başlatın</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>Proton Free, otomatik olarak {0} Free tarife ülkemizdeki en hızlı Free tarife sunucusuyla bağlantınızı kurar. Bu sunucu normalde konumunuza en yakın sunucudur.</value>
+    <value>SyncVPN Free, otomatik olarak {0} Free tarife ülkemizdeki en hızlı Free tarife sunucusuyla bağlantınızı kurar. Bu sunucu normalde konumunuza en yakın sunucudur.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Proton Free, otomatik olarak {0} Free tarife ülkemizdeki en hızlı Free tarife sunucusuyla bağlantınızı kurar. Bu sunucu normalde konumunuza en yakın sunucudur.</value>
+    <value>SyncVPN Free, otomatik olarak {0} Free tarife ülkemizdeki en hızlı Free tarife sunucusuyla bağlantınızı kurar. Bu sunucu normalde konumunuza en yakın sunucudur.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_One">
     <value>Free tarifesi sunucuları ülkesi ({0})</value>
@@ -1825,7 +1825,7 @@ Hata kodu: {0}</value>
     <value>Çevrim içi olduğunuzdan ve bağlantınızın kararlı olduğundan emin olun.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>Bu hızlı düzeltmeler Proton ile bağlantı kurmanıza yardımcı olabilir.</value>
+    <value>Bu hızlı düzeltmeler SyncVPN ile bağlantı kurmanıza yardımcı olabilir.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>Farklı bir ağ kullanın</value>
@@ -1837,7 +1837,7 @@ Hata kodu: {0}</value>
     <value>Durum sayfamıza bakın</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Yalnızca Proton hizmetlerinin normal çalıştığından emin olmak için.</value>
+    <value>Yalnızca SyncVPN hizmetlerinin normal çalıştığından emin olmak için.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>Bağlantı yardımı</value>
@@ -1907,7 +1907,7 @@ Hata kodu: {0}</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>{0} tarifesine hoş geldiniz</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>Artık VPN tünelini atlayarak yazıcılarla, hoparlörlerle ve yerel ağınızdaki (LAN) diğer aygıtlarla bağlantı kurabilirsiniz.</value>
@@ -2530,7 +2530,7 @@ Hata kodu: {0}</value>
     <value>Güvenlik anahtarı</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Proton hesabınızla ilişkilendirilmiş U2F ya da FIDO güvenlik anahtarını takın.</value>
+    <value>SyncVPN hesabınızla ilişkilendirilmiş U2F ya da FIDO güvenlik anahtarını takın.</value>
   </data>
   <data name="Main_Loading">
     <value>Lütfen yüklenirken bekleyin...</value>
@@ -2586,7 +2586,7 @@ Hata kodu: {0}</value>
     <value>En fazla aygıt sayısı sınırınıza ulaştınız. Yeniden VPN bağlantısı kurmak için lütfen başka bir aygıtın bağlantısını kesin.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>Aboneliğiniz Proton Free tarifesine düşürüldü ve sizi yeniden en hızlı Free sunucusuna bağlıyoruz.</value>
+    <value>Aboneliğiniz SyncVPN Free tarifesine düşürüldü ve sizi yeniden en hızlı Free sunucusuna bağlıyoruz.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>Herkese açık Wi-Fi ağları güvenlik tehditlerine karşı daha savunmasızdır. Güvenli bir şekilde gezinmek için VPN bağlantısı kurun.</value>
@@ -2958,7 +2958,7 @@ Yükü yüksek olan sunucular bağlantınızı yavaşlatabilir.</value>
     <value>Alternatif yönlendirme</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>Proton hizmetlerine erişim ağ üzerinden engelleniyorsa, sitelerimizle bağlantınızı kurmak için alternatif ağ yönlendirmesi kullanmayı deneyeceğiz.</value>
+    <value>SyncVPN hizmetlerine erişim ağ üzerinden engelleniyorsa, sitelerimizle bağlantınızı kurmak için alternatif ağ yönlendirmesi kullanmayı deneyeceğiz.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>Özel DNS sunucuları</value>
@@ -3337,7 +3337,7 @@ Yükü yüksek olan sunucular bağlantınızı yavaşlatabilir.</value>
     <value>Tema</value>
   </data>
   <data name="Settings_Improve">
-    <value>Proton uygulamasını geliştirin</value>
+    <value>SyncVPN uygulamasını geliştirin</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>Sansüre karşı koymamıza yardımcı olun</value>
@@ -3487,7 +3487,7 @@ Yükü yüksek olan sunucular bağlantınızı yavaşlatabilir.</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>Proton hesabınızın bilgilerini yazın.</value>
+    <value>SyncVPN hesabınızın bilgilerini yazın.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>Bağlantı kesici özelliğini kapat</value>

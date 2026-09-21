@@ -38,7 +38,7 @@ namespace SyncVPN.Dns.Tests.Resolvers;
 [TestClass]
 public class DnsOverUdpResolverTest
 {
-    private const string HOST = "api.protonvpn.ch";
+    private const string HOST = "api.syncvpn.com";
     private const string NON_EXISTING_HOST = "g5f16gfds1gdsf5g16dsfg15fs5gfds651d61s651g6516gf1s6fdgfs.vhbverhu";
 
     private static readonly TimeSpan DNS_RESOLVE_TIMEOUT = TimeSpan.FromSeconds(30);

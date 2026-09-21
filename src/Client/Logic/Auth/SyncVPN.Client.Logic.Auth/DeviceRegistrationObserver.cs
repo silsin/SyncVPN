@@ -90,7 +90,7 @@ public class DeviceRegistrationObserver : ObserverBase
             OsVersion = Environment.OSVersion.Version.ToString(),
             Architecture = RuntimeInformation.OSArchitecture.ToString().ToLowerInvariant(),
             Locale = CultureInfo.CurrentUICulture.Name,
-            Timezone = TimeZoneInfo.Local.Id,
+            Timezone = GetIanaTimezoneId(),
             PushToken = pushToken,
             OneSignalSubscriptionId = oneSignalSubscriptionId,
         };
@@ -108,5 +108,23 @@ public class DeviceRegistrationObserver : ObserverBase
         {
             Logger.Error<ApiErrorLog>($"Failed to register device with the new SyncVPN backend: {response.Error}");
         }
+    }
+
+    // TimeZoneInfo.Local.Id is a Windows-style name (e.g. "Pacific Standard Time"), but the backend
+    // validates against the IANA tz database (e.g. "America/Los_Angeles") - sending the Windows name as-is
+    // always failed its "must be a valid timezone" check. Falls back to the Windows id on the rare system
+    // where ICU has no mapping, rather than sending an empty value.
+    private static string GetIanaTimezoneId()
+    {
+        string windowsId = TimeZoneInfo.Local.Id;
+        if (!TimeZoneInfo.TryConvertWindowsIdToIanaId(windowsId, out string? ianaId))
+        {
+            return windowsId;
+        }
+
+        // The backend's "timezone" validator rejects "Etc/UTC" (POST /devices/register returns 422
+        // "The timezone field must be a valid timezone.") even though it's a standard IANA id - plain
+        // "UTC" is what it actually accepts for a machine on UTC/GMT (Windows id "UTC").
+        return ianaId == "Etc/UTC" ? "UTC" : ianaId;
     }
 }

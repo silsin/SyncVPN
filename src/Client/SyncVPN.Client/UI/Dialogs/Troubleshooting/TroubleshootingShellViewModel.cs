@@ -42,6 +42,6 @@ public partial class TroubleshootingShellViewModel : ShellViewModelBase<ITrouble
     [RelayCommand]
     private void OpenStatusPage()
     {
-        _urlsBrowser.BrowseTo(_urlsBrowser.ProtonStatusPage);
+        _urlsBrowser.BrowseTo(_urlsBrowser.StatusPage);
     }
 }

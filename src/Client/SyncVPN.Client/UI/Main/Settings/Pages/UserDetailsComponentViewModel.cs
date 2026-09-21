@@ -52,9 +52,9 @@ public partial class UserDetailsComponentViewModel : PageViewModelBase,
 
     public bool IsVpnPlan => _settings.VpnPlan.IsVpnPlan;
 
-    public bool IsProtonPlan => _settings.VpnPlan.IsProtonPlan;
+    public bool IsBundlePlan => _settings.VpnPlan.IsBundlePlan;
 
-    // Guest devices (no real Proton/SyncVPN account - just the new backend's free-server access) have no
+    // Guest devices (no real account - just the new backend's free-server access) have no
     // account page to open and nothing to sign out of - the flyout hides "Account" and swaps "Sign out"
     // for "Sign in" for them.
     public bool IsLoggedIn => _userAuthenticator.IsLoggedIn;
@@ -97,7 +97,7 @@ public partial class UserDetailsComponentViewModel : PageViewModelBase,
     private void RefreshAccountState()
     {
         OnPropertyChanged(nameof(IsVpnPlan));
-        OnPropertyChanged(nameof(IsProtonPlan));
+        OnPropertyChanged(nameof(IsBundlePlan));
         OnPropertyChanged(nameof(VpnPlan));
         OnPropertyChanged(nameof(IsLoggedIn));
         OnPropertyChanged(nameof(Username));

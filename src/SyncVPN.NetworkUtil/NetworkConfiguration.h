@@ -1,5 +1,5 @@
-#ifndef PROTON_NETWORK_UTIL_NETWORK_CONFIGURATION_H
-#define PROTON_NETWORK_UTIL_NETWORK_CONFIGURATION_H
+#ifndef SYNCVPN_NETWORK_UTIL_NETWORK_CONFIGURATION_H
+#define SYNCVPN_NETWORK_UTIL_NETWORK_CONFIGURATION_H
 
 #include <Windows.h>
 #include <Netcfgx.h>
@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-namespace Proton
+namespace SyncVpn
 {
     namespace NetworkUtil
     {
@@ -43,4 +43,4 @@ namespace Proton
     }
 }
 
-#endif // PROTON_NETWORK_UTIL_NETWORK_CONFIGURATION_H
+#endif // SYNCVPN_NETWORK_UTIL_NETWORK_CONFIGURATION_H

@@ -36,7 +36,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
         <Image Grid.Column="0"
                Width="40"
                VerticalAlignment="Top"
-               Source="{StaticResource UpdateProtonVpnIllustrationSource}"
+               Source="{StaticResource UpdateSyncVpnIllustrationSource}"
                Visibility="{x:Bind IsImageVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
         <StackPanel Grid.Column="1"

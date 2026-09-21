@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Recommended</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>更新應用程式至最新版本，以充分發揮 VPN 的功能。</value>
@@ -1628,7 +1628,7 @@
     <value>啟用 Windows 服務以繼續</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Proton Free 將自動連接至我們 {0} 個免費國家/地區中最快的伺服器，通常為距您最近的伺服器。</value>
+    <value>SyncVPN Free 將自動連接至我們 {0} 個免費國家/地區中最快的伺服器，通常為距您最近的伺服器。</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_Other">
     <value>免費伺服器國家 ({0})</value>
@@ -1765,7 +1765,7 @@
     <value>確保您已連線，且連線穩定。</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>這些快速修復可能幫助您連線至 Proton。</value>
+    <value>這些快速修復可能幫助您連線至 SyncVPN。</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>使用不同的網路</value>
@@ -1777,7 +1777,7 @@
     <value>查看我們的狀態頁面</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>只是為了確保 Proton 服務正常運作。</value>
+    <value>只是為了確保 SyncVPN 服務正常運作。</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>連線說明</value>
@@ -1844,7 +1844,7 @@
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Welcome to {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>您現在可以連線到區域網路 (LAN) 上的印表機、揚聲器和其他裝置，繞過 VPN 隧道。</value>
@@ -2435,7 +2435,7 @@
     <value>Security key</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Insert the U2F or FIDO key linked to your Proton Account.</value>
+    <value>Insert the U2F or FIDO key linked to your SyncVPN Account.</value>
   </data>
   <data name="Main_Loading">
     <value>正在載入，請稍候...</value>
@@ -2491,7 +2491,7 @@
     <value>您已達到最大裝置限制。若要重新連線到 VPN，請從另一裝置中斷連線。</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>您的方案已降級為 Proton Free，我們正在將您重新連線到最快的免費伺服器。</value>
+    <value>您的方案已降級為 SyncVPN Free，我們正在將您重新連線到最快的免費伺服器。</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>公用 Wi-Fi 網路更容易受到安全威脅。連線到 VPN 以安全瀏覽。</value>
@@ -2863,7 +2863,7 @@ VPN 連線</value>
     <value>替代路由</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>若 Proton 服務因網路限制而無法使用，我們將嘗試使用替代的網路路由來連線到我們的網站。</value>
+    <value>若 SyncVPN 服務因網路限制而無法使用，我們將嘗試使用替代的網路路由來連線到我們的網站。</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>自訂 DNS 伺服器</value>
@@ -3242,7 +3242,7 @@ VPN 連線</value>
     <value>佈景主題</value>
   </data>
   <data name="Settings_Improve">
-    <value>改進 Proton</value>
+    <value>改進 SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>助我們一臂之力抵抗審查</value>
@@ -3392,7 +3392,7 @@ VPN 連線</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>輸入您的 Proton 帳號的詳細資料。</value>
+    <value>輸入您的 SyncVPN 帳號的詳細資料。</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>停用 Kill Switch</value>

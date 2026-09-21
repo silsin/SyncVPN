@@ -33,7 +33,7 @@ namespace SyncVPN.Integration.Tests.Announcements;
 [TestClass]
 public class AnnouncementsProviderTest : AuthenticatedUserTests
 {
-    private const string FULL_SCREEN_IMAGE_PATH = "https://protonvpn.com/full-screen-image.png";
+    private const string FULL_SCREEN_IMAGE_PATH = "https://syncvpn.com/full-screen-image.png";
 
     private IAnnouncementsProvider? _announcementsProvider;
 

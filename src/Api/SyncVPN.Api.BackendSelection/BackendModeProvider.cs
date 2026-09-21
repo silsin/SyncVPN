@@ -27,10 +27,10 @@ namespace SyncVPN.Api.BackendSelection;
 // Precedence, highest wins:
 //   1. Env var SYNCVPN_USE_NEW_BACKEND_<CAPABILITY> (e.g. SYNCVPN_USE_NEW_BACKEND_SERVERS) - for CI/automation.
 //   2. ISettings.NewBackendOverride - local engineering/QA toggle (currently only a master on/off; see DebugTools).
-//   3. Remote feature flag "NewBackend<Capability>", fetched from the legacy Proton feature-flags endpoint
-//      (kept on Proton per the hybrid-backend decision) - this is how staged/cohort rollout works.
+//   3. Remote feature flag "NewBackend<Capability>", fetched from the legacy feature-flags endpoint
+//      (kept on the legacy backend per the hybrid-backend decision) - this is how staged/cohort rollout works.
 //   4. Default: false for every capability except DeviceRegistration, which defaults to true - it's a
-//      prerequisite for the new backend's guest/free-tier access model, has no legacy Proton equivalent
+//      prerequisite for the new backend's guest/free-tier access model, has no legacy-backend equivalent
 //      to preserve, and is inert on its own (registering a device makes no user-visible change and
 //      breaks nothing), unlike Servers/DnsFilters/Auth/VpnProvisioning which do risk regressing an
 //      existing, working legacy flow.

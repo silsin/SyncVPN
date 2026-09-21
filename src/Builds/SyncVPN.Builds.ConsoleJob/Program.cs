@@ -80,6 +80,7 @@ public static class Program
         string btiServerSignaturePublicKey = GetEnvironmentVariable("BTI_SERVER_SIGNATURE_PUBLIC_KEY");
         string guestHoleKey1 = GetGuestHoleKey("key1.txt");
         string guestHoleKey2 = GetGuestHoleKey("key2.txt");
+        string syncVpnAppToken = GetEnvironmentVariable("SYNCVPN_APP_TOKEN");
 
         return $@"
 /*
@@ -116,6 +117,7 @@ public static class {_globalConfigType.Name}
     public const string BtiServerSignaturePublicKey = ""{btiServerSignaturePublicKey}"";
     public const string GuestHoleKey1 = ""{guestHoleKey1}"";
     public const string GuestHoleKey2 = ""{guestHoleKey2}"";
+    public const string SyncVpnAppToken = ""{syncVpnAppToken}"";
 }}
 ";
     }

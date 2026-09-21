@@ -38,7 +38,7 @@ namespace SyncVPN.Logging.Log4Net
         {
             _loggerConfiguration = loggerConfiguration;
             Configure();
-            InternalLogger = LogManager.GetLogger("ProtonVpnLogger");
+            InternalLogger = LogManager.GetLogger("SyncVpnLogger");
         }
 
         private void Configure()

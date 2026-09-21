@@ -111,7 +111,7 @@ public class SplitTunnelNetworkFilters
     {
         _ipFilter = IpFilter.Create(
             Session.Dynamic(),
-            new DisplayData { Name = "Proton AG", Description = "SyncVPN Split Tunnel provider" });
+            new DisplayData { Name = "SyncVPN", Description = "SyncVPN Split Tunnel provider" });
 
         _subLayer = _ipFilter.CreateSublayer(
             new DisplayData { Name = "SyncVPN Split Tunnel filters" },

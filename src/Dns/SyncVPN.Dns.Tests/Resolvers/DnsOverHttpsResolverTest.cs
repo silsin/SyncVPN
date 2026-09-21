@@ -29,7 +29,7 @@ namespace SyncVPN.Dns.Tests.Resolvers;
 public class DnsOverHttpsResolverTest
     : DnsOverHttpsResolverTestBase<DnsOverHttpsResolver>
 {
-    private const string HOST = "api.protonvpn.ch";
+    private const string HOST = "api.syncvpn.com";
 
     public DnsOverHttpsResolverTest() : base(HOST)
     {

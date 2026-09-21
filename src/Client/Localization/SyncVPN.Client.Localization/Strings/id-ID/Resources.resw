@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Direkomendasikan</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>Dapatkan yang terbaik dari VPN Anda dengan memperbarui aplikasi ke versi terbaru.</value>
@@ -1628,7 +1628,7 @@ Kode kesalahan: {0}</value>
     <value>Aktifkan Layanan Windows untuk melanjutkan</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Proton Free akan menghubungkan Anda secara otomatis ke server tercepat yang tersedia dari {0} negara Free kami. Pada umumnya, server ini adalah server yang terletak paling dekat dengan lokasi Anda.</value>
+    <value>SyncVPN Free akan menghubungkan Anda secara otomatis ke server tercepat yang tersedia dari {0} negara Free kami. Pada umumnya, server ini adalah server yang terletak paling dekat dengan lokasi Anda.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_Other">
     <value>Negara server Free ({0})</value>
@@ -1765,7 +1765,7 @@ Kode kesalahan: {0}</value>
     <value>Pastikan Anda sedang daring dan koneksi Anda stabil.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>Solusi cepat berikut ini dapat membantu Anda terhubung ke Proton.</value>
+    <value>Solusi cepat berikut ini dapat membantu Anda terhubung ke SyncVPN.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>Gunakan jaringan yang berbeda</value>
@@ -1777,7 +1777,7 @@ Kode kesalahan: {0}</value>
     <value>Periksa halaman status kami</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Untuk sekadar memastikan apakah layanan Proton sedang berjalan secara normal.</value>
+    <value>Untuk sekadar memastikan apakah layanan SyncVPN sedang berjalan secara normal.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>Bantuan koneksi</value>
@@ -1844,7 +1844,7 @@ Kode kesalahan: {0}</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Welcome to {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>Anda kini dapat terhubung ke printer, speaker, dan perangkat lainnya pada jaringan lokal (LAN) Anda tanpa melalui terowongan VPN.</value>
@@ -2434,7 +2434,7 @@ Kode kesalahan: {0}</value>
     <value>Kunci keamanan</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Masukkan kunci U2F atau FIDO yang terhubung dengan Akun Proton Anda.</value>
+    <value>Masukkan kunci U2F atau FIDO yang terhubung dengan Akun SyncVPN Anda.</value>
   </data>
   <data name="Main_Loading">
     <value>Memuat aplikasi, mohon tunggu…</value>
@@ -2490,7 +2490,7 @@ Kode kesalahan: {0}</value>
     <value>Anda telah mencapai batas jumlah maksimum perangkat Anda. Untuk menghubungkan ulang ke VPN, silakan putuskan koneksi dari perangkat lain.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>Paket Anda telah diturunkan ke Proton Free, dan kami akan menghubungkan ulang Anda ke server gratis tercepat.</value>
+    <value>Paket Anda telah diturunkan ke SyncVPN Free, dan kami akan menghubungkan ulang Anda ke server gratis tercepat.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>Jaringan Wi-Fi publik lebih rentan terhadap ancaman keamanan. Hubungkan diri Anda ke VPN untuk menjelajah internet secara aman.</value>
@@ -2862,7 +2862,7 @@ Beban server yang tinggi dapat memperlambat koneksi Anda.</value>
     <value>Perutean alternatif</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>Apabila layanan Proton diblokir akibat pembatasan jaringan, kami akan mencoba untuk menggunakan perutean jaringan alternatif demi menghubungkan Anda ke situs kami.</value>
+    <value>Apabila layanan SyncVPN diblokir akibat pembatasan jaringan, kami akan mencoba untuk menggunakan perutean jaringan alternatif demi menghubungkan Anda ke situs kami.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>Server DNS khusus</value>
@@ -3241,7 +3241,7 @@ Beban server yang tinggi dapat memperlambat koneksi Anda.</value>
     <value>Tema</value>
   </data>
   <data name="Settings_Improve">
-    <value>Tingkatkan Proton</value>
+    <value>Tingkatkan SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>Bantu kami melawan sensor</value>
@@ -3391,7 +3391,7 @@ Beban server yang tinggi dapat memperlambat koneksi Anda.</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>Masukkan rincian Akun Proton Anda.</value>
+    <value>Masukkan rincian Akun SyncVPN Anda.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>Nonaktifkan kill switch</value>

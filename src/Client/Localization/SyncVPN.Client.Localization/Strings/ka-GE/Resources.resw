@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>რეკომენდებულია</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>მიიღეთ VPN-ისგან უფრო მეტი აპის ბოლო ვერსიამდე განახლებით.</value>
@@ -1682,10 +1682,10 @@
     <value>გასაგრძელებლად ჩართეთ Windows-ის სერვისი</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>Proton Free ავტომატურად მიუერთდება უსწრაფეს უფასო ხელმისაწვდომ სერვერს ჩვენი {0} უფასო ქვეყნიდან. ეს ჩვეულებრივ თქვენს მდებარეობასთან არსებული უახლოესი სერვერია.</value>
+    <value>SyncVPN Free ავტომატურად მიუერთდება უსწრაფეს უფასო ხელმისაწვდომ სერვერს ჩვენი {0} უფასო ქვეყნიდან. ეს ჩვეულებრივ თქვენს მდებარეობასთან არსებული უახლოესი სერვერია.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Proton Free ავტომატურად მიუერთდება უსწრაფეს უფასო ხელმისაწვდომ სერვერს ჩვენი {0} უფასო ქვეყნიდან. ეს ჩვეულებრივ თქვენს მდებარეობასთან არსებული უახლოესი სერვერია.</value>
+    <value>SyncVPN Free ავტომატურად მიუერთდება უსწრაფეს უფასო ხელმისაწვდომ სერვერს ჩვენი {0} უფასო ქვეყნიდან. ეს ჩვეულებრივ თქვენს მდებარეობასთან არსებული უახლოესი სერვერია.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_One">
     <value>უფასო სერვერის ქვეყანა ({0})</value>
@@ -1825,7 +1825,7 @@
     <value>დადრწმუნდით, რომ ქსელი ჩართულია და რომ მიერთება სტაბილურია.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>ეს სწრაფი გზები, შეიძლება, Proton-თან დაკავშირებაში დაგეხმარონ.</value>
+    <value>ეს სწრაფი გზები, შეიძლება, SyncVPN-თან დაკავშირებაში დაგეხმარონ.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>გამოიყენეთ სხვა ქსელი</value>
@@ -1837,7 +1837,7 @@
     <value>შეამოწმეთ ჩვენი სტატუსის გვერდი</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>უბრალოდ, რომ დავრწმუნდეთ, რომ Proton-ის ყველა სერვისი ნორმალურ მდგომარეობაშია.</value>
+    <value>უბრალოდ, რომ დავრწმუნდეთ, რომ SyncVPN-ის ყველა სერვისი ნორმალურ მდგომარეობაშია.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>მიერთების დახმარება</value>
@@ -1907,7 +1907,7 @@
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Welcome to {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>ახლა შეგიძლიათ დაუკავშირდეთ პრინტერებს, დინამიკებს და სხვა მოწყობილობებს თქვენს ლოკალურ ქსელში (LAN), VPN გვირაბის გვერდის ავლით.</value>
@@ -2530,7 +2530,7 @@
     <value>უსაფრთხოების გასაღები</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>შეაერთეთ თქვენი Proton-ის ანგარიშზე მიბმული U2F ან FIDO გასაღები.</value>
+    <value>შეაერთეთ თქვენი SyncVPN-ის ანგარიშზე მიბმული U2F ან FIDO გასაღები.</value>
   </data>
   <data name="Main_Loading">
     <value>მიმდინარეობს ჩატვირთვა. მოითმინეთ...</value>
@@ -2586,7 +2586,7 @@
     <value>თქვენ მიაღწიეთ მოწყობილობების ლიმიტს. VPN-ზე ხელახლა დასაკავშირებლად გათიშეთ სხვა მოწყობილობა.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>თქვენი სატარიფო გეგმა ჩამოწეულია Proton Free-ზე და ჩვენ თავიდან დაგაკავშირებთ უსწრაფეს უფასო სერვერთან.</value>
+    <value>თქვენი სატარიფო გეგმა ჩამოწეულია SyncVPN Free-ზე და ჩვენ თავიდან დაგაკავშირებთ უსწრაფეს უფასო სერვერთან.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>საჯარო Wi-FI ქსელები უფრო მოწყვლადია უსაფრთხოების მხრივ. დაუკავშირდით VPN-ს ინტერნეტში უსაფრთხოდ სამუშაოდ.</value>
@@ -2958,7 +2958,7 @@ VPN მიერთება</value>
     <value>ალტერნატიული რაუტინგი</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>თუ Proton-ის სერვისები დაბლოკილია ქსელის შეზღუდვების გამო, ჩვენ ალტერნატიულ ქსელის რაუტინგს ვცდით, რომ ჩვენს საიტებთან დაგაკავშიროთ.</value>
+    <value>თუ SyncVPN-ის სერვისები დაბლოკილია ქსელის შეზღუდვების გამო, ჩვენ ალტერნატიულ ქსელის რაუტინგს ვცდით, რომ ჩვენს საიტებთან დაგაკავშიროთ.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>DNS სერვერების ხელით მითითება</value>
@@ -3337,7 +3337,7 @@ VPN მიერთება</value>
     <value>თემა</value>
   </data>
   <data name="Settings_Improve">
-    <value>გააუმჯობესეთ Proton</value>
+    <value>გააუმჯობესეთ SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>დაგვეხმარეთ, ვებრძოლოთ ცენზურას</value>
@@ -3487,7 +3487,7 @@ VPN მიერთება</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>შეიყვანეთ თქვენი Proton-ის ანგარიშის დეტალები.</value>
+    <value>შეიყვანეთ თქვენი SyncVPN-ის ანგარიშის დეტალები.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>Kill Switch-ის გამორთვა</value>

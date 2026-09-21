@@ -3,6 +3,6 @@
 	"UpdateCheckInterval": 				"00:01:27",
 	"ReportBugMaxFiles": 				74,
 	"Urls": {
-		"ApiUrl": 						"https://protonvpn.test/api/"
+		"ApiUrl": 						"https://syncvpn.test/api/"
 	}
 }

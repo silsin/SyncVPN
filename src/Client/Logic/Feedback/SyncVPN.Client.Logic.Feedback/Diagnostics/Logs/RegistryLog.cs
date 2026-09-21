@@ -80,10 +80,10 @@ public class RegistryLog : LogBase
             .AppendLine("--------------------------------------------")
             .AppendLine();
 
-        AppendRegistryEntries(stringBuilder, RegistryHive.ClassesRoot, @"protonvpn");
-        AppendRegistryEntries(stringBuilder, RegistryHive.ClassesRoot, @"proton-vpn");
-        AppendRegistryEntries(stringBuilder, RegistryHive.CurrentUser, @"Software\Classes\protonvpn");
-        AppendRegistryEntries(stringBuilder, RegistryHive.CurrentUser, @"Software\Classes\proton-vpn");
+        AppendRegistryEntries(stringBuilder, RegistryHive.ClassesRoot, _config.LegacyProtocolActivationScheme);
+        AppendRegistryEntries(stringBuilder, RegistryHive.ClassesRoot, _config.ProtocolActivationScheme);
+        AppendRegistryEntries(stringBuilder, RegistryHive.CurrentUser, $@"Software\Classes\{_config.LegacyProtocolActivationScheme}");
+        AppendRegistryEntries(stringBuilder, RegistryHive.CurrentUser, $@"Software\Classes\{_config.ProtocolActivationScheme}");
     }
 
     private void AppendServiceRegistryEntries(StringBuilder stringBuilder)

@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Рэкамендавана</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>Атрымайце яшчэ больш ад свайго VPN, абнавіўшы праграму да апошняй версіі.</value>
@@ -1790,16 +1790,16 @@
     <value>Уключыце сэрвіс Windows для працягу</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>Proton Free аўтаматычна падключае вас да найхутчэйшага даступнага сервера з нашай {0} бясплатнай краіны. Звычайна гэта самы блізкі сервер адносна вашага месцазнаходжання.</value>
+    <value>SyncVPN Free аўтаматычна падключае вас да найхутчэйшага даступнага сервера з нашай {0} бясплатнай краіны. Звычайна гэта самы блізкі сервер адносна вашага месцазнаходжання.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Few">
-    <value>Proton Free аўтаматычна падключае вас да найхутчэйшага даступнага сервера з нашых {0} бясплатных краін. Звычайна гэта самы блізкі сервер адносна вашага месцазнаходжання.</value>
+    <value>SyncVPN Free аўтаматычна падключае вас да найхутчэйшага даступнага сервера з нашых {0} бясплатных краін. Звычайна гэта самы блізкі сервер адносна вашага месцазнаходжання.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Many">
-    <value>Proton Free аўтаматычна падключае вас да найхутчэйшага даступнага сервера з нашых {0} бясплатных краін. Звычайна гэта самы блізкі сервер адносна вашага месцазнаходжання.</value>
+    <value>SyncVPN Free аўтаматычна падключае вас да найхутчэйшага даступнага сервера з нашых {0} бясплатных краін. Звычайна гэта самы блізкі сервер адносна вашага месцазнаходжання.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Proton Free аўтаматычна падключае вас да найхутчэйшага даступнага сервера з нашых {0} бясплатных краін. Звычайна гэта самы блізкі сервер адносна вашага месцазнаходжання.</value>
+    <value>SyncVPN Free аўтаматычна падключае вас да найхутчэйшага даступнага сервера з нашых {0} бясплатных краін. Звычайна гэта самы блізкі сервер адносна вашага месцазнаходжання.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_One">
     <value>Краіна з бясплатнымі серверамі ({0})</value>
@@ -1945,7 +1945,7 @@
     <value>Пераканайцеся, што вы падключаны да інтэрнэту і ваша падключэнне з'яўляецца стабільным.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>Гэтыя хуткія выпраўленні дапамогуць вам падключыцца да Proton.</value>
+    <value>Гэтыя хуткія выпраўленні дапамогуць вам падключыцца да SyncVPN.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>Скарыстацца іншай сеткай</value>
@@ -1957,7 +1957,7 @@
     <value>Праверце статус старонкі</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Спачатку пераканайцеся, што сэрвісы Proton працуюць у звычайным рэжыме.</value>
+    <value>Спачатку пераканайцеся, што сэрвісы SyncVPN працуюць у звычайным рэжыме.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>Дапамога па падключэнні</value>
@@ -2033,7 +2033,7 @@
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Вітаем у {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>Цяпер вы можаце падключацца да прынтараў, дынамікаў і іншых прылад у лакальнай сетцы (LAN), абыходзячы тунэль VPN.</value>
@@ -2722,7 +2722,7 @@
     <value>Ключ бяспекі</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Устаўце ключ U2F або FIDO, які звязаны з вашым уліковым запісам Proton.</value>
+    <value>Устаўце ключ U2F або FIDO, які звязаны з вашым уліковым запісам SyncVPN.</value>
   </data>
   <data name="Main_Loading">
     <value>Загружаецца. Пачакайце…</value>
@@ -2778,7 +2778,7 @@
     <value>Дасягнута абмежаванне па максімальнай колькасці прылад. Адключыце якую-небудзь прыладу, каб перападключыцца да VPN.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>Ваш тарыфны план быў паніжаны да Proton Free. Вы будзеце перападключаны да найхутчэйшага з бясплатных сервераў.</value>
+    <value>Ваш тарыфны план быў паніжаны да SyncVPN Free. Вы будзеце перападключаны да найхутчэйшага з бясплатных сервераў.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>Публічныя сеткі Wi-Fi найбольш уразлівыя да пагроз бяспекі. Падключыцеся да VPN для бяспечнага прагляду.</value>
@@ -3150,7 +3150,7 @@ Secure Core</value>
     <value>Альтэрнатыўная маршрутызацыя</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>Будзе зроблена спроба скарыстацца альтэрнатыўным сеткавым маршрутам для падключэння да нашых сайтаў, калі сэрвісы Proton заблакіраваны з-за абмежавання сеткі.</value>
+    <value>Будзе зроблена спроба скарыстацца альтэрнатыўным сеткавым маршрутам для падключэння да нашых сайтаў, калі сэрвісы SyncVPN заблакіраваны з-за абмежавання сеткі.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>Карыстальніцкія серверы DNS</value>
@@ -3529,7 +3529,7 @@ Secure Core</value>
     <value>Тэма</value>
   </data>
   <data name="Settings_Improve">
-    <value>Удасканаліць Proton</value>
+    <value>Удасканаліць SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>Дапамажыце нам змагацца з цэнзурай</value>
@@ -3679,7 +3679,7 @@ Secure Core</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>Увядзіце падрабязнасці ўліковага запісу Proton.</value>
+    <value>Увядзіце падрабязнасці ўліковага запісу SyncVPN.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>Адключыць Kill Switch</value>

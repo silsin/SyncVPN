@@ -225,10 +225,10 @@ public class Bootstrapper : IBootstrapper
             }
         }
 
-        HandleProtonInstallerArguments(args);
+        HandleCleanInstallArguments(args);
     }
 
-    private void HandleProtonInstallerArguments(string[] args)
+    private void HandleCleanInstallArguments(string[] args)
     {
         bool isCleanInstall = false;
         bool isMailInstalled = false;

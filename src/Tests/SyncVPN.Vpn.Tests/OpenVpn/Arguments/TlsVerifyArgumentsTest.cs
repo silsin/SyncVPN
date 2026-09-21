@@ -44,7 +44,7 @@ public class TlsVerifyArgumentsTest
         // Arrange
         _openVpnConfig.TlsExportCertFolder.Returns("ExportCert");
         _openVpnConfig.TlsVerifyExePath.Returns("SyncVPN.TlsVerify.exe");
-        TlsVerifyArguments subject = new(_openVpnConfig, "nl-101.proton.com");
+        TlsVerifyArguments subject = new(_openVpnConfig, "nl-101.syncvpn.com");
 
         // Act
         List<string> result = subject.ToList();
@@ -57,7 +57,7 @@ public class TlsVerifyArgumentsTest
     public void Enumerable_ShouldContain_SetEnvOption()
     {
         // Arrange
-        const string serverName = "nl-1.proton.com";
+        const string serverName = "nl-1.syncvpn.com";
 
         _openVpnConfig.TlsExportCertFolder.Returns("ExportCert");
         _openVpnConfig.TlsVerifyExePath.Returns("SyncVPN.TlsVerify.exe");
@@ -78,7 +78,7 @@ public class TlsVerifyArgumentsTest
 
         _openVpnConfig.TlsExportCertFolder.Returns(exportCertFolder);
         _openVpnConfig.TlsVerifyExePath.Returns("SyncVPN.TlsVerify.exe");
-        TlsVerifyArguments subject = new(_openVpnConfig, "gb-15.proton.com");
+        TlsVerifyArguments subject = new(_openVpnConfig, "gb-15.syncvpn.com");
 
         // Act
         List<string> result = subject.ToList();
@@ -95,7 +95,7 @@ public class TlsVerifyArgumentsTest
 
         _openVpnConfig.TlsExportCertFolder.Returns("ExportCert");
         _openVpnConfig.TlsVerifyExePath.Returns(tlsVerifyExePath);
-        TlsVerifyArguments subject = new(_openVpnConfig, "gb-15.proton.com");
+        TlsVerifyArguments subject = new(_openVpnConfig, "gb-15.syncvpn.com");
 
         // Act
         List<string> result = subject.ToList();

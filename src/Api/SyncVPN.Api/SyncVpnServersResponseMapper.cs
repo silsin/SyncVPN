@@ -25,7 +25,7 @@ using SyncVPN.Api.V2.Contracts.Servers;
 
 namespace SyncVPN.Api;
 
-// Translates the new SyncVPN backend's server catalog (GET /servers) into the legacy Proton-shaped
+// Translates the new SyncVPN backend's server catalog (GET /servers) into the legacy backend-shaped
 // ServersResponse/LogicalServerResponse DTOs, so the existing entity mapper and ServersCache pipeline
 // (built for vpn/v2/logicals) can consume it unchanged. See the migration plan for the fields the new
 // catalog genuinely has no equivalent for (load, score, Secure Core, per-server key material - the last
@@ -33,7 +33,7 @@ namespace SyncVPN.Api;
 // public catalog) - those are left at safe defaults rather than invented.
 public static class SyncVpnServersResponseMapper
 {
-    // Placeholder StatusID: the new backend has no equivalent to Proton's binary loads/status blob, so
+    // Placeholder StatusID: the new backend has no equivalent to the legacy backend's binary loads/status blob, so
     // there's nothing meaningful to key it by. ServersCache is told (via IBackendModeProvider) to skip
     // the binary-loads fetch entirely when this backend is active, so the value itself is never used
     // to make a request - it only needs to be non-null to satisfy ServersResponse.StatusId.

@@ -168,7 +168,7 @@ internal class OpenVpnConnection : IAdapterSingleVpnConnection
         try
         {
             // A server-issued config (new SyncVPN backend) embeds its own CA and is written verbatim -
-            // ConfigTemplate hardcodes Proton's CA/tls-crypt key and must never be applied to it.
+            // ConfigTemplate hardcodes the legacy backend's CA/tls-crypt key and must never be applied to it.
             string content;
             if (_credentials.ProvisionedConfigText is not null)
             {

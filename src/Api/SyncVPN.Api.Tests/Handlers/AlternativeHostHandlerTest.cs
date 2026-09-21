@@ -51,11 +51,11 @@ namespace SyncVPN.Api.Tests.Handlers;
 public class AlternativeHostHandlerTest
 {
     private const string HTTPS = "https://";
-    private const string HOST = "api.protonvpn.ch";
+    private const string HOST = "api.syncvpn.com";
     private const string PATH = "/auth";
     private const string REQUEST_URL = HTTPS + HOST + PATH;
 
-    private const string CONFIG_API_HOST = "configapi.protonvpn.ch";
+    private const string CONFIG_API_HOST = "configapi.syncvpn.com";
     private const string CONFIG_API_BASE_URL = HTTPS + CONFIG_API_HOST + "/";
     private const string CONFIG_API_PING_URL = CONFIG_API_BASE_URL + AlternativeHostHandler.API_PING_TEST_PATH;
 
@@ -67,9 +67,9 @@ public class AlternativeHostHandlerTest
     private const string ALTERNATIVE_URL_2 = HTTPS + IP_ADDRESS_2 + PATH;
     private const string ALTERNATIVE_URL_3 = HTTPS + IP_ADDRESS_3 + PATH;
 
-    private const string ALTERNATIVE_HOST_1 = "abc.protonvpn.com";
-    private const string ALTERNATIVE_HOST_2 = "def.protonvpn.com";
-    private const string ALTERNATIVE_HOST_3 = "ghi.protonvpn.com";
+    private const string ALTERNATIVE_HOST_1 = "abc.syncvpn.com";
+    private const string ALTERNATIVE_HOST_2 = "def.syncvpn.com";
+    private const string ALTERNATIVE_HOST_3 = "ghi.syncvpn.com";
 
     private const string UNIQUE_SESSION_ID = "SessionID";
 

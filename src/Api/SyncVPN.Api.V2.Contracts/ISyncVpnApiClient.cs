@@ -34,7 +34,7 @@ using SyncVPN.Api.V2.Contracts.Transactions;
 namespace SyncVPN.Api.V2.Contracts;
 
 // Client for the new SyncVPN-owned backend (https://syncvpn.com/api), as opposed to
-// IApiClient/ApiClient which talk to Proton's legacy vpn-api.proton.me.
+// IApiClient/ApiClient which talk to the legacy backend.
 // Grown one capability at a time as each migration phase lands - see the migration plan.
 public interface ISyncVpnApiClient
 {

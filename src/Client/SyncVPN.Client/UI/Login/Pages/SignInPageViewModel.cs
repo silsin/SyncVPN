@@ -275,7 +275,7 @@ public partial class SignInPageViewModel : LoginPageViewModelBase
 
     // Navigates to CodeLoginPageView, which exchanges a 16-character login_code (e.g. handed out after a
     // guest purchase) for a session via POST /auth/code-login - a SyncVPN-only path with no legacy
-    // Proton equivalent, so unlike CreateAccountCommand it never needs to fall back to a browser link.
+    // legacy-backend equivalent, so unlike CreateAccountCommand it never needs to fall back to a browser link.
     [RelayCommand]
     public Task NavigateToCodeLoginAsync()
     {

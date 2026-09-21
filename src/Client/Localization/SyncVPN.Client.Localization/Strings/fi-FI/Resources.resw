@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Suositukset</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>Ota VPN:stä kaikki irti päivittämällä sovellus uusimpaan versioon.</value>
@@ -1682,10 +1682,10 @@ Virhekoodi: {0}</value>
     <value>Jatka aktivoimalla Windows-palvelu</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>Proton Free yhdistää sinut automaattisesti nopeimpaan saatavilla olevaan {0} ilmaismaan ilmaiseen palvelimeen. Yleensä tämä on lähinnä sijaintiasi oleva palvelin.</value>
+    <value>SyncVPN Free yhdistää sinut automaattisesti nopeimpaan saatavilla olevaan {0} ilmaismaan ilmaiseen palvelimeen. Yleensä tämä on lähinnä sijaintiasi oleva palvelin.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Proton Free yhdistää sinut automaattisesti nopeimpaan saatavilla olevaan {0} ilmaismaan ilmaiseen palvelimeen. Yleensä tämä on lähinnä sijaintiasi oleva palvelin.</value>
+    <value>SyncVPN Free yhdistää sinut automaattisesti nopeimpaan saatavilla olevaan {0} ilmaismaan ilmaiseen palvelimeen. Yleensä tämä on lähinnä sijaintiasi oleva palvelin.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_One">
     <value>Ilmaispalvelinmaa ({0})</value>
@@ -1825,7 +1825,7 @@ Virhekoodi: {0}</value>
     <value>Varmista, että olet verkossa ja että yhteys on vakaa.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>Nämä pikaratkaisut voivat auttaa yhdistämään Protoniin.</value>
+    <value>Nämä pikaratkaisut voivat auttaa yhdistämään SyncVPNiin.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>Käytä eri verkkoa</value>
@@ -1837,7 +1837,7 @@ Virhekoodi: {0}</value>
     <value>Tarkasta tilasivumme</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Vain Protonin palveluiden normaalin toiminnan varmistamiseksi.</value>
+    <value>Vain SyncVPNin palveluiden normaalin toiminnan varmistamiseksi.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>Yhteysapua</value>
@@ -1907,7 +1907,7 @@ Virhekoodi: {0}</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Tervetuloa palveluun {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>Voit nyt yhdistää tulostimiin, kaiuttimiin ja muihin laitteisiin paikallisessa verkossasi (LAN), ohittaen VPN-tunnelin.</value>
@@ -2530,7 +2530,7 @@ Virhekoodi: {0}</value>
     <value>Suojausavain</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Kytke Proton-tiliisi liitetty U2F- tai FIDO-avain.</value>
+    <value>Kytke SyncVPN-tiliisi liitetty U2F- tai FIDO-avain.</value>
   </data>
   <data name="Main_Loading">
     <value>Ladataan. Odota...</value>
@@ -2586,7 +2586,7 @@ Virhekoodi: {0}</value>
     <value>You've reached your maximum device limit. To reconnect to VPN, please disconnect from another device.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>Tilauksesi on alennettu Proton Free -tasolle, joten yhteytesi siirretään nopeimmalle ilmaispalvelimelle.</value>
+    <value>Tilauksesi on alennettu SyncVPN Free -tasolle, joten yhteytesi siirretään nopeimmalle ilmaispalvelimelle.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>Julkiset Wi-Fi-verkot ovat alttiimpia tietoturvauhkille. Yhdistä VPN:ään selataksesi turvallisesti.</value>
@@ -2958,7 +2958,7 @@ Korkea kuormitus voi hidastaa yhteyttäsi.</value>
     <value>Vaihtoehtoinen reititys</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>Jos Protonin palveluita ei verkon rajoitusten vuoksi tavoiteta, pyritään ne tavoittamaan vaihtoehtoisen verkkoreitityksen avulla.</value>
+    <value>Jos SyncVPNin palveluita ei verkon rajoitusten vuoksi tavoiteta, pyritään ne tavoittamaan vaihtoehtoisen verkkoreitityksen avulla.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>Vaihtoehtoiset DNS-palvelimet</value>
@@ -3337,7 +3337,7 @@ Korkea kuormitus voi hidastaa yhteyttäsi.</value>
     <value>Teema</value>
   </data>
   <data name="Settings_Improve">
-    <value>Paranna Protonia</value>
+    <value>Paranna SyncVPNia</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>Auta meitä taistelemaan sensuuria vastaan</value>
@@ -3487,7 +3487,7 @@ Korkea kuormitus voi hidastaa yhteyttäsi.</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>Syötä Proton-tilisi tiedot.</value>
+    <value>Syötä SyncVPN-tilisi tiedot.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>Poista tappokytkin käytöstä</value>

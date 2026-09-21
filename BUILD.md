@@ -69,7 +69,7 @@ using the default testing tools of Visual Studio.
 ## Services
 
 The **SyncVPN Service** and **SyncVPN Wireguard** services targets the installation folder by default 
-("C:\Program Files\Proton\SyncVPN\<version>").
+("C:\Program Files\SyncVPN\<version>").
 
 For development, it is possible to: 
 1. re-target the services to the repository output folder
@@ -84,4 +84,4 @@ NET STOP "SyncVPN Wireguard"
 
 ## Templates
 
-Please check [VisualStudioItemTemplates/README.txt](VisualStudioItemTemplates/README.txt) to use recommended Proton default templates.
+Please check [VisualStudioItemTemplates/README.txt](VisualStudioItemTemplates/README.txt) to use recommended default templates.

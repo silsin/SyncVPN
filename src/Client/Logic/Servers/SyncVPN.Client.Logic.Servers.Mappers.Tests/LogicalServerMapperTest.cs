@@ -75,7 +75,7 @@ public class LogicalServerMapperTest
             Id = "Logical server ID",
             Name = "CH#1",
             City = "Geneva",
-            Domain = "ch.protonvpn.com",
+            Domain = "ch.syncvpn.com",
             EntryCountry = "ch",
             ExitCountry = "ch",
             Features = features,

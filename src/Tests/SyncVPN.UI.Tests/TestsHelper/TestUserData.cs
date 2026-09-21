@@ -43,7 +43,7 @@ public class TestUserData
     public static TestUserData ZeroAssignedConnectionsUser => GetUser("ZERO_CONNECTIONS_USER");
     public static TestUserData TwoFactorUser => GetUser("TWO_FACTOR_AUTH_USER");
     public static TestUserData SsoUser => GetUser("SSO_USER");
-    public static TestUserData FakePlusUserWithDomain => new($"{PlusUser.Username}@proton.me", "");
+    public static TestUserData FakePlusUserWithDomain => new($"{PlusUser.Username}@syncvpn.com", "");
     public static TestUserData IncorrectPass => new("testasplus", "IncorrectPass");
     public static TestUserData IncorrectUserAndPass => new("aost2583Akmjdioan", "IncorrectPass");
     public static TestUserData IncorrectUserWithWhitespace => new(" Incorrect Username", " Incorrect Pass");

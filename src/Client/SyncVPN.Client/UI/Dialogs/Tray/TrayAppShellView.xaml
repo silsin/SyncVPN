@@ -54,7 +54,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                                 Command="{x:Bind ViewModel.ShowApplicationCommand, Mode=OneTime}"
                                 Content="{x:Bind ViewModel.OpenApplicationLabel}">
                 <custom:GhostButton.LeftIcon>
-                    <pathicons:BrandProtonVpnFilled Size="Pixels16" />
+                    <pathicons:BrandSyncVpnFilled Size="Pixels16" />
                 </custom:GhostButton.LeftIcon>
             </custom:GhostButton>
             <custom:GhostButton Grid.Column="1"

@@ -33,7 +33,7 @@ namespace SyncVPN.Client.UI.Login.Pages;
 
 // Exchanges the 16-character login_code the SyncVPN backend hands out (e.g. after a guest purchase - see
 // IUserAuthenticator.LoginWithCodeAsync's doc comment) for a device session via POST /auth/code-login.
-// No legacy Proton equivalent - always goes through SyncVpnAuthenticator regardless of BackendCapability.Auth.
+// No legacy backend equivalent - always goes through SyncVpnAuthenticator regardless of BackendCapability.Auth.
 public partial class CodeLoginPageViewModel : LoginPageViewModelBase
 {
     private const int CODE_LENGTH = 16;

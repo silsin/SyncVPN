@@ -39,7 +39,7 @@ namespace SyncVPN.Dns.Tests;
 public class AlternativeHostsManagerTest
 {
     private const string HOST = "dMFYGSLTQOJXXI33OOZYG4LTDNA.protonpro.xyz";
-    private const string DIFFERENT_HOST = "api.protonvpn.ch";
+    private const string DIFFERENT_HOST = "api.syncvpn.com";
     private static readonly TimeSpan FAILED_DNS_REQUEST_TIMEOUT = TimeSpan.FromSeconds(5);
     private static readonly TimeSpan NEW_TTL_ON_RESOLVE_ERROR = TimeSpan.FromMinutes(10);
 
@@ -105,9 +105,9 @@ public class AlternativeHostsManagerTest
     {
         return new List<string>()
         {
-            "protonvpn.com",
-            "proton.me",
-            "protonstatus.com"
+            "syncvpn.com",
+            "syncvpn.com",
+            "syncvpn.com"
         };
     }
 
@@ -211,9 +211,9 @@ public class AlternativeHostsManagerTest
     {
         return new List<string>()
         {
-            "protonvpn.com",
-            "proton.me",
-            "protonstatus.com"
+            "syncvpn.com",
+            "syncvpn.com",
+            "syncvpn.com"
         };
     }
 

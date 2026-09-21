@@ -22,7 +22,7 @@ using Newtonsoft.Json;
 
 namespace SyncVPN.Api.V2.Contracts.Account;
 
-// Present on PurchasedAccount only when protocol == WireGuard. Unlike the legacy Proton flow, the
+// Present on PurchasedAccount only when protocol == WireGuard. Unlike the legacy backend flow, the
 // private key is generated server-side and handed back here - the client never generates its own
 // WireGuard keypair for this backend. See the migration plan's Phase 2 note on why Configuration is
 // written verbatim instead of being rebuilt client-side.

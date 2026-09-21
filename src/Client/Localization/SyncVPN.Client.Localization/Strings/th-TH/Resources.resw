@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>แนะนำ</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>รับประโยชน์สูงสุดจาก VPN โดยอัปเดตแอปเป็นเวอร์ชันล่าสุด</value>
@@ -1628,7 +1628,7 @@
     <value>เปิดใช้งานบริการ Windows เพื่อดำเนินการต่อ</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Proton Free จะเชื่อมต่อกับเซิร์ฟเวอร์ฟรีที่เร็วที่สุดที่มีให้บริการจาก {0} ประเทศฟรีโดยอัตโนมัติ ซึ่งปกติจะเป็นเซิร์ฟเวอร์ที่ใกล้ตำแหน่งของคุณที่สุด</value>
+    <value>SyncVPN Free จะเชื่อมต่อกับเซิร์ฟเวอร์ฟรีที่เร็วที่สุดที่มีให้บริการจาก {0} ประเทศฟรีโดยอัตโนมัติ ซึ่งปกติจะเป็นเซิร์ฟเวอร์ที่ใกล้ตำแหน่งของคุณที่สุด</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_Other">
     <value>ประเทศเซิร์ฟเวอร์ฟรี ({0})</value>
@@ -1765,7 +1765,7 @@
     <value>ตรวจสอบให้แน่ใจว่าออนไลน์อยู่ และการเชื่อมต่อเสถียร</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>การแก้ไขด่วนเหล่านี้อาจช่วยให้เชื่อมต่อกับ Proton ได้</value>
+    <value>การแก้ไขด่วนเหล่านี้อาจช่วยให้เชื่อมต่อกับ SyncVPN ได้</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>ใช้เครือข่ายอื่น</value>
@@ -1777,7 +1777,7 @@
     <value>ตรวจสอบหน้าสถานะของเรา</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>เพื่อความแน่ใจว่าบริการของ Proton ทำงานตามปกติ</value>
+    <value>เพื่อความแน่ใจว่าบริการของ SyncVPN ทำงานตามปกติ</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>ความช่วยเหลือการเชื่อมต่อ</value>
@@ -1844,7 +1844,7 @@
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Welcome to {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>สามารถเชื่อมต่อเครื่องพิมพ์ ลำโพง และอุปกรณ์อื่นๆ บนเครือข่ายท้องถิ่น (LAN) โดยไม่ต้องผ่านอุโมงค์ VPN</value>
@@ -2434,7 +2434,7 @@
     <value>คีย์ความปลอดภัย</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>ใส่คีย์ U2F หรือ FIDO ที่ลิงก์กับ Proton Account</value>
+    <value>ใส่คีย์ U2F หรือ FIDO ที่ลิงก์กับ SyncVPN Account</value>
   </data>
   <data name="Main_Loading">
     <value>กำลังโหลด โปรดรอสักครู่...</value>
@@ -2490,7 +2490,7 @@
     <value>ถึงขีดจำกัดอุปกรณ์สูงสุดแล้ว หากต้องการเชื่อมต่อ VPN ใหม่ โปรดยกเลิกการเชื่อมต่อจากอุปกรณ์อื่น</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>แผนของคุณถูกดาวน์เกรดเป็น Proton Free และเรากำลังเชื่อมต่อคุณใหม่ไปยังเซิร์ฟเวอร์ฟรีที่เร็วที่สุด</value>
+    <value>แผนของคุณถูกดาวน์เกรดเป็น SyncVPN Free และเรากำลังเชื่อมต่อคุณใหม่ไปยังเซิร์ฟเวอร์ฟรีที่เร็วที่สุด</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>เครือข่าย Wi-Fi สาธารณะเสี่ยงต่อภัยคุกคามความปลอดภัยมากกว่า เชื่อมต่อกับ VPN เพื่อเรียกดูอย่างปลอดภัย</value>
@@ -2862,7 +2862,7 @@ Secure Core</value>
     <value>เราติ้งสำรอง</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>หากบริการ Proton ถูกบล็อกเนื่องจากข้อจำกัดเครือข่าย เราจะพยายามใช้การกำหนดเส้นทางเครือข่ายทางเลือกเพื่อเชื่อมต่อคุณกับไซต์ของเรา</value>
+    <value>หากบริการ SyncVPN ถูกบล็อกเนื่องจากข้อจำกัดเครือข่าย เราจะพยายามใช้การกำหนดเส้นทางเครือข่ายทางเลือกเพื่อเชื่อมต่อคุณกับไซต์ของเรา</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>เซิร์ฟเวอร์ DNS ที่กำหนดเอง</value>
@@ -3241,7 +3241,7 @@ Secure Core</value>
     <value>ธีม</value>
   </data>
   <data name="Settings_Improve">
-    <value>ปรับปรุง Proton</value>
+    <value>ปรับปรุง SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>ช่วยเราต่อสู้กับการเซ็นเซอร์</value>
@@ -3391,7 +3391,7 @@ Secure Core</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>ป้อนรายละเอียดบัญชี Proton ของคุณ</value>
+    <value>ป้อนรายละเอียดบัญชี SyncVPN ของคุณ</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>ปิดใช้งานสวิตช์ตัดการเชื่อมต่อฉุกเฉิน</value>

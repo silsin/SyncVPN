@@ -47,7 +47,7 @@ public class PhysicalServerMapperTest
     {
         PhysicalServer server = _mapper.Map(CreatePhysicalServerResponse(status));
 
-        Assert.AreEqual("host.protonvpn.com", server.Domain);
+        Assert.AreEqual("host.syncvpn.com", server.Domain);
         Assert.AreEqual("127.0.0.1", server.EntryIp);
         Assert.AreEqual("0", server.Label);
         Assert.AreEqual("signature", server.Signature);
@@ -61,7 +61,7 @@ public class PhysicalServerMapperTest
         return new PhysicalServerResponse()
         {
             Id = "ID",
-            Domain = "host.protonvpn.com",
+            Domain = "host.syncvpn.com",
             EntryIp = "127.0.0.1",
             Label = "0",
             Signature = "signature",

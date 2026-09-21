@@ -31,7 +31,7 @@ namespace SyncVPN.Vpn.Connection;
 // Dials a native Windows RAS L2TP/IPsec-PSK connection - see IRasConnection/RasConnection for the
 // engine itself, and NativeMethods for the important caveat that engine is unverified against a real
 // Windows SDK/server. Implements ISingleVpnConnection directly rather than IAdapterSingleVpnConnection:
-// unlike OpenVpn/WireGuard, this isn't wrapped in LocalAgentWrapper, since Local Agent is Proton's
+// unlike OpenVpn/WireGuard, this isn't wrapped in LocalAgentWrapper, since Local Agent is the legacy backend's
 // proprietary post-connect control channel and has no equivalent for a plain RAS tunnel - so
 // SetFeatures/RequestNetShieldStats/RequestConnectionDetails are no-ops here rather than being
 // provided by that wrapper.

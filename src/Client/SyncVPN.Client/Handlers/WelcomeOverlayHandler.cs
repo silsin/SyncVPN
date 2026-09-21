@@ -129,7 +129,7 @@ public class WelcomeOverlayHandler : IHandler,
                 _settings.WasWelcomePlusOverlayDisplayed = true;
                 await _mainWindowOverlayActivator.ShowWelcomeToVpnPlusOverlayAsync();
             }
-            else if (plan.IsProtonPlan && !_settings.WasWelcomeUnlimitedOverlayDisplayed)
+            else if (plan.IsBundlePlan && !_settings.WasWelcomeUnlimitedOverlayDisplayed)
             {
                 _settings.WasWelcomeUnlimitedOverlayDisplayed = true;
                 await _mainWindowOverlayActivator.ShowWelcomeToVpnUnlimitedOverlayAsync();

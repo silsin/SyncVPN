@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Recomandat</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>Obțineți tot ce poate oferi aplicația VPN actualizând-o la ultima versiune.</value>
@@ -1736,13 +1736,13 @@ Cod eroare: {0}</value>
     <value>Activați serviciul Windows pentru a continua</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>Proton Free vă conectează automat la cel mai rapid server disponibil din {0} țară gratuită. Acesta va fi în mod normal cel mai apropiat server de locul de unde vă conectați.</value>
+    <value>SyncVPN Free vă conectează automat la cel mai rapid server disponibil din {0} țară gratuită. Acesta va fi în mod normal cel mai apropiat server de locul de unde vă conectați.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Few">
-    <value>Proton Free vă conectează automat la cel mai rapid server disponibil din cele {0} țări gratuite. De obicei acesta va fi cel mai apropiat server de locul de unde vă conectați.</value>
+    <value>SyncVPN Free vă conectează automat la cel mai rapid server disponibil din cele {0} țări gratuite. De obicei acesta va fi cel mai apropiat server de locul de unde vă conectați.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Proton Free vă conectează automat la cel mai rapid server disponibil din cele {0} de țări gratuite. De obicei acesta va fi cel mai apropiat server de locul de unde vă conectați.</value>
+    <value>SyncVPN Free vă conectează automat la cel mai rapid server disponibil din cele {0} de țări gratuite. De obicei acesta va fi cel mai apropiat server de locul de unde vă conectați.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_One">
     <value>Țări servere gratuite ({0})</value>
@@ -1885,7 +1885,7 @@ Cod eroare: {0}</value>
     <value>Asigurați-vă că aveți acces la internet și conexiunea este stabilă.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>Aceste remedieri rapide vă pot ajuta să vă conectați la Proton.</value>
+    <value>Aceste remedieri rapide vă pot ajuta să vă conectați la SyncVPN.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>Folosiți o rețea diferită.</value>
@@ -1897,7 +1897,7 @@ Cod eroare: {0}</value>
     <value>Verificați pagina de stare</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Pentru a vă asigura ca serviciile Proton rulează normal.</value>
+    <value>Pentru a vă asigura ca serviciile SyncVPN rulează normal.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>Ajutor conectare</value>
@@ -1970,7 +1970,7 @@ Cod eroare: {0}</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Bun venit la {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>Acum vă puteți conecta la imprimante, difuzoare și alte dispozitive din rețeaua locală (LAN), ocolind tunelul VPN.</value>
@@ -2626,7 +2626,7 @@ Cod eroare: {0}</value>
     <value>Cheie de securitate</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Introduceți cheia U2F sau FIDO conectată la contul Proton.</value>
+    <value>Introduceți cheia U2F sau FIDO conectată la contul SyncVPN.</value>
   </data>
   <data name="Main_Loading">
     <value>Se încarcă, vă rugăm să așteptați...</value>
@@ -2682,7 +2682,7 @@ Cod eroare: {0}</value>
     <value>Ați atins limita de dispozitive utilizate. Pentru a vă reconecta la VPN, deconectați-vă de pe alt dispozitiv.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>Planul v-a fost retrogradat la Proton Free și vă reconectam la cel mai rapid server gratuit.</value>
+    <value>Planul v-a fost retrogradat la SyncVPN Free și vă reconectam la cel mai rapid server gratuit.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>Rețelele Wi-Fi publice sunt mai vulnerabile la amenințările de securitate. Conectați-vă la VPN pentru a naviga în siguranță.</value>
@@ -3054,7 +3054,7 @@ O solicitare mare a serverului vă poate încetini conexiunea.</value>
     <value>Rută alternativă</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>Dacă serviciile Proton sunt blocate din cauza restricțiilor de rețea, vom încerca să utilizăm o direcționarea alternativă de rețea pentru a vă conecta la site-urile noastre.</value>
+    <value>Dacă serviciile SyncVPN sunt blocate din cauza restricțiilor de rețea, vom încerca să utilizăm o direcționarea alternativă de rețea pentru a vă conecta la site-urile noastre.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>Servere DNS personale</value>
@@ -3433,7 +3433,7 @@ O solicitare mare a serverului vă poate încetini conexiunea.</value>
     <value>Tema</value>
   </data>
   <data name="Settings_Improve">
-    <value>Îmbunătățire Proton</value>
+    <value>Îmbunătățire SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>Ajutați-ne să luptăm cu cenzura</value>
@@ -3583,7 +3583,7 @@ O solicitare mare a serverului vă poate încetini conexiunea.</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>Introduceți detaliile contului Proton.</value>
+    <value>Introduceți detaliile contului SyncVPN.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>Dezactivare întrerupător de conexiune</value>

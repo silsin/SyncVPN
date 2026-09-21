@@ -11,7 +11,7 @@
         <ApplicationManifest>app.manifest</ApplicationManifest>
     </PropertyGroup>
     <PropertyGroup>
-        <ApplicationIcon>protonvpn.ico</ApplicationIcon>
+        <ApplicationIcon>syncvpn.ico</ApplicationIcon>
         <StartupObject>SyncVPN.RestoreInternet.Program</StartupObject>
         <BaseOutputPath>..\src\bin</BaseOutputPath>
     </PropertyGroup>
@@ -19,7 +19,7 @@
         <Compile Include="..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
     </ItemGroup>
     <ItemGroup>
-        <Resource Include="protonvpn.ico" />
+        <Resource Include="syncvpn.ico" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="System.Collections.Immutable" />

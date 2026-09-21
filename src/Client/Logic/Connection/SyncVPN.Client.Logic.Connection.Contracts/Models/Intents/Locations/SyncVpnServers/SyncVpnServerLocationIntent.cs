@@ -24,7 +24,7 @@ namespace SyncVPN.Client.Logic.Connection.Contracts.Models.Intents.Locations.Syn
 // Targets one specific server from the new SyncVPN backend's catalog (GET /servers /servers/pro) by
 // id, bypassing the legacy candidate-selection pipeline entirely - see ConnectionRequestCreator,
 // which recognizes this intent and claims the account directly via POST /account instead of picking
-// from ServersLoader's (legacy Proton) cached Server list. IsSupported/FilterServers always report
+// from ServersLoader's (legacy backend) cached Server list. IsSupported/FilterServers always report
 // "no match" against that legacy list - truthfully, since this server doesn't exist there at all.
 public class SyncVpnServerLocationIntent : LocationIntentBase
 {

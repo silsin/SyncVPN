@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>موصى به</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>احصل على أقصى استفادة من VPN الخاص بك عن طريق التحديث إلى أحدث إصدار من التطبيق.</value>
@@ -1898,22 +1898,22 @@
     <value>قم بتفعيل خدمة Windows للمتابعة</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Zero">
-    <value>يقوم Proton Free بتوصيلك تلقائيًا بأسرع خادم مجاني متاح من {0} بلد مجاني. و هذا عادةً ما يكون أقرب خادم إلى موقعك.</value>
+    <value>يقوم SyncVPN Free بتوصيلك تلقائيًا بأسرع خادم مجاني متاح من {0} بلد مجاني. و هذا عادةً ما يكون أقرب خادم إلى موقعك.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>يصلك Proton Free تلقائيًا بأسرع خادم مجاني متاح من بلدنا المجاني ({0}). وعادةً ما يكون هذا الخادم هو الأقرب إلى موقعك.</value>
+    <value>يصلك SyncVPN Free تلقائيًا بأسرع خادم مجاني متاح من بلدنا المجاني ({0}). وعادةً ما يكون هذا الخادم هو الأقرب إلى موقعك.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Two">
-    <value>يصلك Proton Free تلقائيًا بأسرع خادم مجاني متاح من بلدينا المجانيين ({0}). وعادةً ما يكون هذا الخادم هو الأقرب إلى موقعك.</value>
+    <value>يصلك SyncVPN Free تلقائيًا بأسرع خادم مجاني متاح من بلدينا المجانيين ({0}). وعادةً ما يكون هذا الخادم هو الأقرب إلى موقعك.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Few">
-    <value>يصلك Proton Free تلقائيًا بأسرع خادم مجاني متاح من بلداننا المجانية ({0}). وعادةً ما يكون هذا الخادم هو الأقرب إلى موقعك.</value>
+    <value>يصلك SyncVPN Free تلقائيًا بأسرع خادم مجاني متاح من بلداننا المجانية ({0}). وعادةً ما يكون هذا الخادم هو الأقرب إلى موقعك.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Many">
-    <value>يصلك Proton Free تلقائيًا بأسرع خادم مجاني متاح من بلداننا المجانية ({0}). وعادةً ما يكون هذا الخادم هو الأقرب إلى موقعك.</value>
+    <value>يصلك SyncVPN Free تلقائيًا بأسرع خادم مجاني متاح من بلداننا المجانية ({0}). وعادةً ما يكون هذا الخادم هو الأقرب إلى موقعك.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>يصلك Proton Free تلقائيًا بأسرع خادم مجاني متاح من بلداننا المجانية ({0}). وعادةً ما يكون هذا الخادم هو الأقرب إلى موقعك.</value>
+    <value>يصلك SyncVPN Free تلقائيًا بأسرع خادم مجاني متاح من بلداننا المجانية ({0}). وعادةً ما يكون هذا الخادم هو الأقرب إلى موقعك.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_Zero">
     <value>بلدان الخوادم المجانية ({0})</value>
@@ -2065,7 +2065,7 @@
     <value>تأكد من أنك متصل بالإنترنت، وأن اتصالك مستقر.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>هذه الإصلاحات السريعة قد تساعدك على الاتصال proton.</value>
+    <value>هذه الإصلاحات السريعة قد تساعدك على الاتصال SyncVPN.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>استخدام شبكة أخرى</value>
@@ -2077,7 +2077,7 @@
     <value>تحقق من صفحة الحالة الخاصة بنا</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>لنتأكد فقط من أن خدمات Proton تعمل بشكل طبيعي.</value>
+    <value>لنتأكد فقط من أن خدمات SyncVPN تعمل بشكل طبيعي.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>المساعدة في الاتصال</value>
@@ -2155,11 +2155,11 @@
     <value>مرحبا بك في VPN Plus</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Description">
-    <value>عالم Proton بين يديك الآن. استمتع بالمزايا الاحترافية لتطبيقات VPN و Mail و Calendar و Drive و Pass.</value>
+    <value>عالم SyncVPN بين يديك الآن. استمتع بالمزايا الاحترافية لتطبيقات VPN و Mail و Calendar و Drive و Pass.</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>انطلق الآن مع {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>يمكنك الآن الاتصال بالطابعات ومكبرات الصوت والأجهزة الأخرى على شبكتك المحلية (LAN)، متجاوزًا نفق VPN.</value>
@@ -2914,7 +2914,7 @@
     <value>مفتاح الأمان</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>أدرج مفتاح U2F أو FIDO المرتبط بحساب Proton Account.</value>
+    <value>أدرج مفتاح U2F أو FIDO المرتبط بحساب SyncVPN Account.</value>
   </data>
   <data name="Main_Loading">
     <value>جارٍ التحميل، يرجى الانتظار...</value>
@@ -2970,7 +2970,7 @@
     <value>لقد وصلت إلى الحد الأقصى لعدد الأجهزة. لإعادة الاتصال بـ VPN، يرجى قطع الاتصال من جهاز آخر.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>تم تخفيض باقتك إلى Proton Free، ونعيد توصيلك بأسرع خادم مجاني.</value>
+    <value>تم تخفيض باقتك إلى SyncVPN Free، ونعيد توصيلك بأسرع خادم مجاني.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>شبكات Wi-Fi العامة أكثر عرضة للتهديدات الأمنية. اتصل بـ VPN للتصفح بأمان.</value>
@@ -3342,7 +3342,7 @@ VPN</value>
     <value>المسار البديل</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>إذا تم حظر خدمات Proton بسبب قيود الشبكة، فسنحاول استخدام توجيه الشبكة البديل لتوصيلك بمواقعنا.</value>
+    <value>إذا تم حظر خدمات SyncVPN بسبب قيود الشبكة، فسنحاول استخدام توجيه الشبكة البديل لتوصيلك بمواقعنا.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>خوادم DNS مخصصة</value>
@@ -3721,7 +3721,7 @@ VPN</value>
     <value>المظهر</value>
   </data>
   <data name="Settings_Improve">
-    <value>تحسين Proton</value>
+    <value>تحسين SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>ساعدنا في مكافحة الرقابة</value>
@@ -3871,7 +3871,7 @@ VPN</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>أدخل بيانات حسابك في Proton</value>
+    <value>أدخل بيانات حسابك في SyncVPN</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>تعطيل مفتاح الأمان</value>

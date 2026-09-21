@@ -84,14 +84,14 @@ public class SettingRobot
     protected Element AutoLaunchToggle = Element.ByAutomationId("AutoLaunchToggle");
     protected Element AutoConnectToggle = Element.ByAutomationId("AutoConnectToggle");
 
-    protected Element ProtonProtocolsToggle = Element.ByName("Proton protocols").And(Element.ByClassName("NamedContainerAutomationPeer"));
+    protected Element SmartProtocolsToggle = Element.ByName("Proton protocols").And(Element.ByClassName("NamedContainerAutomationPeer"));
     protected Element OpenVpnTcpProtocolRadioButton = Element.ByAutomationId("OpenVpnTcpProtocolRadioButton");
     protected Element OpenVpnUdpProtocolRadioButton = Element.ByAutomationId("OpenVpnUdpProtocolRadioButton");
     protected Element WireGuardUdpProtocolRadioButton = Element.ByAutomationId("WireGuardUdpProtocolRadioButton");
     protected Element WireGuardTlsProtocolRadioButton = Element.ByAutomationId("WireGuardTlsProtocolRadioButton");
     protected Element WireGuardTcpProtocolRadioButton = Element.ByAutomationId("WireGuardTcpProtocolRadioButton");
     protected Element SmartProtocolRadioButton = Element.ByAutomationId("SmartProtocolRadioButton");
-    protected Element ExitProtonPopUp = Element.ByName("Exit SyncVPN?");
+    protected Element ExitAppPopUp = Element.ByName("Exit SyncVPN?");
 
     public SettingRobot OpenSettings()
     {
@@ -272,14 +272,14 @@ public class SettingRobot
     public SettingRobot ExitTheAppWithConfirmation()
     {
         ExitTheAppButton.DoubleClick();
-        ExitProtonPopUp.WaitUntilDisplayed();
+        ExitAppPopUp.WaitUntilDisplayed();
         ExitButton.Click();
         return this;
     }
 
     public SettingRobot ToggleProtun()
     {
-        ProtonProtocolsToggle.FindChild(Element.ByClassName("ToggleSwitch")).Toggle();
+        SmartProtocolsToggle.FindChild(Element.ByClassName("ToggleSwitch")).Toggle();
         return this;
     }
 
@@ -458,7 +458,7 @@ public class SettingRobot
 
         public Verifications IsProtunEnabled()
         {
-            ProtonProtocolsToggle.FindChild(Element.ByClassName("ToggleSwitch")).IsToggled();
+            SmartProtocolsToggle.FindChild(Element.ByClassName("ToggleSwitch")).IsToggled();
             return this;
         }
 

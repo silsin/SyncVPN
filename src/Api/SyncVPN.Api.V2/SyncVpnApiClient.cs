@@ -38,11 +38,14 @@ using SyncVPN.Api.V2.Contracts.Purchases;
 using SyncVPN.Api.V2.Contracts.Servers;
 using SyncVPN.Api.V2.Contracts.Transactions;
 using SyncVPN.Client.Settings.Contracts;
+using SyncVPN.Common.Core.Extensions;
+using SyncVPN.Logging.Contracts;
+using SyncVPN.Logging.Contracts.Events.ApiLogs;
 
 namespace SyncVPN.Api.V2;
 
 // Talks to the new SyncVPN-owned backend (https://syncvpn.com/api). Deliberately independent of
-// BaseApiClient/ApiClient (Proton) - no SRP, no x-pm-* headers, no retry/human-verification/alt-routing
+// BaseApiClient/ApiClient (legacy backend) - no SRP, no x-pm-* headers, no retry/human-verification/alt-routing
 // pipeline. Those concerns can be layered back in per-endpoint if a migrated capability turns out to need
 // them, rather than inherited wholesale from a pipeline built for a different backend.
 public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
@@ -52,8 +55,9 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
 
     private readonly HttpClient _httpClient;
     private readonly ISettings _settings;
+    private readonly ILogger _logger;
 
-    public SyncVpnApiClient(ISyncVpnApiHostProvider hostProvider, ISyncVpnAppTokenProvider appTokenProvider, ISettings settings)
+    public SyncVpnApiClient(ISyncVpnApiHostProvider hostProvider, ISyncVpnAppTokenProvider appTokenProvider, ISettings settings, ILogger logger)
     {
         _httpClient = new HttpClient { BaseAddress = hostProvider.GetBaseUri() };
         _httpClient.DefaultRequestHeaders.Add(AppTokenHeaderName, appTokenProvider.GetAppToken());
@@ -61,62 +65,66 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
         // instead of JSON - see SyncVpnApiClient.GetWebLoginStatusAsync's 404 case.
         _httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
         _settings = settings;
+        _logger = logger;
     }
 
     public async Task<ApiResponseResult<RegisterDeviceResponse>> RegisterDeviceAsync(RegisterDeviceRequest request, CancellationToken cancellationToken = default)
     {
         // The one endpoint exempt from the Deviceid header - it's how the device gets one in the first place.
-        using StringContent content = new(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
-        using HttpResponseMessage response = await _httpClient.PostAsync("devices/register", content, cancellationToken);
+        using HttpRequestMessage httpRequest = new(HttpMethod.Post, "devices/register")
+        {
+            Content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json")
+        };
+        using HttpResponseMessage response = await SendAsync(httpRequest, cancellationToken);
         return await ReadResponseAsync<RegisterDeviceResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<CountryListResponse>> GetCountriesAsync(CancellationToken cancellationToken = default)
     {
         using HttpRequestMessage request = CreateRequest(HttpMethod.Get, "countries");
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<CountryListResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<BillingCountryListResponse>> GetBillingCountriesAsync(CancellationToken cancellationToken = default)
     {
         using HttpRequestMessage request = CreateRequest(HttpMethod.Get, "billing/countries");
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<BillingCountryListResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<ServerListResponse>> GetServersAsync(CancellationToken cancellationToken = default)
     {
         using HttpRequestMessage request = CreateRequest(HttpMethod.Get, "servers");
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<ServerListResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<ServerListResponse>> GetProServersAsync(CancellationToken cancellationToken = default)
     {
         using HttpRequestMessage request = CreateRequest(HttpMethod.Get, "servers/pro");
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<ServerListResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<FavoriteServersResponse>> GetFavoriteServersAsync(CancellationToken cancellationToken = default)
     {
         using HttpRequestMessage request = CreateRequest(HttpMethod.Get, "servers/favorites");
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<FavoriteServersResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<FavoriteServerActionResponse>> AddFavoriteServerAsync(long serverId, CancellationToken cancellationToken = default)
     {
         using HttpRequestMessage request = CreateRequest(HttpMethod.Post, $"servers/{serverId}/favorite");
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<FavoriteServerActionResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<RemoveFavoriteServerResponse>> RemoveFavoriteServerAsync(long serverId, CancellationToken cancellationToken = default)
     {
         using HttpRequestMessage request = CreateRequest(HttpMethod.Delete, $"servers/{serverId}/favorite");
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<RemoveFavoriteServerResponse>(response, cancellationToken);
     }
 
@@ -125,7 +133,7 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
         using HttpRequestMessage request = CreateRequest(HttpMethod.Post, $"servers/{serverId}/rate");
         request.Content = new StringContent(JsonConvert.SerializeObject(new RateServerRequest { Rate = rate }), Encoding.UTF8, "application/json");
 
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<RateServerResponse>(response, cancellationToken);
     }
 
@@ -144,7 +152,7 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
         using HttpRequestMessage httpRequest = CreateRequest(HttpMethod.Post, path);
         httpRequest.Content = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
 
-        using HttpResponseMessage response = await _httpClient.SendAsync(httpRequest, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(httpRequest, cancellationToken);
         return await ReadResponseAsync<ClaimAccountResponse>(response, cancellationToken);
     }
 
@@ -155,14 +163,14 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
         using HttpRequestMessage httpRequest = CreateRequest(HttpMethod.Post, "account/usage");
         httpRequest.Content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
-        using HttpResponseMessage response = await _httpClient.SendAsync(httpRequest, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(httpRequest, cancellationToken);
         return await ReadResponseAsync<UsageReportResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<AccountDnsFilterResponse>> GetDnsFiltersAsync(CancellationToken cancellationToken = default)
     {
         using HttpRequestMessage request = CreateRequest(HttpMethod.Get, "account/dns-filters");
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<AccountDnsFilterResponse>(response, cancellationToken);
     }
 
@@ -175,14 +183,14 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
         using HttpRequestMessage request = CreateRequest(HttpMethod.Patch, "account/dns-filters");
         request.Content = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
 
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<UpdateAccountDnsFiltersResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<PlanListResponse>> GetPlansAsync(CancellationToken cancellationToken = default)
     {
         using HttpRequestMessage request = CreateRequest(HttpMethod.Get, "plans");
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<PlanListResponse>(response, cancellationToken);
     }
 
@@ -194,7 +202,7 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
         using HttpRequestMessage httpRequest = CreateRequest(HttpMethod.Post, "purchases");
         httpRequest.Content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
-        using HttpResponseMessage response = await _httpClient.SendAsync(httpRequest, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(httpRequest, cancellationToken);
         return await ReadResponseAsync<PurchaseResponse>(response, cancellationToken);
     }
 
@@ -205,7 +213,7 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
         using HttpRequestMessage httpRequest = CreateRequest(HttpMethod.Post, "checkout-links");
         httpRequest.Content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
-        using HttpResponseMessage response = await _httpClient.SendAsync(httpRequest, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(httpRequest, cancellationToken);
         return await ReadResponseAsync<CheckoutLinkResponse>(response, cancellationToken);
     }
 
@@ -216,14 +224,14 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
         using HttpRequestMessage httpRequest = CreateRequest(HttpMethod.Post, "checkout-links/status");
         httpRequest.Content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
-        using HttpResponseMessage response = await _httpClient.SendAsync(httpRequest, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(httpRequest, cancellationToken);
         return await ReadResponseAsync<CheckoutStatusResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<TransactionListResponse>> GetTransactionsAsync(int page = 1, CancellationToken cancellationToken = default)
     {
         using HttpRequestMessage request = CreateRequest(HttpMethod.Get, $"transactions?page={page}");
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<TransactionListResponse>(response, cancellationToken);
     }
 
@@ -242,8 +250,9 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
         using HttpRequestMessage request = CreateRequest(HttpMethod.Post, path);
         request.Content = new StringContent(JsonConvert.SerializeObject(requestBody), Encoding.UTF8, "application/json");
 
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         string body = await response.Content.ReadAsStringAsync(cancellationToken);
+        LogResponse(response, body);
 
         if (response.StatusCode == HttpStatusCode.Accepted)
         {
@@ -265,7 +274,7 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
     public async Task<ApiResponseResult<WebAppLoginResponse>> StartWebLoginAsync(CancellationToken cancellationToken = default)
     {
         using HttpRequestMessage request = CreateRequest(HttpMethod.Post, "auth/web-app");
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<WebAppLoginResponse>(response, cancellationToken);
     }
 
@@ -277,7 +286,7 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
         WebAppLoginStatusRequest body = new() { Key = key, PollToken = pollToken };
         request.Content = new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json");
 
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<WebAppLoginStatusResponse>(response, cancellationToken);
     }
 
@@ -286,21 +295,21 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
         using HttpRequestMessage httpRequest = CreateRequest(HttpMethod.Post, "auth/2fa/verify");
         httpRequest.Content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
-        using HttpResponseMessage response = await _httpClient.SendAsync(httpRequest, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(httpRequest, cancellationToken);
         return await ReadResponseAsync<LoginResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<AuthenticatedDeviceResponse>> GetAuthenticatedDeviceAsync(CancellationToken cancellationToken = default)
     {
         using HttpRequestMessage request = CreateRequest(HttpMethod.Get, "auth/me");
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<AuthenticatedDeviceResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<LogoutResponse>> LogoutAsync(CancellationToken cancellationToken = default)
     {
         using HttpRequestMessage request = CreateRequest(HttpMethod.Post, "auth/logout");
-        using HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<LogoutResponse>(response, cancellationToken);
     }
 
@@ -327,9 +336,10 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
         return request;
     }
 
-    private static async Task<ApiResponseResult<T>> ReadResponseAsync<T>(HttpResponseMessage response, CancellationToken cancellationToken)
+    private async Task<ApiResponseResult<T>> ReadResponseAsync<T>(HttpResponseMessage response, CancellationToken cancellationToken)
     {
         string body = await response.Content.ReadAsStringAsync(cancellationToken);
+        LogResponse(response, body);
 
         if (!response.IsSuccessStatusCode)
         {
@@ -338,6 +348,57 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
 
         T? value = JsonConvert.DeserializeObject<T>(body);
         return ApiResponseResult<T>.Ok(response, value);
+    }
+
+    // Every SendAsync call site routes through here so every request/failure is visible in the log file
+    // regardless of build configuration (unlike LoggingHandler's legacy backend pipeline, which strips its
+    // header/body logging out of Release builds) - this client talks to a newer, less-proven backend
+    // where seeing exactly what was sent and got back is the main way to diagnose "data not coming back".
+    private async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    {
+        string description = DescribeRequest(request);
+        _logger.Info<ApiRequestLog>(description);
+
+        try
+        {
+            return await _httpClient.SendAsync(request, cancellationToken);
+        }
+        catch (Exception ex) when (ex is not OperationCanceledException)
+        {
+            _logger.Error<ApiErrorLog>($"{description} failed: {ex.CombinedMessage()}");
+            throw;
+        }
+    }
+
+    // Response body is logged in full (unlike LoggingHandler, which only logs status/headers) - every
+    // SyncVpnApiClient response is a small JSON payload, never a large file download, so this is safe to
+    // do unconditionally.
+    private void LogResponse(HttpResponseMessage response, string body)
+    {
+        string description = DescribeRequest(response.RequestMessage);
+
+        if (response.IsSuccessStatusCode || response.StatusCode == HttpStatusCode.Accepted)
+        {
+            _logger.Info<ApiResponseLog>($"{description}: {(int)response.StatusCode} {response.StatusCode} - {body}");
+        }
+        else
+        {
+            _logger.Error<ApiErrorLog>($"{description}: {(int)response.StatusCode} {response.StatusCode} - {body}");
+        }
+    }
+
+    // request.RequestUri starts out relative (e.g. "account"), but HttpClient rewrites it in place to the
+    // resolved absolute URI once the request has actually been sent - so by the time this runs against
+    // response.RequestMessage, prepending BaseAddress again would duplicate it.
+    private string DescribeRequest(HttpRequestMessage request)
+    {
+        if (request is null)
+        {
+            return string.Empty;
+        }
+
+        Uri uri = request.RequestUri.IsAbsoluteUri ? request.RequestUri : new Uri(_httpClient.BaseAddress, request.RequestUri);
+        return $"{request.Method.Method} \"{uri}\"";
     }
 
     public void Dispose()

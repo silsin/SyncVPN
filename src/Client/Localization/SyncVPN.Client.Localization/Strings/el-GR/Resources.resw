@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Προτεινόμενο</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>Αξιοποιήστε στο έπακρο το VPN σας κάνοντας ενημέρωση στην πιο πρόσφατη έκδοση της εφαρμογής.</value>
@@ -1682,10 +1682,10 @@
     <value>Ενεργοποιήστε την Υπηρεσία Windows για να συνεχίσετε</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>Το Proton Free σας συνδέει αυτόματα με τον ταχύτερο διαθέσιμο δωρεάν διακομιστή από τη {0} δωρεάν χώρα μας. Αυτός θα είναι συνήθως ο πλησιέστερος διακομιστής στην τοποθεσία σας.</value>
+    <value>Το SyncVPN Free σας συνδέει αυτόματα με τον ταχύτερο διαθέσιμο δωρεάν διακομιστή από τη {0} δωρεάν χώρα μας. Αυτός θα είναι συνήθως ο πλησιέστερος διακομιστής στην τοποθεσία σας.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Το Proton Free σας συνδέει αυτόματα με τον ταχύτερο διαθέσιμο δωρεάν διακομιστή από τις {0} δωρεάν χώρες μας. Αυτός θα είναι συνήθως ο πλησιέστερος διακομιστής στην τοποθεσία σας.</value>
+    <value>Το SyncVPN Free σας συνδέει αυτόματα με τον ταχύτερο διαθέσιμο δωρεάν διακομιστή από τις {0} δωρεάν χώρες μας. Αυτός θα είναι συνήθως ο πλησιέστερος διακομιστής στην τοποθεσία σας.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_One">
     <value>Χώρα δωρεάν διακομιστών ({0})</value>
@@ -1825,7 +1825,7 @@
     <value>Βεβαιωθείτε ότι είστε συνδεδεμένοι στο διαδίκτυο και ότι η σύνδεσή σας είναι σταθερή.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>Αυτές οι γρήγορες διορθώσεις μπορεί να σας βοηθήσουν να συνδεθείτε στο Proton.</value>
+    <value>Αυτές οι γρήγορες διορθώσεις μπορεί να σας βοηθήσουν να συνδεθείτε στο SyncVPN.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>Χρησιμοποιήστε ένα διαφορετικό δίκτυο</value>
@@ -1837,7 +1837,7 @@
     <value>Ελέγξτε τη σελίδα κατάστασής μας</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Απλώς για να βεβαιωθείτε ότι οι υπηρεσίες Proton λειτουργούν κανονικά.</value>
+    <value>Απλώς για να βεβαιωθείτε ότι οι υπηρεσίες SyncVPN λειτουργούν κανονικά.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>Βοήθεια σύνδεσης</value>
@@ -1907,7 +1907,7 @@
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Καλώς ήρθατε στο {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>Μπορείτε πλέον να συνδεθείτε σε εκτυπωτές, ηχεία και άλλες συσκευές στο τοπικό σας δίκτυο (LAN), παρακάμπτοντας τη σήραγγα VPN.</value>
@@ -2530,7 +2530,7 @@
     <value>Κλειδί ασφαλείας</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Εισάγετε το κλειδί U2F ή FIDO που είναι συνδεδεμένο με τον λογαριασμό σας Proton.</value>
+    <value>Εισάγετε το κλειδί U2F ή FIDO που είναι συνδεδεμένο με τον λογαριασμό σας SyncVPN.</value>
   </data>
   <data name="Main_Loading">
     <value>Φόρτωση, παρακαλούμε περιμένετε...</value>
@@ -2586,7 +2586,7 @@
     <value>Έχετε συμπληρώσει το μέγιστο όριο συσκευών. Για να συνδεθείτε ξανά στο VPN, παρακαλούμε αποσυνδεθείτε από την άλλη συσκευή.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>Το πλάνο σας έχει υποβαθμιστεί σε Proton Free και σας επανασυνδέουμε στον ταχύτερο δωρεάν διακομιστή.</value>
+    <value>Το πλάνο σας έχει υποβαθμιστεί σε SyncVPN Free και σας επανασυνδέουμε στον ταχύτερο δωρεάν διακομιστή.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>Τα δημόσια δίκτυα Wi-Fi είναι πιο ευάλωτα σε απειλές ασφαλείας. Συνδεθείτε στο VPN για να περιηγηθείτε με ασφάλεια.</value>
@@ -2958,7 +2958,7 @@
     <value>Εναλλακτική δρομολόγηση</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>Εάν οι υπηρεσίες Proton αποκλειστούν λόγω περιορισμών δικτύου, θα προσπαθήσουμε να χρησιμοποιήσουμε εναλλακτική δρομολόγηση δικτύου για να σας συνδέσουμε στους ιστότοπούς μας.</value>
+    <value>Εάν οι υπηρεσίες SyncVPN αποκλειστούν λόγω περιορισμών δικτύου, θα προσπαθήσουμε να χρησιμοποιήσουμε εναλλακτική δρομολόγηση δικτύου για να σας συνδέσουμε στους ιστότοπούς μας.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>Προσαρμοσμένοι διακομιστές DNS</value>
@@ -3337,7 +3337,7 @@
     <value>Θέμα</value>
   </data>
   <data name="Settings_Improve">
-    <value>Βελτιώστε το Proton</value>
+    <value>Βελτιώστε το SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>Βοηθήστε μας να καταπολεμήσουμε τη λογοκρισία</value>
@@ -3487,7 +3487,7 @@
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>Εισαγάγετε τα στοιχεία του λογαριασμού σας Proton.</value>
+    <value>Εισαγάγετε τα στοιχεία του λογαριασμού σας SyncVPN.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>Απενεργοποίηση kill switch</value>

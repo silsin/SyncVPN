@@ -81,17 +81,8 @@
         <Content Remove="Assets\Icons\PathIcons\BrandMac.cs" />
         <Content Remove="Assets\Icons\PathIcons\BrandMastercard.cs" />
         <Content Remove="Assets\Icons\PathIcons\BrandPaypal.cs" />
-        <Content Remove="Assets\Icons\PathIcons\BrandProton.cs" />
-        <Content Remove="Assets\Icons\PathIcons\BrandProtonCalendar.cs" />
-        <Content Remove="Assets\Icons\PathIcons\BrandProtonCalendarFilled.cs" />
-        <Content Remove="Assets\Icons\PathIcons\BrandProtonDrive.cs" />
-        <Content Remove="Assets\Icons\PathIcons\BrandProtonDriveFilled.cs" />
-        <Content Remove="Assets\Icons\PathIcons\BrandProtonMail.cs" />
-        <Content Remove="Assets\Icons\PathIcons\BrandProtonMailFilled.cs" />
-        <Content Remove="Assets\Icons\PathIcons\BrandProtonPass.cs" />
-        <Content Remove="Assets\Icons\PathIcons\BrandProtonPassFilled.cs" />
-        <Content Remove="Assets\Icons\PathIcons\BrandProtonVpn.cs" />
-        <Content Remove="Assets\Icons\PathIcons\BrandProtonVpnFilled.cs" />
+        <Content Remove="Assets\Icons\PathIcons\BrandSyncVpn.cs" />
+        <Content Remove="Assets\Icons\PathIcons\BrandSyncVpnFilled.cs" />
         <Content Remove="Assets\Icons\PathIcons\BrandTor.cs" />
         <Content Remove="Assets\Icons\PathIcons\BrandTwitter.cs" />
         <Content Remove="Assets\Icons\PathIcons\BrandVisa.cs" />
@@ -788,7 +779,7 @@
         <None Remove="Assets\Illustrations\swiss-flag.png" />
         <None Remove="Assets\Illustrations\tor-countries.png" />
         <None Remove="Assets\Illustrations\tor-thumbnail.png" />
-        <None Remove="Assets\Illustrations\update-proton-vpn.png" />
+        <None Remove="Assets\Illustrations\update-sync-vpn.png" />
         <None Remove="Assets\Illustrations\upsell-customisation-large.png" />
         <None Remove="Assets\Illustrations\upsell-customisation-small.png" />
         <None Remove="Assets\Illustrations\upsell-multiple-devices-large.png" />
@@ -1175,10 +1166,10 @@
         <Content Update="Assets\Icons\App\badge-warning.ico">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <Content Update="Assets\Icons\App\proton-vpn-off.svg">
+        <Content Update="Assets\Icons\App\sync-vpn-off.svg">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <Content Update="Assets\Icons\App\proton-vpn-on.svg">
+        <Content Update="Assets\Icons\App\sync-vpn-on.svg">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
         <Content Update="Assets\Icons\App\vpn-off.ico">
@@ -2285,7 +2276,7 @@
         <Content Update="Assets\Illustrations\tor-thumbnail.png">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <Content Update="Assets\Illustrations\update-proton-vpn.png">
+        <Content Update="Assets\Illustrations\update-sync-vpn.png">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
         <Content Update="Assets\Illustrations\upsell-customisation-large.png">

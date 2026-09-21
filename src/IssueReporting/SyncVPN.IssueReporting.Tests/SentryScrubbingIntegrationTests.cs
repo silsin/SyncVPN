@@ -44,7 +44,7 @@ public class SentryScrubbingIntegrationTests
         _mockLogger = Substitute.For<ILogger>();
         _mockLogger.GetRecentLogs().Returns(new List<string>
         {
-            "[2025-01-30 10:00:00] User testuser@protonvpn.com connected",
+            "[2025-01-30 10:00:00] User testuser@syncvpn.com connected",
             @"[2025-01-30 10:01:00] Config at C:\Users\JohnDoe\AppData\Local\SyncVPN\config.json"
         });
 
@@ -64,12 +64,12 @@ public class SentryScrubbingIntegrationTests
     {
         InitializeSentry();
 
-        SentrySdk.CaptureMessage("User admin@proton.me accessed C:\\Users\\AdminUser\\Documents\\secret.txt");
+        SentrySdk.CaptureMessage("User admin@syncvpn.com accessed C:\\Users\\AdminUser\\Documents\\secret.txt");
 
         WaitForCapture();
 
         _capturedEvent.Should().NotBeNull();
-        _capturedEvent!.Message!.Message.Should().NotContain("admin@proton.me");
+        _capturedEvent!.Message!.Message.Should().NotContain("admin@syncvpn.com");
         _capturedEvent.Message.Message.Should().Contain("[REDACTED_EMAIL]");
         _capturedEvent.Message.Message.Should().NotContain("AdminUser");
         _capturedEvent.Message.Message.Should().Contain(@"C:\Users\[REDACTED_USER]");
@@ -82,7 +82,7 @@ public class SentryScrubbingIntegrationTests
 
         SentrySdk.ConfigureScope(scope =>
         {
-            scope.SetTag("user_email", "sensitive@protonmail.com");
+            scope.SetTag("user_email", "sensitive@syncvpn.com");
             scope.SetExtra("file_path", @"C:\Users\TestUser\Desktop\data.txt");
             scope.SetExtra("safe_value", 42);
         });
@@ -93,7 +93,7 @@ public class SentryScrubbingIntegrationTests
 
         _capturedEvent.Should().NotBeNull();
         _capturedEvent!.Tags!["user_email"].Should().Be("[REDACTED_EMAIL]");
-        _capturedEvent.Tags["user_email"].Should().NotContain("sensitive@protonmail.com");
+        _capturedEvent.Tags["user_email"].Should().NotContain("sensitive@syncvpn.com");
 
         string filePath = _capturedEvent.Extra["file_path"] as string;
         filePath.Should().Contain("[REDACTED_USER]");
@@ -116,7 +116,7 @@ public class SentryScrubbingIntegrationTests
 
         string logs = _capturedEvent.Extra["logs"] as string;
         logs.Should().NotBeNull();
-        logs!.Should().NotContain("testuser@protonvpn.com");
+        logs!.Should().NotContain("testuser@syncvpn.com");
         logs.Should().Contain("[REDACTED_EMAIL]");
         logs.Should().NotContain("JohnDoe");
         logs.Should().Contain("[REDACTED_USER]");

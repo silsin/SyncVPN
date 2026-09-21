@@ -50,10 +50,10 @@ namespace SyncVPN.Vpn.Tests.Management
         [DataRow(VpnError.TapRequiresUpdateError, ",,,This version of OpenVPN requires a TAP-Win32 driver that is at least version XXX")]
         [DataRow(VpnError.AdapterTimeoutError, ",,,Timeout,,,")]
         [DataRow(VpnError.NetshError, ",,,NETSH: command failed,,,")]
-        [DataRow(VpnError.TlsCertificateError, ">LOG:1579630832,,VERIFY SCRIPT ERROR: depth=0, CN=nl-free.proton.com")]
-        [DataRow(VpnError.Unknown, ">LOG:1579630832,,VERIFY SCRIPT OK: depth=0, CN=nl-free.proton.com")]
-        [DataRow(VpnError.TlsCertificateError, ">LOG:1579630614,N,VERIFY ERROR: depth=0, error=certificate has expired: CN=nl-free.proton.com")]
-        [DataRow(VpnError.Unknown, ">LOG:1579630614,N,VERIFY OK: depth=0, error=certificate has expired: CN=nl-free.proton.com")]
+        [DataRow(VpnError.TlsCertificateError, ">LOG:1579630832,,VERIFY SCRIPT ERROR: depth=0, CN=nl-free.syncvpn.com")]
+        [DataRow(VpnError.Unknown, ">LOG:1579630832,,VERIFY SCRIPT OK: depth=0, CN=nl-free.syncvpn.com")]
+        [DataRow(VpnError.TlsCertificateError, ">LOG:1579630614,N,VERIFY ERROR: depth=0, error=certificate has expired: CN=nl-free.syncvpn.com")]
+        [DataRow(VpnError.Unknown, ">LOG:1579630614,N,VERIFY OK: depth=0, error=certificate has expired: CN=nl-free.syncvpn.com")]
         [DataRow(VpnError.Unknown, ">STATE:1579680207,ASSIGN_IP,,10.8.0.13,,,,")]
         public void VpnError_ShouldBe(VpnError expected, string message)
         {
@@ -72,10 +72,10 @@ namespace SyncVPN.Vpn.Tests.Management
         [DataRow(true, ">PASSWORD:Verification Failed: 'Auth'")]
         [DataRow(true, ">STATE:1579680219,RECONNECTING,tls-error,,,,,")]
         [DataRow(false, ">STATE:1579680219,RECONNECTING,,,,,,,")]
-        [DataRow(true, ">LOG:1579630832,,VERIFY SCRIPT ERROR: depth=0, CN=nl-free.proton.com")]
-        [DataRow(false, ">LOG:1579630832,,VERIFY SCRIPT OK: depth=0, CN=nl-free.proton.com")]
-        [DataRow(true, ">LOG:1579630614,N,VERIFY ERROR: depth=0, error=certificate has expired: CN=nl-free.proton.com")]
-        [DataRow(false, ">LOG:1579630614,N,VERIFY OK: depth=0, error=certificate has expired: CN=nl-free.proton.com")]
+        [DataRow(true, ">LOG:1579630832,,VERIFY SCRIPT ERROR: depth=0, CN=nl-free.syncvpn.com")]
+        [DataRow(false, ">LOG:1579630832,,VERIFY SCRIPT OK: depth=0, CN=nl-free.syncvpn.com")]
+        [DataRow(true, ">LOG:1579630614,N,VERIFY ERROR: depth=0, error=certificate has expired: CN=nl-free.syncvpn.com")]
+        [DataRow(false, ">LOG:1579630614,N,VERIFY OK: depth=0, error=certificate has expired: CN=nl-free.syncvpn.com")]
         [DataRow(false, ">STATE:1579680207,ASSIGN_IP,,10.8.0.13,,,,")]
         public void ContainsError_ShouldBe(bool expected, string message)
         {

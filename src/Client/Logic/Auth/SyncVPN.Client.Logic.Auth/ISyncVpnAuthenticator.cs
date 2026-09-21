@@ -23,7 +23,7 @@ using SyncVPN.Client.Logic.Auth.Contracts.Models;
 namespace SyncVPN.Client.Logic.Auth;
 
 // Mirrors ISrpAuthenticator's shape so UserAuthenticator can delegate to either behind the same
-// AuthResult contract. Deliberately narrower: no security-key/WebAuthn support (Proton-specific,
+// AuthResult contract. Deliberately narrower: no security-key/WebAuthn support (legacy-backend-specific,
 // not part of the new API), and no post-login orchestration (VPN plan/certificate/feature flags) -
 // this is credential exchange only, for internal testing behind BackendCapability.Auth. See the
 // migration plan's Phase 4 scoping note.

@@ -59,7 +59,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                             Width="72"
                             Height="72"
                             Padding="8">
-                        <Image Source="{StaticResource ProtonVpnOnApplicationIconSource}"
+                        <Image Source="{StaticResource SyncVpnOnApplicationIconSource}"
                                Stretch="Uniform" />
                     </Border>
 

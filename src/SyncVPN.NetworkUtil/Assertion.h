@@ -1,9 +1,9 @@
-#ifndef PROTON_NETWORK_UTIL_ASSERTION_H
-#define PROTON_NETWORK_UTIL_ASSERTION_H
+#ifndef SYNCVPN_NETWORK_UTIL_ASSERTION_H
+#define SYNCVPN_NETWORK_UTIL_ASSERTION_H
 
 #include <Windows.h>
 
-namespace Proton
+namespace SyncVpn
 {
     namespace NetworkUtil
     {
@@ -11,4 +11,4 @@ namespace Proton
     }
 }
 
-#endif // PROTON_NETWORKUTIL_ASSERTION_H
+#endif // SYNCVPN_NETWORKUTIL_ASSERTION_H

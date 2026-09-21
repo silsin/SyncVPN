@@ -21,6 +21,6 @@ namespace SyncVPN.Api.BackendSelection;
 
 public interface IBackendModeProvider
 {
-    // true => call the new SyncVPN API for this capability. false => keep using the legacy Proton API.
+    // true => call the new SyncVPN API for this capability. false => keep using the legacy backend API.
     bool IsNewBackendEnabled(BackendCapability capability);
 }

@@ -38,11 +38,11 @@ public class UrlsConfiguration : IUrlsConfiguration
     public string RegisterUrl { get; set; } = string.Empty;
     public string TroubleShootingUrl { get; set; } = string.Empty;
     public string P2PStatusUrl { get; set; } = string.Empty;
-    public string ProtonMailPricingUrl { get; set; } = string.Empty;
+    public string MailPricingUrl { get; set; } = string.Empty;
     public string PublicWifiSafetyUrl { get; set; } = string.Empty;
-    public string ProtonStatusUrl { get; set; } = string.Empty;
+    public string StatusUrl { get; set; } = string.Empty;
     public string TorBrowserUrl { get; set; } = string.Empty;
-    public string ProtonTwitterUrl { get; set; } = string.Empty;
+    public string TwitterUrl { get; set; } = string.Empty;
     public string SupportFormUrl { get; set; } = string.Empty;
     public string AlternativeRoutingUrl { get; set; } = string.Empty;
     public string AboutKillSwitchUrl { get; set; } = string.Empty;

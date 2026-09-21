@@ -43,7 +43,7 @@ namespace SyncVPN.Client.Models.Connections.Countries;
 // One row of the new SyncVPN backend's server catalog (GET /servers + GET /servers/pro, merged - see
 // IFreeServersCache), rendered inline in the Countries sidebar list (see AllCountriesComponentViewModel)
 // instead of the standalone flyout this used to live behind. Deliberately does not derive from
-// ServerLocationItemBase - that type is built around the legacy Proton Server model
+// ServerLocationItemBase - that type is built around the legacy backend Server model
 // (Tier/Features/Load/physical-server list), which this catalog has no equivalent for; faking one
 // would show made-up load/feature data. Connects via SyncVpnServerLocationIntent, which bypasses the
 // legacy candidate-selection pipeline entirely.

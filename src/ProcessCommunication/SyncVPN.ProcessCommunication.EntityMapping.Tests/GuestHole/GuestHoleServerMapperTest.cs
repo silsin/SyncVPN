@@ -54,7 +54,7 @@ public class GuestHoleServerMapperTest
 
         GuestHoleServerContract entity = new()
         {
-            Host = "protonvpn.com",
+            Host = "syncvpn.com",
             Ip = "192.168.0.0",
             Label = "1",
             Signature = "sdh2uS26AfSADioe5w6p6S5D2H5fkdY8p9Jfh1F1sdo2a5JfGHroGeunf6K9G4H1c1K/2u3G3oGKdso==",
@@ -93,7 +93,7 @@ public class GuestHoleServerMapperTest
     {
         VpnServerIpcEntity entity = new()
         {
-            Name = "protonvpn.com",
+            Name = "syncvpn.com",
             Ip = "192.168.0.0",
             Label = "1",
             Signature = "sdh2uS26AfSADioe5w6p6S5D2H5fkdY8p9Jfh1F1sdo2a5JfGHroGeunf6K9G4H1c1K/2u3G3oGKdso==",

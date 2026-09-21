@@ -30,7 +30,7 @@ namespace SyncVPN.Api.Tests;
 [TestClass]
 public class ApiHostProviderTest
 {
-    private const string API_HOST = "api.protonvpn.ch";
+    private const string API_HOST = "api.syncvpn.com";
     private const string API_URL = "https://" + API_HOST;
     private const string PROXY_HOST = "alternative.api.url";
     private IConfiguration _config;

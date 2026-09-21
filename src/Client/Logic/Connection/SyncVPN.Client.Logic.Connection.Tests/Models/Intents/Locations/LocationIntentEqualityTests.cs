@@ -41,8 +41,8 @@ public class LocationIntentEqualityTests
         ILocationIntent singleCity = SingleCityLocationIntent.From("CH", "Geneva");
         ILocationIntent singleServerFromState = SingleServerLocationIntent.From("US", "CA", "Los Angeles", ServerInfo.From("1", "US-CA#1"));
         ILocationIntent singleServer = SingleServerLocationIntent.From("CH", "Geneva", ServerInfo.From("1", "CH#1"));
-        ILocationIntent singleGateway = SingleGatewayLocationIntent.From("PROTON");
-        ILocationIntent singleGatewayServer = SingleGatewayServerLocationIntent.From("PROTON", GatewayServerInfo.From("1", "PROTON-CH#1", "CH"));
+        ILocationIntent singleGateway = SingleGatewayLocationIntent.From("SYNCVPN");
+        ILocationIntent singleGatewayServer = SingleGatewayServerLocationIntent.From("SYNCVPN", GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH"));
 
         ILocationIntent multiCountry = MultiCountryLocationIntent.Default;
         ILocationIntent multiState = MultiStateLocationIntent.From("US", ["CA", "AZ", "NY"], SelectionStrategy.Fastest);
@@ -50,8 +50,8 @@ public class LocationIntentEqualityTests
         ILocationIntent multiCity = MultiCityLocationIntent.From("CH", ["Geneva", "Zurich"], SelectionStrategy.Fastest);
         ILocationIntent multiServerFromState = MultiServerLocationIntent.From("US", "CA", "Los Angeles", [ServerInfo.From("1", "US-CA#1"), ServerInfo.From("2", "US-CA#2")], SelectionStrategy.Fastest);
         ILocationIntent multiServer = MultiServerLocationIntent.From("CH", "Geneva", [ServerInfo.From("1", "CH#1"), ServerInfo.From("2", "CH#2")], SelectionStrategy.Fastest);
-        ILocationIntent multiGateway = MultiGatewayLocationIntent.From(["PROTON", "GUEST"], SelectionStrategy.Fastest);
-        ILocationIntent multiGatewayServer = MultiGatewayServerLocationIntent.From("PROTON", [GatewayServerInfo.From("1", "PROTON-CH#1", "CH"), GatewayServerInfo.From("2", "PROTON-CH#2", "CH")], SelectionStrategy.Fastest);
+        ILocationIntent multiGateway = MultiGatewayLocationIntent.From(["SYNCVPN", "GUEST"], SelectionStrategy.Fastest);
+        ILocationIntent multiGatewayServer = MultiGatewayServerLocationIntent.From("SYNCVPN", [GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH"), GatewayServerInfo.From("2", "SYNCVPN-CH#2", "CH")], SelectionStrategy.Fastest);
 
         Assert.IsTrue(singleCountry.IsSameAs(singleCountry));
         Assert.IsTrue(singleState.IsSameAs(singleState));
@@ -86,10 +86,10 @@ public class LocationIntentEqualityTests
         ILocationIntent singleServerFromStateB = SingleServerLocationIntent.From("US", "CA", "Los Angeles", ServerInfo.From("1", "US-CA#1"));
         ILocationIntent singleServerA = SingleServerLocationIntent.From("CH", "Geneva", ServerInfo.From("1", "CH#1"));
         ILocationIntent singleServerB = SingleServerLocationIntent.From("CH", "Geneva", ServerInfo.From("1", "CH#1"));
-        ILocationIntent singleGatewayA = SingleGatewayLocationIntent.From("PROTON");
-        ILocationIntent singleGatewayB = SingleGatewayLocationIntent.From("PROTON");
-        ILocationIntent singleGatewayServerA = SingleGatewayServerLocationIntent.From("PROTON", GatewayServerInfo.From("1", "PROTON-CH#1", "CH"));
-        ILocationIntent singleGatewayServerB = SingleGatewayServerLocationIntent.From("PROTON", GatewayServerInfo.From("1", "PROTON-CH#1", "CH"));
+        ILocationIntent singleGatewayA = SingleGatewayLocationIntent.From("SYNCVPN");
+        ILocationIntent singleGatewayB = SingleGatewayLocationIntent.From("SYNCVPN");
+        ILocationIntent singleGatewayServerA = SingleGatewayServerLocationIntent.From("SYNCVPN", GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH"));
+        ILocationIntent singleGatewayServerB = SingleGatewayServerLocationIntent.From("SYNCVPN", GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH"));
 
         ILocationIntent genericCountryA = MultiCountryLocationIntent.Default;
         ILocationIntent genericCountryB = MultiCountryLocationIntent.Default;
@@ -105,10 +105,10 @@ public class LocationIntentEqualityTests
         ILocationIntent multiServerFromStateB = MultiServerLocationIntent.From("US", "CA", "Los Angeles", [ServerInfo.From("1", "US-CA#1"), ServerInfo.From("2", "US-CA#2")], SelectionStrategy.Fastest);
         ILocationIntent multiServerA = MultiServerLocationIntent.From("CH", "Geneva", [ServerInfo.From("1", "CH#1"), ServerInfo.From("2", "CH#2")], SelectionStrategy.Fastest);
         ILocationIntent multiServerB = MultiServerLocationIntent.From("CH", "Geneva", [ServerInfo.From("1", "CH#1"), ServerInfo.From("2", "CH#2")], SelectionStrategy.Fastest);
-        ILocationIntent multiGatewayA = MultiGatewayLocationIntent.From(["PROTON", "GUEST"], SelectionStrategy.Fastest);
-        ILocationIntent multiGatewayB = MultiGatewayLocationIntent.From(["PROTON", "GUEST"], SelectionStrategy.Fastest);
-        ILocationIntent multiGatewayServerA = MultiGatewayServerLocationIntent.From("PROTON", [GatewayServerInfo.From("1", "PROTON-CH#1", "CH"), GatewayServerInfo.From("2", "PROTON-CH#2", "CH")], SelectionStrategy.Fastest);
-        ILocationIntent multiGatewayServerB = MultiGatewayServerLocationIntent.From("PROTON", [GatewayServerInfo.From("1", "PROTON-CH#1", "CH"), GatewayServerInfo.From("2", "PROTON-CH#2", "CH")], SelectionStrategy.Fastest);
+        ILocationIntent multiGatewayA = MultiGatewayLocationIntent.From(["SYNCVPN", "GUEST"], SelectionStrategy.Fastest);
+        ILocationIntent multiGatewayB = MultiGatewayLocationIntent.From(["SYNCVPN", "GUEST"], SelectionStrategy.Fastest);
+        ILocationIntent multiGatewayServerA = MultiGatewayServerLocationIntent.From("SYNCVPN", [GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH"), GatewayServerInfo.From("2", "SYNCVPN-CH#2", "CH")], SelectionStrategy.Fastest);
+        ILocationIntent multiGatewayServerB = MultiGatewayServerLocationIntent.From("SYNCVPN", [GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH"), GatewayServerInfo.From("2", "SYNCVPN-CH#2", "CH")], SelectionStrategy.Fastest);
 
         Assert.IsTrue(singleCountryA.IsSameAs(singleCountryB));
         Assert.IsTrue(singleStateA.IsSameAs(singleStateB));
@@ -327,9 +327,9 @@ public class LocationIntentEqualityTests
 
         List<MultiGatewayLocationIntent> gatewayIntents =
         [
-            MultiGatewayLocationIntent.From(["GUEST", "PROTON"], SelectionStrategy.Fastest),
-            MultiGatewayLocationIntent.From(["PROTON", "GUEST"], SelectionStrategy.Fastest),
-            MultiGatewayLocationIntent.From(["PROTON", "GUEST", "PROTON"], SelectionStrategy.Fastest)
+            MultiGatewayLocationIntent.From(["GUEST", "SYNCVPN"], SelectionStrategy.Fastest),
+            MultiGatewayLocationIntent.From(["SYNCVPN", "GUEST"], SelectionStrategy.Fastest),
+            MultiGatewayLocationIntent.From(["SYNCVPN", "GUEST", "SYNCVPN"], SelectionStrategy.Fastest)
         ];
 
         foreach (MultiGatewayLocationIntent intent in gatewayIntents)
@@ -337,7 +337,7 @@ public class LocationIntentEqualityTests
             Assert.IsFalse(intent.IsSelectionEmpty);
             Assert.HasCount(2, intent.GatewayNames);
             Assert.AreEqual("GUEST", intent.GatewayNames[0]);
-            Assert.AreEqual("PROTON", intent.GatewayNames[1]);
+            Assert.AreEqual("SYNCVPN", intent.GatewayNames[1]);
         }
 
         Assert.IsTrue(gatewayIntents[0].IsSameAs(gatewayIntents[1]));
@@ -349,9 +349,9 @@ public class LocationIntentEqualityTests
 
         List<MultiGatewayServerLocationIntent> gatewayServerIntents =
         [
-            MultiGatewayServerLocationIntent.From("PROTON", [GatewayServerInfo.From("1", "PROTON-CH#1", "CH"), GatewayServerInfo.From("2", "PROTON-CH#2", "CH"), GatewayServerInfo.From("3", "PROTON-CH#3", "CH")], SelectionStrategy.Fastest),
-            MultiGatewayServerLocationIntent.From("PROTON", [GatewayServerInfo.From("3", "PROTON-CH#3", "CH"), GatewayServerInfo.From("2", "PROTON-CH#2", "CH"), GatewayServerInfo.From("1", "PROTON-CH#1", "CH")], SelectionStrategy.Fastest),
-            MultiGatewayServerLocationIntent.From("PROTON", [GatewayServerInfo.From("1", "PROTON-CH#1", "CH"), GatewayServerInfo.From("3", "PROTON-CH#3", "CH"), GatewayServerInfo.From("2", "PROTON-CH#2", "CH"), GatewayServerInfo.From("1", "PROTON-CH#1", "CH"), GatewayServerInfo.From("3", "PROTON-CH#3", "CH")], SelectionStrategy.Fastest)
+            MultiGatewayServerLocationIntent.From("SYNCVPN", [GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH"), GatewayServerInfo.From("2", "SYNCVPN-CH#2", "CH"), GatewayServerInfo.From("3", "SYNCVPN-CH#3", "CH")], SelectionStrategy.Fastest),
+            MultiGatewayServerLocationIntent.From("SYNCVPN", [GatewayServerInfo.From("3", "SYNCVPN-CH#3", "CH"), GatewayServerInfo.From("2", "SYNCVPN-CH#2", "CH"), GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH")], SelectionStrategy.Fastest),
+            MultiGatewayServerLocationIntent.From("SYNCVPN", [GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH"), GatewayServerInfo.From("3", "SYNCVPN-CH#3", "CH"), GatewayServerInfo.From("2", "SYNCVPN-CH#2", "CH"), GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH"), GatewayServerInfo.From("3", "SYNCVPN-CH#3", "CH")], SelectionStrategy.Fastest)
         ];
 
         foreach (MultiGatewayServerLocationIntent intent in gatewayServerIntents)
@@ -359,11 +359,11 @@ public class LocationIntentEqualityTests
             Assert.IsFalse(intent.IsSelectionEmpty);
             Assert.HasCount(3, intent.Servers);
             Assert.AreEqual("1", intent.Servers[0].Id);
-            Assert.AreEqual("PROTON-CH#1", intent.Servers[0].Name);
+            Assert.AreEqual("SYNCVPN-CH#1", intent.Servers[0].Name);
             Assert.AreEqual("2", intent.Servers[1].Id);
-            Assert.AreEqual("PROTON-CH#2", intent.Servers[1].Name);
+            Assert.AreEqual("SYNCVPN-CH#2", intent.Servers[1].Name);
             Assert.AreEqual("3", intent.Servers[2].Id);
-            Assert.AreEqual("PROTON-CH#3", intent.Servers[2].Name);
+            Assert.AreEqual("SYNCVPN-CH#3", intent.Servers[2].Name);
         }
 
         Assert.IsTrue(gatewayServerIntents[0].IsSameAs(gatewayServerIntents[1]));
@@ -389,10 +389,10 @@ public class LocationIntentEqualityTests
         ILocationIntent singleServerFromStateB = SingleServerLocationIntent.From("US", "CA", "Los Angeles", ServerInfo.From("2", "US-CA#2"));
         ILocationIntent singleServerA = SingleServerLocationIntent.From("CH", "Geneva", ServerInfo.From("1", "CH#1"));
         ILocationIntent singleServerB = SingleServerLocationIntent.From("CH", "Geneva", ServerInfo.From("2", "CH#2"));
-        ILocationIntent singleGatewayA = SingleGatewayLocationIntent.From("PROTON");
+        ILocationIntent singleGatewayA = SingleGatewayLocationIntent.From("SYNCVPN");
         ILocationIntent singleGatewayB = SingleGatewayLocationIntent.From("GUEST");
-        ILocationIntent singleGatewayServerA = SingleGatewayServerLocationIntent.From("PROTON", GatewayServerInfo.From("1", "PROTON-CH#1", "CH"));
-        ILocationIntent singleGatewayServerB = SingleGatewayServerLocationIntent.From("PROTON", GatewayServerInfo.From("2", "PROTON-CH#2", "CH"));
+        ILocationIntent singleGatewayServerA = SingleGatewayServerLocationIntent.From("SYNCVPN", GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH"));
+        ILocationIntent singleGatewayServerB = SingleGatewayServerLocationIntent.From("SYNCVPN", GatewayServerInfo.From("2", "SYNCVPN-CH#2", "CH"));
 
         ILocationIntent genericCountryA = MultiCountryLocationIntent.Fastest;
         ILocationIntent genericCountryB = MultiCountryLocationIntent.Random;
@@ -422,14 +422,14 @@ public class LocationIntentEqualityTests
         ILocationIntent multiServerB = MultiServerLocationIntent.From("CH", "Geneva", [ServerInfo.From("1", "CH#1"), ServerInfo.From("3", "CH#3")], SelectionStrategy.Fastest);
         ILocationIntent multiServerC = MultiServerLocationIntent.From("CH", "Geneva", [ServerInfo.From("1", "CH#1")], SelectionStrategy.Fastest);
         ILocationIntent multiServerD = MultiServerLocationIntent.From("CH", "Zurich", [ServerInfo.From("1", "CH#1"), ServerInfo.From("2", "CH#2")], SelectionStrategy.Fastest);
-        ILocationIntent multiGatewayA = MultiGatewayLocationIntent.From(["PROTON", "GUEST"], SelectionStrategy.Fastest);
-        ILocationIntent multiGatewayB = MultiGatewayLocationIntent.From(["PROTON", "EXTERNAL"], SelectionStrategy.Fastest);
-        ILocationIntent multiGatewayC = MultiGatewayLocationIntent.From(["PROTON"], SelectionStrategy.Fastest);
-        ILocationIntent multiGatewayD = MultiGatewayLocationIntent.From(["PROTON", "GUEST"], SelectionStrategy.Random);
-        ILocationIntent multiGatewayServerA = MultiGatewayServerLocationIntent.From("PROTON", [GatewayServerInfo.From("1", "PROTON-CH#1", "CH"), GatewayServerInfo.From("2", "PROTON-CH#2", "CH")], SelectionStrategy.Fastest);
-        ILocationIntent multiGatewayServerB = MultiGatewayServerLocationIntent.From("PROTON", [GatewayServerInfo.From("1", "PROTON-CH#1", "CH"), GatewayServerInfo.From("3", "PROTON-CH#3", "CH")], SelectionStrategy.Fastest);
-        ILocationIntent multiGatewayServerC = MultiGatewayServerLocationIntent.From("PROTON", [GatewayServerInfo.From("1", "PROTON-CH#1", "CH")], SelectionStrategy.Fastest);
-        ILocationIntent multiGatewayServerD = MultiGatewayServerLocationIntent.From("PROTON", [GatewayServerInfo.From("1", "PROTON-CH#1", "CH"), GatewayServerInfo.From("2", "PROTON-CH#2", "CH")], SelectionStrategy.Random);
+        ILocationIntent multiGatewayA = MultiGatewayLocationIntent.From(["SYNCVPN", "GUEST"], SelectionStrategy.Fastest);
+        ILocationIntent multiGatewayB = MultiGatewayLocationIntent.From(["SYNCVPN", "EXTERNAL"], SelectionStrategy.Fastest);
+        ILocationIntent multiGatewayC = MultiGatewayLocationIntent.From(["SYNCVPN"], SelectionStrategy.Fastest);
+        ILocationIntent multiGatewayD = MultiGatewayLocationIntent.From(["SYNCVPN", "GUEST"], SelectionStrategy.Random);
+        ILocationIntent multiGatewayServerA = MultiGatewayServerLocationIntent.From("SYNCVPN", [GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH"), GatewayServerInfo.From("2", "SYNCVPN-CH#2", "CH")], SelectionStrategy.Fastest);
+        ILocationIntent multiGatewayServerB = MultiGatewayServerLocationIntent.From("SYNCVPN", [GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH"), GatewayServerInfo.From("3", "SYNCVPN-CH#3", "CH")], SelectionStrategy.Fastest);
+        ILocationIntent multiGatewayServerC = MultiGatewayServerLocationIntent.From("SYNCVPN", [GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH")], SelectionStrategy.Fastest);
+        ILocationIntent multiGatewayServerD = MultiGatewayServerLocationIntent.From("SYNCVPN", [GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH"), GatewayServerInfo.From("2", "SYNCVPN-CH#2", "CH")], SelectionStrategy.Random);
 
         Assert.IsFalse(singleCountryA.IsSameAs(singleCountryB));
         Assert.IsFalse(singleStateA.IsSameAs(singleStateB));
@@ -476,12 +476,12 @@ public class LocationIntentEqualityTests
         ILocationIntent singleState = SingleStateLocationIntent.From("US", "CA");
         ILocationIntent singleCity = SingleCityLocationIntent.From("CH", "Geneva");
         ILocationIntent singleServer = SingleServerLocationIntent.From("CH", "Geneva", ServerInfo.From("1", "CH#1"));
-        ILocationIntent singleGateway = SingleGatewayLocationIntent.From("PROTON");
+        ILocationIntent singleGateway = SingleGatewayLocationIntent.From("SYNCVPN");
         ILocationIntent multiCountry = MultiCountryLocationIntent.Default;
         ILocationIntent multiState = MultiStateLocationIntent.From("US", ["CA", "AZ", "NY"], SelectionStrategy.Fastest);
         ILocationIntent multiCity = MultiCityLocationIntent.From("CH", ["Geneva", "Zurich"], SelectionStrategy.Fastest);
         ILocationIntent multiServer = MultiServerLocationIntent.From("CH", "Geneva", [ServerInfo.From("1", "CH#1"), ServerInfo.From("2", "CH#2")], SelectionStrategy.Fastest);
-        ILocationIntent multiGateway = MultiGatewayLocationIntent.From(["PROTON", "GUEST"], SelectionStrategy.Fastest);
+        ILocationIntent multiGateway = MultiGatewayLocationIntent.From(["SYNCVPN", "GUEST"], SelectionStrategy.Fastest);
 
         Assert.IsFalse(singleCountry.IsSameAs(singleState));
         Assert.IsFalse(singleCountry.IsSameAs(singleCity));
@@ -535,9 +535,9 @@ public class LocationIntentEqualityTests
         Assert.IsTrue(singleCity.IsSameAs(multiServerFromState.City));
         Assert.IsTrue(singleCity.IsSameAs(multiServerFromCity.City));
 
-        SingleGatewayLocationIntent singleGateway = SingleGatewayLocationIntent.From("PROTON");
-        SingleGatewayServerLocationIntent singleGatewayServer = SingleGatewayServerLocationIntent.From("PROTON", GatewayServerInfo.From("1", "PROTON-CH#1", "CH"));
-        MultiGatewayServerLocationIntent multiGatewayServer = MultiGatewayServerLocationIntent.From("PROTON", [GatewayServerInfo.From("1", "PROTON-CH#1", "CH"), GatewayServerInfo.From("2", "PROTON-CH#2", "CH")], SelectionStrategy.Fastest);
+        SingleGatewayLocationIntent singleGateway = SingleGatewayLocationIntent.From("SYNCVPN");
+        SingleGatewayServerLocationIntent singleGatewayServer = SingleGatewayServerLocationIntent.From("SYNCVPN", GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH"));
+        MultiGatewayServerLocationIntent multiGatewayServer = MultiGatewayServerLocationIntent.From("SYNCVPN", [GatewayServerInfo.From("1", "SYNCVPN-CH#1", "CH"), GatewayServerInfo.From("2", "SYNCVPN-CH#2", "CH")], SelectionStrategy.Fastest);
 
         Assert.IsTrue(singleGateway.IsSameAs(singleGatewayServer.Gateway));
         Assert.IsTrue(singleGateway.IsSameAs(multiGatewayServer.Gateway));

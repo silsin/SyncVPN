@@ -91,12 +91,12 @@ public partial class DebugToolsShellViewModel : ShellViewModelBase<IDebugToolsWi
     [
         new("VPN Free", "free", 0, false),
         new("VPN Plus", "vpn", 2, false),
-        new("Proton Unlimited", "bundle", 2, false),
-        new("Proton Duo", "duo", 2, false),
-        new("Proton Family", "family", 2, false),
-        new("Proton Visionary", "visionary", 2, false),
+        new("SyncVPN Unlimited", "bundle", 2, false),
+        new("SyncVPN Duo", "duo", 2, false),
+        new("SyncVPN Family", "family", 2, false),
+        new("SyncVPN Visionary", "visionary", 2, false),
         new("VPN Business", "vpnpro", 2, true),
-        new("Proton Business", "bundlepro", 2, true),
+        new("SyncVPN Business", "bundlepro", 2, true),
     ];
 
     public DebugToolsShellViewModel(

@@ -32,7 +32,7 @@ namespace SyncVPN.Vpn.Tests.ServerValidation;
 public class ServerValidatorTest
 {
     private const string CONFIG_SERVER_VALIDATION_PUBLIC_KEY = "ServerValidationPublicKey";
-    private const string SERVER_NAME = "protonvpn.com";
+    private const string SERVER_NAME = "syncvpn.com";
     private const string SERVER_IP = "192.168.1.1";
     private const string SERVER_LABEL = "99";
     private const string SERVER_PUBLIC_KEY_BASE_64 = "U2VydmVyUHVibGljS2V5QmFzZTY0IFByb3RvblZQTg==";

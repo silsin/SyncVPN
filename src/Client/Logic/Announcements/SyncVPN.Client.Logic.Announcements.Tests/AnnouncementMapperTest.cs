@@ -112,7 +112,7 @@ public class AnnouncementMapperTest
         Assert.IsNotNull(result.Panel);
         Assert.IsNotNull(result.Panel.Button);
         Assert.AreEqual("Get the deal now", result.Panel.Button.Text);
-        Assert.AreEqual("https://protonvpn.com/", result.Panel.Button.Url);
+        Assert.AreEqual("https://syncvpn.com/", result.Panel.Button.Url);
         Assert.AreEqual("OpenURL", result.Panel.Button.Action);
         Assert.IsNotNull(result.Panel.Button.Behaviors);
         Assert.IsNotEmpty(result.Panel.Button.Behaviors);
@@ -130,14 +130,14 @@ public class AnnouncementMapperTest
             Type = 0,
             Offer = new OfferResponse()
             {
-                Url = "https://protonvpn.com/",
-                Icon = "https://protonvpn.com/download/resources/youtube.png",
+                Url = "https://syncvpn.com/",
+                Icon = "https://syncvpn.com/download/resources/youtube.png",
                 Label = "Black Friday offer -60%",
                 Panel = new OfferPanelResponse()
                 {
                     Button = new OfferPanelButtonResponse()
                     {
-                        Url = "https://protonvpn.com/",
+                        Url = "https://syncvpn.com/",
                         Action = "OpenURL",
                         Behaviors = ["AutoLogin"],
                         Text = "Get the deal now"
@@ -149,7 +149,7 @@ public class AnnouncementMapperTest
                          {
                              new SourceResponse()
                              {
-                                 Url = "https://protonvpn.com/download/resources/promo/eoy2023/eoy23-en-desktop-modal-protonunlimited@3x.png",
+                                 Url = "https://syncvpn.com/download/resources/promo/eoy2023/eoy23-en-desktop-modal-syncvpnunlimited@3x.png",
                                  Type = "PNG",
                                  Width = 2244,
                                  Height = 1740
@@ -176,7 +176,7 @@ public class AnnouncementMapperTest
         Assert.IsNotNull(result.Panel);
         Assert.IsNotNull(result.Panel.Button);
         Assert.AreEqual("Get the deal now", result.Panel.Button.Text);
-        Assert.AreEqual("https://protonvpn.com/", result.Panel.Button.Url);
+        Assert.AreEqual("https://syncvpn.com/", result.Panel.Button.Url);
         Assert.AreEqual("OpenURL", result.Panel.Button.Action);
         Assert.IsNotNull(result.Panel.Button.Behaviors);
         Assert.IsNotEmpty(result.Panel.Button.Behaviors);
@@ -194,14 +194,14 @@ public class AnnouncementMapperTest
             Type = 1,
             Offer = new OfferResponse()
             {
-                Url = "https://protonvpn.com/",
-                Icon = "https://protonvpn.com/download/resources/russia-emergency/phone-illustration.png",
+                Url = "https://syncvpn.com/",
+                Icon = "https://syncvpn.com/download/resources/russia-emergency/phone-illustration.png",
                 Label = "Get 60% off SyncVPN Plus!",
                 Panel = new OfferPanelResponse()
                 {
                     Button = new OfferPanelButtonResponse()
                     {
-                        Url = "https://protonvpn.com/",
+                        Url = "https://syncvpn.com/",
                         Action = "OpenURL",
                         Behaviors = ["AutoLogin"],
                         Text = "Get the deal now"
@@ -213,7 +213,7 @@ public class AnnouncementMapperTest
                          {
                              new SourceResponse()
                              {
-                                 Url = "https://protonvpn.com/download/resources/promo/welcome-offer/1month-desktop-30pct@3x.png",
+                                 Url = "https://syncvpn.com/download/resources/promo/welcome-offer/1month-desktop-30pct@3x.png",
                                  Type = "PNG",
                                  Width = 2244,
                                  Height = 1740

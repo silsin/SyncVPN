@@ -36,11 +36,11 @@ public interface IUrlsConfiguration
     string RegisterUrl { get; }
     string TroubleShootingUrl { get; }
     string P2PStatusUrl { get; }
-    string ProtonMailPricingUrl { get; }
+    string MailPricingUrl { get; }
     string PublicWifiSafetyUrl { get; }
-    string ProtonStatusUrl { get; }
+    string StatusUrl { get; }
     string TorBrowserUrl { get; }
-    string ProtonTwitterUrl { get; }
+    string TwitterUrl { get; }
     string SupportFormUrl { get; }
     string AlternativeRoutingUrl { get; }
     string AboutKillSwitchUrl { get; }

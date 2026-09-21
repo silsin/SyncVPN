@@ -195,7 +195,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                                           IsClickEnabled="True"
                                           Style="{StaticResource DefaultSettingsCardStyle}">
                         <toolkit:SettingsCard.HeaderIcon>
-                            <pathicons:BrandProtonVpn />
+                            <pathicons:BrandSyncVpn />
                         </toolkit:SettingsCard.HeaderIcon>
                         <toolkit:SettingsCard.ActionIcon>
                             <pathicons:ChevronRight />

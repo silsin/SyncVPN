@@ -69,7 +69,7 @@ public class ConnectionsViewNavigator : ViewNavigatorBase, IConnectionsViewNavig
         _settings = settings;
     }
 
-    // The legacy Proton catalog is empty for an anonymous/free-tier session (it requires a login), but
+    // The legacy backend catalog is empty for an anonymous/free-tier session (it requires a login), but
     // the new SyncVPN backend's free-server catalog doesn't - so the Countries tab must stay reachable
     // when only that one is populated, not just when the legacy list has entries.
     public bool CanNavigateToCountriesView()

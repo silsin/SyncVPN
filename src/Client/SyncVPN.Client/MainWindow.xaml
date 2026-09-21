@@ -28,7 +28,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                    xmlns:reportissue="using:SyncVPN.Client.UI.Dialogs.ReportIssue"
                    xmlns:tray="using:SyncVPN.Client.UI.Tray"
                    xmlns:ui="using:SyncVPN.Client.UI"
-                   MinWidth="1220"
+                   MinWidth="1280"
                    MinHeight="609"
                    mc:Ignorable="d">
 
@@ -38,7 +38,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
     <custom:WindowContentControl x:Name="WindowContainer"
                                  IsTabStop="False"
                                  Title="{x:Bind Shell.ViewModel.Title, Mode=OneWay}"
-                                 IconSource="{StaticResource ProtonVpnOnApplicationIconSource}"
+                                 IconSource="{StaticResource SyncVpnOnApplicationIconSource}"
                                  Style="{StaticResource MainWindowContentControlStyle}">
 
         <custom:WindowContentControl.TitleBarLeftContent>

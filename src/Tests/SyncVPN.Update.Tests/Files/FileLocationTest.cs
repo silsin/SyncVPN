@@ -32,7 +32,7 @@ namespace SyncVPN.Update.Tests.Files
         {
             const string folder = @"C:\Windows\Temp\Downloads";
             const string filename = "SyncVPN_win_v3.3.3.exe";
-            string url = $"https://the.proton.site/downloads/{filename}";
+            string url = $"https://the.syncvpn.com/downloads/{filename}";
 
             string expected = Path.Combine(folder, filename);
             FileLocation location = new FileLocation(folder);

@@ -71,7 +71,7 @@ public class AllCountriesComponentViewModel : CountriesComponentViewModelBase
     public override IEnumerable<ConnectionItemBase> GetItems()
     {
         // Anonymous/logged-out sessions only ever have the new backend's free-server catalog to show -
-        // no legacy Proton countries (requires login), no plan to gate Pro rows against - so only the
+        // no legacy backend countries (requires login), no plan to gate Pro rows against - so only the
         // free subset is shown; a Pro row here would imply an unlockable server with nothing behind it.
         if (!_userAuthenticator.IsLoggedIn)
         {

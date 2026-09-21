@@ -20,7 +20,7 @@
 namespace SyncVPN.Api.BackendSelection;
 
 // One flag per migration phase, so each capability can be rolled out/rolled back independently.
-// Everything defaults to Legacy (Proton) until explicitly proven on the new backend - see the migration plan.
+// Everything defaults to the legacy backend until explicitly proven on the new backend - see the migration plan.
 public enum BackendCapability
 {
     DeviceRegistration,

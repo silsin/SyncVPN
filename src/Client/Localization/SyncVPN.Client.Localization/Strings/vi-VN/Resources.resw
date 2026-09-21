@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Được đề xuất</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>Tận dụng tối đa VPN bằng cách cập nhật lên phiên bản ứng dụng mới nhất.</value>
@@ -1628,7 +1628,7 @@ Mã lỗi: {0}</value>
     <value>Kích hoạt Dịch vụ Windows để tiếp tục</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Proton Free tự động kết nối bạn với máy chủ miễn phí nhanh nhất hiện có từ {0} quốc gia miễn phí. Đây thường sẽ là máy chủ gần vị trí của bạn nhất.</value>
+    <value>SyncVPN Free tự động kết nối bạn với máy chủ miễn phí nhanh nhất hiện có từ {0} quốc gia miễn phí. Đây thường sẽ là máy chủ gần vị trí của bạn nhất.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_Other">
     <value>Quốc gia có máy chủ miễn phí ({0})</value>
@@ -1765,7 +1765,7 @@ Mã lỗi: {0}</value>
     <value>Hãy đảm bảo bạn đang trực tuyến và kết nối ổn định.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>Những cách sửa lỗi nhanh này có thể giúp bạn kết nối với Proton.</value>
+    <value>Những cách sửa lỗi nhanh này có thể giúp bạn kết nối với SyncVPN.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>Sử dụng mạng khác</value>
@@ -1777,7 +1777,7 @@ Mã lỗi: {0}</value>
     <value>Kiểm tra trang trạng thái của chúng tôi</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Để đảm bảo các dịch vụ Proton đang hoạt động bình thường.</value>
+    <value>Để đảm bảo các dịch vụ SyncVPN đang hoạt động bình thường.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>Trợ giúp kết nối</value>
@@ -1844,7 +1844,7 @@ Mã lỗi: {0}</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Welcome to {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>Bây giờ bạn có thể kết nối với máy in, loa và các thiết bị khác trên mạng cục bộ (LAN), vượt qua đường hầm VPN.</value>
@@ -2434,7 +2434,7 @@ Mã lỗi: {0}</value>
     <value>Khóa bảo mật</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Chèn khóa U2F hoặc FIDO được liên kết với Tài khoản Proton.</value>
+    <value>Chèn khóa U2F hoặc FIDO được liên kết với Tài khoản SyncVPN.</value>
   </data>
   <data name="Main_Loading">
     <value>Đang tải, vui lòng chờ...</value>
@@ -2490,7 +2490,7 @@ Mã lỗi: {0}</value>
     <value>Đã đạt đến giới hạn thiết bị tối đa. Để kết nối lại với VPN, vui lòng ngắt kết nối khỏi một thiết bị khác.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>Gói của bạn đã bị hạ cấp xuống Proton Free, và chúng tôi đang kết nối lại bạn với máy chủ miễn phí nhanh nhất.</value>
+    <value>Gói của bạn đã bị hạ cấp xuống SyncVPN Free, và chúng tôi đang kết nối lại bạn với máy chủ miễn phí nhanh nhất.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>Các mạng Wi-Fi công cộng dễ bị đe dọa bảo mật hơn. Kết nối với VPN để duyệt một cách an toàn.</value>
@@ -2862,7 +2862,7 @@ Tải máy chủ cao có thể làm chậm kết nối.</value>
     <value>Định tuyến thay thế</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>Nếu dịch vụ Proton bị chặn do hạn chế mạng, chúng tôi sẽ thử dùng định tuyến mạng thay thế để kết nối bạn với trang web.</value>
+    <value>Nếu dịch vụ SyncVPN bị chặn do hạn chế mạng, chúng tôi sẽ thử dùng định tuyến mạng thay thế để kết nối bạn với trang web.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>Máy chủ DNS tùy chỉnh</value>
@@ -3241,7 +3241,7 @@ Tải máy chủ cao có thể làm chậm kết nối.</value>
     <value>Chủ đề</value>
   </data>
   <data name="Settings_Improve">
-    <value>Cải thiện Proton</value>
+    <value>Cải thiện SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>Hãy giúp chúng tôi chống lại kiểm duyệt</value>
@@ -3391,7 +3391,7 @@ Tải máy chủ cao có thể làm chậm kết nối.</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>Nhập chi tiết tài khoản Proton của bạn.</value>
+    <value>Nhập chi tiết tài khoản SyncVPN của bạn.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>Vô hiệu hóa công tắc ngắt</value>

@@ -21,7 +21,7 @@ using SyncVPN.Client.Common.UI.Assets.Icons.Base;
 
 namespace SyncVPN.Client.Common.UI.Assets.Icons.PathIcons;
 
-public class BrandProtonVpnFilled : CustomPathIcon
+public class BrandSyncVpnFilled : CustomPathIcon
 {
     protected override string IconGeometry16 { get; }
         = "M1.209 3.882c-.639-1.142.288-2.526 1.587-2.37l10.796 1.294a1.6 1.6 0 0 1 1.159 2.449l-5.457 8.55a1.5 1.5 0 0 1-2.573-.074l-5.512-9.85Zm1.468-1.377a.6.6 0 0 0-.595.888l.273.489L10.97 5.04c.553.074.839.7.534 1.166l-4.23 6.466.32.57a.5.5 0 0 0 .857.026l5.457-8.551a.6.6 0 0 0-.434-.919L2.676 2.505Z";

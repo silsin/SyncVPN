@@ -36,7 +36,7 @@ public class Country
     public bool IsUnderMaintenance { get; set; } = true;
 
     // Set for pins backed by the new SyncVPN backend's server catalog (free or Pro) rather than a
-    // legacy Proton country - lets the connect handler target this exact server directly instead of
+    // legacy backend country - lets the connect handler target this exact server directly instead of
     // the country. Naming predates Pro servers also using this catalog; see FreeServerIsForPaidUsersOnly
     // for whether this specific pin still needs the paid-plan upsell gate.
     public bool IsFreeServer { get; set; } = false;

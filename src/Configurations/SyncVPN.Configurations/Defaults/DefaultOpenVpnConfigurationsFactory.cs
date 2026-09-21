@@ -25,7 +25,7 @@ namespace SyncVPN.Configurations.Defaults;
 
 public static class DefaultOpenVpnConfigurationsFactory
 {
-    public static IOpenVpnConfigurations Create(string baseFolder, string resourcesFolderPath, string commonAppDataProtonVpnPath)
+    public static IOpenVpnConfigurations Create(string baseFolder, string resourcesFolderPath, string commonAppDataPath)
     {
         return new OpenVpnConfigurations()
         {
@@ -38,7 +38,7 @@ public static class DefaultOpenVpnConfigurationsFactory
             TunAdapterId = "wintun",
             TunAdapterName = "SyncVPN TUN",
 
-            TlsExportCertFolder = Path.Combine(commonAppDataProtonVpnPath, "ExportCert"),
+            TlsExportCertFolder = Path.Combine(commonAppDataPath, "ExportCert"),
             ExePath = Path.Combine(resourcesFolderPath, "openvpn.exe"),
             TlsVerifyExePath = Path.Combine(baseFolder, "SyncVPN.TlsVerify.exe"),
 

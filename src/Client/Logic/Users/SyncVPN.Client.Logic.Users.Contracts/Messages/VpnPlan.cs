@@ -44,7 +44,7 @@ public readonly struct VpnPlan
 
     public bool IsVpnPlan => !IsDefaultPlan && IsPaid && Name.Contains("vpn", StringComparison.OrdinalIgnoreCase);
 
-    public bool IsProtonPlan => !IsDefaultPlan && IsPaid && !IsVpnPlan;
+    public bool IsBundlePlan => !IsDefaultPlan && IsPaid && !IsVpnPlan;
 
     public bool IsPaidB2CPlan => !IsDefaultPlan && IsPaid && !IsB2B;
 }

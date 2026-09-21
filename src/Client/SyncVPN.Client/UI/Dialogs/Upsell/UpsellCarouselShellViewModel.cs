@@ -25,14 +25,14 @@ using SyncVPN.Client.Core.Bases;
 using SyncVPN.Client.Core.Bases.ViewModels;
 using SyncVPN.Client.Core.Services.Activation;
 using SyncVPN.Client.Core.Services.Navigation;
-using SyncVPN.Client.Services.Upselling;
 using SyncVPN.Client.UI.Dialogs.Upsell.Bases;
 
 namespace SyncVPN.Client.UI.Dialogs.Upsell;
 
 public partial class UpsellCarouselShellViewModel : ShellViewModelBase<IUpsellCarouselWindowActivator, IUpsellCarouselViewNavigator>
 {
-    private readonly IAccountUpgradeUrlLauncher _accountUpgradeUrlLauncher;
+    private readonly IMainViewNavigator _mainViewNavigator;
+    private readonly IMainWindowActivator _mainWindowActivator;
 
     [ObservableProperty]
     private IUpsellFeaturePage? _selectedUpsellFeaturePage;
@@ -50,12 +50,14 @@ public partial class UpsellCarouselShellViewModel : ShellViewModelBase<IUpsellCa
     public UpsellCarouselShellViewModel(
         IUpsellCarouselWindowActivator windowActivator,
         IUpsellCarouselViewNavigator childViewNavigator,
-        IAccountUpgradeUrlLauncher accountUpgradeUrlLauncher,
+        IMainViewNavigator mainViewNavigator,
+        IMainWindowActivator mainWindowActivator,
         IEnumerable<IUpsellFeaturePage> upsellFeaturePages,
         IViewModelHelper viewModelHelper)
         : base(windowActivator, childViewNavigator, viewModelHelper)
     {
-        _accountUpgradeUrlLauncher = accountUpgradeUrlLauncher;
+        _mainViewNavigator = mainViewNavigator;
+        _mainWindowActivator = mainWindowActivator;
 
         UpsellFeaturePages = new(upsellFeaturePages.OrderBy(p => p.SortIndex));
     }
@@ -91,12 +93,16 @@ public partial class UpsellCarouselShellViewModel : ShellViewModelBase<IUpsellCa
         MoveToPage(previousPageIndex);
     }
 
+    // Used to open the external legacy upgrade/checkout page before the in-app Store existed - now that
+    // it does, "Upgrade" here should land on the same Store page as everywhere else (e.g. the sidebar's
+    // free-plan card), not silently open a browser tab behind the main window.
     [RelayCommand]
     private async Task UpgradeAsync()
     {
-        await _accountUpgradeUrlLauncher.OpenAsync(WindowActivator.ModalSource);
-        
         Hide();
+
+        _mainWindowActivator.Activate();
+        await _mainViewNavigator.NavigateToStoreViewAsync();
     }
 
     private void MoveToPage(int index)

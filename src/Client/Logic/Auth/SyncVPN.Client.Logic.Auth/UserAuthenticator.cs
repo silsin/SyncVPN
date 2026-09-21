@@ -133,7 +133,7 @@ public class UserAuthenticator : IUserAuthenticator,
 
     private bool IsSyncVpnAuthEnabled => _backendModeProvider.IsNewBackendEnabled(BackendCapability.Auth);
 
-    // Credential exchange only against the new backend (Phase 4) - deliberately skips the Proton-specific
+    // Credential exchange only against the new backend (Phase 4) - deliberately skips the legacy backend-specific
     // post-login orchestration CompleteLoginAsync does (VPN plan, certificate, feature flags, IPv6),
     // since none of it has a new-backend equivalent yet. Internal/QA testing only, gated behind
     // BackendCapability.Auth - see the migration plan.
@@ -144,8 +144,8 @@ public class UserAuthenticator : IUserAuthenticator,
             SetAuthenticationStatus(AuthenticationStatus.LoggingIn);
             ResetCancellationTokenIfCancelled();
 
-            // Feature flags/client config/guest hole/announcements are still Proton-backed - keep a
-            // Proton unauth session alive even though this user's auth session lives on the new backend,
+            // Feature flags/client config/guest hole/announcements are still legacy backend-backed - keep a
+            // legacy backend unauth session alive even though this user's auth session lives on the new backend,
             // so those features keep working. See the migration plan's Phase 5 note on this gap.
             await _unauthSessionManager.CreateIfDoesNotExistAsync(_cts.Token);
 
@@ -197,7 +197,7 @@ public class UserAuthenticator : IUserAuthenticator,
         }
     }
 
-    // No legacy Proton equivalent - always goes to the new backend, regardless of BackendCapability.Auth.
+    // No legacy backend equivalent - always goes to the new backend, regardless of BackendCapability.Auth.
     public async Task<AuthResult> LoginWithCodeAsync(string code)
     {
         SetAuthenticationStatus(AuthenticationStatus.LoggingIn);
@@ -281,7 +281,7 @@ public class UserAuthenticator : IUserAuthenticator,
     {
         // VpnPlanUpdater sends this for ANY failure of the legacy GET /vpn/v2 plan check, including a
         // plain 401 - which is exactly what that legacy endpoint returns for a SyncVpn-only account (it
-        // has no legacy Proton VPN plan at all). Stomping AuthenticationStatus here for such an account
+        // has no legacy-backend plan at all). Stomping AuthenticationStatus here for such an account
         // pins it at 'LoggingIn' forever (nothing ever transitions it back), which silently breaks
         // IsLoggedIn / the Settings sign-out UI. Server/account signals must never drive login state -
         // see UserAuthenticator's other IsSyncVpnAuthEnabled guards for the same rule.
@@ -471,7 +471,7 @@ public class UserAuthenticator : IUserAuthenticator,
         {
             SetAuthenticationStatus(AuthenticationStatus.LoggingIn);
 
-            // See the migration plan's Phase 5 note: keep Proton's unauth session alive on this path too,
+            // See the migration plan's Phase 5 note: keep the legacy backend's unauth session alive on this path too,
             // so feature flags/client config/guest hole/announcements keep working for a user whose auth
             // session lives entirely on the new backend.
             await _unauthSessionManager.CreateIfDoesNotExistAsync(_cts.Token);
@@ -583,7 +583,7 @@ public class UserAuthenticator : IUserAuthenticator,
             return;
         }
 
-        // This fires when the Proton *unauth* session's refresh token fails - that session only exists
+        // This fires when the legacy backend *unauth* session's refresh token fails - that session only exists
         // to keep feature flags/client config/guest hole/announcements working (see
         // OnSyncVpnLoginSucceeded's Phase 5 note), even for a user whose real session lives entirely on
         // the new backend. Its refresh failing is routine (it isn't tied to any real account) and must
@@ -608,8 +608,8 @@ public class UserAuthenticator : IUserAuthenticator,
     }
 
     // The new-backend login path skips CompleteLoginAsync entirely (no new-backend equivalent for VPN
-    // plan/certificate/IPv6 yet). Profiles/recents are local-storage reads, not Proton API calls, so
-    // they run here directly; feature flags/client config are still fetched over the Proton unauth
+    // plan/certificate/IPv6 yet). Profiles/recents are local-storage reads, not legacy backend API calls, so
+    // they run here directly; feature flags/client config are still fetched over the legacy backend unauth
     // session kept alive alongside this login, so those keep working too. See the migration plan's
     // Phase 5 note on this gap.
     private void OnSyncVpnLoginSucceeded()

@@ -139,7 +139,7 @@ public static class SyncVpnAccountClaimMapper
                 IsIpv6Supported = false,
                 RelayIpByProtocol = null,
                 // No signature to verify: this host came back on the same authenticated HTTPS response
-                // that carried the credentials themselves, unlike Proton's separately-fetched server
+                // that carried the credentials themselves, unlike the legacy backend's separately-fetched server
                 // list - see VpnHost.SkipSignatureValidation.
                 SkipSignatureValidation = true,
             }

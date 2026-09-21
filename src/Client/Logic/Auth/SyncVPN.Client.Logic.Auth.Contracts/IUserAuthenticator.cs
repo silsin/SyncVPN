@@ -40,7 +40,7 @@ public interface IUserAuthenticator
     Task<AuthResult> LoginUserAsync(string username, SecureString password);
 
     // Exchanges a 16-character login_code (e.g. returned by POST /purchases for a guest purchase)
-    // for a SyncVPN device session - no legacy Proton equivalent, always goes to the new backend.
+    // for a SyncVPN device session - no legacy backend equivalent, always goes to the new backend.
     Task<AuthResult> LoginWithCodeAsync(string code);
 
     // Starts a browser-based login attempt. On success, the caller opens the returned VerificationUrl

@@ -23,8 +23,8 @@ using Newtonsoft.Json;
 namespace SyncVPN.Api.V2.Contracts.Account;
 
 // Present on PurchasedAccount only when protocol == OpenVpn. Configuration embeds this backend's own
-// CA certificate - it must never be combined with the legacy Proton OpenVpn config template, which
-// hardcodes Proton's CA and would fail the TLS handshake against this backend's servers.
+// CA certificate - it must never be combined with the legacy backend OpenVpn config template, which
+// hardcodes the legacy backend's CA and would fail the TLS handshake against this backend's servers.
 public class OpenVpnConnectionInfo
 {
     [JsonProperty("transport")]

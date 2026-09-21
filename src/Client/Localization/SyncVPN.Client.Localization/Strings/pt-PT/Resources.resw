@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Recommended</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>Tire o máximo partido da sua VPN atualizando para a versão mais recente da aplicação.</value>
@@ -1682,10 +1682,10 @@ Error code: {0}</value>
     <value>Ativar o serviço Windows para continuar</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>O Proton Free conecta-o automaticamente ao servidor gratuito mais rápido disponível no {0} país gratuito. Normalmente, será o servidor mais próximo da sua localização.</value>
+    <value>O SyncVPN Free conecta-o automaticamente ao servidor gratuito mais rápido disponível no {0} país gratuito. Normalmente, será o servidor mais próximo da sua localização.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>O Proton Free conecta-o automaticamente ao servidor gratuito mais rápido disponível nos nossos {0} países gratuitos. Normalmente, será o servidor mais próximo da sua localização.</value>
+    <value>O SyncVPN Free conecta-o automaticamente ao servidor gratuito mais rápido disponível nos nossos {0} países gratuitos. Normalmente, será o servidor mais próximo da sua localização.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_One">
     <value>País com servidor gratuito ({0})</value>
@@ -1825,7 +1825,7 @@ Error code: {0}</value>
     <value>Certifique-se de que está online e que a sua conexão está estável.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>Estas soluções rápidas podem ajudá-lo a conectar-se ao Proton.</value>
+    <value>Estas soluções rápidas podem ajudá-lo a conectar-se ao SyncVPN.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>Utilizar uma rede diferente</value>
@@ -1837,7 +1837,7 @@ Error code: {0}</value>
     <value>Verifique a nossa página de estado</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Só para ter a certeza de que os serviços da Proton funcionam normalmente.</value>
+    <value>Só para ter a certeza de que os serviços da SyncVPN funcionam normalmente.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>Ajuda da conexão</value>
@@ -1907,7 +1907,7 @@ Error code: {0}</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Welcome to {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>Agora pode conectar impressoras, altifalantes e outros dispositivos na sua rede local (LAN), ignorando o túnel VPN.</value>
@@ -2530,7 +2530,7 @@ Error code: {0}</value>
     <value>Security key</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Insert the U2F or FIDO key linked to your Proton Account.</value>
+    <value>Insert the U2F or FIDO key linked to your SyncVPN Account.</value>
   </data>
   <data name="Main_Loading">
     <value>A carregar. Aguarde...</value>
@@ -2586,7 +2586,7 @@ Error code: {0}</value>
     <value>Atingiu o seu limite máximo de dispositivos. Para reconectar-se à VPN, desconecte-se de outro dispositivo.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>O seu plano foi alterado para a versão gratuita Proton Free e estamos a reconcertá-lo ao servidor gratuito mais rápido.</value>
+    <value>O seu plano foi alterado para a versão gratuita SyncVPN Free e estamos a reconcertá-lo ao servidor gratuito mais rápido.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>As redes Wi-Fi públicas são mais vulneráveis ​​às ameaças de segurança. Ligue-se à VPN para navegar em segurança.</value>
@@ -2958,7 +2958,7 @@ Uma carga elevada do servidor pode diminuir a sua conexão.</value>
     <value>Redirecionamento alternativo</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>Se os serviços do Proton estiverem bloqueados devido a restrições de rede, tentaremos utilizar o roteamento alternativo para conectá-lo aos nossos sítios web.</value>
+    <value>Se os serviços do SyncVPN estiverem bloqueados devido a restrições de rede, tentaremos utilizar o roteamento alternativo para conectá-lo aos nossos sítios web.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>Servidores DNS personalizados</value>
@@ -3337,7 +3337,7 @@ Uma carga elevada do servidor pode diminuir a sua conexão.</value>
     <value> Tema</value>
   </data>
   <data name="Settings_Improve">
-    <value>Melhorar a Proton</value>
+    <value>Melhorar a SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>Ajude-nos a combater a censura</value>
@@ -3487,7 +3487,7 @@ Uma carga elevada do servidor pode diminuir a sua conexão.</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>Introduza os detalhes da sua conta Proton.</value>
+    <value>Introduza os detalhes da sua conta SyncVPN.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>Desativar o Kill switch</value>

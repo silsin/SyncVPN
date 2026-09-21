@@ -40,7 +40,7 @@ namespace SyncVPN.Update.Tests.Files.Downloadable
     {
         private const string APP_FILENAME = "SyncVPN.exe";
         private const string INSTALLER_FILENAME = "SyncVPN_win_v1.5.1.exe";
-        private const string INSTALLER_DOWNLOAD_URL = "https://protonvpn.com/download/" + INSTALLER_FILENAME;
+        private const string INSTALLER_DOWNLOAD_URL = "https://syncvpn.com/download/" + INSTALLER_FILENAME;
         private IHttpClient _httpClient;
 
         #region Initialization

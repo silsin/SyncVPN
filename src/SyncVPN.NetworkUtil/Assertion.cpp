@@ -2,7 +2,7 @@
 #include "Assertion.h"
 #include <comdef.h>
 
-namespace Proton
+namespace SyncVpn
 {
     namespace NetworkUtil
     {

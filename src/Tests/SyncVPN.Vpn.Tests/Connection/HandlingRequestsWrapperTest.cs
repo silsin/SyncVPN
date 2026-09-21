@@ -54,7 +54,7 @@ public class HandlingRequestsWrapperTest
         _origin = Substitute.For<ISingleVpnConnection>();
 
         VpnHost vpnHost = new(
-            name: "proton.vpn",
+            name: "syncvpn.com",
             ip: "135.27.46.203",
             label: string.Empty,
             x25519PublicKey: null,

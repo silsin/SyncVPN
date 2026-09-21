@@ -30,42 +30,42 @@ public static class DefaultConfiguration
     private const string IPV6_FOLDER_NAME = "IPv6";
 
     // Auxiliary fields
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0</returns>
     private static readonly Lazy<string> _baseVersionDirectory = new(() =>
     {
         string? location = Assembly.GetEntryAssembly()?.Location;
         return (location is null ? null : new FileInfo(location).DirectoryName) ?? AppDomain.CurrentDomain.BaseDirectory;
     });
 
-    /// <returns>C:\Program Files\Proton\SyncVPN</returns>
+    /// <returns>C:\Program Files\SyncVPN</returns>
     private static readonly Lazy<string> _baseDirectory = new(() => Path.GetDirectoryName(_baseVersionDirectory.Value) ?? string.Empty);
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0\Resources</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0\Resources</returns>
     private static readonly Lazy<string> _resourcesFolderPath = new(() => Path.Combine(_baseVersionDirectory.Value, "Resources"));
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0\ServiceData</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0\ServiceData</returns>
     private static readonly Lazy<string> _serviceDataPath = new(() => Path.Combine(_baseVersionDirectory.Value, "ServiceData"));
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0\ServiceData\Logs</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0\ServiceData\Logs</returns>
     private static readonly Lazy<string> _serviceLogsFolder = new(() => Path.Combine(_serviceDataPath.Value, LOGS_FOLDER_NAME));
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0\ServiceData\IPv6</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0\ServiceData\IPv6</returns>
     private static readonly Lazy<string> _ipv6DataFolder = new(() => Path.Combine(_serviceDataPath.Value, IPV6_FOLDER_NAME));
 
     /// <returns>C:\Users\{user}\AppData\Local</returns>
     private static readonly Lazy<string> _localAppDataPath = new(() => Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 
-    /// <returns>C:\Users\{user}\AppData\Local\Proton\SyncVPN</returns>
-    private static readonly Lazy<string> _localAppDataProtonVpnPath = new(() => Path.Combine(_localAppDataPath.Value, "Proton", "SyncVPN"));
+    /// <returns>C:\Users\{user}\AppData\Local\SyncVPN</returns>
+    private static readonly Lazy<string> _localAppDataAppPath = new(() => Path.Combine(_localAppDataPath.Value, "SyncVPN"));
 
-    /// <returns>C:\Users\{user}\AppData\Local\Proton\SyncVPN\Storage</returns>
-    private static readonly Lazy<string> _storageFolder = new(() => Path.Combine(_localAppDataProtonVpnPath.Value, "Storage"));
+    /// <returns>C:\Users\{user}\AppData\Local\SyncVPN\Storage</returns>
+    private static readonly Lazy<string> _storageFolder = new(() => Path.Combine(_localAppDataAppPath.Value, "Storage"));
 
-    /// <returns>C:\Users\{user}\AppData\Local\Proton\SyncVPN\Logs</returns>
-    private static readonly Lazy<string> _clientLogsFolder = new(() => Path.Combine(_localAppDataProtonVpnPath.Value, LOGS_FOLDER_NAME));
+    /// <returns>C:\Users\{user}\AppData\Local\SyncVPN\Logs</returns>
+    private static readonly Lazy<string> _clientLogsFolder = new(() => Path.Combine(_localAppDataAppPath.Value, LOGS_FOLDER_NAME));
 
-    /// <returns>C:\Users\{user}\AppData\Local\Proton\SyncVPN\DiagnosticLogs</returns>
-    private static readonly Lazy<string> _diagnosticLogsFolder = new(() => Path.Combine(_localAppDataProtonVpnPath.Value, "DiagnosticLogs"));
+    /// <returns>C:\Users\{user}\AppData\Local\SyncVPN\DiagnosticLogs</returns>
+    private static readonly Lazy<string> _diagnosticLogsFolder = new(() => Path.Combine(_localAppDataAppPath.Value, "DiagnosticLogs"));
 
     // Properties
     public static string ClientVersion => AssemblyVersion.Get();
@@ -77,90 +77,90 @@ public static class DefaultConfiguration
     public static string CalloutServiceName => "SyncVPNCallout";
     public static string BaseFilteringEngineServiceName => "BFE";
 
-    /// <returns>C:\Users\{user}\AppData\Local\Proton\SyncVPN</returns>
-    public static string LocalAppDataProtonVpnPath => _localAppDataProtonVpnPath.Value;
+    /// <returns>C:\Users\{user}\AppData\Local\SyncVPN</returns>
+    public static string LocalAppDataPath => _localAppDataAppPath.Value;
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\SyncVPN.Launcher.exe</returns>
+    /// <returns>C:\Program Files\SyncVPN\SyncVPN.Launcher.exe</returns>
     public static string ClientLauncherExePath => Path.Combine(_baseDirectory.Value, "SyncVPN.Launcher.exe");
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0\Resources\SyncVPN.InstallActions.dll</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0\Resources\SyncVPN.InstallActions.dll</returns>
     public static string InstallActionsPath => Path.Combine(_baseVersionDirectory.Value, "SyncVPN.InstallActions.dll");
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0\SyncVPN.Client.exe</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0\SyncVPN.Client.exe</returns>
     public static string ClientExePath => Path.Combine(_baseVersionDirectory.Value, "SyncVPN.Client.exe");
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0\SyncVPNService.exe</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0\SyncVPNService.exe</returns>
     public static string ServiceExePath => Path.Combine(_baseVersionDirectory.Value, "SyncVPNService.exe");
 
-    public static string ProtocolActivationScheme = "proton-vpn";
+    public static string ProtocolActivationScheme = "sync-vpn";
 
     public static string LegacyProtocolActivationScheme = "protonvpn";
 
-    /// <returns>C:\Users\{user}\AppData\Local\Proton\SyncVPN\Storage</returns>
+    /// <returns>C:\Users\{user}\AppData\Local\SyncVPN\Storage</returns>
     public static string StorageFolder => _storageFolder.Value;
 
-    /// <returns>C:\Users\{user}\AppData\Local\Proton\SyncVPN\Logs</returns>
+    /// <returns>C:\Users\{user}\AppData\Local\SyncVPN\Logs</returns>
     public static string ClientLogsFolder => _clientLogsFolder.Value;
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0\ServiceData\Logs</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0\ServiceData\Logs</returns>
     public static string ServiceLogsFolder => _serviceLogsFolder.Value;
 
-    /// <returns>C:\Users\{user}\AppData\Local\Proton\SyncVPN\DiagnosticLogs</returns>
+    /// <returns>C:\Users\{user}\AppData\Local\SyncVPN\DiagnosticLogs</returns>
     public static string DiagnosticLogsFolder => _diagnosticLogsFolder.Value;
 
-    /// <returns>C:\Users\{user}\AppData\Local\Proton\SyncVPN\Images</returns>
-    public static string ImageCacheFolder => Path.Combine(_localAppDataProtonVpnPath.Value, "Images");
+    /// <returns>C:\Users\{user}\AppData\Local\SyncVPN\Images</returns>
+    public static string ImageCacheFolder => Path.Combine(_localAppDataAppPath.Value, "Images");
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0\ServiceData\Updates</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0\ServiceData\Updates</returns>
     public static string UpdatesFolder => Path.Combine(_serviceDataPath.Value, "Updates");
 
-    /// <returns>C:\Users\{user}\AppData\Local\Proton\SyncVPN\WebView2</returns>
-    public static string WebViewFolder => Path.Combine(_localAppDataProtonVpnPath.Value, "WebView2");
+    /// <returns>C:\Users\{user}\AppData\Local\SyncVPN\WebView2</returns>
+    public static string WebViewFolder => Path.Combine(_localAppDataAppPath.Value, "WebView2");
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0\SyncVPN.Client.Common.UI\Assets</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0\SyncVPN.Client.Common.UI\Assets</returns>
     public static string AssetsFolder => Path.Combine(_baseVersionDirectory.Value, "SyncVPN.Client.Common.UI", "Assets");
 
-    /// <returns>C:\Users\{user}\AppData\Local\Proton\SyncVPN\Logs\client-logs.txt</returns>
+    /// <returns>C:\Users\{user}\AppData\Local\SyncVPN\Logs\client-logs.txt</returns>
     public static string ClientLogsFilePath => Path.Combine(ClientLogsFolder, "client-logs.txt");
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0\ServiceData\Logs\service-logs.txt</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0\ServiceData\Logs\service-logs.txt</returns>
     public static string ServiceLogsFilePath => Path.Combine(ServiceLogsFolder, "service-logs.txt");
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\Install.log.txt</returns>
+    /// <returns>C:\Program Files\SyncVPN\Install.log.txt</returns>
     public static string InstallLogsFilePath => Path.Combine(_baseDirectory.Value, "Install.log.txt");
 
-    /// <returns>C:\Users\{user}\AppData\Local\Proton\SyncVPN\DiagnosticLogs\diagnostic_logs.zip</returns>
+    /// <returns>C:\Users\{user}\AppData\Local\SyncVPN\DiagnosticLogs\diagnostic_logs.zip</returns>
     public static string DiagnosticLogsZipFilePath => Path.Combine(DiagnosticLogsFolder, "diagnostic_logs.zip");
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0\Resources\GuestHoleServers.json</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0\Resources\GuestHoleServers.json</returns>
     public static string GuestHoleServersJsonFilePath => Path.Combine(_resourcesFolderPath.Value, "GuestHoleServers.json");
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0\ServiceData\ServiceSettings.json</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0\ServiceData\ServiceSettings.json</returns>
     public static string ServiceSettingsFilePath => Path.Combine(_serviceDataPath.Value, "ServiceSettings.json");
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0\ServiceData\WireGuardServerRoutes.json</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0\ServiceData\WireGuardServerRoutes.json</returns>
     public static string WireGuardServerRoutesFilePath => Path.Combine(_serviceDataPath.Value, "WireGuardServerRoutes.json");
 
     /// <returns>C:\Users\{user}\AppData\Local\SyncVPN</returns>
     public static string LegacyAppLocalData => Path.Combine(_localAppDataPath.Value, "SyncVPN");
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0\ServiceData\IPv6\PrefixTree.bin</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0\ServiceData\IPv6\PrefixTree.bin</returns>
     public static string IPv6PrefixTreeFilePath => Path.Combine(_ipv6DataFolder.Value, "PrefixTree.bin");
 
-    /// <returns>C:\Program Files\Proton\SyncVPN\v4.0.0\ServiceData\IPv6\PrefixTree.bin</returns>
+    /// <returns>C:\Program Files\SyncVPN\v4.0.0\ServiceData\IPv6\PrefixTree.bin</returns>
     public static string IPv6PersistedDataFilePath => Path.Combine(_ipv6DataFolder.Value, "PersistedData.csv");
 
-    // C:\Program Files\Proton\SyncVPN\v4.0.0\wintun.dll
+    // C:\Program Files\SyncVPN\v4.0.0\wintun.dll
     public static string WintunDriverPath => Path.Combine(_baseVersionDirectory.Value, "wintun.dll");
 
     public static string WintunAdapterName => "SyncVPN TUN";
 
     public static string ServerValidationPublicKey => "MCowBQYDK2VwAyEANpYpt/FlSRwEuGLMoNAGOjy1BTyEJPJvKe00oln7LZk=";
     public static string SyncVpnAppToken => "";
-    public static string VpnUsernameSuffix => "+pw"; // p - proton, w - windows
+    public static string VpnUsernameSuffix => "+pw"; // p - platform indicator, w - windows
     public static string GuestHoleVpnUsername => "guest";
     public static string GuestHoleVpnPassword => "guest";
-    public static string DoHVerifyApiHost => "verify-api.protonvpn.com";
+    public static string DoHVerifyApiHost => "syncvpn.com";
 
     public static string NtpServerUrl => "time.windows.com";
 
@@ -208,10 +208,10 @@ public static class DefaultConfiguration
     public static IOpenVpnConfigurations OpenVpn => DefaultOpenVpnConfigurationsFactory.Create(
         baseFolder: _baseVersionDirectory.Value,
         resourcesFolderPath: _resourcesFolderPath.Value, 
-        commonAppDataProtonVpnPath: _serviceDataPath.Value);
+        commonAppDataPath: _serviceDataPath.Value);
     public static IWireGuardConfigurations WireGuard => DefaultWireGuardConfigurationsFactory.Create(
         baseDirectory: _baseVersionDirectory.Value,
-        commonAppDataProtonVpnPath: _serviceDataPath.Value);
+        commonAppDataPath: _serviceDataPath.Value);
 
     public static IList<string> DohProviders => DefaultDohProvidersFactory.Create();
     public static IUrlsConfiguration Urls => DefaultUrlsConfigurationFactory.Create();

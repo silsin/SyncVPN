@@ -40,14 +40,14 @@ public class TlsPinnedCertificateHandlerTest
     private X509Certificate _alternativeHostCert;
 
     private readonly string _unknownHost = "unknown.host.com";
-    private readonly string _apiHost = "api.protonvpn.ch";
+    private readonly string _apiHost = "api.syncvpn.com";
     private readonly string _alternativeHost = "alternative.host.com";
 
     [TestInitialize]
     public void TestInitialize()
     {
         _reportClient = Substitute.For<IReportClient>();
-        _apiCert = X509Certificate.CreateFromCertFile("TestData\\api.protonvpn.ch.cer");
+        _apiCert = X509Certificate.CreateFromCertFile("TestData\\api.syncvpn.com.cer");
         _alternativeHostCert = X509Certificate.CreateFromCertFile("TestData\\alternative.host.cer");
     }
 

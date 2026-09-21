@@ -21,6 +21,6 @@ namespace SyncVPN.ProcessCommunication.Common;
 
 public static class NamedPipeConfiguration
 {
-    public const string REGISTRY_PATH = @"SOFTWARE\Proton AG\SyncVPN\gRPC";
+    public const string REGISTRY_PATH = @"SOFTWARE\SyncVPN\SyncVPN\gRPC";
     public const string REGISTRY_KEY = "PipeName";
 }

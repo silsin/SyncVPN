@@ -234,8 +234,8 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.-->
 
     <SvgImageSource x:Key="WorldMapIllustrationSource"
                     UriSource="ms-appx:///SyncVPN.Client.Common.UI/Assets/Illustrations/world-map.svg" />
-    <BitmapImage x:Key="UpdateProtonVpnIllustrationSource"
-                 UriSource="ms-appx:///SyncVPN.Client.Common.UI/Assets/Illustrations/update-proton-vpn.png" />
+    <BitmapImage x:Key="UpdateSyncVpnIllustrationSource"
+                 UriSource="ms-appx:///SyncVPN.Client.Common.UI/Assets/Illustrations/update-sync-vpn.png" />
     <SvgImageSource x:Key="FreeConnectionFlagsIllustrationSource"
                     UriSource="ms-appx:///SyncVPN.Client.Common.UI/Assets/Illustrations/free-connection-flags.svg" />
     <SvgImageSource x:Key="PlaceholderIllustrationSource"

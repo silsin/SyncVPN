@@ -38,12 +38,12 @@ internal class ReportIssueDefaultDataProvider
                             new()
                             {
                                 Text = "Turn off Secure Core. It can sometimes slow down your connection.",
-                                Link = "https://protonvpn.com/support/secure-core-vpn"
+                                Link = "https://syncvpn.com/support/secure-core-vpn"
                             },
                             new()
                             {
                                 Text = "Use another VPN protocol.",
-                                Link = "https://protonvpn.com/support/how-to-change-vpn-protocols"
+                                Link = "https://syncvpn.com/support/how-to-change-vpn-protocols"
                             },
                             new()
                             {
@@ -97,7 +97,7 @@ internal class ReportIssueDefaultDataProvider
                             new()
                             {
                                 Text = "Switch to another protocol from the settings.",
-                                Link = "https://protonvpn.com/support/how-to-change-vpn-protocols"
+                                Link = "https://syncvpn.com/support/how-to-change-vpn-protocols"
                             },
                             new()
                             {
@@ -141,7 +141,7 @@ internal class ReportIssueDefaultDataProvider
                             new()
                             {
                                 Text = "Use another VPN protocol.",
-                                Link = "https://protonvpn.com/support/how-to-change-vpn-protocols"
+                                Link = "https://syncvpn.com/support/how-to-change-vpn-protocols"
                             },
                             new()
                             {
@@ -223,7 +223,7 @@ internal class ReportIssueDefaultDataProvider
                             new()
                             {
                                 Text = "Clear your cache. You can do this in your browser settings.",
-                                Link = "https://protonvpn.com/support/clear-browser-cache-cookies"
+                                Link = "https://syncvpn.com/support/clear-browser-cache-cookies"
                             },
                             new()
                             {

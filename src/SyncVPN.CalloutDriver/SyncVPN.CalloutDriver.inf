@@ -53,7 +53,7 @@ LoadOrderGroup = NDIS
 Dependencies   = TCPIP                               ; Load after TCPIP.sys
 
 [Strings]
-ManufacturerName   = "Proton AG"
+ManufacturerName   = "SyncVPN"
 DiskName           = "SyncVPN Callout Driver Installation Disk"
 ServiceName        = "SyncVPNCallout"
 ServiceDisplayName = "SyncVPN Callout"

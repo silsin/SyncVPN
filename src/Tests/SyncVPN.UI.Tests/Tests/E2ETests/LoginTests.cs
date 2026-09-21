@@ -204,7 +204,7 @@ public class LoginTests : FreshSessionSetUp
         {
             (Plan: "VPN Plus", User: TestUserData.PlusUser),
             (Plan: "Visionary", User: TestUserData.VisionaryUser),
-            (Plan: "Proton Unlimited", User: TestUserData.UnlimitedUser),
+            (Plan: "SyncVPN Unlimited", User: TestUserData.UnlimitedUser),
             (Plan: "SyncVPN Free", User: TestUserData.FreeUser)
         };
 

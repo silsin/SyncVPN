@@ -106,12 +106,12 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                     </VisualState.Setters>
                 </VisualState>
 
-                <VisualState x:Name="ProtonPlan">
+                <VisualState x:Name="BundlePlan">
                     <VisualState.StateTriggers>
-                        <StateTrigger IsActive="{x:Bind ViewModel.IsProtonPlan}" />
+                        <StateTrigger IsActive="{x:Bind ViewModel.IsBundlePlan}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="VpnPlanContainer.BorderBrush" Value="{ThemeResource GradientProtonPlanBorderBrushColor}" />
+                        <Setter Target="VpnPlanContainer.BorderBrush" Value="{ThemeResource GradientBundlePlanBorderBrushColor}" />
                     </VisualState.Setters>
                 </VisualState>
 

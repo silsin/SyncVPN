@@ -35,7 +35,7 @@ namespace SyncVPN.Vpn.Tests.OpenVpn.Arguments;
 public class EndpointArgumentsTest
 {
     private readonly VpnHost _vpnHost = new(
-            name: "proton.vpn",
+            name: "syncvpn.com",
             ip: "135.27.46.203",
             label: string.Empty,
             x25519PublicKey: null,

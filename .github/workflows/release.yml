@@ -112,7 +112,9 @@ jobs:
           "APP_VERSION=$version" >> $env:GITHUB_ENV
           "SHORT_SHA=$shortSha" >> $env:GITHUB_ENV
 
-      - name: Generate build variables (Sentry/BTI config, all optional/empty here)
+      - name: Generate build variables (Sentry/BTI config optional/empty; SyncVpnAppToken from repo secret)
+        env:
+          SYNCVPN_APP_TOKEN: ${{ secrets.SYNCVPN_APP_TOKEN }}
         run: |
           dotnet build src\Builds\SyncVPN.Builds.ConsoleJob\SyncVPN.Builds.ConsoleJob.csproj
           src\bin\SyncVPN.Builds.ConsoleJob.exe
@@ -130,8 +132,7 @@ jobs:
             'src\SyncVPN.Service\SyncVPN.Service.csproj',
             'src\SyncVPN.TlsVerify\SyncVPN.TlsVerify.csproj',
             'src\SyncVPN.WireGuardService\SyncVPN.WireGuardService.csproj',
-            'src\SyncVPN.RestoreInternet\SyncVPN.RestoreInternet.csproj',
-            'src\ProtonInstaller\ProtonInstaller.csproj'
+            'src\SyncVPN.RestoreInternet\SyncVPN.RestoreInternet.csproj'
           )
           foreach ($project in $projects) {
             dotnet publish $project -c Release -r win-x64 --self-contained -o $env:BUILD_PATH /p:Platform=x64

@@ -242,7 +242,7 @@ namespace SyncVPN.Update.Tests.Updates
         [TestMethod]
         public async Task Available_ShouldBe_False_WhenLatestRelease_FileHasNoChecksum()
         {
-            const string json = "{\"Releases\": [{\"Version\": \"2.0.0\", \"ReleaseNotes\": [{\"Notes\": [\"line 1\"]}], \"File\": {\"Url\": \"https://protonvpn.com/download/SyncVPN_win_v1.5.2.exe\"}} ]}";
+            const string json = "{\"Releases\": [{\"Version\": \"2.0.0\", \"ReleaseNotes\": [{\"Notes\": [\"line 1\"]}], \"File\": {\"Url\": \"https://syncvpn.com/download/SyncVPN_win_v1.5.2.exe\"}} ]}";
             IAppUpdate update = AppUpdate(new Version(1, 0, 0), HttpResponseFromString(json));
 
             update = await update.Latest(false);
@@ -265,7 +265,7 @@ namespace SyncVPN.Update.Tests.Updates
         [TestMethod]
         public async Task Available_ShouldNotChange_AfterDownload_WhenItWasTrue()
         {
-            const string fileUri = "https://protonvpn.com/download/SyncVPN_win_v2.0.0.exe";
+            const string fileUri = "https://syncvpn.com/download/SyncVPN_win_v2.0.0.exe";
             IHttpResponseMessage httpResponse = HttpResponseFromFile("SyncVPN_win_v2.0.0.exe");
             _httpClient.GetAsync(fileUri).Returns(httpResponse);
 
@@ -331,7 +331,7 @@ namespace SyncVPN.Update.Tests.Updates
         public async Task Ready_ShouldNotChange_AfterDownloaded_WhenFalse()
         {
             IHttpResponseMessage httpResponse = HttpResponseFromFile("SyncVPN_win_v2.0.0.exe");
-            _httpClient.GetAsync("https://protonvpn.com/download/SyncVPN_win_v2.0.0.exe").Returns(httpResponse);
+            _httpClient.GetAsync("https://syncvpn.com/download/SyncVPN_win_v2.0.0.exe").Returns(httpResponse);
 
             IAppUpdate update = AppUpdate(new Version(1, 5, 5), HttpResponseFromFile("windows-releases.json"));
             update = await update.Latest(true);
@@ -346,7 +346,7 @@ namespace SyncVPN.Update.Tests.Updates
         public async Task Ready_ShouldNotChange_AfterDownloaded_WhenTrue()
         {
             IHttpResponseMessage httpResponse = HttpResponseFromFile("SyncVPN_win_v2.0.0.exe");
-            _httpClient.GetAsync("https://protonvpn.com/download/SyncVPN_win_v2.0.0.exe").Returns(httpResponse);
+            _httpClient.GetAsync("https://syncvpn.com/download/SyncVPN_win_v2.0.0.exe").Returns(httpResponse);
 
             IAppUpdate update = AppUpdate(new Version(1, 5, 5), HttpResponseFromFile("windows-releases.json"));
             update = await update.Latest(true);
@@ -378,7 +378,7 @@ namespace SyncVPN.Update.Tests.Updates
         public async Task Ready_ShouldBeFalse_AfterValidated_WhenFileCheckSum_IsNotValid()
         {
             IHttpResponseMessage httpResponse = HttpResponseFromFile("SyncVPN_win_v1.0.0.exe");
-            _httpClient.GetAsync("https://protonvpn.com/download/SyncVPN_win_v1.5.1.exe").Returns(httpResponse);
+            _httpClient.GetAsync("https://syncvpn.com/download/SyncVPN_win_v1.5.1.exe").Returns(httpResponse);
 
             IAppUpdate update = AppUpdate(new Version(1, 2, 0), HttpResponseFromFile("windows-releases.json"));
             update = await update.Latest(false);
@@ -394,7 +394,7 @@ namespace SyncVPN.Update.Tests.Updates
         public async Task Ready_ShouldBeTrue_AfterValidated_WhenFileCheckSum_IsValid()
         {
             IHttpResponseMessage httpResponse = HttpResponseFromFile("SyncVPN_win_v2.0.0.exe");
-            _httpClient.GetAsync("https://protonvpn.com/download/SyncVPN_win_v2.0.0.exe").Returns(httpResponse);
+            _httpClient.GetAsync("https://syncvpn.com/download/SyncVPN_win_v2.0.0.exe").Returns(httpResponse);
 
             IAppUpdate update = AppUpdate(new Version(1, 5, 1), HttpResponseFromFile("windows-releases.json"));
             update = await update.Latest(true);
@@ -524,7 +524,7 @@ namespace SyncVPN.Update.Tests.Updates
         [TestMethod]
         public async Task Downloaded_ShouldDownload_FromFileUri()
         {
-            const string fileUri = "https://protonvpn.com/download/SyncVPN_win_v1.5.1.exe";
+            const string fileUri = "https://syncvpn.com/download/SyncVPN_win_v1.5.1.exe";
             IHttpResponseMessage httpResponse = HttpResponseFromFile("SyncVPN_win_v1.5.1.exe");
             _httpClient.GetAsync(fileUri).Returns(httpResponse);
 
@@ -546,7 +546,7 @@ namespace SyncVPN.Update.Tests.Updates
             update.Available.Should().BeTrue();
 
             IHttpResponseMessage httpResponse = HttpResponseFromFile("SyncVPN_win_v2.0.0.exe");
-            _httpClient.GetAsync("https://protonvpn.com/download/SyncVPN_win_v2.0.0.exe").Returns(httpResponse);
+            _httpClient.GetAsync("https://syncvpn.com/download/SyncVPN_win_v2.0.0.exe").Returns(httpResponse);
 
             string filename = Path.Combine(TestConfig.GetFolderPath(downloadsPath), "SyncVPN_win_v2.0.0.exe");
             File.Exists(filename).Should().BeFalse();

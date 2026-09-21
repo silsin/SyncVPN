@@ -27,10 +27,10 @@ namespace SyncVPN.Core.Tests.Models
     public class UserTest
     {
         [DataTestMethod]
-        [DataRow(0, "ProtonMail Account")]
-        [DataRow(1, "ProtonMail Account")]
-        [DataRow(2, "ProtonMail Account")]
-        [DataRow(3, "ProtonMail Account")]
+        [DataRow(0, "SyncVPN Account")]
+        [DataRow(1, "SyncVPN Account")]
+        [DataRow(2, "SyncVPN Account")]
+        [DataRow(3, "SyncVPN Account")]
         [DataRow(4, "SyncVPN Account")]
         public void GetAccountPlan_ShouldBe_MappedFormServices(int services, string expected)
         {

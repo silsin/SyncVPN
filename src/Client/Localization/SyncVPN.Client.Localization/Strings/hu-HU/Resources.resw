@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Recommended</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>Hozza ki a legtöbbet a VPN-ből az alkalmazás legújabb verziójára való frissítéssel.</value>
@@ -1682,10 +1682,10 @@ Error code: {0}</value>
     <value>A folytatáshoz engedélyezze a Windows szolgáltatást</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>A Proton Free automatikusan a leggyorsabb elérhető ingyenes szerverhez csatlakozik az {0} ingyenes országunkból. Ez általában az Önhöz legközelebbi szerver lesz.</value>
+    <value>A SyncVPN Free automatikusan a leggyorsabb elérhető ingyenes szerverhez csatlakozik az {0} ingyenes országunkból. Ez általában az Önhöz legközelebbi szerver lesz.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>A Proton Free automatikusan a leggyorsabb elérhető ingyenes szerverhez csatlakozik az {0} ingyenes országunkból. Ez általában az Önhöz legközelebbi szerver lesz.</value>
+    <value>A SyncVPN Free automatikusan a leggyorsabb elérhető ingyenes szerverhez csatlakozik az {0} ingyenes országunkból. Ez általában az Önhöz legközelebbi szerver lesz.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_One">
     <value>Ingyenes szerver országok ({0})</value>
@@ -1825,7 +1825,7 @@ Error code: {0}</value>
     <value>Győződjön meg róla, hogy online van, és hogy a kapcsolat stabil.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>Ezek a gyorsjavítások segíthetnek a Protonhoz való csatlakozásban.</value>
+    <value>Ezek a gyorsjavítások segíthetnek a SyncVPNhoz való csatlakozásban.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>Használjon egy másik hálózatot</value>
@@ -1837,7 +1837,7 @@ Error code: {0}</value>
     <value>Ellenőrizze a státusz oldalunkat</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Csak azért, hogy megbizonyosodjon arról, hogy a Proton szolgáltatásai a szokásos módon működnek.</value>
+    <value>Csak azért, hogy megbizonyosodjon arról, hogy a SyncVPN szolgáltatásai a szokásos módon működnek.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>Kapcsolati segítség</value>
@@ -1907,7 +1907,7 @@ Error code: {0}</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Welcome to {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>Mostantól kapcsolódhat nyomtatókhoz, hangszórókhoz és más eszközökhöz a helyi hálózatán (LAN), megkerülve a VPN alagutat.</value>
@@ -2530,7 +2530,7 @@ Error code: {0}</value>
     <value>Security key</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Insert the U2F or FIDO key linked to your Proton Account.</value>
+    <value>Insert the U2F or FIDO key linked to your SyncVPN Account.</value>
   </data>
   <data name="Main_Loading">
     <value>Betöltés, kis türelmet...</value>
@@ -2586,7 +2586,7 @@ Error code: {0}</value>
     <value>Elérte a maximális eszközlimitet. A VPN-hez való újbóli csatlakozáshoz kérjük, válassza le a kapcsolatot egy másik eszközről.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>A díjcsomagját visszaállítottuk Proton Free-re, és visszakapcsoljuk a leggyorsabb ingyenes szerverre.</value>
+    <value>A díjcsomagját visszaállítottuk SyncVPN Free-re, és visszakapcsoljuk a leggyorsabb ingyenes szerverre.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>A nyilvános Wi-Fi hálózatok sokkal sebezhetőbbek a biztonsági fenyegetésekkel szemben. A biztonságos böngészéshez csatlakozzon VPN-nel.</value>
@@ -2958,7 +2958,7 @@ A nagy szerverterhelés lelassíthatja a kapcsolatot.</value>
     <value>Alternatív útválasztás</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>Ha a Proton szolgáltatásai hálózati korlátozások miatt blokkolva vannak, megpróbálunk alternatív hálózati útvonalakat használni, hogy csatlakoztassuk Önt a webhelyeinkhez.</value>
+    <value>Ha a SyncVPN szolgáltatásai hálózati korlátozások miatt blokkolva vannak, megpróbálunk alternatív hálózati útvonalakat használni, hogy csatlakoztassuk Önt a webhelyeinkhez.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>Egyéni DNS szerverek</value>
@@ -3337,7 +3337,7 @@ A nagy szerverterhelés lelassíthatja a kapcsolatot.</value>
     <value>Téma</value>
   </data>
   <data name="Settings_Improve">
-    <value>Proton javítása</value>
+    <value>SyncVPN javítása</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>Segítsen nekünk a cenzúra elleni harcban</value>
@@ -3487,7 +3487,7 @@ A nagy szerverterhelés lelassíthatja a kapcsolatot.</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>Írja be a Proton fiókja adatait.</value>
+    <value>Írja be a SyncVPN fiókja adatait.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>Vészkapcsoló kikapcsolása</value>

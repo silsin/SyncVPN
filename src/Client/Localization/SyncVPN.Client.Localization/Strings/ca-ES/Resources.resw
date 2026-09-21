@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Recomanat</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>Aprofiteu al màxim la vostra VPN tot actualitzant-la a la darrera versió de l'aplicació.</value>
@@ -1676,16 +1676,16 @@ Codi d'error: {0}</value>
     <value>Milloreu per tornar a tenir accés als servidors i funcions Plus.</value>
   </data>
   <data name="Dialogs_DisabledService_Description">
-    <value>Sembla que el servei VPN de Proton està desactivat. Haureu de tornar a activar el servei per connectar-se.</value>
+    <value>Sembla que el servei VPN de SyncVPN està desactivat. Haureu de tornar a activar el servei per connectar-se.</value>
   </data>
   <data name="Dialogs_DisabledService_Title">
     <value>Activeu el servei de Windows per continuar</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>Proton Free us connecta automàticament al servidor gratuït més ràpid disponible del nostre {0} país lliure. Aquest serà normalment el servidor més proper a la vostra ubicació.</value>
+    <value>SyncVPN Free us connecta automàticament al servidor gratuït més ràpid disponible del nostre {0} país lliure. Aquest serà normalment el servidor més proper a la vostra ubicació.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Proton Free us connecta automàticament al servidor gratuït més ràpid disponible dels nostres {0} països lliures. Aquest serà normalment el servidor més proper a la vostra ubicació.</value>
+    <value>SyncVPN Free us connecta automàticament al servidor gratuït més ràpid disponible dels nostres {0} països lliures. Aquest serà normalment el servidor més proper a la vostra ubicació.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_One">
     <value>País del servidor gratuït ({0})</value>
@@ -1825,7 +1825,7 @@ Codi d'error: {0}</value>
     <value>Assegureu-vos que esteu en línia i que la vostra connexió és estable.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>Aquestes solucions ràpides us poden ajudar a connectar-vos a Proton.</value>
+    <value>Aquestes solucions ràpides us poden ajudar a connectar-vos a SyncVPN.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>Utilitzeu una xarxa diferent</value>
@@ -1837,7 +1837,7 @@ Codi d'error: {0}</value>
     <value>Consulti la nostra pàgina d'estat</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Només per assegurar-vos que els serveis de Proton funcionen amb normalitat.</value>
+    <value>Només per assegurar-vos que els serveis de SyncVPN funcionen amb normalitat.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>Ajuda de connexió</value>
@@ -1907,7 +1907,7 @@ Codi d'error: {0}</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Us donem la benvinguda a {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>Ara us podeu connectar a impressores, altaveus, i altres dispositius de la vostra xarxa local (LAN), evitant el túnel VPN.</value>
@@ -2530,7 +2530,7 @@ Codi d'error: {0}</value>
     <value>Clau de seguretat</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Introduïu la clau U2F o FIDO vinculada al vostre compte de Proton.</value>
+    <value>Introduïu la clau U2F o FIDO vinculada al vostre compte de SyncVPN.</value>
   </data>
   <data name="Main_Loading">
     <value>S'està carregant. Espereu...</value>
@@ -2586,7 +2586,7 @@ Codi d'error: {0}</value>
     <value>Heu arribat al límit màxim de dispositius. Per tornar a connectar la VPN, desconnecteu-vos d'algun dispositiu.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>El vostre pla s'ha rebaixat a Proton Free i us tornem a connectar al servidor gratuït més ràpid.</value>
+    <value>El vostre pla s'ha rebaixat a SyncVPN Free i us tornem a connectar al servidor gratuït més ràpid.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>Les xarxes Wi-Fi públiques són més vulnerables a les amenaces de seguretat. Connecteu-vos a la VPN per navegar amb seguretat.</value>
@@ -2958,7 +2958,7 @@ Una càrrega elevada del servidor pot alentir la vostra connexió.</value>
     <value>Encaminament alternatiu</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>Si els serveis de Proton es bloquegen a causa de restriccions de xarxa, intentarem utilitzar un encaminament de xarxa alternatiu per connectar-vos als nostres llocs.</value>
+    <value>Si els serveis de SyncVPN es bloquegen a causa de restriccions de xarxa, intentarem utilitzar un encaminament de xarxa alternatiu per connectar-vos als nostres llocs.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>Servidors DNS personalitzats</value>
@@ -3337,7 +3337,7 @@ Una càrrega elevada del servidor pot alentir la vostra connexió.</value>
     <value>Tema</value>
   </data>
   <data name="Settings_Improve">
-    <value>Milloreu Proton</value>
+    <value>Milloreu SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>Ajudeu-nos a lluitar contra la censura</value>
@@ -3487,7 +3487,7 @@ Una càrrega elevada del servidor pot alentir la vostra connexió.</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>Introduïu els detalls del vostre compte de Proton.</value>
+    <value>Introduïu els detalls del vostre compte de SyncVPN.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>Desactiva el Kill switch</value>

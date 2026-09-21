@@ -72,7 +72,7 @@ public class VpnServerMapperTest
     public void TestMapLeftToRight_WithNullRelayIpByProtocol()
     {
         VpnHost entityToTest = new(
-            name: "protonvpn.com",
+            name: "syncvpn.com",
             ip: "192.168.0.0",
             label: DateTime.UtcNow.Millisecond.ToString(),
             x25519PublicKey: new PublicKey("PVPN", KeyAlgorithm.Unknown),
@@ -104,7 +104,7 @@ public class VpnServerMapperTest
         };
 
         VpnHost entityToTest = new(
-            name: "protonvpn.com",
+            name: "syncvpn.com",
             ip: "192.168.0.0",
             label: DateTime.UtcNow.Millisecond.ToString(),
             x25519PublicKey: new PublicKey("PVPN", KeyAlgorithm.Unknown),
@@ -143,7 +143,7 @@ public class VpnServerMapperTest
     {
         VpnServerIpcEntity entityToTest = new()
         {
-            Name = "protonvpn.com",
+            Name = "syncvpn.com",
             Ip = "192.168.0.0",
             Label = DateTime.UtcNow.Millisecond.ToString(),
             X25519PublicKey = new ServerPublicKeyIpcEntity(),
@@ -176,7 +176,7 @@ public class VpnServerMapperTest
 
         VpnServerIpcEntity entityToTest = new()
         {
-            Name = "protonvpn.com",
+            Name = "syncvpn.com",
             Ip = "192.168.0.0",
             Label = DateTime.UtcNow.Millisecond.ToString(),
             X25519PublicKey = new ServerPublicKeyIpcEntity(),

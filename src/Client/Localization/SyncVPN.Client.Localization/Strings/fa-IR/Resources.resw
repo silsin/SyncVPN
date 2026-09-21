@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Recommended</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>با به‌روزرسانی به آخرین نسخهٔ برنامه، بیشترین بهره را از VPN ببرید.</value>
@@ -1682,10 +1682,10 @@ Error code: {0}</value>
     <value>Enable Windows Service to continue</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>Proton Free به‌طور خودکار شما را به سریع‌ترین سرور رایگان در دسترس از {0} کشور رایگان ما وصل می‌کند. این به‌طور معمول نزدیک‌ترین سرور به مکان شما است.</value>
+    <value>SyncVPN Free به‌طور خودکار شما را به سریع‌ترین سرور رایگان در دسترس از {0} کشور رایگان ما وصل می‌کند. این به‌طور معمول نزدیک‌ترین سرور به مکان شما است.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Proton Free به‌طور خودکار شما را به سریع‌ترین سرور رایگان در دسترس از {0} کشور رایگان ما وصل می‌کند. این به‌طور معمول نزدیک‌ترین سرور به مکان شما است.</value>
+    <value>SyncVPN Free به‌طور خودکار شما را به سریع‌ترین سرور رایگان در دسترس از {0} کشور رایگان ما وصل می‌کند. این به‌طور معمول نزدیک‌ترین سرور به مکان شما است.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_One">
     <value>کشور سرور رایگان ({0})</value>
@@ -1825,7 +1825,7 @@ Error code: {0}</value>
     <value>Make sure you're online, and that your connection is stable.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>These quick fixes may help you connect to Proton.</value>
+    <value>These quick fixes may help you connect to SyncVPN.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>Use a different network</value>
@@ -1837,7 +1837,7 @@ Error code: {0}</value>
     <value>Check our status page</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Just to be sure that Proton services are running as normal.</value>
+    <value>Just to be sure that SyncVPN services are running as normal.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>Connection help</value>
@@ -1907,7 +1907,7 @@ Error code: {0}</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Welcome to {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>You can now connect to printers, speakers, and other devices on your local network (LAN), bypassing the VPN tunnel.</value>
@@ -2530,7 +2530,7 @@ Error code: {0}</value>
     <value>Security key</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Insert the U2F or FIDO key linked to your Proton Account.</value>
+    <value>Insert the U2F or FIDO key linked to your SyncVPN Account.</value>
   </data>
   <data name="Main_Loading">
     <value>Loading, please wait...</value>
@@ -2586,7 +2586,7 @@ Error code: {0}</value>
     <value>You've reached your maximum device limit. To reconnect to VPN, please disconnect from another device.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>Your plan has been downgraded to Proton Free, and we're reconnecting you to the fastest free server.</value>
+    <value>Your plan has been downgraded to SyncVPN Free, and we're reconnecting you to the fastest free server.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>Public Wi-Fi networks are more vulnerable to security threats. Connect to VPN to browse safely.</value>
@@ -2958,7 +2958,7 @@ Secure Core</value>
     <value>مسیریابی جایگزین</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>اگر سرویس‌های Proton با ممنوعیت‌های شبکه مسدود شده‌اند، ما سعی می‌کنیم از مسیریابی شبکه‌ جایگزین برای اتصال شما به سایت‌هایمان استفاده کنیم.</value>
+    <value>اگر سرویس‌های SyncVPN با ممنوعیت‌های شبکه مسدود شده‌اند، ما سعی می‌کنیم از مسیریابی شبکه‌ جایگزین برای اتصال شما به سایت‌هایمان استفاده کنیم.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>سرورهای DNS سفارشی</value>
@@ -3337,7 +3337,7 @@ Secure Core</value>
     <value>ظاهر</value>
   </data>
   <data name="Settings_Improve">
-    <value>بهبود بخشیدن به Proton</value>
+    <value>بهبود بخشیدن به SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>به ما برای مبارزه با سانسور کمک کنید</value>

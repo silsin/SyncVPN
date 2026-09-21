@@ -62,7 +62,7 @@ public class ConnectionCertificateUpdater : IConnectionCertificateUpdater,
     {
         // A new-backend VPN account has no certificate to renew - POST /account is claimed fresh at
         // connect time instead (see the migration plan's VpnProvisioning phase). Starting this timer
-        // anyway would just be a periodic, pointless call to the legacy Proton cert endpoint.
+        // anyway would just be a periodic, pointless call to the legacy backend cert endpoint.
         if (_backendModeProvider.IsNewBackendEnabled(BackendCapability.VpnProvisioning))
         {
             return;

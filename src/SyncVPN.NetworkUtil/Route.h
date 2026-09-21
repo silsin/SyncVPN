@@ -2,7 +2,7 @@
 
 #include <iphlpapi.h>
 
-namespace Proton
+namespace SyncVpn
 {
     namespace NetworkUtil
     {

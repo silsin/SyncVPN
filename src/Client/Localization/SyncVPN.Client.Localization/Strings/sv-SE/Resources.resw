@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Rekommenderad</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>Få ut det mesta av din VPN genom att uppdatera till den senaste versionen av appen.</value>
@@ -1682,10 +1682,10 @@ Felkod: {0}</value>
     <value>Aktivera Windows-tjänst för att fortsätta</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>Proton Free ansluter dig automatiskt till den snabbaste tillgängliga gratisservern från vårt {0} gratis land. Detta kommer vanligtvis vara servern närmast dig.</value>
+    <value>SyncVPN Free ansluter dig automatiskt till den snabbaste tillgängliga gratisservern från vårt {0} gratis land. Detta kommer vanligtvis vara servern närmast dig.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Proton Free ansluter dig automatiskt till den snabbaste tillgängliga gratisservern från våra {0} gratis länder. Detta kommer vanligtvis vara servern närmast dig.</value>
+    <value>SyncVPN Free ansluter dig automatiskt till den snabbaste tillgängliga gratisservern från våra {0} gratis länder. Detta kommer vanligtvis vara servern närmast dig.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_One">
     <value>Gratis serverland ({0})</value>
@@ -1825,7 +1825,7 @@ Felkod: {0}</value>
     <value>Se till att du är online och att din anslutning är stabil.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>Dessa snabba lösningar kan hjälpa dig att ansluta till Proton.</value>
+    <value>Dessa snabba lösningar kan hjälpa dig att ansluta till SyncVPN.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>Använd ett annat nätverk</value>
@@ -1837,7 +1837,7 @@ Felkod: {0}</value>
     <value>Kolla vår statussida</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Bara för att vara säker på att Proton-tjänsterna fungerar som vanligt.</value>
+    <value>Bara för att vara säker på att SyncVPN-tjänsterna fungerar som vanligt.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>Anslutningshjälp</value>
@@ -1907,7 +1907,7 @@ Felkod: {0}</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Välkommen till {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>Du kan nu ansluta till skrivare, högtalare och andra enheter på ditt lokala nätverk (LAN) och kringgå VPN-tunneln.</value>
@@ -2530,7 +2530,7 @@ Felkod: {0}</value>
     <value>Säkerhetsnyckel</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Infoga U2F eller FIDO-nyckeln länkat till ditt Proton-konto.</value>
+    <value>Infoga U2F eller FIDO-nyckeln länkat till ditt SyncVPN-konto.</value>
   </data>
   <data name="Main_Loading">
     <value>Laddar in, vänta …</value>
@@ -2586,7 +2586,7 @@ Felkod: {0}</value>
     <value>Du har nått din maximala enhetsgräns. För att återansluta till VPN, koppla från annan enhet.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>Ditt paket har nedgraderats till Proton Free och vi återansluter dig till den snabbaste gratisservern.</value>
+    <value>Ditt paket har nedgraderats till SyncVPN Free och vi återansluter dig till den snabbaste gratisservern.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>Offentliga Wi-Fi-nätverk är mer sårbara för säkerhetshot. Anslut till VPN för att surfa säkert.</value>
@@ -2958,7 +2958,7 @@ En hög serverbelastning kan sakta ner din anslutning.</value>
     <value>Alternativ routing</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>Om Proton-tjänster blockeras på grund av nätverksbegränsningar kommer vi att försöka använda alternativ nätverksdirigering för att ansluta dig till våra webbplatser.</value>
+    <value>Om SyncVPN-tjänster blockeras på grund av nätverksbegränsningar kommer vi att försöka använda alternativ nätverksdirigering för att ansluta dig till våra webbplatser.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>Anpassade DNS-servrar</value>
@@ -3337,7 +3337,7 @@ En hög serverbelastning kan sakta ner din anslutning.</value>
     <value>Tema</value>
   </data>
   <data name="Settings_Improve">
-    <value>Förbättra Proton</value>
+    <value>Förbättra SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>Hjälp oss att bekämpa censur</value>
@@ -3487,7 +3487,7 @@ En hög serverbelastning kan sakta ner din anslutning.</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>Ange dina kontodetaljer för Proton.</value>
+    <value>Ange dina kontodetaljer för SyncVPN.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>Inaktivera kill switch</value>

@@ -23,7 +23,7 @@ using SyncVPN.Api.V2.Contracts.Servers;
 namespace SyncVPN.Client.Logic.Purchases.Contracts;
 
 // GET /servers and GET /servers/pro - the new backend's server catalog. Distinct from IServersLoader
-// (SyncVPN.Client.Logic.Servers.Contracts), which owns the legacy Proton Physical/Logical server model -
+// (SyncVPN.Client.Logic.Servers.Contracts), which owns the legacy backend Physical/Logical server model -
 // the two models aren't compatible (this one has no Tier/Features/Load). Rows built from this are
 // rendered directly inside the Countries sidebar list (see SyncVpnServerLocationItem) rather than
 // mapped onto the legacy Server model.

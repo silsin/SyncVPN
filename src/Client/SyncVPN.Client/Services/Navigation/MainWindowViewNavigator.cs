@@ -58,9 +58,9 @@ public class MainWindowViewNavigator : ViewNavigatorBase, IMainWindowViewNavigat
         _backendModeProvider = backendModeProvider;
     }
 
-    // A device-registered guest (no Proton account login) can reach Main directly. Free servers,
+    // A device-registered guest (no legacy backend account login) can reach Main directly. Free servers,
     // plans, etc. come from the new SyncVPN backend keyed off just the Deviceid header, not the legacy
-    // Proton server cache, so the logged-in HasNoServers()/login requirement doesn't apply to this path.
+    // legacy backend server cache, so the logged-in HasNoServers()/login requirement doesn't apply to this path.
     private bool IsGuestAccessEnabled => _backendModeProvider.IsNewBackendEnabled(BackendCapability.DeviceRegistration);
 
     public Task<bool> NavigateToLoginViewAsync()
@@ -83,7 +83,7 @@ public class MainWindowViewNavigator : ViewNavigatorBase, IMainWindowViewNavigat
     public override Task<bool> NavigateToDefaultAsync()
     {
         // IsGuestAccessEnabled means the new SyncVPN backend's server catalog (IFreeServersCache) is
-        // what's actually driving this app, not the legacy Proton _serversCache below - that stays
+        // what's actually driving this app, not the legacy backend _serversCache below - that stays
         // permanently empty for a SyncVpn-only account, since it's never populated from this backend.
         // Checking it regardless of login state (as the code used to do for IsLoggedIn) meant a real,
         // successfully logged-in SyncVPN user was unconditionally routed to "No VPN connections

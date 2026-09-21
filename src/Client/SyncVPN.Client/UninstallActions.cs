@@ -31,7 +31,7 @@ public static class UninstallActions
     {
         try
         {
-            Directory.Delete(DefaultConfiguration.LocalAppDataProtonVpnPath, true);
+            Directory.Delete(DefaultConfiguration.LocalAppDataPath, true);
         }
         catch
         {
@@ -43,8 +43,8 @@ public static class UninstallActions
     /// </summary>
     /// <remarks>
     /// <para>The following registry keys and values will be deleted:</para>
-    /// <para>- HKCU\Software\Classes\protonvpn</para>
-    /// <para>- HKCU\Software\Classes\proton-vpn</para>
+    /// <para>- HKCU\Software\Classes\protonvpn (legacy scheme)</para>
+    /// <para>- HKCU\Software\Classes\sync-vpn</para>
     /// <para>- HKCU\Software\Classes\AppUserModelId\{appUserModelId}</para>
     /// <para>- HKCU\Software\Microsoft\Windows\CurrentVersion\Run (Value name: {appName})</para>
     /// <para>- HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run (Value name: {appName})</para>

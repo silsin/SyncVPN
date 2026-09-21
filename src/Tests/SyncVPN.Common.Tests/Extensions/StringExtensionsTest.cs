@@ -63,7 +63,7 @@ namespace SyncVPN.Common.Tests.Extensions
         [DataRow('-')]
         public void TestSplitToEnumerable_ForOne(char separator)
         {
-            string input = "protonvpn";
+            string input = "syncvpn";
             List<string> expectedResult = new() { input };
 
             IEnumerable<string> result = StringExtensions.SplitToEnumerable(input, separator);
@@ -124,7 +124,7 @@ namespace SyncVPN.Common.Tests.Extensions
         [DataRow('-')]
         public void TestSplitToHashSet_ForOne(char separator)
         {
-            string input = "protonvpn";
+            string input = "syncvpn";
             HashSet<string> expectedResult = new() { input };
 
             HashSet<string> result = StringExtensions.SplitToHashSet(input, separator);
@@ -166,7 +166,7 @@ namespace SyncVPN.Common.Tests.Extensions
         [DataRow('-')]
         public void TestSplitToList_ForOne(char separator)
         {
-            string input = "protonvpn";
+            string input = "syncvpn";
             List<string> expectedResult = new() { input };
 
             List<string> result = StringExtensions.SplitToList(input, separator);
@@ -192,10 +192,10 @@ namespace SyncVPN.Common.Tests.Extensions
 
         [TestMethod]
         [DataRow("https://192.168.1.1/", "192.168.1.1")]
-        [DataRow("https://protonvpn.com/", "protonvpn.com")]
-        [DataRow("http://protonvpn.com/", "http://protonvpn.com")]
-        [DataRow("https://account.proton.me/", "account.proton.me")]
-        [DataRow("https://account.proton.me/switch", "https://account.proton.me/switch")]
+        [DataRow("https://syncvpn.com/", "syncvpn.com")]
+        [DataRow("http://syncvpn.com/", "http://syncvpn.com")]
+        [DataRow("https://account.syncvpn.com/", "account.syncvpn.com")]
+        [DataRow("https://account.syncvpn.com/switch", "https://account.syncvpn.com/switch")]
         public void TestIsHttpUri(string expectedUriString, string input)
         {
             bool isUri = StringExtensions.IsHttpUri(input, out Uri uri);

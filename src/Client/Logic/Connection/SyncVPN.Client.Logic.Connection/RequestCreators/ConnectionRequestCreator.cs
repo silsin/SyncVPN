@@ -86,9 +86,9 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
         _userAuthenticator = userAuthenticator;
     }
 
-    // A device-registered guest has no legacy Proton session/certificate to request credentials from,
+    // A device-registered guest has no legacy backend session/certificate to request credentials from,
     // so it always claims via the new backend's POST /account regardless of the global VpnProvisioning
-    // rollout flag - that flag only governs whether a *logged-in* Proton user's connections switch over,
+    // rollout flag - that flag only governs whether a *logged-in* legacy backend user's connections switch over,
     // which is a separate, higher-stakes rollout decision left untouched here.
     // IUserAuthenticator is injected lazily: UserAuthenticator -> GuestHoleManager -> ConnectionManager
     // -> ConnectionRequestCreator already forms a cycle back to this class, so an eager dependency here
@@ -122,7 +122,7 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
         return request;
     }
 
-    // Shared by ConnectionRequestCreator and ReconnectionRequestCreator: on the legacy Proton path,
+    // Shared by ConnectionRequestCreator and ReconnectionRequestCreator: on the legacy backend path,
     // servers/credentials come from two independent sources (the cached server catalog + a certificate
     // request). On the new SyncVPN backend, a single POST /account call returns both at once for a
     // chosen candidate server - see the migration plan's VpnProvisioning phase.
@@ -130,7 +130,7 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
         IConnectionIntent connectionIntent, IReadOnlyList<PhysicalServer> candidates, IList<VpnProtocol> preferredProtocols)
     {
         // A specific new-backend server was already chosen (e.g. from the Free Servers list) - claim
-        // it directly rather than picking a candidate from the legacy Proton cache, which doesn't
+        // it directly rather than picking a candidate from the legacy backend cache, which doesn't
         // contain it at all.
         if (connectionIntent.Location is SyncVpnServerLocationIntent syncVpnServerIntent)
         {
@@ -176,7 +176,7 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
     private async Task<(VpnServerIpcEntity[] Servers, VpnCredentialsIpcEntity Credentials, int? SstpPort)> ClaimAccountAsync(
         IReadOnlyList<PhysicalServer> candidates, IList<VpnProtocol> preferredProtocols)
     {
-        // A guest device (no Proton account/session) never has any legacy candidates - Countries,
+        // A guest device (no legacy backend account/session) never has any legacy candidates - Countries,
         // "Fastest server", etc. all resolve through the old Server cache, which is always empty here.
         // Rather than crash the connect attempt, fall back to claiming a new-backend free server
         // directly, same as clicking a specific free-server row already does.

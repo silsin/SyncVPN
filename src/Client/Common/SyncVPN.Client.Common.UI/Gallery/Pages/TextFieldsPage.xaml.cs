@@ -28,11 +28,11 @@ public sealed partial class TextFieldsPage
     {
         Products = new ObservableCollection<string>()
         {
-            "Proton Mail",
-            "Proton Calendar",
-            "Proton Drive",
+            "Mail",
+            "Calendar",
+            "Drive",
             "SyncVPN",
-            "Proton Pass",
+            "Pass",
         };
 
         InitializeComponent();

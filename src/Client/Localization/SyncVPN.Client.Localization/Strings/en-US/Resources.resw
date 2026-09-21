@@ -185,7 +185,7 @@
   </data>
   <data name="Common_Tags_Recommended" xml:space="preserve">
     <value>Recommended</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Common_Tags_New" xml:space="preserve">
     <value>NEW</value>
@@ -1657,7 +1657,7 @@
     <value>Alternative routing</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description" xml:space="preserve">
-    <value>If Proton services are blocked due to network restrictions, we'll try using alternative network routing to connect you to our sites.</value>
+    <value>If SyncVPN services are blocked due to network restrictions, we'll try using alternative network routing to connect you to our sites.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers" xml:space="preserve">
     <value>Custom DNS servers</value>
@@ -1865,7 +1865,7 @@
     <value>Theme</value>
   </data>
   <data name="Settings_Improve" xml:space="preserve">
-    <value>Improve Proton</value>
+    <value>Improve SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship" xml:space="preserve">
     <value>Help us fight censorship</value>
@@ -2049,7 +2049,7 @@
     <value>Security key</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description" xml:space="preserve">
-    <value>Insert the U2F or FIDO key linked to your Proton Account.</value>
+    <value>Insert the U2F or FIDO key linked to your SyncVPN Account.</value>
   </data>
   <data name="Login_TwoFactor_NoMethodAvailable" xml:space="preserve">
     <value>No known two-factor authentication methods found.</value>
@@ -3011,11 +3011,11 @@
     <value>Change server</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One" xml:space="preserve">
-    <value>Proton Free automatically connects you to the fastest available free server from our {0} free country. This will normally be the closest server to your location.</value>
+    <value>SyncVPN Free automatically connects you to the fastest available free server from our {0} free country. This will normally be the closest server to your location.</value>
     <comment>{0} is a placeholder for the number of free countries available (eg. 1 free country). This string is used when the number is 1.</comment>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other" xml:space="preserve">
-    <value>Proton Free automatically connects you to the fastest available free server from our {0} free countries. This will normally be the closest server to your location.</value>
+    <value>SyncVPN Free automatically connects you to the fastest available free server from our {0} free countries. This will normally be the closest server to your location.</value>
     <comment>{0} is a placeholder for the number of free countries available (eg. 5 free countries).This string is used when the number is different than 1.</comment>
   </data>
   <data name="Dialogs_FreeConnections_Header_One" xml:space="preserve">
@@ -3298,7 +3298,7 @@
     <value>{0} secure servers</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected" xml:space="preserve">
-    <value>Your plan has been downgraded to Proton Free, and we're reconnecting you to the fastest free server.</value>
+    <value>Your plan has been downgraded to SyncVPN Free, and we're reconnecting you to the fastest free server.</value>
   </data>
   <data name="Dialogs_SubscriptionExpired_MaybeLater" xml:space="preserve">
     <value>Maybe later</value>
@@ -3313,7 +3313,7 @@
     <value>Connection help</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description" xml:space="preserve">
-    <value>These quick fixes may help you connect to Proton.</value>
+    <value>These quick fixes may help you connect to SyncVPN.</value>
   </data>
   <data name="Dialogs_Troubleshooting_CheckInternet" xml:space="preserve">
     <value>Check your internet connection</value>
@@ -3337,7 +3337,7 @@
     <value>Check our status page</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description" xml:space="preserve">
-    <value>Just to be sure that Proton services are running as normal.</value>
+    <value>Just to be sure that SyncVPN services are running as normal.</value>
   </data>
   <data name="Dialogs_WelcomeToVpnPlus_Title" xml:space="preserve">
     <value>Welcome to VPN Plus</value>
@@ -3385,7 +3385,7 @@
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title" xml:space="preserve">
     <value>Welcome to {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Description" xml:space="preserve">
     <value>You unlocked all premium SyncVPN, Mail, Calendar, Drive, and Pass features.</value>
@@ -3683,7 +3683,7 @@
     <value>Light</value>
   </data>
   <data name="SignIn_Form_Description" xml:space="preserve">
-    <value>Enter your Proton Account details.</value>
+    <value>Enter your SyncVPN Account details.</value>
   </data>
   <data name="SignIn_Form_Title" xml:space="preserve">
     <value>Sign in</value>

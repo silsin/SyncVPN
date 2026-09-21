@@ -354,13 +354,13 @@ void FreeMemory(PVOID ptr)
 {
     if (ptr != nullptr)
     {
-        ExFreePoolWithTag(ptr, ProtonTAG);
+        ExFreePoolWithTag(ptr, SyncVpnTAG);
     }
 }
 
 PVOID AllocateMemory(size_t size)
 {
-    return ExAllocatePool2(POOL_FLAG_NON_PAGED, size, ProtonTAG);
+    return ExAllocatePool2(POOL_FLAG_NON_PAGED, size, SyncVpnTAG);
 }
 
 void NTAPI CompleteBasicPacketInjection(VOID* data,

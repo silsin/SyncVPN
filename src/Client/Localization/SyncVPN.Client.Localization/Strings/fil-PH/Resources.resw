@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Inirerekomenda</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>Sulitin ang iyong VPN sa pamamagitan ng pag-update sa pinakabagong bersyon ng app.</value>
@@ -1682,10 +1682,10 @@ Error code: {0}</value>
     <value>I-enable ang Windows Service upang magpatuloy</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>Awtomatiko kang ikinokonekta ng Proton Free sa pinakamabilis na available na libreng server mula sa aming {0} libreng bansa. Karaniwang ito ang pinakamalapit na server sa lokasyon mo.</value>
+    <value>Awtomatiko kang ikinokonekta ng SyncVPN Free sa pinakamabilis na available na libreng server mula sa aming {0} libreng bansa. Karaniwang ito ang pinakamalapit na server sa lokasyon mo.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Awtomatiko kang ikinokonekta ng Proton Free sa pinakamabilis na available na libreng server mula sa aming {0} libreng bansa. Karaniwang ito ang pinakamalapit na server sa lokasyon mo.</value>
+    <value>Awtomatiko kang ikinokonekta ng SyncVPN Free sa pinakamabilis na available na libreng server mula sa aming {0} libreng bansa. Karaniwang ito ang pinakamalapit na server sa lokasyon mo.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_One">
     <value>Bansang may libreng server ({0})</value>
@@ -1825,7 +1825,7 @@ Error code: {0}</value>
     <value>Tiyaking online ka at na stable ang koneksyon mo.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>Maaaring makatulong ang mabibilis na solusyong ito upang makakonekta ka sa Proton.</value>
+    <value>Maaaring makatulong ang mabibilis na solusyong ito upang makakonekta ka sa SyncVPN.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>Gumamit ng ibang network</value>
@@ -1837,7 +1837,7 @@ Error code: {0}</value>
     <value>Tingnan ang aming pahina ng status</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Para lang matiyak na tumatakbo nang normal ang mga serbisyo ng Proton</value>
+    <value>Para lang matiyak na tumatakbo nang normal ang mga serbisyo ng SyncVPN</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>Tulong sa koneksyon</value>
@@ -1907,7 +1907,7 @@ Error code: {0}</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Welcome to {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>Maaari ka na ngayong kumonekta sa mga printer, speaker at iba pang device sa iyong local network (LAN) nang bina-bypass ang VPN tunnel.</value>
@@ -2530,7 +2530,7 @@ Error code: {0}</value>
     <value>Security key</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Ilagay ang U2F o FIDO key na naka-link sa Proton Account mo.</value>
+    <value>Ilagay ang U2F o FIDO key na naka-link sa SyncVPN Account mo.</value>
   </data>
   <data name="Main_Loading">
     <value>Naglo-load. Mangyaring maghintay...</value>
@@ -2586,7 +2586,7 @@ Error code: {0}</value>
     <value>Naabot mo na ang maximum na limitasyon ng device mo. Upang kumonektang muli sa VPN, mangyaring mag-disconnect mula sa ibang device.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>Na-downgrade ang plan mo sa Proton Free, at muli ka naming ikinokonekta sa pinakamabilis na libreng server.</value>
+    <value>Na-downgrade ang plan mo sa SyncVPN Free, at muli ka naming ikinokonekta sa pinakamabilis na libreng server.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>Mas vulnerable sa mga banta sa seguridad ang mga pampublikong Wi-Fi network. Kumonekta sa VPN upang ligtas na makapag-browse.</value>
@@ -2958,7 +2958,7 @@ Maaaring pabagalin ng mataas na load ng server ang koneksyon mo.</value>
     <value>Alternatibong pag-route</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>Kung naka-block ang mga serbisyo ng Proton dahil sa mga paghihigpit sa network, susubukan naming gumamit ng alternatibong pag-route ng network upang ikonekta ka sa aming mga site.</value>
+    <value>Kung naka-block ang mga serbisyo ng SyncVPN dahil sa mga paghihigpit sa network, susubukan naming gumamit ng alternatibong pag-route ng network upang ikonekta ka sa aming mga site.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>Mga custom na DNS server</value>
@@ -3337,7 +3337,7 @@ Maaaring pabagalin ng mataas na load ng server ang koneksyon mo.</value>
     <value>Tema</value>
   </data>
   <data name="Settings_Improve">
-    <value>Pahusayin ang Proton</value>
+    <value>Pahusayin ang SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>Tulungan kaming labanan ang censorship</value>
@@ -3487,7 +3487,7 @@ Maaaring pabagalin ng mataas na load ng server ang koneksyon mo.</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>Ilagay ang mga detalye ng Proton Account mo.</value>
+    <value>Ilagay ang mga detalye ng SyncVPN Account mo.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>I-disable ang kill switch</value>

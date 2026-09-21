@@ -40,8 +40,8 @@ namespace SyncVPN.Dns.Tests;
 [TestClass]
 public class DnsManagerTest
 {
-    private const string HOST = "api.protonvpn.ch";
-    private const string DIFFERENT_HOST = "differentapi.protonvpn.ch";
+    private const string HOST = "api.syncvpn.com";
+    private const string DIFFERENT_HOST = "differentapi.syncvpn.com";
     private static readonly TimeSpan FAILED_DNS_REQUEST_TIMEOUT = TimeSpan.FromSeconds(5);
     private static readonly TimeSpan NEW_TTL_ON_RESOLVE_ERROR = TimeSpan.FromMinutes(10);
 

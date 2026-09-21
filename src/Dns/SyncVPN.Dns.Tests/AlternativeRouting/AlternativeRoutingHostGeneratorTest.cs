@@ -28,7 +28,7 @@ namespace SyncVPN.Dns.Tests.AlternativeRouting;
 [TestClass]
 public class AlternativeRoutingHostGeneratorTest
 {
-    private const string API_URL = "https://api.protonvpn.ch";
+    private const string API_URL = "https://api.syncvpn.com";
     private const string EXPECTED_BASE_HOST = "dMFYGSLTQOJXXI33OOZYG4LTDNA.protonpro.xyz";
 
     [TestMethod]

@@ -9,10 +9,10 @@ For contribution policy see [CONTRIBUTING](CONTRIBUTING.md).
 
 ## Description
 
-The [SyncVPN](https://protonvpn.com) Windows app is intended for every SyncVPN service user,
+The [SyncVPN](https://syncvpn.com) Windows app is intended for every SyncVPN service user,
 paid or free and supports all functionalities available to authenticated users (user signup instead happens on the web site).
 
-You can download the latest stable release, either on [SyncVPN official website](https://protonvpn.com/download) or directly on the [official GitHub repository](https://github.com/SyncVPN/win-app/releases/latest).
+You can download the latest stable release, either on [SyncVPN official website](https://syncvpn.com/download) or directly on the [official GitHub repository](https://github.com/SyncVPN/win-app/releases/latest).
 
 ### The application
 
@@ -25,7 +25,7 @@ The app consists of these interacting parts:
 
 #### GUI application
 
-The SyncVPN GUI app is installed into "C:\Program Files\Proton\SyncVPN\<version>" directory by default. 
+The SyncVPN GUI app is installed into "C:\Program Files\SyncVPN\<version>" directory by default. 
 The main executable is "SyncVPN.exe".
 
 SyncVPN GUI app starts SyncVPN Service when launched and stops the service
@@ -50,7 +50,7 @@ TLS certificate pinning. To disable TLS certificate pinning the configuration fi
 #### SyncVPN Service
 
 The Windows service "SyncVPN Service" is installed into
-"C:\Program Files\Proton\SyncVPN\<version>" directory by default. Service
+"C:\Program Files\SyncVPN\<version>" directory by default. Service
 executable is "SyncVPNService.exe". The service is started and stopped by the SyncVPN
 GUI app.
 
@@ -72,7 +72,7 @@ The SyncVPN uses OpenVPN for maintaining a VPN tunnel. The new OpenVPN process i
 connect to a VPN and closed on disconnect. Communication with the OpenVPN process is maintained through
 TCP management interface.
 
-OpenVPN is installed into "C:\Program Files\Proton\SyncVPN\<version>\Resources\"
+OpenVPN is installed into "C:\Program Files\SyncVPN\<version>\Resources\"
 directory by default. The OpenVPN config file is static, it doesn't change for each VPN server.
 
 The OpenVPN is built from official source by applying a patch to support SyncVPN specific

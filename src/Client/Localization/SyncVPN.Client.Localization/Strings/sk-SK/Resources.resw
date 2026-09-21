@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Odporúčané</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>Ak chcete VPN využívať naplno, aktualizujte si najnovšiu verziu aplikácie.</value>
@@ -325,7 +325,7 @@
     <value>Upraviť profil</value>
   </data>
   <data name="Connection_Error_MissingConnectionCertificate">
-    <value>Protonu VPN sa nepodarilo načítať overovací certifikát kvôli problému so sieťou.</value>
+    <value>SyncVPN sa nepodarilo načítať overovací certifikát kvôli problému so sieťou.</value>
   </data>
   <data name="Connection_Error_MobileHotspotEnabled">
     <value>Pripojenie bolo blokované nastaveniami siete vo vašom zariadení. Príčinou môže byť mobilný hotspot, iná VPN aplikácia alebo softvér virtuálneho stroja. Skontrolujte, prosím, svoju sieťovú konfiguráciu alebo kontaktujte podporu, aby vám pomohla.</value>
@@ -1790,16 +1790,16 @@ Chybový kód: {0}</value>
     <value>Pre pokračovanie povoľte službu Windows</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>Proton Free vás automaticky pripojí k najrýchlejšiemu dostupnému bezplatnému serveru z našej {0} bezplatnej krajiny. Obvykle sa jedná o server, ktorý je najbližšie k vašej polohe.</value>
+    <value>SyncVPN Free vás automaticky pripojí k najrýchlejšiemu dostupnému bezplatnému serveru z našej {0} bezplatnej krajiny. Obvykle sa jedná o server, ktorý je najbližšie k vašej polohe.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Few">
-    <value>Proton Free vás automaticky pripojí k najrýchlejšiemu dostupnému bezplatnému serveru z našich {0} bezplatných krajín. Obvykle sa jedná o server, ktorý je najbližšie k vašej polohe.</value>
+    <value>SyncVPN Free vás automaticky pripojí k najrýchlejšiemu dostupnému bezplatnému serveru z našich {0} bezplatných krajín. Obvykle sa jedná o server, ktorý je najbližšie k vašej polohe.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Many">
-    <value>Proton Free vás automaticky pripojí k najrýchlejšiemu dostupnému bezplatnému serveru z našich {0} bezplatných krajín. Obvykle sa jedná o server, ktorý je najbližšie k vašej polohe.</value>
+    <value>SyncVPN Free vás automaticky pripojí k najrýchlejšiemu dostupnému bezplatnému serveru z našich {0} bezplatných krajín. Obvykle sa jedná o server, ktorý je najbližšie k vašej polohe.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Proton Free vás automaticky pripojí k najrýchlejšiemu dostupnému bezplatnému serveru z našich {0} bezplatných krajín. Obvykle sa jedná o server, ktorý je najbližšie k vašej polohe.</value>
+    <value>SyncVPN Free vás automaticky pripojí k najrýchlejšiemu dostupnému bezplatnému serveru z našich {0} bezplatných krajín. Obvykle sa jedná o server, ktorý je najbližšie k vašej polohe.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_One">
     <value>Krajina s bezplatnými servermi ({0})</value>
@@ -1945,7 +1945,7 @@ Chybový kód: {0}</value>
     <value>Skontrolujte, či ste online a či je vaše pripojenie stabilné.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>Tieto rýchle opatrenia vám môžu pomôcť pripojiť sa k spoločnosti Proton.</value>
+    <value>Tieto rýchle opatrenia vám môžu pomôcť pripojiť sa k spoločnosti SyncVPN.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>Použite inú sieť</value>
@@ -1957,7 +1957,7 @@ Chybový kód: {0}</value>
     <value>Pozrite si našu stránku so súčasným stavom</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Len aby ste sa uistili, že služby spoločnosti Proton fungujú normálne.</value>
+    <value>Len aby ste sa uistili, že služby spoločnosti SyncVPN fungujú normálne.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>Pomoc s pripojením</value>
@@ -2033,7 +2033,7 @@ Chybový kód: {0}</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Vitajte v {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>Teraz sa môžete pripojiť k tlačiarňam, reproduktorom a iným zariadeniam vo vašej lokálnej sieti (LAN) obídením VPN tunela.</value>
@@ -2722,7 +2722,7 @@ Chybový kód: {0}</value>
     <value>Bezpečnostný kľúč</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Vložte U2F alebo FIDO kľúč prepojený s vaším Proton Account.</value>
+    <value>Vložte U2F alebo FIDO kľúč prepojený s vaším SyncVPN Account.</value>
   </data>
   <data name="Main_Loading">
     <value>Načítava sa, prosím počkajte...</value>
@@ -2778,7 +2778,7 @@ Chybový kód: {0}</value>
     <value>Dosiahli ste maximálny limit počtu zariadení. Ak sa chcete znovu pripojiť k VPN, odpojte sa v inom zariadení.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>Vaša tarifa bola znížená na Proton Free a prepájame vás k najrýchlejšiemu bezplatnému serveru.</value>
+    <value>Vaša tarifa bola znížená na SyncVPN Free a prepájame vás k najrýchlejšiemu bezplatnému serveru.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>Verejné WiFi siete sú zraniteľnejšie voči bezpečnostným hrozbám. Pripojte sa k VPN a surfujte bezpečne.</value>
@@ -3150,7 +3150,7 @@ Vysoké vyťaženie servera môže spomaliť vaše pripojenie.</value>
     <value>Alternatívne smerovanie</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>Ak služby spoločnosti Proton zablokuje váš poskytovateľ siete, pokúsime sa vás pripojiť na našu stránku pomocou alternatívneho sieťového smerovania.</value>
+    <value>Ak služby spoločnosti SyncVPN zablokuje váš poskytovateľ siete, pokúsime sa vás pripojiť na našu stránku pomocou alternatívneho sieťového smerovania.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>Vlastné servery DNS</value>
@@ -3529,7 +3529,7 @@ Vysoké vyťaženie servera môže spomaliť vaše pripojenie.</value>
     <value>Vzhľad</value>
   </data>
   <data name="Settings_Improve">
-    <value>Vylepšite Proton</value>
+    <value>Vylepšite SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>Pomôžte nám bojovať s cenzúrou</value>
@@ -3679,7 +3679,7 @@ Vysoké vyťaženie servera môže spomaliť vaše pripojenie.</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>Zadajte detaily vášho účtu Proton.</value>
+    <value>Zadajte detaily vášho účtu SyncVPN.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>Zakázať kill switch</value>

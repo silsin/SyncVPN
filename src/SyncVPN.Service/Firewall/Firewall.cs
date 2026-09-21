@@ -232,7 +232,7 @@ internal class Firewall : IFirewall, IStartable
                 EnableDnsLeakProtection(firewallParams);
 
                 // Always drop the OpenVPN server block before tearing down the process permits
-                // to avoid a window where Proton processes are still blocked but no longer whitelisted.
+                // to avoid a window where legacy backend processes are still blocked but no longer whitelisted.
                 RemoveItems(blockOutsideOpenVpnGuids, _lastParams.SessionType);
                 RemoveItems(baseLeakProtectionGuids, _lastParams.SessionType);
 
@@ -324,7 +324,7 @@ internal class Firewall : IFirewall, IStartable
     private void EnableBaseLeakProtection(FirewallParams firewallParams)
     {
         // Add blocks first so that during cleanup (which follows insertion order) the block filters
-        // disappear before any exceptions, ensuring Proton processes always retain their bypass rules.
+        // disappear before any exceptions, ensuring legacy backend processes always retain their bypass rules.
         BlockAllIpv4Network(1, firewallParams);
         BlockAllIpv6Network(1, firewallParams);
         BlockOutsideOpenVpnTraffic(firewallParams);

@@ -34,27 +34,14 @@ public static class DefaultTlsPinningConfigurationFactory
             {
                 new TlsPinnedDomain()
                 {
-                    Name = "vpn-api.proton.me",
+                    Name = "syncvpn.com",
                     Enforce = true,
                     SendReport = true,
                     PublicKeyHashes = new HashSet<string>
                     {
-                        "CT56BhOTmj5ZIPgb/xD5mH8rY3BLo/MlhP7oPyJUEDo=", // Current.
-                        "35Dx28/uzN3LeltkCBQ8RHK0tlNSa2kCpCRGNp34Gxc=", // Hot backup
-                        "qYIukVc63DEITct8sFT7ebIq5qsWmuscaIKeJx+5J5A=", // Cold backup.
-                    },
-                },
-                new TlsPinnedDomain()
-                {
-                    Name = "protonvpn.com",
-                    Enforce = true,
-                    SendReport = true,
-                    PublicKeyHashes = new HashSet<string>
-                    {
-                        "+0dMG0qG2Ga+dNE8uktwMm7dv6RFEXwBoBjQ43GqsQ0=",
-                        "8joiNBdqaYiQpKskgtkJsqRxF7zN0C0aqfi8DacknnI=",
-                        "JMI8yrbc6jB1FYGyyWRLFTmDNgIszrNEMGlgy972e7w=",
-                        "Iu44zU84EOCZ9vx/vz67/MRVrxF1IO4i4NIa8ETwiIY=",
+                        "OHCQhWbRMlsUk7NICIRsTFZQJFHP+fAT4f7SP8afUvg=", // Current leaf (Google Trust Services WE1).
+                        "kIdp6NNEd8wsugYyyIYFsi1ylMCED3hZbSR8ZFsa/A4=", // Hot backup - issuing CA (WE1).
+                        "mEflZT5enoR1FuXLgYYGqnVEoZvmf9c2bVBpiOjYQ0c=", // Cold backup - root CA (GTS Root R4).
                     },
                 },
                 new TlsPinnedDomain()

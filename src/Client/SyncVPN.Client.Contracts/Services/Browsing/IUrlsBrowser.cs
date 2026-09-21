@@ -46,7 +46,7 @@ public interface IUrlsBrowser
     string TorLearnMore { get; }
     string RpcServerProblem { get; }
     string Troubleshooting { get; }
-    string ProtonStatusPage { get; }
+    string StatusPage { get; }
     string P2PStatusPage { get; }
     string SupportForm { get; }
     string NoLogs { get; }

@@ -4,7 +4,7 @@
         <AssemblyName>SyncVPNService</AssemblyName>
     </PropertyGroup>
     <PropertyGroup>
-        <ApplicationIcon>protonvpn.ico</ApplicationIcon>
+        <ApplicationIcon>syncvpn.ico</ApplicationIcon>
     </PropertyGroup>
     <PropertyGroup>
         <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -33,7 +33,7 @@
         </Compile>
     </ItemGroup>
     <ItemGroup>
-        <Content Include="protonvpn.ico" />
+        <Content Include="syncvpn.ico" />
         <Content Include="Resources\config.ovpn">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>

@@ -9,7 +9,7 @@ import shutil
 
 project_path = os.getenv('CI_PROJECT_DIR') + "\protonvpn-windows-alpha"
 git = f'git -C "{project_path}"'
-win_update_prod_endpoint = "https://protonvpn.com/download/windows-releases.json"
+win_update_prod_endpoint = "https://syncvpn.com/download/windows-releases.json"
 
 def delete_all_files_by_ending(dir_path, file_extenstion):
     for root, _, files in os.walk(dir_path):
@@ -80,7 +80,7 @@ def get_full_update_json(version, installer_path):
     return win_update_json
 
 if __name__ == '__main__':
-    installer_path = glob(os.getenv('CI_PROJECT_DIR') + '\\setup\\Installers\\Proton' + '*.exe')[0]
+    installer_path = glob(os.getenv('CI_PROJECT_DIR') + '\\setup\\Installers\\SyncVPN' + '*.exe')[0]
     version = get_version_number(installer_path)[:-2]
 
     clone_main_branch()

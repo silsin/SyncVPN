@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-namespace Proton
+namespace SyncVpn
 {
 	namespace NetworkUtil
 	{

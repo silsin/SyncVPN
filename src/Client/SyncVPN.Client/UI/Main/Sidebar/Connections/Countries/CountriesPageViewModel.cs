@@ -39,7 +39,6 @@ namespace SyncVPN.Client.UI.Main.Sidebar.Connections.Countries;
 public partial class CountriesPageViewModel : ConnectionPageViewModelBase
 {
     private readonly IMainViewNavigator _mainViewNavigator;
-    private readonly IUpsellCarouselWindowActivator _upsellCarouselWindowActivator;
 
     [ObservableProperty]
     private ICountriesComponent _selectedCountriesComponent;
@@ -62,7 +61,6 @@ public partial class CountriesPageViewModel : ConnectionPageViewModelBase
     public CountriesPageViewModel(
         IConnectionsViewNavigator parentViewNavigator,
         IMainViewNavigator mainViewNavigator,
-        IUpsellCarouselWindowActivator upsellCarouselWindowActivator,
         ISettings settings,
         IServersLoader serversLoader,
         IConnectionManager connectionManager,
@@ -77,7 +75,6 @@ public partial class CountriesPageViewModel : ConnectionPageViewModelBase
                viewModelHelper)
     {
         _mainViewNavigator = mainViewNavigator;
-        _upsellCarouselWindowActivator = upsellCarouselWindowActivator;
 
         CountriesComponents = new(countriesComponents.OrderBy(p => p.SortIndex));
 
@@ -90,10 +87,14 @@ public partial class CountriesPageViewModel : ConnectionPageViewModelBase
         return _mainViewNavigator.NavigateToHomeViewAsync();
     }
 
+    // Was opening the feature-showcase carousel (an extra "Upgrade" click away from the actual Store),
+    // which read as "nothing happened" to anyone who didn't notice the carousel appear. This button is
+    // labeled identically to the sidebar's free-plan-card button ("Upgrade to Premium") and should behave
+    // the same way: go straight to the Store page.
     [RelayCommand]
     private Task UpgradeAsync()
     {
-        return _upsellCarouselWindowActivator.ActivateAsync(UpsellFeatureType.WorldwideCoverage);
+        return _mainViewNavigator.NavigateToStoreViewAsync();
     }
 
     protected override void OnLoggedIn()

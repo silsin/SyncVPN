@@ -19,7 +19,7 @@ extern "C" EXPORT long NetworkUtilEnableIPv6(const wchar_t* appName, const wchar
 {
     try
     {
-        auto networkConfig = Proton::NetworkUtil::NetworkConfiguration::instance();
+        auto networkConfig = SyncVpn::NetworkUtil::NetworkConfiguration::instance();
         auto lock = networkConfig.acquireWriteLock(LockTimeoutMs, appName);
         networkConfig.initialize();
 
@@ -46,7 +46,7 @@ extern "C" EXPORT long NetworkUtilEnableIPv6OnAllAdapters(wchar_t* appName, cons
 
     try
     {
-        auto networkConfig = Proton::NetworkUtil::NetworkConfiguration::instance();
+        auto networkConfig = SyncVpn::NetworkUtil::NetworkConfiguration::instance();
         auto lock = networkConfig.acquireWriteLock(LockTimeoutMs, appName);
         networkConfig.initialize();
 
@@ -73,7 +73,7 @@ extern "C" EXPORT long NetworkUtilDisableIPv6OnAllAdapters(wchar_t* appName, con
 
     try
     {
-        auto networkConfig = Proton::NetworkUtil::NetworkConfiguration::instance();
+        auto networkConfig = SyncVpn::NetworkUtil::NetworkConfiguration::instance();
         auto lock = networkConfig.acquireWriteLock(LockTimeoutMs, appName);
         networkConfig.initialize();
 
@@ -96,7 +96,7 @@ extern "C" EXPORT DWORD GetBestInterfaceIp(IN_ADDR* address, const wchar_t* excl
 
     try
     {
-        auto networkConfig = Proton::NetworkUtil::NetworkConfiguration::instance();
+        auto networkConfig = SyncVpn::NetworkUtil::NetworkConfiguration::instance();
 
         networkConfig.initialize();
 
@@ -118,9 +118,9 @@ extern "C" EXPORT DWORD GetBestInterfaceIp(IN_ADDR* address, const wchar_t* excl
 
 extern "C" EXPORT long SetLowestTapMetric(UINT index)
 {
-    Proton::NetworkUtil::Route::IfaceInfo info{};
+    SyncVpn::NetworkUtil::Route::IfaceInfo info{};
     if (!GetIfaceInfo(index, info) ||
-        !Proton::NetworkUtil::InterfaceMetric::instance()->SetLowestMetric(info.Luid))
+        !SyncVpn::NetworkUtil::InterfaceMetric::instance()->SetLowestMetric(info.Luid))
 	{
         return 1;
 	}
@@ -130,9 +130,9 @@ extern "C" EXPORT long SetLowestTapMetric(UINT index)
 
 extern "C" EXPORT long RestoreDefaultTapMetric(UINT index)
 {
-    Proton::NetworkUtil::Route::IfaceInfo info{};
+    SyncVpn::NetworkUtil::Route::IfaceInfo info{};
     if (!GetIfaceInfo(index, info) ||
-        !Proton::NetworkUtil::InterfaceMetric::instance()->RestoreDefaultMetric(info.Luid))
+        !SyncVpn::NetworkUtil::InterfaceMetric::instance()->RestoreDefaultMetric(info.Luid))
     {
         return 1;
     }

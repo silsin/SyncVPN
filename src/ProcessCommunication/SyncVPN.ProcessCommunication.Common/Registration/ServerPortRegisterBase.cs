@@ -24,7 +24,7 @@ namespace SyncVPN.ProcessCommunication.Common.Registration;
 
 public abstract class ServerPortRegisterBase
 {
-    private const string PATH = "SOFTWARE\\Proton AG\\SyncVPN\\gRPC";
+    private const string PATH = "SOFTWARE\\SyncVPN\\SyncVPN\\gRPC";
 
     private readonly IRegistryEditor _registryEditor;
     private readonly RegistryUri _registryUri;

@@ -24,7 +24,7 @@ namespace SyncVPN.Vpn.WireGuard;
 
 // A server-issued WireGuard config (new SyncVPN backend) embeds its own "DNS = ..." line. This patches
 // just that line when the user has a custom DNS override configured, rather than reconstructing the
-// whole config client-side the way WireGuardConfigGenerator does for the legacy Proton path.
+// whole config client-side the way WireGuardConfigGenerator does for the legacy backend path.
 public static class WireGuardConfigDnsPatcher
 {
     public static string ApplyCustomDnsOverride(string configText, IReadOnlyCollection<string> customDns)

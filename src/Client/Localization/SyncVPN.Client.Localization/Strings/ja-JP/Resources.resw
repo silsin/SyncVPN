@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>おすすめ</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>アプリの最新バージョンに更新することで、VPNを最大限に活用できます。</value>
@@ -1628,7 +1628,7 @@
     <value>続行するには Windows サービスを有効にしてください</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Proton Free は、{0} ヶ国から利用可能な最速の無料サーバーに自動的に接続します。 通常、これはあなたの場所に最も近いサーバーになります。</value>
+    <value>SyncVPN Free は、{0} ヶ国から利用可能な最速の無料サーバーに自動的に接続します。 通常、これはあなたの場所に最も近いサーバーになります。</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_Other">
     <value>無料サーバーの国 ({0})</value>
@@ -1765,7 +1765,7 @@
     <value>オンラインになっていて、接続が安定していることを確認してください。</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>これらのクイック修正は、Proton への接続に役立つ場合があります。</value>
+    <value>これらのクイック修正は、SyncVPN への接続に役立つ場合があります。</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>別のネットワークを使用する</value>
@@ -1777,7 +1777,7 @@
     <value>ステータスページを確認してください</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Proton サービスが通常どおり実行されていることを確認するためです。</value>
+    <value>SyncVPN サービスが通常どおり実行されていることを確認するためです。</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>接続ヘルプ</value>
@@ -1844,7 +1844,7 @@
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Welcome to {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>VPNトンネルを抜けて、ローカルネットワーク (LAN) 上のプリンターやスピーカーなどに接続できるようになりました。</value>
@@ -2434,7 +2434,7 @@
     <value>セキュリティキー</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>お客様のProtonアカウントにリンクされたU2FまたはFIDOキーを差し込んでください。</value>
+    <value>お客様のSyncVPNアカウントにリンクされたU2FまたはFIDOキーを差し込んでください。</value>
   </data>
   <data name="Main_Loading">
     <value>読み込み中です。お待ちください...</value>
@@ -2490,7 +2490,7 @@
     <value>最大のデバイス数に達しました。VPNに再接続するには、他のデバイスで切断してください。</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>お客様のプランは Proton Free にダウングレードされ、最速の無料サーバーに再接続されます。</value>
+    <value>お客様のプランは SyncVPN Free にダウングレードされ、最速の無料サーバーに再接続されます。</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>公衆Wi-Fiネットワークはセキュリティの脅威に対してより脆弱です。安全に閲覧するにはVPNに接続してください。</value>
@@ -2862,7 +2862,7 @@ VPN接続</value>
     <value>代替ルーティング</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>ネットワーク制限により Proton サービスがブロックされている場合は、代替ネットワーク ルーティングを使用してサイトに接続しようとします。</value>
+    <value>ネットワーク制限により SyncVPN サービスがブロックされている場合は、代替ネットワーク ルーティングを使用してサイトに接続しようとします。</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>カスタムDNSサーバー</value>
@@ -3241,7 +3241,7 @@ VPN接続</value>
     <value>テーマ</value>
   </data>
   <data name="Settings_Improve">
-    <value>Protonを改善する</value>
+    <value>SyncVPNを改善する</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>検閲との闘いにご協力ください</value>
@@ -3391,7 +3391,7 @@ VPN接続</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>Protonアカウントの詳細を入力</value>
+    <value>SyncVPNアカウントの詳細を入力</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>キルスイッチを無効にする</value>

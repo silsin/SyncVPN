@@ -34,7 +34,7 @@ namespace SyncVPN.Vpn.Connection;
 // to a server-assigned non-standard port, so a claimed account whose Sstp.Port isn't 443 cannot
 // actually be reached through this engine today (see RasEntryOptions).
 // Implements ISingleVpnConnection directly rather than IAdapterSingleVpnConnection: unlike
-// OpenVpn/WireGuard, this isn't wrapped in LocalAgentWrapper, since Local Agent is Proton's
+// OpenVpn/WireGuard, this isn't wrapped in LocalAgentWrapper, since Local Agent is the legacy backend's
 // proprietary post-connect control channel and has no equivalent for a plain RAS tunnel - so
 // SetFeatures/RequestNetShieldStats/RequestConnectionDetails are no-ops here rather than being
 // provided by that wrapper.

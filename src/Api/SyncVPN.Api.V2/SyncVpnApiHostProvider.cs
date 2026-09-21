@@ -29,8 +29,8 @@ public interface ISyncVpnApiHostProvider
     Uri GetBaseUri();
 }
 
-// Unlike ApiHostProvider (Proton), the new backend has no alternative-routing/anti-censorship
-// host swap - that mechanism stays Proton-only per the hybrid-backend decision.
+// Unlike ApiHostProvider (legacy backend), the new backend has no alternative-routing/anti-censorship
+// host swap - that mechanism stays on the legacy backend per the hybrid-backend decision.
 public class SyncVpnApiHostProvider : ISyncVpnApiHostProvider
 {
     // Matches DefaultUrlsConfigurationFactory - used only if IConfiguration.Urls.SyncVpnApiUrl is

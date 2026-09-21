@@ -260,9 +260,6 @@
     <Project Path="src/ProcessCommunication/Server/SyncVPN.ProcessCommunication.Server.Installers/SyncVPN.ProcessCommunication.Server.Installers.csproj" />
     <Project Path="src/ProcessCommunication/Server/SyncVPN.ProcessCommunication.Server/SyncVPN.ProcessCommunication.Server.csproj" />
   </Folder>
-  <Folder Name="/ProtonInstaller/">
-    <Project Path="src/ProtonInstaller/ProtonInstaller.csproj" />
-  </Folder>
   <Folder Name="/Serialization/">
     <Project Path="src/Serialization/SyncVPN.Serialization.Contracts/SyncVPN.Serialization.Contracts.csproj" />
     <Project Path="src/Serialization/SyncVPN.Serialization.Installers/SyncVPN.Serialization.Installers.csproj" />

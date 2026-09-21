@@ -19,6 +19,7 @@
         <ProjectReference Include="..\..\Common\SyncVPN.Common.Core\SyncVPN.Common.Core.csproj" />
         <ProjectReference Include="..\..\Configurations\SyncVPN.Configurations.Contracts\SyncVPN.Configurations.Contracts.csproj" />
         <ProjectReference Include="..\..\Client\Settings\SyncVPN.Client.Settings.Contracts\SyncVPN.Client.Settings.Contracts.csproj" />
+        <ProjectReference Include="..\..\Logging\SyncVPN.Logging.Contracts\SyncVPN.Logging.Contracts.csproj" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" />

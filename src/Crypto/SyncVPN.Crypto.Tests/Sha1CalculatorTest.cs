@@ -44,7 +44,7 @@ public class Sha1CalculatorTest
     [DataRow("1ef0c5a368ea1e692f92214a6d4fb2b87e2626e8", "testas1")]
     [DataRow("089249220d3ec96e9457427b03f03f465a9e9955", "testas2")]
     [DataRow("16e5ef380cf2bc2f081344f1b3d5aada387a3a3c", "testas3")]
-    [DataRow("aeda6f734aff5793c3c61cf57841453423fdc2c0", "example.test.account.123456789@account.protonvpn.com")]
+    [DataRow("aeda6f734aff5793c3c61cf57841453423fdc2c0", "example.test.account.123456789@account.syncvpn.com")]
     public void TestHash(string expectedResult, string input)
     {
         string result = _sha1Calculator!.Hash(input);

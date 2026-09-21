@@ -254,7 +254,7 @@ public class ServersCache : IServersCache
 
                     _settings.LastLogicalsStatusId = response.Value.StatusId;
 
-                    // The new SyncVPN backend has no equivalent to Proton's binary loads/status blob
+                    // The new SyncVPN backend has no equivalent to the legacy backend's binary loads/status blob
                     // (no separate load/score signal at all yet - see the migration plan) - skip that
                     // fetch entirely rather than let it silently abort the whole update below.
                     if (!_backendModeProvider.IsNewBackendEnabled(BackendCapability.Servers))

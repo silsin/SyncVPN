@@ -1,5 +1,5 @@
-#ifndef PROTON_NETWORK_UTIL_NETWORK_IPV6_SETTINGS_H
-#define PROTON_NETWORK_UTIL_NETWORK_IPV6_SETTINGS_H
+#ifndef SYNCVPN_NETWORK_UTIL_NETWORK_IPV6_SETTINGS_H
+#define SYNCVPN_NETWORK_UTIL_NETWORK_IPV6_SETTINGS_H
 
 #include <netcfgx.h>
 #include <atlbase.h>
@@ -7,7 +7,7 @@
 #include <string>
 #include <set>
 
-namespace Proton
+namespace SyncVpn
 {
     namespace NetworkUtil
     {
@@ -25,4 +25,4 @@ namespace Proton
     }
 }
 
-#endif // PROTON_NETWORK_UTIL_NETWORK_IPV6_SETTINGS_H
+#endif // SYNCVPN_NETWORK_UTIL_NETWORK_IPV6_SETTINGS_H

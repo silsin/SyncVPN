@@ -78,7 +78,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                                 Style="{StaticResource TitleBarMenuFlyoutItemStyle}"
                                 Text="{x:Bind ViewModel.Localizer.Get('Home_TitleBar_Menu_About')}">
                     <MenuFlyoutItem.Icon>
-                        <pathicons:BrandProtonVpnFilled Size="Pixels16" />
+                        <pathicons:BrandSyncVpnFilled Size="Pixels16" />
                     </MenuFlyoutItem.Icon>
                 </MenuFlyoutItem>
 

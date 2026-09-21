@@ -86,7 +86,7 @@ public static class ReportIssueMapper
             BROWSING_SPEED_CATEGORY => new Bolt(),
             CONNECTING_TO_VPN_CATEGORY => new PowerOff(),
             WEAK_CONNECTION_CATEGORY => new ExclamationCircle(),
-            USING_APP_CATEGORY => new BrandProtonVpn(),
+            USING_APP_CATEGORY => new BrandSyncVpn(),
             STREAMING_CATEGORY => new Play(),
             SOMETHING_ELSE_CATEGORY => new ThreeDotsHorizontal(),
             PROMOTIONS_CATEGORY => new BagPercent(),

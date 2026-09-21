@@ -35,7 +35,7 @@ namespace SyncVPN.Common.Tests.Vpn
         public void Name_ShouldBe_Name()
         {
             // Arrange
-            const string expected = "server-1.protonvpn.com";
+            const string expected = "server-1.syncvpn.com";
             VpnHost host = new(expected, "127.0.0.1", string.Empty, null, string.Empty, false, null);
 
             // Act
@@ -50,7 +50,7 @@ namespace SyncVPN.Common.Tests.Vpn
         {
             // Arrange
             const string expected = "44.55.66.77";
-            VpnHost host = new("server-1.protonvpn.com", expected, string.Empty, null, string.Empty, false, null);
+            VpnHost host = new("server-1.syncvpn.com", expected, string.Empty, null, string.Empty, false, null);
 
             // Act
             string result = host.Ip;
@@ -88,8 +88,8 @@ namespace SyncVPN.Common.Tests.Vpn
         [TestMethod]
         [DataRow(null)]
         [DataRow("")]
-        [DataRow("server.\"proton.com")]
-        [DataRow("server.proton.com\"")]
+        [DataRow("server.\"syncvpn.com")]
+        [DataRow("server.syncvpn.com\"")]
         public void VpnHost_ShouldThrow_WhenNameIsNotValid(string name)
         {
             // Act

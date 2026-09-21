@@ -35,7 +35,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
 
     <custom:WindowContentControl x:Name="WindowContainer"
                                  Background="{ThemeResource BackgroundNormColorBrush}"
-                                 IconSource="{StaticResource ProtonVpnOnApplicationIconSource}"
+                                 IconSource="{StaticResource SyncVpnOnApplicationIconSource}"
                                  TitleBarButtonsLength="46">
 
         <custom:WindowContentControl.Resources>

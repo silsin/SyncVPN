@@ -7,6 +7,6 @@
 .Set DestinationDir=SyncVPN.CalloutDriver.arm64
 
 "bin\Release\arm64\SyncVPN.CalloutDriver\SyncVPN.CalloutDriver.inf"
-"bin\Release\arm64\SyncVPN.CalloutDriver\protonvpn.calloutdriver.cat"
+"bin\Release\arm64\SyncVPN.CalloutDriver\SyncVPN.CalloutDriver.cat"
 "bin\Release\arm64\SyncVPN.CalloutDriver\SyncVPN.CalloutDriver.sys"
 "bin\Release\arm64\SyncVPN.CalloutDriver\SyncVPN.CalloutDriver.pdb"

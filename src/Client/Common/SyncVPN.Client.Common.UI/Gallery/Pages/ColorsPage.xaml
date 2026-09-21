@@ -261,7 +261,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                     Orientation="Horizontal"
                     Spacing="8">
             <gallery:ColorsControl ColorBrush="{ThemeResource VpnGreenColorBrush}"
-                                   Header="proton-vpn-green"
+                                   Header="sync-vpn-green"
                                    ResourceName="VpnGreenColorBrush" />
         </StackPanel>
 

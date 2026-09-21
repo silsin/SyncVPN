@@ -34,16 +34,16 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
         <x:Double x:Key="IconAnimationToValue">2</x:Double>
         <SineEase x:Key="IconAnimationEasingFunction" />
 
-        <x:Double x:Key="ProtonVpnLogoSize">120</x:Double>
+        <x:Double x:Key="SyncVpnLogoSize">120</x:Double>
         <x:Double x:Key="ProgressRingSize">24</x:Double>
     </base:IconUserControl.Resources>
 
     <Viewbox Stretch="{x:Bind Stretch, Mode=OneWay}">
         <Grid>
 
-            <Image Width="{StaticResource ProtonVpnLogoSize}"
-                   Height="{StaticResource ProtonVpnLogoSize}"
-                   Source="{StaticResource ProtonVpnOnApplicationIconSource}"
+            <Image Width="{StaticResource SyncVpnLogoSize}"
+                   Height="{StaticResource SyncVpnLogoSize}"
+                   Source="{StaticResource SyncVpnOnApplicationIconSource}"
                    Stretch="Uniform" />
 
             <ProgressRing Width="{StaticResource ProgressRingSize}"

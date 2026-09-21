@@ -42,7 +42,7 @@ namespace SyncVPN.Update.Tests.Releases
         {
             FileResponse file = new()
             {
-                Url = "https://protonvpn.com/download.exe", Sha512CheckSum = "012345", Args = "-install"
+                Url = "https://syncvpn.com/download.exe", Sha512CheckSum = "012345", Args = "-install"
             };
             Release release = new()
             {

@@ -84,14 +84,14 @@ public class SentryEventScrubberProcessorTests
     {
         // Arrange
         SentryEvent sentryEvent = new();
-        sentryEvent.SetExtra("logs", "User admin@proton.me logged in from C:\\Users\\Admin\\Desktop");
+        sentryEvent.SetExtra("logs", "User admin@syncvpn.com logged in from C:\\Users\\Admin\\Desktop");
 
         // Act
         SentryEvent result = _processor.Process(sentryEvent);
 
         // Assert
         string logs = result.Extra["logs"] as string;
-        logs.Should().NotContain("admin@proton.me");
+        logs.Should().NotContain("admin@syncvpn.com");
         logs.Should().NotContain("Admin");
         logs.Should().Contain("[REDACTED_EMAIL]");
         logs.Should().Contain("[REDACTED_USER]");

@@ -37,7 +37,7 @@ namespace SyncVPN.Api.Tests.Handlers;
 [TestClass]
 public class DnsHandlerTest
 {
-    private const string TEST_URL = "https://protonvpn.com/test";
+    private const string TEST_URL = "https://syncvpn.com/test";
 
     private ILogger _logger;
     private IDnsManager _dnsManager;

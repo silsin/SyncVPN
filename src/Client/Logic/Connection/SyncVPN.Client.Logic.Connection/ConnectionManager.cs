@@ -337,7 +337,7 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
                 PhysicalServer? physicalServer = server?.Servers.FirstOrDefault(FilterPhysicalServerByVpnState(message, vpnProtocol));
 
                 // A SyncVPN-catalog server only ever exists in the new backend's catalog - it can never
-                // be found by GetCurrentServer above, which only searches _serversLoader's legacy Proton
+                // be found by GetCurrentServer above, which only searches _serversLoader's legacy backend
                 // cache. Without this, every single SyncVPN server connection actually succeeded at the
                 // native/tunnel level (a real EndpointIp was reported) but fell into the "Server is null"
                 // branch below on every status update, endlessly reconnecting until the native service

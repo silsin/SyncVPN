@@ -43,11 +43,11 @@ public static class TestConstants
     public static TimeSpan NavigationDelay => TimeSpan.FromMilliseconds(500);
     public static TimeSpan UserInputSimulationDelay => TimeSpan.FromMilliseconds(500);
 
-    public static string AppFolderPath = @"C:\Program Files\Proton\SyncVPN";
-    public static string LauncherPath = @"C:\Program Files\Proton\SyncVPN\SyncVPN.Launcher.exe";
+    public static string AppFolderPath = @"C:\Program Files\SyncVPN";
+    public static string LauncherPath = @"C:\Program Files\SyncVPN\SyncVPN.Launcher.exe";
     public static string MapCountry = "CA";
-    public static string ClientLogsPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Proton\SyncVPN\Logs\client-logs.txt");
-    public static string UserStoragePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Proton\SyncVPN");    
+    public static string ClientLogsPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"SyncVPN\Logs\client-logs.txt");
+    public static string UserStoragePath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"SyncVPN");
     public static string? ServerStoragePath => Directory.GetFiles(Path.Combine(UserStoragePath, "Storage"), "Servers.*.bin").OrderByDescending(File.GetLastWriteTime).FirstOrDefault();
 
     public enum Protocol

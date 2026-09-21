@@ -301,7 +301,7 @@ public class HomeRobot
 
         public Verifications IsProtocolDisplayed(TestConstants.Protocol protocol, bool isProtun = false)
         {
-            string? protonPrefix = isProtun ? "Proton " : null;
+            string? legacyPrefix = isProtun ? "Proton " : null;
 
             switch (protocol)
             {
@@ -312,13 +312,13 @@ public class HomeRobot
                     ConnectionDetailsProtocol.TextEquals("OpenVPN (TCP)");
                     break;
                 case TestConstants.Protocol.WireGuardTcp:
-                    ConnectionDetailsProtocol.TextEquals(protonPrefix + "WireGuard (TCP)");
+                    ConnectionDetailsProtocol.TextEquals(legacyPrefix + "WireGuard (TCP)");
                     break;
                 case TestConstants.Protocol.WireGuardTls:
-                    ConnectionDetailsProtocol.TextEquals(protonPrefix + "Stealth");
+                    ConnectionDetailsProtocol.TextEquals(legacyPrefix + "Stealth");
                     break;
                 case TestConstants.Protocol.WireGuardUdp:
-                    ConnectionDetailsProtocol.TextEquals(protonPrefix + "WireGuard (UDP)");
+                    ConnectionDetailsProtocol.TextEquals(legacyPrefix + "WireGuard (UDP)");
                     break;
             }
 

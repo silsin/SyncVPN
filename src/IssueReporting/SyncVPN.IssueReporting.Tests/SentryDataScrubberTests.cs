@@ -37,7 +37,7 @@ public class SentryDataScrubberTests
     public void Scrub_ShouldRedactEmailAddresses()
     {
         // Arrange
-        string input = "User email is john.doe@example.com and contact is support@protonvpn.com";
+        string input = "User email is john.doe@example.com and contact is support@syncvpn.com";
 
         // Act
         string result = _scrubber.Scrub(input);

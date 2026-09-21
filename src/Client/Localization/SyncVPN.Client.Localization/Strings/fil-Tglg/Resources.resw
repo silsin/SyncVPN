@@ -298,7 +298,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>ᜁᜈᜒᜇᜒᜇᜒᜃᜓᜋᜒᜈ᜔ᜇ</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>ᜐᜓᜎᜒᜆᜒᜈ᜔ ᜀᜅ᜔ ᜁᜌᜓᜅ᜔ VPN ᜐ ᜉᜋᜋᜄᜒᜆᜈ᜔ ᜈᜅ᜔ ᜉᜄ᜔-update ᜐ ᜉᜒᜈᜃᜊᜄᜓᜅ᜔ ᜊᜒᜇ᜔ᜐ᜔ᜌᜓᜈ᜔ ᜈᜅ᜔ app.</value>
@@ -1688,10 +1688,10 @@ Error code: {0}</value>
     <value>ᜁ-enable ᜀᜅ᜔ Windows Service ᜂᜉᜅ᜔ ᜋᜄ᜔ᜉᜆᜓᜎᜓᜌ᜔</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>ᜀᜏ᜔ᜆᜓᜋᜆᜒᜃᜓ ᜃᜅ᜔ ᜁᜃᜒᜈᜓᜃᜓᜈᜒᜃ᜔ᜆ ᜈᜅ᜔ Proton Free ᜐ ᜉᜒᜈᜃᜋᜊᜒᜎᜒᜐ᜔ ᜈ available ᜈ ᜎᜒᜊ᜔ᜇᜒᜅ᜔ server ᜋᜓᜎ ᜐ ᜀᜋᜒᜅ᜔ {0} ᜎᜒᜊ᜔ᜇᜒᜅ᜔ ᜊᜈ᜔ᜐ. ᜃᜇᜈᜒᜏᜅ᜔ ᜁᜆᜓ ᜀᜅ᜔ ᜉᜒᜈᜃᜋᜎᜉᜒᜆ᜔ ᜈ server ᜐ ᜎᜓᜃᜐ᜔ᜌᜓᜈ᜔ ᜋᜓ.</value>
+    <value>ᜀᜏ᜔ᜆᜓᜋᜆᜒᜃᜓ ᜃᜅ᜔ ᜁᜃᜒᜈᜓᜃᜓᜈᜒᜃ᜔ᜆ ᜈᜅ᜔ SyncVPN Free ᜐ ᜉᜒᜈᜃᜋᜊᜒᜎᜒᜐ᜔ ᜈ available ᜈ ᜎᜒᜊ᜔ᜇᜒᜅ᜔ server ᜋᜓᜎ ᜐ ᜀᜋᜒᜅ᜔ {0} ᜎᜒᜊ᜔ᜇᜒᜅ᜔ ᜊᜈ᜔ᜐ. ᜃᜇᜈᜒᜏᜅ᜔ ᜁᜆᜓ ᜀᜅ᜔ ᜉᜒᜈᜃᜋᜎᜉᜒᜆ᜔ ᜈ server ᜐ ᜎᜓᜃᜐ᜔ᜌᜓᜈ᜔ ᜋᜓ.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>ᜀᜏ᜔ᜆᜓᜋᜆᜒᜃᜓ ᜃᜅ᜔ ᜁᜃᜒᜈᜓᜃᜓᜈᜒᜃ᜔ᜆ ᜈᜅ᜔ Proton Free ᜐ ᜉᜒᜈᜃᜋᜊᜒᜎᜒᜐ᜔ ᜈ available ᜈ ᜎᜒᜊ᜔ᜇᜒᜅ᜔ server ᜋᜓᜎ ᜐ ᜀᜋᜒᜅ᜔ {0} ᜋᜅ ᜎᜒᜊ᜔ᜇᜒᜅ᜔ ᜊᜈ᜔ᜐ. ᜃᜇᜈᜒᜏᜅ᜔ ᜁᜆᜓ ᜀᜅ᜔ ᜉᜒᜈᜃᜋᜎᜉᜒᜆ᜔ ᜈ ᜐᜒᜇ᜔ᜊᜒᜇ᜔ ᜐ ᜎᜓᜃᜐ᜔ᜌᜓᜈ᜔ ᜋᜓ.</value>
+    <value>ᜀᜏ᜔ᜆᜓᜋᜆᜒᜃᜓ ᜃᜅ᜔ ᜁᜃᜒᜈᜓᜃᜓᜈᜒᜃ᜔ᜆ ᜈᜅ᜔ SyncVPN Free ᜐ ᜉᜒᜈᜃᜋᜊᜒᜎᜒᜐ᜔ ᜈ available ᜈ ᜎᜒᜊ᜔ᜇᜒᜅ᜔ server ᜋᜓᜎ ᜐ ᜀᜋᜒᜅ᜔ {0} ᜋᜅ ᜎᜒᜊ᜔ᜇᜒᜅ᜔ ᜊᜈ᜔ᜐ. ᜃᜇᜈᜒᜏᜅ᜔ ᜁᜆᜓ ᜀᜅ᜔ ᜉᜒᜈᜃᜋᜎᜉᜒᜆ᜔ ᜈ ᜐᜒᜇ᜔ᜊᜒᜇ᜔ ᜐ ᜎᜓᜃᜐ᜔ᜌᜓᜈ᜔ ᜋᜓ.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_One">
     <value>ᜊᜈ᜔ᜐᜅ᜔ ᜋᜌ᜔ ᜎᜒᜊ᜔ᜇᜒᜅ᜔ server ({0})</value>
@@ -1831,7 +1831,7 @@ Error code: {0}</value>
     <value>ᜐᜒᜂᜇᜇᜓᜑᜒᜅ᜔ online ᜃ ᜀᜆ᜔ stable ᜀᜅ᜔ ᜃᜓᜈᜒᜃ᜔ᜐ᜔ᜌᜓᜈ᜔ ᜋᜓ.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>ᜊᜃ ᜋᜃᜆᜓᜎᜓᜅ᜔ ᜀᜅ᜔ ᜋᜊᜒᜊᜒᜎᜒᜐ᜔ ᜈ ᜐᜓᜎᜓᜐ᜔ᜌᜓᜅ᜔ ᜁᜆᜓ ᜂᜉᜅ᜔ ᜋᜃᜃᜓᜈᜒᜃ᜔ᜆ ᜃ ᜐ Proton.</value>
+    <value>ᜊᜃ ᜋᜃᜆᜓᜎᜓᜅ᜔ ᜀᜅ᜔ ᜋᜊᜒᜊᜒᜎᜒᜐ᜔ ᜈ ᜐᜓᜎᜓᜐ᜔ᜌᜓᜅ᜔ ᜁᜆᜓ ᜂᜉᜅ᜔ ᜋᜃᜃᜓᜈᜒᜃ᜔ᜆ ᜃ ᜐ SyncVPN.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>ᜄᜓᜋᜋᜒᜆ᜔ ᜅ᜔ ᜁᜊᜅ᜔ ᜈᜒᜆ᜔ᜏᜓᜇ᜔ᜃ᜔</value>
@@ -1843,7 +1843,7 @@ Error code: {0}</value>
     <value>ᜆᜒᜅ᜔ᜈᜈ᜔ ᜀᜅ᜔ ᜀᜋᜒᜅ᜔ ᜉᜑᜒᜈ ᜈᜅ᜔ ᜐ᜔ᜆᜆᜓᜐ᜔</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Pᜉᜇ ᜎᜅ᜔ ᜋᜆᜒᜌᜃ᜔ ᜈ ᜆᜓᜋᜆᜃ᜔ᜊᜓ ᜈᜅ᜔ ᜈᜓᜇ᜔ᜋᜎ᜔ ᜀᜅ᜔ ᜋᜅ ᜐᜒᜇ᜔ᜊᜒᜐ᜔ᜌᜓ ᜈᜅ᜔ Proton</value>
+    <value>Pᜉᜇ ᜎᜅ᜔ ᜋᜆᜒᜌᜃ᜔ ᜈ ᜆᜓᜋᜆᜃ᜔ᜊᜓ ᜈᜅ᜔ ᜈᜓᜇ᜔ᜋᜎ᜔ ᜀᜅ᜔ ᜋᜅ ᜐᜒᜇ᜔ᜊᜒᜐ᜔ᜌᜓ ᜈᜅ᜔ SyncVPN</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>ᜆᜓᜎᜓᜅ᜔ ᜐ ᜃᜓᜈᜒᜃ᜔ᜐ᜔ᜌᜓᜈ᜔</value>
@@ -1913,7 +1913,7 @@ Error code: {0}</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>ᜋᜎᜒᜄᜌᜅ᜔ ᜉᜄ᜔ᜇᜆᜒᜅ᜔ ᜐ {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>ᜋᜀᜀᜇᜒ ᜃ ᜈ ᜅᜌᜓᜅ᜔ ᜃᜓᜋᜓᜈᜒᜃ᜔ᜆ ᜐ ᜋᜅ ᜉ᜔printer, speaker, ᜀᜆ᜔ ᜁᜊ ᜉᜅ᜔ devices ᜐ ᜁᜌᜓᜅ᜔ local network (LAN) ᜈᜅ᜔ ᜊᜒᜈ-bypass ᜀᜅ᜔ VPN tunnel.</value>
@@ -2536,7 +2536,7 @@ Error code: {0}</value>
     <value>Security key</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>ᜁᜎᜄᜌ᜔ ᜀᜅ᜔ U2F ᜂ FIDO key ᜈ ᜈᜃ-link ᜐ Proton Account ᜋᜓ.</value>
+    <value>ᜁᜎᜄᜌ᜔ ᜀᜅ᜔ U2F ᜂ FIDO key ᜈ ᜈᜃ-link ᜐ SyncVPN Account ᜋᜓ.</value>
   </data>
   <data name="Main_Loading">
     <value>Loading, ᜋᜅ᜔ᜌᜄᜒᜅ᜔ ᜋᜄ᜔ᜑᜒᜈ᜔ᜆᜌ᜔...</value>
@@ -2592,7 +2592,7 @@ Error code: {0}</value>
     <value>ᜈᜀᜊᜓᜆ᜔ ᜋᜓ ᜈ ᜀᜅ᜔ maximum ᜈ ᜎᜒᜋᜒᜆᜐ᜔ᜌᜓᜈ᜔ ᜈᜅ᜔ device ᜋᜓ. ᜂᜉᜅ᜔ ᜃᜓᜋᜓᜈᜒᜃ᜔ᜆᜅ᜔ ᜋᜓᜎᜒ ᜐ VPN, ᜋᜅ᜔ᜌᜇᜒᜅ᜔ ᜋᜄ᜔-disconnect ᜋᜓᜎ ᜐ ᜁᜊᜅ᜔ device.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>ᜈ-downgrade ᜀᜅ᜔ plan ᜋᜓ ᜐ Proton Free, ᜀᜆ᜔ ᜋᜓᜎᜒ ᜃ ᜈᜋᜒᜅ᜔ ᜁᜃᜒᜈᜓᜃᜓᜈᜒᜃ᜔ᜆ ᜐ ᜉᜒᜈᜃᜋᜊᜒᜎᜒᜐ᜔ ᜈ ᜎᜒᜊ᜔ᜇᜒᜅ᜔ server.</value>
+    <value>ᜈ-downgrade ᜀᜅ᜔ plan ᜋᜓ ᜐ SyncVPN Free, ᜀᜆ᜔ ᜋᜓᜎᜒ ᜃ ᜈᜋᜒᜅ᜔ ᜁᜃᜒᜈᜓᜃᜓᜈᜒᜃ᜔ᜆ ᜐ ᜉᜒᜈᜃᜋᜊᜒᜎᜒᜐ᜔ ᜈ ᜎᜒᜊ᜔ᜇᜒᜅ᜔ server.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>ᜋᜐ᜔ vulnerable ᜐ ᜋᜅ ᜊᜈ᜔ᜆ ᜐ ᜐᜒᜄᜓᜇᜒᜇᜇ᜔ ᜀᜅ᜔ ᜋᜅ ᜉᜋ᜔ᜉᜓᜊ᜔ᜎᜒᜃᜓᜅ᜔ Wi-Fi network. ᜃᜓᜋᜓᜈᜒᜃ᜔ᜆ ᜐ VPN ᜂᜉᜅ᜔ ᜎᜒᜄ᜔ᜆᜐ᜔ ᜈ ᜋᜃᜉᜄ᜔-browse.</value>
@@ -2964,7 +2964,7 @@ VPN connection</value>
     <value>ᜀᜎ᜔ᜆᜒᜇ᜔ᜈᜆᜒᜊᜓᜅ᜔ routing</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>ᜃᜓᜅ᜔ ᜈᜃ-block ᜀᜅ᜔ ᜋᜅ ᜐᜒᜇ᜔ᜊᜒᜐ᜔ᜌᜓ ᜈᜅ᜔ Proton ᜇᜑᜒᜎ᜔ ᜐ ᜋᜅ ᜉᜄ᜔ᜑᜒᜑᜒᜄ᜔ᜉᜒᜆ᜔ ᜐ network, ᜐᜓᜐᜓᜊᜓᜃᜈ᜔ ᜈᜋᜒᜅ᜔ ᜄᜓᜋᜋᜒᜆ᜔ ᜈᜅ᜔ ᜀᜎ᜔ᜆᜒᜇ᜔ᜈᜆᜒᜊᜓᜅ᜔ network routing ᜂᜉᜅ᜔ ᜁᜃᜓᜈᜒᜃ᜔ᜆ ᜃ ᜐ ᜀᜋᜒᜅ᜔ ᜋᜅ site.</value>
+    <value>ᜃᜓᜅ᜔ ᜈᜃ-block ᜀᜅ᜔ ᜋᜅ ᜐᜒᜇ᜔ᜊᜒᜐ᜔ᜌᜓ ᜈᜅ᜔ SyncVPN ᜇᜑᜒᜎ᜔ ᜐ ᜋᜅ ᜉᜄ᜔ᜑᜒᜑᜒᜄ᜔ᜉᜒᜆ᜔ ᜐ network, ᜐᜓᜐᜓᜊᜓᜃᜈ᜔ ᜈᜋᜒᜅ᜔ ᜄᜓᜋᜋᜒᜆ᜔ ᜈᜅ᜔ ᜀᜎ᜔ᜆᜒᜇ᜔ᜈᜆᜒᜊᜓᜅ᜔ network routing ᜂᜉᜅ᜔ ᜁᜃᜓᜈᜒᜃ᜔ᜆ ᜃ ᜐ ᜀᜋᜒᜅ᜔ ᜋᜅ site.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>ᜋᜅ custom ᜈ DNS server</value>
@@ -3343,7 +3343,7 @@ VPN connection</value>
     <value>ᜆᜒᜋ</value>
   </data>
   <data name="Settings_Improve">
-    <value>ᜉᜑᜓᜐᜌᜒᜈ᜔ ᜀᜅ᜔ Proton</value>
+    <value>ᜉᜑᜓᜐᜌᜒᜈ᜔ ᜀᜅ᜔ SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>ᜆᜓᜎᜓᜅᜈ᜔ ᜃᜋᜒᜅ᜔ ᜎᜊᜈᜈ᜔ ᜀᜅ᜔ censorship</value>
@@ -3387,25 +3387,25 @@ VPN connection</value>
     <value>ᜀᜅ᜔ ᜀᜋᜒᜅ᜔ ᜊᜄᜓᜅ᜔ framework ᜈ ᜈᜃᜊᜆᜌ᜔ ᜐ WireGuard ᜉᜇ ᜐ ᜋᜐ᜔ ᜋᜆᜀᜐ᜔ ᜈ ᜃᜆᜆᜄᜈ᜔, functionality, ᜀᜆ᜔ ᜉᜄ᜔ᜎᜊᜈ᜔ ᜐ censorship.</value>
   </data>
   <data name="Settings_Protocols_ProTunTcp_Title">
-    <value>Proton WireGuard</value>
+    <value>SyncVPN WireGuard</value>
   </data>
   <data name="Settings_Protocols_ProTunTls_Description">
     <value>ᜀᜅ᜔ ᜀᜋᜒᜅ᜔ ᜊᜄᜓᜅ᜔ framework ᜈ ᜈᜃᜊᜆᜌ᜔ ᜐ WireGuard ᜉᜇ ᜐ ᜋᜐ᜔ ᜋᜆᜀᜐ᜔ ᜈ ᜃᜆᜆᜄᜈ᜔, functionality, ᜀᜆ᜔ ᜉᜄ᜔ᜎᜊᜈ᜔ ᜐ censorship.</value>
   </data>
   <data name="Settings_Protocols_ProTunTls_Title">
-    <value>Proton Stealth</value>
+    <value>SyncVPN Stealth</value>
   </data>
   <data name="Settings_Protocols_ProTunUdp_Description">
     <value>ᜀᜅ᜔ ᜀᜋᜒᜅ᜔ ᜊᜄᜓᜅ᜔ framework ᜈ ᜈᜃᜊᜆᜌ᜔ ᜐ WireGuard ᜉᜇ ᜐ ᜋᜐ᜔ ᜋᜆᜀᜐ᜔ ᜈ ᜃᜆᜆᜄᜈ᜔, functionality, ᜀᜆ᜔ ᜉᜄ᜔ᜎᜊᜈ᜔ ᜐ censorship.</value>
   </data>
   <data name="Settings_Protocols_ProTunUdp_Title">
-    <value>Proton WireGuard</value>
+    <value>SyncVPN WireGuard</value>
   </data>
   <data name="Settings_Protocols_ProtonProtocols_Description">
     <value>ᜄᜋᜒᜆᜒᜈ᜔ ᜀᜅ᜔ ᜐᜇᜒᜎᜒᜅ᜔ ᜁᜋ᜔ᜉ᜔ᜎᜒᜋᜒᜈ᜔ᜆᜐ᜔ᜌᜓᜈ᜔ ᜈᜅ᜔ SyncVPN ᜈᜅ᜔ WireGuard. ᜁᜐ ᜁᜆᜓᜅ᜔ experimental ᜈ feature, ᜃᜌ ᜋᜀᜀᜇᜒ ᜃᜅ᜔ ᜋᜃᜇᜈᜐ᜔ ᜈᜅ᜔ ᜁᜎᜅ᜔ instability.</value>
   </data>
   <data name="Settings_Protocols_ProtonProtocols_Title">
-    <value>ᜋᜅ ᜉ᜔ᜇᜓᜆᜓᜃᜓᜎ᜔ ᜈᜅ᜔ Proton</value>
+    <value>ᜋᜅ ᜉ᜔ᜇᜓᜆᜓᜃᜓᜎ᜔ ᜈᜅ᜔ SyncVPN</value>
   </data>
   <data name="Settings_Protocols_Smart_Description">
     <value>ᜀᜏ᜔ᜆᜓᜋᜆᜒᜃᜓᜅ᜔ ᜉᜒᜈᜒᜉᜒᜎᜒ ᜀᜅ᜔ ᜉᜒᜈᜃᜋᜑᜓᜐᜌ᜔ ᜈ protocol ᜉᜇ ᜐ ᜁᜌᜓᜅ᜔ ᜃᜓᜈᜒᜃ᜔ᜐ᜔ᜌᜓᜈ᜔</value>
@@ -3462,13 +3462,13 @@ VPN connection</value>
     <value>OpenVPN (UDP)</value>
   </data>
   <data name="Settings_SelectedProtocol_ProTunTcp">
-    <value>Proton WireGuard (TCP)</value>
+    <value>SyncVPN WireGuard (TCP)</value>
   </data>
   <data name="Settings_SelectedProtocol_ProTunTls">
-    <value>Proton Stealth</value>
+    <value>SyncVPN Stealth</value>
   </data>
   <data name="Settings_SelectedProtocol_ProTunUdp">
-    <value>Proton WireGuard (UDP)</value>
+    <value>SyncVPN WireGuard (UDP)</value>
   </data>
   <data name="Settings_SelectedProtocol_Smart">
     <value>Smart</value>
@@ -3526,7 +3526,7 @@ VPN connection</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>ᜁᜎᜄᜌ᜔ ᜀᜅ᜔ ᜋᜅ ᜇᜒᜆᜎ᜔ᜌᜒ ᜈᜅ᜔ Proton Account ᜋᜓ.</value>
+    <value>ᜁᜎᜄᜌ᜔ ᜀᜅ᜔ ᜋᜅ ᜇᜒᜆᜎ᜔ᜌᜒ ᜈᜅ᜔ SyncVPN Account ᜋᜓ.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>ᜁ-disable ᜀᜅ᜔ kill switch</value>
@@ -3869,19 +3869,19 @@ VPN connection</value>
     <value>ᜋᜆᜆᜄ᜔, ᜐᜓᜊᜓᜃ᜔ ᜈ, ᜀᜆ᜔ ᜎᜒᜄ᜔ᜆᜐ᜔</value>
   </data>
   <data name="VpnProtocol_ProTun_Tcp">
-    <value>Proton WireGuard (TCP)</value>
+    <value>SyncVPN WireGuard (TCP)</value>
   </data>
   <data name="VpnProtocol_ProTun_Tcp_Description">
     <value>State-of-the-art ᜈ protocol ᜉᜇ ᜐ ᜐᜒᜄᜓᜇᜒᜇᜇ᜔ ᜀᜆ᜔ performance</value>
   </data>
   <data name="VpnProtocol_ProTun_Tls">
-    <value>Proton Stealth</value>
+    <value>SyncVPN Stealth</value>
   </data>
   <data name="VpnProtocol_ProTun_Tls_Description">
     <value>ᜈᜒᜎᜎᜋ᜔ᜉᜐᜈ᜔ ᜀᜅ᜔ ᜋ᜔ᜄ ᜉᜄ᜔-block ᜐ VPN ᜐ ᜉᜋᜋᜄᜒᜆᜈ᜔ ᜈᜅ᜔ ᜉᜄ᜔ᜆᜆᜄᜓ ᜈᜅ᜔ ᜁᜌᜓᜅ᜔ ᜃᜓᜈᜒᜃ᜔ᜐ᜔ᜌᜓᜈ᜔ ᜋᜓᜎ ᜐ ᜋᜅ censor</value>
   </data>
   <data name="VpnProtocol_ProTun_Udp">
-    <value>Proton WireGuard (UDP)</value>
+    <value>SyncVPN WireGuard (UDP)</value>
   </data>
   <data name="VpnProtocol_ProTun_Udp_Description">
     <value>State-of-the-art ᜈ protocol ᜉᜇ ᜐ ᜐᜒᜄᜓᜇᜒᜇᜇ᜔ ᜀᜆ᜔ performance</value>

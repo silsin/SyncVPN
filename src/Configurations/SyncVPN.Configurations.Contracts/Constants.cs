@@ -22,5 +22,5 @@ namespace SyncVPN.Configurations.Contracts;
 public static class Constants
 {
     public const string ALTERNATIVE_ROUTING_HOSTNAME = "*";
-    public const string API_URL = "api.protonvpn.ch";
+    public const string API_URL = "syncvpn.com";
 }

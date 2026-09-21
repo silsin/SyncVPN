@@ -26,7 +26,7 @@ public static class DefaultWireGuardConfigurationsFactory
 {
     private const string WIREGUARD_CONFIG_FILENAME = "SyncVPN";
 
-    public static IWireGuardConfigurations Create(string baseDirectory, string commonAppDataProtonVpnPath)
+    public static IWireGuardConfigurations Create(string baseDirectory, string commonAppDataPath)
     {
         return new WireGuardConfigurations
         {
@@ -43,9 +43,9 @@ public static class DefaultWireGuardConfigurationsFactory
             DefaultServerGatewayIpv6Address = "2a07:b944::2:1",
             DefaultClientIpv6Address = "2a07:b944::2:2",
 
-            ConfigFilePath = Path.Combine(commonAppDataProtonVpnPath, "WireGuard", $"{WIREGUARD_CONFIG_FILENAME}.conf"),
+            ConfigFilePath = Path.Combine(commonAppDataPath, "WireGuard", $"{WIREGUARD_CONFIG_FILENAME}.conf"),
             ServicePath = Path.Combine(baseDirectory, "SyncVPN.WireGuardService.exe"),
-            LogFilePath = Path.Combine(commonAppDataProtonVpnPath, "WireGuard", "log.bin"),
+            LogFilePath = Path.Combine(commonAppDataPath, "WireGuard", "log.bin"),
             PipeName = $"ProtectedPrefix\\Administrators\\WireGuard\\{WIREGUARD_CONFIG_FILENAME}",
         };
     }

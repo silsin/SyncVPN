@@ -119,7 +119,7 @@ DriverEntry(
     nbl_pool_params.Header.Revision = NET_BUFFER_LIST_POOL_PARAMETERS_REVISION_1;
     nbl_pool_params.Header.Size = sizeof(nbl_pool_params);
     nbl_pool_params.fAllocateNetBuffer = TRUE;
-    nbl_pool_params.PoolTag = ProtonTAG;
+    nbl_pool_params.PoolTag = SyncVpnTAG;
     nbl_pool_params.DataSize = 0;
     nbl_pool_handle = NdisAllocateNetBufferListPool(nullptr, &nbl_pool_params);
     if (nbl_pool_handle == nullptr)

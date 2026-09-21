@@ -48,7 +48,7 @@ public class SplitTunnelingAndKillSwitchTests : FreshSessionSetUp
     Remove-NetFirewallRule -DisplayName 'Block Chrome Inbound'
     ";
 
-    private static readonly string _installedServicePath = Path.Combine(TestEnvironment.GetProtonClientFolder(), "SyncVPNService.exe");
+    private static readonly string _installedServicePath = Path.Combine(TestEnvironment.GetClientFolder(), "SyncVPNService.exe");
 
     private const string VPN_QOS_POLICY_NAME = "LimitSyncVPN";
 
@@ -321,7 +321,7 @@ public class SplitTunnelingAndKillSwitchTests : FreshSessionSetUp
     public void TearDown()
     {
         //these are all backups
-        DeleteProtonData();
+        DeleteAppData();
         BrowserUtils.KillAllBrowsers();
         WindowsUtils.RunPowerShellScript(_removeVpnLimitScript, true);
         WindowsUtils.RunPowerShellScript(REMOVE_FIREWALL_RULES_SCRIPT, true);

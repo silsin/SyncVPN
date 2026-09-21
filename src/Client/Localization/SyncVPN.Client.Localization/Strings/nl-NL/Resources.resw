@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Aanbevolen</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>Haal het meeste uit uw VPN door bij te werken naar de nieuwste versie van de app.</value>
@@ -1682,10 +1682,10 @@ Foutcode: {0}</value>
     <value>Windows Service inschakelen om door te gaan</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>Proton Free verbindt u automatisch met de snelste gratis server uit ons {0} gratis land. Dit zal normaal gesproken de dichtstbijzijnde server bij uw locatie zijn.</value>
+    <value>SyncVPN Free verbindt u automatisch met de snelste gratis server uit ons {0} gratis land. Dit zal normaal gesproken de dichtstbijzijnde server bij uw locatie zijn.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Proton Free verbindt u automatisch met de snelste gratis server uit onze {0} gratis landen. Dit zal normaal gesproken de dichtstbijzijnde server bij uw locatie zijn.</value>
+    <value>SyncVPN Free verbindt u automatisch met de snelste gratis server uit onze {0} gratis landen. Dit zal normaal gesproken de dichtstbijzijnde server bij uw locatie zijn.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_One">
     <value>Land met gratis server ({0})</value>
@@ -1825,7 +1825,7 @@ Foutcode: {0}</value>
     <value>Zorg ervoor dat u online bent en dat uw verbinding stabiel is.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>Deze snelle oplossingen kunnen u helpen om verbinding te maken met Proton.</value>
+    <value>Deze snelle oplossingen kunnen u helpen om verbinding te maken met SyncVPN.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>Gebruik een ander netwerk</value>
@@ -1837,7 +1837,7 @@ Foutcode: {0}</value>
     <value>Bekijk onze statuspagina</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Om er zeker van te zijn dat de Proton-diensten normaal functioneren.</value>
+    <value>Om er zeker van te zijn dat de SyncVPN-diensten normaal functioneren.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>Hulp bij verbinding</value>
@@ -1907,7 +1907,7 @@ Foutcode: {0}</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Welkom bij {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>U kunt nu verbinden met printers, luidsprekers en andere apparaten op uw lokale netwerk (LAN), door de VPN-tunnel te omzeilen.</value>
@@ -2530,7 +2530,7 @@ Foutcode: {0}</value>
     <value>Beveiligingssleutel</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Voeg de U2F - of FIDO-sleutel in die is gekoppeld aan uw Proton-account.</value>
+    <value>Voeg de U2F - of FIDO-sleutel in die is gekoppeld aan uw SyncVPN-account.</value>
   </data>
   <data name="Main_Loading">
     <value>Laden, een ogenblik geduld alstublieft...</value>
@@ -2586,7 +2586,7 @@ Foutcode: {0}</value>
     <value>U heeft uw maximale apparaatlimiet bereikt. Om opnieuw verbinding te maken met VPN, verbreek de verbinding van een ander apparaat.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>Uw abonnement is gedowngraded naar Proton Free, en we verbinden u opnieuw met de snelste gratis server.</value>
+    <value>Uw abonnement is gedowngraded naar SyncVPN Free, en we verbinden u opnieuw met de snelste gratis server.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>Openbare wifi-netwerken zijn kwetsbaarder voor beveiligingsinbreuken. Maak verbinding met VPN om veilig te surfen.</value>
@@ -2958,7 +2958,7 @@ VPN-verbinding</value>
     <value>Alternatieve routering</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>Als Proton-diensten worden geblokkeerd door netwerkbeperkingen, proberen we alternatieve netwerkroutering te gebruiken om u met onze sites te verbinden.</value>
+    <value>Als SyncVPN-diensten worden geblokkeerd door netwerkbeperkingen, proberen we alternatieve netwerkroutering te gebruiken om u met onze sites te verbinden.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>Aangepaste DNS-servers</value>
@@ -3337,7 +3337,7 @@ VPN-verbinding</value>
     <value>Thema</value>
   </data>
   <data name="Settings_Improve">
-    <value>Verbeter Proton</value>
+    <value>Verbeter SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>Help ons censuur te bestrijden</value>
@@ -3487,7 +3487,7 @@ VPN-verbinding</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>Voer de gegevens van uw Proton-account in.</value>
+    <value>Voer de gegevens van uw SyncVPN-account in.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>Kill switch uitschakelen</value>

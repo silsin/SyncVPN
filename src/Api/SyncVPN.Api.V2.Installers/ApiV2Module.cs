@@ -23,7 +23,7 @@ using SyncVPN.Api.V2.Contracts;
 
 namespace SyncVPN.Api.V2.Installers;
 
-// Registered alongside (not instead of) ApiModule (Proton) - see the backend migration plan.
+// Registered alongside (not instead of) ApiModule (legacy backend) - see the backend migration plan.
 // IApiClient's public surface and its single Autofac registration are untouched by this module;
 // migrated ApiClient methods branch internally via IBackendModeProvider to call ISyncVpnApiClient instead.
 public class ApiV2Module : Module

@@ -7,7 +7,7 @@
 
 #include "Assertion.h"
 
-namespace Proton
+namespace SyncVpn
 {
     namespace NetworkUtil
     {

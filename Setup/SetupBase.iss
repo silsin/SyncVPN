@@ -6,7 +6,7 @@
 #define LauncherExeName "SyncVPN.Launcher.exe"
 #define AppUserModelID "SyncVPN"
 
-#define MyPublisher "Proton AG"
+#define MyPublisher "SyncVPN"
 
 #define ServiceName "SyncVPN Service"
 #define ServiceExe "SyncVPNService.exe"
@@ -19,14 +19,11 @@
 
 #define RestoreInternetExeName "SyncVPN.RestoreInternet.exe"
 
-#define ProtonInstallerName "ProtonInstaller.exe"
 #define Webview2InstallerName "MicrosoftEdgeWebview2Setup.exe"
 #define VcRedistX64Name "VC_redist.x64.exe"
 #define VcRedistArm64Name "VC_redist.arm64.exe"
 #define InstallLogPath "{app}\Install.log.txt"
 #define ClearAppDataClientArg "-DoUninstallActions"
-
-#define ProtonDriveUpgradeCode "{F3B95BD2-1311-4B82-8B4A-B9EB7C0500ED}"
 
 #define Hash ""
 #define VersionFolder "v" + MyAppVersion
@@ -34,7 +31,7 @@
 #define DisableAutoUpdateClientArg "-DisableAutoUpdate"
 #define OpenOnDesktopInstallerArg "/OPENONDESKTOP"
 #define OpenOnDesktopClientArg "-OpenOnDesktop"
-#define AppFolder "Proton\SyncVPN"
+#define AppFolder "SyncVPN"
 #define RegistryRunPath "Software\Microsoft\Windows\CurrentVersion\Run"
 #define LegacyClientName "SyncVPN"
 
@@ -42,7 +39,7 @@
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 DefaultDirName={autopf}\{#AppFolder}
-DefaultGroupName=Proton
+DefaultGroupName=SyncVPN
 DisableDirPage=yes
 AlwaysShowDirOnReadyPage=yes
 DisableProgramGroupPage=auto
@@ -55,7 +52,7 @@ WizardStyle=modern
 Compression=lzma2
 SolidCompression=yes
 OutputDir=Installers
-SetupIconFile=Images\protonvpn.ico
+SetupIconFile=Images\syncvpn.ico
 SetupLogging=yes
 DisableFinishedPage=yes
 DisableStartupPrompt=yes
@@ -71,14 +68,12 @@ SignTool=signtool sign /a /tr http://timestamp.sectigo.com /td SHA256 /fd SHA256
 SetupWindowTitle={#MyAppName}
 
 [Registry]
-Root: HKLM; Subkey: "Software\Proton AG\SyncVPN"; Flags: uninsdeletekey dontcreatekey;
+Root: HKLM; Subkey: "Software\SyncVPN\SyncVPN"; Flags: uninsdeletekey dontcreatekey;
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\EventLog\Application\SyncVPNService"; Flags: uninsdeletekey dontcreatekey;
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\EventLog\Application\SyncVPN"; Flags: uninsdeletekey;
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Services\EventLog\Application\SyncVPN"; ValueType: expandsz; ValueName: "EventMessageFile"; ValueData: "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\EventLogMessages.dll"; Flags: deletekey uninsdeletekey;
 
 [Files]
-Source: "Images\Proton*.bmp"; Flags: dontcopy nocompression;
-
 Source: "..\{#SourcePath}\SyncVPN.Launcher.exe"; DestDir: "{app}"; Flags: signonce;
 
 Source: "..\{#SourcePath}\SyncVPNService.exe"; DestDir: "{app}\{#VersionFolder}"; Flags: signonce;
@@ -263,49 +258,19 @@ type
 var
   IsToReboot, IsSilent, IsVerySilent, IsNotSilent, IsToDisableAutoUpdate, IsToOpenOnDesktop: Boolean;
   InstallationProgressLabel: TNewStaticText;
-  ProductDriveCheckBox, ProductMailCheckBox, ProductPassCheckBox: TNewCheckBox;
 
 const
-  ProductLogoWidth = 140;
-  ProductLogoHeight = 36;
   PanelWidth = 500;
-  PanelHeight = 50;
-  Padding = 10;
-  PanelSpacing = 10;
-
-procedure OnProductDriveClick(Sender: TObject);
-begin
-  ProductDriveCheckBox.Checked := not ProductDriveCheckBox.Checked;
-end;
-
-procedure OnProductMailClick(Sender: TObject);
-begin
-  ProductMailCheckBox.Checked := not ProductMailCheckBox.Checked;
-end;
-
-procedure OnProductPassClick(Sender: TObject);
-begin
-  ProductPassCheckBox.Checked := not ProductPassCheckBox.Checked;
-end;
 
 procedure InitializeWizard;
 var
-  // Proton product vars
-  HeaderLabel, SubHeaderLabel: TLabel;
-  ProductDriveLabelA, ProductMailLabelA, ProductPassLabelA: TLabel;
-  ProductDriveLabelB, ProductMailLabelB, ProductPassLabelB: TLabel;
-  ProductDriveImage, ProductMailImage, ProductPassImage: TBitmapImage;
-  ProductDrivePanel, ProductMailPanel, ProductPassPanel: TPanel;
-  ProductDrivePanelOverlay, ProductMailPanelOverlay, ProductPassPanelOverlay: TLabel;
-  IsProductDriveInstalled, IsProductMailInstalled, IsProductPassInstalled, IsArm64: Boolean;
-  ProductPadding: Int64;
+  HeaderLabel: TLabel;
 begin
-  IsArm64 := ExpandConstant('{#Architecture}') = 'arm64';
   InstallationProgressLabel := TNewStaticText.Create(WizardForm);
   InstallationProgressLabel.Parent := WizardForm.InstallingPage;
   InstallationProgressLabel.Top := ScaleY(100);
   InstallationProgressLabel.Left := 0;
-  
+
   HeaderLabel := TLabel.Create(WizardForm.SelectTasksPage);
   HeaderLabel.Parent := WizardForm.SelectTasksPage;
   HeaderLabel.Caption := CustomMessage('InstallerTitle');
@@ -315,179 +280,8 @@ begin
   HeaderLabel.Width := ScaleX(PanelWidth);
   HeaderLabel.Font.Size := 14;
 
-  IsProductMailInstalled := RegValueExists(HKEY_CURRENT_USER, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\proton_mail', 'DisplayVersion');
-  IsProductDriveInstalled := IsProductInstalled('{#ProtonDriveUpgradeCode}') <> 0;
-  IsProductPassInstalled := RegValueExists(HKEY_CURRENT_USER, 'Software\Microsoft\Windows\CurrentVersion\Uninstall\ProtonPass', 'DisplayVersion');
-
-  SubHeaderLabel := TLabel.Create(WizardForm.SelectTasksPage);
-  SubHeaderLabel.Parent := WizardForm.SelectTasksPage;
-  SubHeaderLabel.Top := HeaderLabel.Top + HeaderLabel.Height + ScaleY(32);
-  SubHeaderLabel.Caption := CustomMessage('InstallOtherApps');
-  SubHeaderLabel.WordWrap := True;
-  SubHeaderLabel.Width := ScaleX(PanelWidth);
-  SubHeaderLabel.Font.Size := 8;
-  SubHeaderLabel.Font.Style := [fsBold];
-
-  if not IsProductMailInstalled or not IsProductDriveInstalled or not IsProductPassInstalled then begin
-    ExtractTemporaryFile('ProtonMail.bmp');
-    ExtractTemporaryFile('ProtonDrive.bmp');
-    ExtractTemporaryFile('ProtonPass.bmp');
-
-    ProductPadding := ScaleY(PanelSpacing);
-
-    // Proton Mail
-    ProductMailPanel := TPanel.Create(WizardForm.SelectTasksPage);
-    ProductMailPanel.Parent := WizardForm.SelectTasksPage;
-    ProductMailPanel.SetBounds(0, SubHeaderLabel.Top + SubHeaderLabel.Height + ProductPadding, ScaleX(PanelWidth), ScaleY(PanelHeight));
-    ProductMailPanel.BevelOuter := bvNone;
-
-    ProductMailCheckBox := TNewCheckBox.Create(ProductMailPanel);
-    ProductMailCheckBox.Parent := ProductMailPanel;
-    ProductMailCheckBox.Top := ScaleX(Padding);
-    ProductMailCheckBox.Left := ScaleX(Padding);
-    ProductMailCheckBox.Width := ScaleX(14);
-    ProductMailCheckBox.Height := ScaleY(14);
-    ProductMailCheckBox.Checked := not IsProductMailInstalled;
-
-    ProductMailImage := TBitmapImage.Create(ProductMailPanel);
-    ProductMailImage.Parent := ProductMailPanel;
-    ProductMailImage.Bitmap.LoadFromFile(ExpandConstant('{tmp}\ProtonMail.bmp'));
-    ProductMailImage.Stretch := True;
-    ProductMailImage.SetBounds(ProductMailCheckBox.Left + ScaleX(21), ProductMailCheckBox.Top - ScaleY(2), ScaleX(82), ScaleY(22));
-
-    ProductMailLabelA := TLabel.Create(ProductMailPanel);
-    ProductMailLabelA.Parent := ProductMailPanel;
-    ProductMailLabelA.Caption := CustomMessage('FreeTrial') + ' - ';
-    ProductMailLabelA.AutoSize := True;
-    ProductMailLabelA.Top := ProductMailImage.Top + ProductMailImage.Height + ScaleY(5);
-    ProductMailLabelA.Left := ProductMailImage.Left;
-    ProductMailLabelA.Width := ScaleX(PanelWidth - Padding);
-    ProductMailLabelA.Font.Style := [fsBold];
-
-    ProductMailLabelB := TLabel.Create(ProductMailPanel);
-    ProductMailLabelB.Parent := ProductMailPanel;
-    ProductMailLabelB.Caption := CustomMessage('ProtonMailDescription');
-    ProductMailLabelB.AutoSize := True;
-    ProductMailLabelB.Top := ProductMailLabelA.Top;
-    ProductMailLabelB.Left := ProductMailLabelA.Left + ProductMailLabelA.Width;
-    ProductMailLabelB.WordWrap := True;
-
-    ProductMailPanelOverlay := TLabel.Create(ProductMailPanel);
-    ProductMailPanelOverlay.Parent := ProductMailPanel;
-    ProductMailPanelOverlay.Width := ScaleX(PanelWidth);
-    ProductMailPanelOverlay.Height := ScaleY(PanelHeight);
-    ProductMailPanelOverlay.Transparent := True;
-    ProductMailPanelOverlay.OnClick := @OnProductMailClick;
-
-    if IsProductMailInstalled then begin
-      ProductMailPanel.Visible := False;
-      ProductMailPanel.Height := 0;
-      ProductPadding := 0;
-    end;
-
-    // Proton Drive
-    ProductDrivePanel := TPanel.Create(WizardForm.SelectTasksPage);
-    ProductDrivePanel.Parent := WizardForm.SelectTasksPage;
-    ProductDrivePanel.SetBounds(0, ProductMailPanel.Top + ProductMailPanel.Height + ProductPadding, ScaleX(PanelWidth), ScaleY(PanelHeight));
-    ProductDrivePanel.BevelOuter := bvNone;
-
-    ProductDriveCheckBox := TNewCheckBox.Create(ProductDrivePanel);
-    ProductDriveCheckBox.Parent := ProductDrivePanel;
-    ProductDriveCheckBox.Top := ScaleX(Padding);
-    ProductDriveCheckBox.Left := ScaleX(Padding);
-    ProductDriveCheckBox.Width := ScaleX(14);
-    ProductDriveCheckBox.Height := ScaleY(14);
-    ProductDriveCheckBox.Checked := not IsProductDriveInstalled;
-
-    ProductDriveImage := TBitmapImage.Create(ProductDrivePanel);
-    ProductDriveImage.Parent := ProductDrivePanel;
-    ProductDriveImage.Bitmap.LoadFromFile(ExpandConstant('{tmp}\ProtonDrive.bmp'));
-    ProductDriveImage.Stretch := True;
-    ProductDriveImage.SetBounds(ProductDriveCheckBox.Left + ScaleX(21), ProductDriveCheckBox.Top - ScaleY(2), ScaleX(86), ScaleY(22));
-
-    ProductDriveLabelA := TLabel.Create(ProductDrivePanel);
-    ProductDriveLabelA.Parent := ProductDrivePanel;
-    ProductDriveLabelA.Caption := CustomMessage('Free') + ' - ';
-    ProductDriveLabelA.AutoSize := True;
-    ProductDriveLabelA.Top := ProductDriveImage.Top + ProductDriveImage.Height + ScaleY(5);
-    ProductDriveLabelA.Left := ProductDriveImage.Left;
-    ProductDriveLabelA.Width := ScaleX(PanelWidth - Padding);
-    ProductDriveLabelA.Font.Style := [fsBold];
-
-    ProductDriveLabelB := TLabel.Create(ProductDrivePanel);
-    ProductDriveLabelB.Parent := ProductDrivePanel;
-    ProductDriveLabelB.Caption := CustomMessage('ProtonDriveDescription');
-    ProductDriveLabelB.AutoSize := True;
-    ProductDriveLabelB.Top := ProductDriveLabelA.Top;
-    ProductDriveLabelB.Left := ProductDriveLabelA.Left + ProductDriveLabelA.Width;
-    ProductDriveLabelB.WordWrap := True;
-
-    ProductDrivePanelOverlay := TLabel.Create(ProductDrivePanel);
-    ProductDrivePanelOverlay.Parent := ProductDrivePanel;
-    ProductDrivePanelOverlay.Width := ScaleX(PanelWidth);
-    ProductDrivePanelOverlay.Height := ScaleY(PanelHeight);
-    ProductDrivePanelOverlay.Transparent := True;
-    ProductDrivePanelOverlay.OnClick := @OnProductDriveClick;
-
-    if IsProductDriveInstalled then begin
-      ProductDrivePanel.Visible := False;
-      ProductDrivePanel.Height := 0;
-      ProductPadding := 0;
-    end else
-      ProductPadding := ScaleX(PanelSpacing);
-
-    // Proton Pass
-    ProductPassPanel := TPanel.Create(WizardForm.SelectTasksPage);
-    ProductPassPanel.Parent := WizardForm.SelectTasksPage;
-    ProductPassPanel.SetBounds(0, ProductDrivePanel.Top + ProductDrivePanel.Height + ProductPadding, ScaleX(PanelWidth), ScaleY(PanelHeight));
-    ProductPassPanel.BevelOuter := bvNone;
-
-    ProductPassCheckBox := TNewCheckBox.Create(ProductPassPanel);
-    ProductPassCheckBox.Parent := ProductPassPanel;
-    ProductPassCheckBox.Top := ScaleX(Padding);
-    ProductPassCheckBox.Left := ScaleX(Padding);
-    ProductPassCheckBox.Width := ScaleX(14);
-    ProductPassCheckBox.Height := ScaleY(14);
-    ProductPassCheckBox.Checked := not IsProductPassInstalled;
-
-    ProductPassImage := TBitmapImage.Create(ProductPassPanel);
-    ProductPassImage.Parent := ProductPassPanel;
-    ProductPassImage.Bitmap.LoadFromFile(ExpandConstant('{tmp}\ProtonPass.bmp'));
-    ProductPassImage.Stretch := True;
-    ProductPassImage.SetBounds(ProductPassCheckBox.Left + ScaleX(21), ProductPassCheckBox.Top - ScaleY(2), ScaleX(84), ScaleY(22));
-
-    ProductPassLabelA := TLabel.Create(ProductPassPanel);
-    ProductPassLabelA.Parent := ProductPassPanel;
-    ProductPassLabelA.Caption := CustomMessage('Free') + ' - ';
-    ProductPassLabelA.AutoSize := True;
-    ProductPassLabelA.Top := ProductPassImage.Top + ProductPassImage.Height + ScaleY(5);
-    ProductPassLabelA.Left := ProductPassImage.Left;
-    ProductPassLabelA.Width := ScaleX(PanelWidth - Padding);
-    ProductPassLabelA.Font.Style := [fsBold];
-
-    ProductPassLabelB := TLabel.Create(ProductPassPanel);
-    ProductPassLabelB.Parent := ProductPassPanel;
-    ProductPassLabelB.Caption := CustomMessage('ProtonPassDescription');
-    ProductPassLabelB.AutoSize := True;
-    ProductPassLabelB.Top := ProductPassLabelA.Top;
-    ProductPassLabelB.Left := ProductPassLabelA.Left + ProductPassLabelA.Width;
-    ProductPassLabelB.WordWrap := True;
-
-    ProductPassPanelOverlay := TLabel.Create(ProductPassPanel);
-    ProductPassPanelOverlay.Parent := ProductPassPanel;
-    ProductPassPanelOverlay.Width := ScaleX(PanelWidth);
-    ProductPassPanelOverlay.Height := ScaleY(PanelHeight);
-    ProductPassPanelOverlay.Transparent := True;
-    ProductPassPanelOverlay.OnClick := @OnProductPassClick;
-
-    if IsProductPassInstalled then begin
-      ProductPassPanel.Visible := False;
-      ProductPassPanel.Height := 0;
-    end;
-
-    WizardForm.TasksList.Top := ProductPassPanel.Top + ProductPassPanel.Height + ScaleY(16);
-    WizardForm.TasksList.Left := ProductPassCheckBox.Left - ScaleX(4);
-  end;
+  WizardForm.TasksList.Top := HeaderLabel.Top + HeaderLabel.Height + ScaleY(16);
+  WizardForm.TasksList.Left := ScaleX(0);
 
   // Hide top window section
   WizardForm.SelectTasksLabel.Visible := False;
@@ -656,7 +450,7 @@ begin
   if IsWindowsVersionEqualOrHigher(10, 0, 19041) = False then begin
     if WizardSilent() = false then begin
       MsgBox('This application does not support your Windows version. You will be redirected to a download page with an application suitable for your Windows version. ', mbInformation, MB_OK);
-      ShellExec('open', 'https://protonvpn.com/free-vpn/windows/windows7', '', '', SW_SHOW, ewNoWait, ErrCode);
+      ShellExec('open', 'https://syncvpn.com/free-vpn/windows/windows7', '', '', SW_SHOW, ewNoWait, ErrCode);
     end;
     Result := False;
     exit;
@@ -774,25 +568,10 @@ end;
 
 procedure CurStepChanged(CurStep: TSetupStep);
 var
-  logfilepathname, logfilename, newfilepathname, langCode, launcherArgs, productArguments: String;
+  logfilepathname, logfilename, newfilepathname, langCode, launcherArgs: String;
   res: Integer;
 begin
-  productArguments := '';
   launcherArgs := '';
-  if IsNotSilent then begin
-    if Assigned(ProductMailCheckBox) and ProductMailCheckBox.Checked then begin
-      productArguments := productArguments + ' /Mail';
-      launcherArgs := launcherArgs + ' -MailInstalled';
-    end;
-    if Assigned(ProductDriveCheckBox) and ProductDriveCheckBox.Checked then begin
-      productArguments := productArguments + ' /Drive';
-      launcherArgs := launcherArgs + ' -DriveInstalled';
-    end;
-    if Assigned(ProductPassCheckBox) and ProductPassCheckBox.Checked then begin
-      productArguments := productArguments + ' /Pass';
-      launcherArgs := launcherArgs + ' -PassInstalled';
-    end;
-  end;
 
   if CurStep = ssDone then begin
     logfilepathname := ExpandConstant('{log}');
@@ -832,11 +611,6 @@ begin
         WizardForm.Refresh();
         ExtractTemporaryFile('{#Webview2InstallerName}');
         LaunchUnelevatedProcess(ExpandConstant('{tmp}\{#Webview2InstallerName}'), '/silent /install', True);
-      end;
-      if productArguments <> '' then begin
-        if WizardIsTaskSelected('desktopicon') then
-          productArguments := productArguments + ' /CreateDesktopShortcut';
-        LaunchUnelevatedProcess(ExpandConstant('{app}\{#VersionFolder}\{#ProtonInstallerName}'), Trim(productArguments), False);
       end;
     end;
   end;

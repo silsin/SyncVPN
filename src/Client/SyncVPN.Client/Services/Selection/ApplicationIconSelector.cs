@@ -45,13 +45,13 @@ public class ApplicationIconSelector : IApplicationIconSelector,
     IEventMessageReceiver<SettingChangedMessage>,
     IEventMessageReceiver<ServerListChangedMessage>
 {
-    public const string PROTON_VPN_ICON_PATH = "Assets/SyncVPN.ico";
+    public const string SYNC_VPN_ICON_PATH = "Assets/SyncVPN.ico";
 
-    public static readonly ImageSource ConnectedTrayIcon = ResourceHelper.GetIcon("ProtonVpnProtectedTrayIcon");
-    public static readonly ImageSource ErrorTrayIcon = ResourceHelper.GetIcon("ProtonVpnErrorTrayIcon");
-    public static readonly ImageSource WarningTrayIcon = ResourceHelper.GetIcon("ProtonVpnWarningTrayIcon");
-    public static readonly ImageSource DisconnectedTrayIcon = ResourceHelper.GetIcon("ProtonVpnUnprotectedTrayIcon");
-    public static readonly ImageSource LoggedOutTrayIcon = ResourceHelper.GetIcon("ProtonVpnLoggedOutTrayIcon");
+    public static readonly ImageSource ConnectedTrayIcon = ResourceHelper.GetIcon("SyncVpnProtectedTrayIcon");
+    public static readonly ImageSource ErrorTrayIcon = ResourceHelper.GetIcon("SyncVpnErrorTrayIcon");
+    public static readonly ImageSource WarningTrayIcon = ResourceHelper.GetIcon("SyncVpnWarningTrayIcon");
+    public static readonly ImageSource DisconnectedTrayIcon = ResourceHelper.GetIcon("SyncVpnUnprotectedTrayIcon");
+    public static readonly ImageSource LoggedOutTrayIcon = ResourceHelper.GetIcon("SyncVpnLoggedOutTrayIcon");
 
     public readonly Icon ConnectedBadgeIcon;
     public readonly Icon DisconnectedBadgeIcon;
@@ -127,7 +127,7 @@ public class ApplicationIconSelector : IApplicationIconSelector,
 
     public string GetAppIconPath()
     {
-        return PROTON_VPN_ICON_PATH;
+        return SYNC_VPN_ICON_PATH;
     }
 
     public ImageSource GetStatusIcon()

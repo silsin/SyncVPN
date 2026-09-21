@@ -38,8 +38,8 @@ public struct VpnHost
 
     // True only for a host claimed via the new SyncVPN backend's POST /account (see the migration plan's
     // VpnProvisioning phase). Its endpoint/keys come back on the same authenticated HTTPS response used
-    // to fetch the credentials themselves, unlike Proton's separately-fetched, cacheable server list -
-    // so there is no separate tampering risk for Proton's Ed25519 server-list signature to guard against,
+    // to fetch the credentials themselves, unlike the legacy backend's separately-fetched, cacheable server list -
+    // so there is no separate tampering risk for the legacy backend's Ed25519 server-list signature to guard against,
     // and this backend issues no such signature at all. ServerValidator skips ValidateSignature for these.
     public bool SkipSignatureValidation { get; }
 

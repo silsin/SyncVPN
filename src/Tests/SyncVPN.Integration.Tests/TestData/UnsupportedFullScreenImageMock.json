@@ -7,14 +7,14 @@
             "EndTime": 1924898400,
             "Type": 0,
             "Offer": {
-                "URL": "https://protonvpn.com",
-                "Icon": "https://protonvpn.com",
+                "URL": "https://syncvpn.com",
+                "Icon": "https://syncvpn.com",
                 "Label": "VPN Survey",
                 "Panel": {
                     "FullScreenImage": {
                         "Source": [
                             {
-                                "URL": "https://protonvpn.com/full-screen-image.svg",
+                                "URL": "https://syncvpn.com/full-screen-image.svg",
                                 "Type": "SVG",
                                 "Width": 2000,
                                 "Height": 1000
@@ -23,7 +23,7 @@
                         "AlternativeText": "Take this short survey to help us, blah blah"
                     },
                     "Button": {
-                        "URL": "https://protonvpn.com",
+                        "URL": "https://syncvpn.com",
                         "Text": "Take the survey",
                         "Action": "OpenURL",
                         "With": ["AutoLogin"]

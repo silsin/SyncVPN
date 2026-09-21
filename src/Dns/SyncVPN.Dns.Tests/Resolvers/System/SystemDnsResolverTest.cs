@@ -30,7 +30,7 @@ namespace SyncVPN.Dns.Tests.Resolvers.System
     [TestClass]
     public class SystemDnsResolverTest
     {
-        private const string HOST = "api.protonvpn.ch";
+        private const string HOST = "api.syncvpn.com";
 
         private MockOfLogger _logger;
         private SystemDnsResolver _appSettings;

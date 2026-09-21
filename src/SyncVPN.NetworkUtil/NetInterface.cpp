@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <iterator>
 
-namespace Proton
+namespace SyncVpn
 {
 	namespace NetworkUtil
 	{

@@ -114,7 +114,7 @@ public class BaseTest
         }
     }
 
-    protected static void DeleteProtonData()
+    protected static void DeleteAppData()
     {
         try
         {
@@ -162,14 +162,14 @@ public class BaseTest
     {
         try
         {
-            using ServiceController protonService = new ServiceController("SyncVPNCallout");
+            using ServiceController calloutService = new ServiceController("SyncVPNCallout");
 
-            if (protonService.Status != ServiceControllerStatus.Stopped)
+            if (calloutService.Status != ServiceControllerStatus.Stopped)
             {
                 TestContext.WriteLine($"WARNING: The SyncVPNCallout service is still running after app close - possible bug or unclean shutdown.");
 
-                protonService.Stop();
-                protonService.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromSeconds(10));
+                calloutService.Stop();
+                calloutService.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromSeconds(10));
             }
         }
         catch (Exception)
@@ -182,13 +182,13 @@ public class BaseTest
     {
         if (isFreshStart)
         {
-            DeleteProtonData();
+            DeleteAppData();
         }
 
         string installedClientPath = Path.Combine(
             _isDevelopmentModeEnabled
-                ? TestEnvironment.GetDevProtonClientFolder()
-                : TestEnvironment.GetProtonClientFolder(),
+                ? TestEnvironment.GetDevClientFolder()
+                : TestEnvironment.GetClientFolder(),
             CLIENT_NAME);
 
         ProcessStartInfo startInfo = new ProcessStartInfo(installedClientPath)

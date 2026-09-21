@@ -42,7 +42,7 @@ public class ProdTestApiClient
     {
         _client = new HttpClient
         {
-            BaseAddress = new Uri("https://api.protonvpn.ch")
+            BaseAddress = new Uri("https://api.syncvpn.com")
         };
     }
 

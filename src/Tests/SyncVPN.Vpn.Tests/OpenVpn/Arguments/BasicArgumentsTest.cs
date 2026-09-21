@@ -54,7 +54,7 @@ public class BasicArgumentsTest
     [TestMethod]
     public void Enumerable_ShouldContain_ConfigOption()
     {
-        const string configPath = @"C:\Program Files\Proton Technologies\SyncVPN\Resources\config.ovpn";
+        const string configPath = @"C:\Program Files\SyncVPN\Resources\config.ovpn";
 
         // Arrange
         _openVpnConfig.ConfigPath.Returns(configPath);

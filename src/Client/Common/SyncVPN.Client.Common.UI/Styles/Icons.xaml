@@ -21,25 +21,25 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SvgImageSource x:Key="ProtonVpnOnApplicationIconSource"
-                    UriSource="ms-appx:///SyncVPN.Client.Common.UI/Assets/Icons/App/proton-vpn-on.svg" />
-    <SvgImageSource x:Key="ProtonVpnOffApplicationIconSource"
-                    UriSource="ms-appx:///SyncVPN.Client.Common.UI/Assets/Icons/App/proton-vpn-off.svg" />
+    <SvgImageSource x:Key="SyncVpnOnApplicationIconSource"
+                    UriSource="ms-appx:///SyncVPN.Client.Common.UI/Assets/Icons/App/sync-vpn-on.svg" />
+    <SvgImageSource x:Key="SyncVpnOffApplicationIconSource"
+                    UriSource="ms-appx:///SyncVPN.Client.Common.UI/Assets/Icons/App/sync-vpn-off.svg" />
 
-    <BitmapImage x:Key="ProtonVpnUnprotectedApplicationIcon"
+    <BitmapImage x:Key="SyncVpnUnprotectedApplicationIcon"
                  UriSource="ms-appx:///SyncVPN.Client.Common.UI/Assets/Icons/App/vpn-off.ico" />
-    <BitmapImage x:Key="ProtonVpnProtectedApplicationIcon"
+    <BitmapImage x:Key="SyncVpnProtectedApplicationIcon"
                  UriSource="ms-appx:///SyncVPN.Client.Common.UI/Assets/Icons/App/vpn-on.ico" />
 
-    <BitmapImage x:Key="ProtonVpnErrorTrayIcon"
+    <BitmapImage x:Key="SyncVpnErrorTrayIcon"
                  UriSource="ms-appx:///SyncVPN.Client.Common.UI/Assets/Icons/App/vpn-tray-error.ico" />
-    <BitmapImage x:Key="ProtonVpnWarningTrayIcon"
+    <BitmapImage x:Key="SyncVpnWarningTrayIcon"
                  UriSource="ms-appx:///SyncVPN.Client.Common.UI/Assets/Icons/App/vpn-tray-warning.ico" />
-    <BitmapImage x:Key="ProtonVpnLoggedOutTrayIcon"
+    <BitmapImage x:Key="SyncVpnLoggedOutTrayIcon"
                  UriSource="ms-appx:///SyncVPN.Client.Common.UI/Assets/Icons/App/vpn-tray-not-logged-in.ico" />
-    <BitmapImage x:Key="ProtonVpnProtectedTrayIcon"
+    <BitmapImage x:Key="SyncVpnProtectedTrayIcon"
                  UriSource="ms-appx:///SyncVPN.Client.Common.UI/Assets/Icons/App/vpn-tray-protected.ico" />
-    <BitmapImage x:Key="ProtonVpnUnprotectedTrayIcon"
+    <BitmapImage x:Key="SyncVpnUnprotectedTrayIcon"
                  UriSource="ms-appx:///SyncVPN.Client.Common.UI/Assets/Icons/App/vpn-tray-unprotected.ico" />
 
     <BitmapImage x:Key="Streaming10PlayIcon"

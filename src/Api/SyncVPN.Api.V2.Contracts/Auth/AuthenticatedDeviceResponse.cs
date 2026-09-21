@@ -24,7 +24,7 @@ namespace SyncVPN.Api.V2.Contracts.Auth;
 
 // GET /auth/me - validates the current DeviceToken. Note: the API accepts a DeviceToken for up to
 // three months of inactivity before requiring full re-login - there is no refresh-token endpoint on
-// this backend at all, unlike Proton's auth/refresh.
+// this backend at all, unlike the legacy backend's auth/refresh.
 public class AuthenticatedDeviceResponseData
 {
     [JsonProperty("user")]

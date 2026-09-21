@@ -8,7 +8,7 @@
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     </PropertyGroup>
     <PropertyGroup>
-        <ApplicationIcon>protonvpn.ico</ApplicationIcon>
+        <ApplicationIcon>syncvpn.ico</ApplicationIcon>
     </PropertyGroup>
     <ItemGroup>
         <Compile Include="..\GlobalAssemblyInfo.cs">
@@ -16,7 +16,7 @@
         </Compile>
     </ItemGroup>
     <ItemGroup>
-        <Content Include="protonvpn.ico" />
+        <Content Include="syncvpn.ico" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="System.Collections.Immutable" />

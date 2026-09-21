@@ -301,7 +301,7 @@
   </data>
   <data name="Common_Tags_Recommended">
     <value>Recommended</value>
-    <comment>This tag indicates that a given option in the settings is recommended by Proton</comment>
+    <comment>This tag indicates that a given option in the settings is recommended by SyncVPN</comment>
   </data>
   <data name="Components_Update_GetMostFromYourVpn">
     <value>Получите максимум от VPN, обновив приложение до последней версии.</value>
@@ -1790,16 +1790,16 @@ Error code: {0}</value>
     <value>Чтобы продолжить, включите службу Windows</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_One">
-    <value>Proton Free автоматически подключает вас к самому быстрому бесплатному серверу из нашей {0} бесплатной страны. Обычно это ближайший к вашему местоположению сервер.</value>
+    <value>SyncVPN Free автоматически подключает вас к самому быстрому бесплатному серверу из нашей {0} бесплатной страны. Обычно это ближайший к вашему местоположению сервер.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Few">
-    <value>Proton Free автоматически подключает вас к самому быстрому бесплатному серверу из наших {0} бесплатных стран. Обычно это ближайший к вашему местоположению сервер.</value>
+    <value>SyncVPN Free автоматически подключает вас к самому быстрому бесплатному серверу из наших {0} бесплатных стран. Обычно это ближайший к вашему местоположению сервер.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Many">
-    <value>Proton Free автоматически подключает вас к самому быстрому бесплатному серверу из наших {0} бесплатных стран. Обычно это ближайший к вашему местоположению сервер.</value>
+    <value>SyncVPN Free автоматически подключает вас к самому быстрому бесплатному серверу из наших {0} бесплатных стран. Обычно это ближайший к вашему местоположению сервер.</value>
   </data>
   <data name="Dialogs_FreeConnections_Description_Other">
-    <value>Proton Free автоматически подключает вас к самому быстрому бесплатному серверу из наших {0} бесплатных стран. Обычно это ближайший к вашему местоположению сервер.</value>
+    <value>SyncVPN Free автоматически подключает вас к самому быстрому бесплатному серверу из наших {0} бесплатных стран. Обычно это ближайший к вашему местоположению сервер.</value>
   </data>
   <data name="Dialogs_FreeConnections_Header_One">
     <value>Страна с серверами Free ({0})</value>
@@ -1945,7 +1945,7 @@ Error code: {0}</value>
     <value>Убедитесь, что вы в сети и что ваше подключение стабильно.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Description">
-    <value>Эти быстрые исправления могут помочь подключиться к Proton.</value>
+    <value>Эти быстрые исправления могут помочь подключиться к SyncVPN.</value>
   </data>
   <data name="Dialogs_Troubleshooting_DifferentNetwork">
     <value>Использовать другую сеть</value>
@@ -1957,7 +1957,7 @@ Error code: {0}</value>
     <value>Проверьте нашу страницу состояния</value>
   </data>
   <data name="Dialogs_Troubleshooting_StatusPage_Description">
-    <value>Просто чтобы убедиться в том, что службы Proton работают в обычном режиме.</value>
+    <value>Просто чтобы убедиться в том, что службы SyncVPN работают в обычном режиме.</value>
   </data>
   <data name="Dialogs_Troubleshooting_Title">
     <value>Помощь по подключению</value>
@@ -2033,7 +2033,7 @@ Error code: {0}</value>
   </data>
   <data name="Dialogs_WelcomeUnlimited_Title">
     <value>Welcome to {0}</value>
-    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. Proton Unlimited, Proton Duo, Proton Family).</comment>
+    <comment>Title to welcome the user after an account upgrade. {0} is a placeholder for the name of the new plan (eg. SyncVPN Unlimited, SyncVPN Duo, SyncVPN Family).</comment>
   </data>
   <data name="Dialogs_WhatsNew_LanConnections_Description">
     <value>You can now connect to printers, speakers, and other devices on your local network (LAN), bypassing the VPN tunnel.</value>
@@ -2722,7 +2722,7 @@ Error code: {0}</value>
     <value>Ключ безопасности</value>
   </data>
   <data name="Login_TwoFactor_SecurityKey_Description">
-    <value>Insert the U2F or FIDO key linked to your Proton Account.</value>
+    <value>Insert the U2F or FIDO key linked to your SyncVPN Account.</value>
   </data>
   <data name="Main_Loading">
     <value>Loading, please wait...</value>
@@ -2778,7 +2778,7 @@ Error code: {0}</value>
     <value>Достигнуто максимальное количество устройств. Чтобы переподключиться к VPN, отключитесь от другого устройства.</value>
   </data>
   <data name="Notifications_SubscriptionExpired_Description_Connected">
-    <value>Вы переведены на более дешёвый тариф Proton Free, и мы снова подключаем вас к самому быстрому бесплатному серверу.</value>
+    <value>Вы переведены на более дешёвый тариф SyncVPN Free, и мы снова подключаем вас к самому быстрому бесплатному серверу.</value>
   </data>
   <data name="Notifications_UnsecureWifi_Description">
     <value>Общественные сети Wi-Fi более уязвимы к угрозам безопасности. Подключитесь к VPN для защищённого просмотра веб-страниц.</value>
@@ -3150,7 +3150,7 @@ Error code: {0}</value>
     <value>Альтернативная маршрутизация</value>
   </data>
   <data name="Settings_Connection_Advanced_AlternativeRouting_Description">
-    <value>Если службы Proton заблокированы из-за сетевых ограничений, мы попробуем использовать альтернативные маршруты, чтобы подключить вас к нашим сайтам.</value>
+    <value>Если службы SyncVPN заблокированы из-за сетевых ограничений, мы попробуем использовать альтернативные маршруты, чтобы подключить вас к нашим сайтам.</value>
   </data>
   <data name="Settings_Connection_Advanced_CustomDnsServers">
     <value>Пользовательские DNS-серверы</value>
@@ -3529,7 +3529,7 @@ Error code: {0}</value>
     <value>Тема</value>
   </data>
   <data name="Settings_Improve">
-    <value>Улучшить Proton</value>
+    <value>Улучшить SyncVPN</value>
   </data>
   <data name="Settings_Improve_Censorship">
     <value>Помогите нам бороться с цензурой</value>
@@ -3679,7 +3679,7 @@ Error code: {0}</value>
     <comment>A button inside sign in form</comment>
   </data>
   <data name="SignIn_Form_Description">
-    <value>Введите информацию о вашем аккаунте Proton.</value>
+    <value>Введите информацию о вашем аккаунте SyncVPN.</value>
   </data>
   <data name="SignIn_Form_DisableKillSwitch">
     <value>Отключить kill switch</value>

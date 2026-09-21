@@ -43,7 +43,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
         <x:Double x:Key="FadeInOpacity">1</x:Double>
         <x:Double x:Key="FadeOutOpacity">0.4</x:Double>
 
-        <x:Double x:Key="FreeServersSectionWidth">320.0</x:Double>
+        <x:Double x:Key="FreeServersSectionWidth">380.0</x:Double>
 
         <Duration x:Key="OpacityAnimationDuration">0:0:5</Duration>
     </UserControl.Resources>
@@ -53,7 +53,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
             <ColumnDefinition Width="0" />
             <ColumnDefinition Width="{x:Bind SidebarWidth, Converter={StaticResource DoubleToPixelGridLengthConverter}}" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="320" />
+            <ColumnDefinition Width="380" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>

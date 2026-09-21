@@ -19,6 +19,8 @@
 
 using SyncVPN.Api.BackendSelection;
 using SyncVPN.Client.Contracts.Services.Browsing;
+using SyncVPN.Client.Core.Services.Activation;
+using SyncVPN.Client.Core.Services.Navigation;
 using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Logic.Auth.Contracts;
 using SyncVPN.Client.Logic.Users.Contracts.Messages;
@@ -29,11 +31,15 @@ namespace SyncVPN.Client.Services.Upselling;
 public class AccountUpgradeUrlLauncher : IAccountUpgradeUrlLauncher,
     IEventMessageReceiver<VpnPlanChangedMessage>
 {
+    private const string InAppStoreAttemptUrl = "app:store";
+
     private readonly IUpsellUpgradeAttemptReporter _upsellUpgradeAttemptReporter;
     private readonly IUpsellSuccessReporter _upsellSuccessReporter;
     private readonly IUrlsBrowser _urlsBrowser;
     private readonly IWebAuthenticator _webAuthenticator;
     private readonly IBackendModeProvider _backendModeProvider;
+    private readonly IMainViewNavigator _mainViewNavigator;
+    private readonly IMainWindowActivator _mainWindowActivator;
 
     private string? _currentAttemptUrl;
     private ModalSource? _currentAttemptModalSource;
@@ -44,25 +50,47 @@ public class AccountUpgradeUrlLauncher : IAccountUpgradeUrlLauncher,
         IUpsellSuccessReporter upsellSuccessReporter,
         IUrlsBrowser urlsBrowser,
         IWebAuthenticator webAuthenticator,
-        IBackendModeProvider backendModeProvider)
+        IBackendModeProvider backendModeProvider,
+        IMainViewNavigator mainViewNavigator,
+        IMainWindowActivator mainWindowActivator)
     {
         _upsellUpgradeAttemptReporter = upsellUpgradeAttemptReporter;
         _upsellSuccessReporter = upsellSuccessReporter;
         _urlsBrowser = urlsBrowser;
         _webAuthenticator = webAuthenticator;
         _backendModeProvider = backendModeProvider;
+        _mainViewNavigator = mainViewNavigator;
+        _mainWindowActivator = mainWindowActivator;
     }
 
-    // A device-registered guest (see MainWindowViewNavigator.IsGuestAccessEnabled) has no Proton account
-    // to fork a session for - _webAuthenticator.GetUpgradeAccountUrlAsync's auth-fork silently fails for
-    // one and falls back to the bare Proton account URL, so "Upgrade" was opening account.protonvpn.com
-    // instead of anything SyncVPN-branded. While the new backend is enabled, send everyone to the SyncVPN
-    // pricing page instead of ever asking Proton for an upgrade URL.
+    // Every "Upgrade"/"Upgrade to Premium" entry point in the app (country flags, tray, feature upsell
+    // dialogs, etc.) funnels through here. This used to always open an external browser tab - a device
+    // registered guest (see MainWindowViewNavigator.IsGuestAccessEnabled) has no legacy account to fork a
+    // session for, so _webAuthenticator.GetUpgradeAccountUrlAsync's auth-fork silently failed for one and
+    // fell back to the bare legacy account URL, meaning "Upgrade" opened the legacy account domain instead
+    // of anything SyncVPN-branded - and even when that URL was right, a browser tab opening behind the
+    // main window looked exactly like nothing happened. Now that the in-app Store page exists (with real
+    // checkout-link purchase flow), send everyone there directly instead while the new backend is enabled.
     public async Task OpenAsync(ModalSource modalSource, string? reference = null)
     {
-        string url = _backendModeProvider.IsNewBackendEnabled(BackendCapability.DeviceRegistration)
-            ? _urlsBrowser.CreateAccount
-            : await _webAuthenticator.GetUpgradeAccountUrlAsync(modalSource, reference);
+        if (_backendModeProvider.IsNewBackendEnabled(BackendCapability.DeviceRegistration))
+        {
+            try
+            {
+                _upsellUpgradeAttemptReporter.Report(modalSource, reference);
+
+                _mainWindowActivator.Activate();
+                await _mainViewNavigator.NavigateToStoreViewAsync();
+            }
+            finally
+            {
+                SetAttempt(InAppStoreAttemptUrl, modalSource, reference);
+            }
+
+            return;
+        }
+
+        string url = await _webAuthenticator.GetUpgradeAccountUrlAsync(modalSource, reference);
 
         Open(url, modalSource, reference);
     }
