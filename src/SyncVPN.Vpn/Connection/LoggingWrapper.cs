@@ -19,6 +19,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using SyncVPN.Common.Core.Networking;
 using SyncVPN.Common.Legacy;
 using SyncVPN.Logging.Contracts;
@@ -59,6 +60,9 @@ namespace SyncVPN.Vpn.Connection
 
         public void Connect(IReadOnlyList<VpnHost> servers, VpnConfig config, VpnCredentials credentials)
         {
+            _logger.Info<ConnectionLog>($"[CONNECTION_PROCESS] VPN pipeline Connect: {servers.Count} server(s) " +
+                $"[{string.Join(", ", servers.Select(s => $"{s.Ip}/{s.Label}"))}], protocol '{config.VpnProtocol}', " +
+                $"preferred protocols [{string.Join(", ", config.PreferredProtocols ?? [])}].");
             _origin.Connect(servers, config, credentials);
         }
 
@@ -90,7 +94,7 @@ namespace SyncVPN.Vpn.Connection
         private void Origin_StateChanged(object sender, EventArgs<VpnState> e)
         {
             VpnState state = e.Data;
-            _logger.Info<ConnectionStateChangeLog>($"VPN state changed: {state.Status}, Error: {state.Error}, " +
+            _logger.Info<ConnectionStateChangeLog>($"[CONNECTION_PROCESS] VPN state changed: {state.Status}, Error: {state.Error}, " +
                          $"LocalIP: {state.LocalIp}, RemoteIP: {state.RemoteIp}, Label: {state.Label}");
 
             OnStateChanged(state);

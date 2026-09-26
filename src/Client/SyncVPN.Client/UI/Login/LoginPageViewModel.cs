@@ -34,6 +34,7 @@ using SyncVPN.Client.Logic.Auth.Contracts.Enums;
 using SyncVPN.Client.Logic.Auth.Contracts.Messages;
 using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.Client.Settings.Contracts.Messages;
+using SyncVPN.Client.Extensions;
 using SyncVPN.Client.UI.Login.Pages;
 using SyncVPN.Logging.Contracts.Events.AppLogs;
 using SyncVPN.Logging.Contracts.Events.GuestHoleLogs;
@@ -138,7 +139,7 @@ public partial class LoginPageViewModel : PageViewModelBase<IMainWindowViewNavig
                             break;
 
                         case AuthError.Unknown:
-                            SetErrorMessage(message.ErrorMessage);
+                            SetErrorMessage(Localizer.GetUserFacingError(message.ErrorMessage));
                             break;
                     }
                     break;
@@ -221,7 +222,7 @@ public partial class LoginPageViewModel : PageViewModelBase<IMainWindowViewNavig
                 break;
 
             default:
-                SetErrorMessage(message.ErrorMessage);
+                SetErrorMessage(Localizer.GetUserFacingError(message.ErrorMessage));
                 break;
         }
     }

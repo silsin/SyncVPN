@@ -1,5 +1,5 @@
-﻿/*
- * Copyright (c) 2025 Proton AG
+/*
+ * Copyright (c) 2026 Proton AG
  *
  * This file is part of SyncVPN.
  *
@@ -17,30 +17,21 @@
  * along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-namespace SyncVPN.OperatingSystems.Services.Contracts;
+using Newtonsoft.Json;
 
-public interface IService
+namespace SyncVPN.Api.V2.Contracts.Geographical;
+
+public class LocationData
 {
-    string Name { get; }
+    [JsonProperty("ip")]
+    public string Ip { get; set; } = string.Empty;
 
-    bool IsCreated();
-    void Create(ServiceCreationOptions options);
+    [JsonProperty("country")]
+    public LocationCountry Country { get; set; } = new();
 
-    bool IsEnabled();
-    void Enable(string? installPathIfMissing = null);
-    void UpdatePathAndArgs(string pathAndArgs);
-    string? GetBinaryPath();
+    [JsonProperty("location")]
+    public LocationCoordinates Location { get; set; } = new();
 
-    bool IsRunning();
-    bool IsStopped();
-
-    bool Start();
-    bool StartWithRetry();
-    Task<bool> StartAsync(CancellationToken cancellationToken);
-
-    bool Stop();
-    bool StopWithRetry();
-    Task<bool> StopAsync(CancellationToken cancellationToken);
-
-    ServiceStatus? GetStatus();
+    [JsonProperty("whois")]
+    public LocationWhois Whois { get; set; } = new();
 }

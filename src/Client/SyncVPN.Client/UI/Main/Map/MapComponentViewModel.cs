@@ -38,6 +38,8 @@ using SyncVPN.Client.Logic.Connection.RequestCreators;
 using SyncVPN.Client.Logic.Servers;
 using SyncVPN.Client.Logic.Servers.Cache;
 using SyncVPN.Client.Logic.Servers.Contracts.Messages;
+using SyncVPN.Client.Logic.Services.Contracts;
+using SyncVPN.Client.Logic.Services.Contracts.Messages;
 using SyncVPN.Client.Services.FreeServers;
 using SyncVPN.Client.Settings.Contracts;
 using SyncVPN.Client.Settings.Contracts.Messages;
@@ -51,7 +53,8 @@ public partial class MapComponentViewModel : ViewModelBase,
     IEventMessageReceiver<SettingChangedMessage>,
     IEventMessageReceiver<MainWindowVisibilityChangedMessage>,
     IEventMessageReceiver<ServerListChangedMessage>,
-    IEventMessageReceiver<MapLocationSelectedMessage>
+    IEventMessageReceiver<MapLocationSelectedMessage>,
+    IEventMessageReceiver<ServiceEnablementChangedMessage>
 {
     private readonly ISettings _settings;
     private readonly IServersCache _serversCache;
@@ -60,6 +63,7 @@ public partial class MapComponentViewModel : ViewModelBase,
     private readonly ICoordinatesProvider _coordinatesProvider;
     private readonly IUpsellCarouselWindowActivator _upsellCarouselWindowActivator;
     private readonly IMainWindowOverlayActivator _mainWindowOverlayActivator;
+    private readonly IServiceManager _serviceManager;
 
     [ObservableProperty]
     private bool _isMainWindowVisible;
@@ -75,6 +79,7 @@ public partial class MapComponentViewModel : ViewModelBase,
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasSelectedCountry))]
     [NotifyPropertyChangedFor(nameof(ConnectButtonText))]
+    [NotifyPropertyChangedFor(nameof(ShowSelectedConnectButton))]
     private Country? _selectedCountry;
 
     partial void OnSelectedCountryChanged(Country? value)
@@ -104,9 +109,21 @@ public partial class MapComponentViewModel : ViewModelBase,
     // that switches to Cancel. See ConnectionCardComponentViewModel.IsConnectingViaThisButton for the mirror.
     public bool IsConnectingFromMapSelection => IsConnecting && _connectionManager.CurrentConnectionTrigger == VpnTriggerDimension.Map;
 
-    public bool ShowConnectButton => IsDisconnected || IsConnectingFromMapSelection;
+    // Hidden (not just disabled) while the service is unavailable - same as the bottom bar's own Connect
+    // button (see ConnectionCardComponentViewModel.ShowConnectButton/ShowEnableServiceButton), which is
+    // the one place that offers the "Enable" action, so the map doesn't need a second copy of it.
+    public bool ShowConnectButton => (IsDisconnected && _serviceManager.IsServiceEnabled) || IsConnectingFromMapSelection;
+
+    public bool ShowSelectedConnectButton => HasSelectedCountry && (_serviceManager.IsServiceEnabled || IsConnectingFromMapSelection);
 
     public bool ShowCancelButton => IsConnecting && !IsConnectingFromMapSelection;
+
+    // The bottom bar's own Connect button (ConnectionCardComponentViewModel.CanConnect) already refuses
+    // to connect while the Windows service is unavailable - this screen's Connect buttons (map pin /
+    // "fastest") bypassed that check entirely and went straight to ConnectionManager.ConnectAsync, which
+    // has no service check of its own, so pressing them with the service down just failed deep in the
+    // connection pipeline with a confusing error instead of being blocked up front.
+    public bool CanConnectFromMap => !IsConnectingFromMapSelection && _serviceManager.IsServiceEnabled;
 
     public MapComponentViewModel(
         ISettings settings,
@@ -116,6 +133,7 @@ public partial class MapComponentViewModel : ViewModelBase,
         ICoordinatesProvider coordinatesProvider,
         IUpsellCarouselWindowActivator upsellCarouselWindowActivator,
         IMainWindowOverlayActivator mainWindowOverlayActivator,
+        IServiceManager serviceManager,
         IViewModelHelper viewModelHelper)
         : base(viewModelHelper)
     {
@@ -126,6 +144,7 @@ public partial class MapComponentViewModel : ViewModelBase,
         _coordinatesProvider = coordinatesProvider;
         _upsellCarouselWindowActivator = upsellCarouselWindowActivator;
         _mainWindowOverlayActivator = mainWindowOverlayActivator;
+        _serviceManager = serviceManager;
 
         InvalidateActiveCountry();
     }
@@ -156,7 +175,19 @@ public partial class MapComponentViewModel : ViewModelBase,
             OnPropertyChanged(nameof(IsDisconnected));
             OnPropertyChanged(nameof(IsConnectingFromMapSelection));
             OnPropertyChanged(nameof(ShowConnectButton));
+            OnPropertyChanged(nameof(ShowSelectedConnectButton));
             OnPropertyChanged(nameof(ShowCancelButton));
+            OnPropertyChanged(nameof(CanConnectFromMap));
+        });
+    }
+
+    public void Receive(ServiceEnablementChangedMessage message)
+    {
+        ExecuteOnUIThread(() =>
+        {
+            OnPropertyChanged(nameof(ShowConnectButton));
+            OnPropertyChanged(nameof(ShowSelectedConnectButton));
+            OnPropertyChanged(nameof(CanConnectFromMap));
         });
     }
 
@@ -319,6 +350,16 @@ public partial class MapComponentViewModel : ViewModelBase,
     [RelayCommand]
     private Task ConnectAsync(Country country)
     {
+        // Defense in depth: CanConnectFromMap already disables both map Connect buttons for this, but a
+        // click that raced the button's IsEnabled re-evaluation (e.g. right as the service goes down)
+        // should not be allowed to reach ConnectionManager.ConnectAsync, which has no service check of
+        // its own and would otherwise fail deep in the connection pipeline with a confusing error.
+        if (!_serviceManager.IsServiceEnabled)
+        {
+            Logger.Info<AppLog>("Map: Connect pressed while the Windows service is unavailable - ignoring.");
+            return Task.CompletedTask;
+        }
+
         if (country == null)
         {
             // No pin picked (tap or Free-servers row) - fall back to the app's usual "fastest" pick,

@@ -22,6 +22,7 @@ using SyncVPN.Client.Logic.Services.Contracts;
 using SyncVPN.Common.Core.Extensions;
 using SyncVPN.Common.Legacy.Abstract;
 using SyncVPN.Logging.Contracts;
+using SyncVPN.Logging.Contracts.Events.ProcessCommunicationLogs;
 using SyncVPN.ProcessCommunication.Contracts;
 using SyncVPN.ProcessCommunication.Contracts.Controllers;
 using SyncVPN.ProcessCommunication.Contracts.Entities.LocalAgent;
@@ -37,9 +38,20 @@ public class VpnServiceCaller : ServiceCallerBase<IVpnController>, IVpnServiceCa
         : base(logger, grpcClient, serviceCommunicationErrorHandler)
     { }
 
-    public Task ConnectAsync(ConnectionRequestIpcEntity connectionRequest)
+    public async Task ConnectAsync(ConnectionRequestIpcEntity connectionRequest)
     {
-        return InvokeAsync((c, ct) => c.Connect(connectionRequest, ct).Wrap());
+        Logger.Info<ProcessCommunicationLog>("[CONNECTION_PROCESS] App -> Service: sending Connect request over IPC.");
+
+        Result<Task> result = await InvokeAsync((c, ct) => c.Connect(connectionRequest, ct).Wrap());
+
+        if (result.Success)
+        {
+            Logger.Info<ProcessCommunicationLog>("[CONNECTION_PROCESS] App -> Service: Connect request delivered and accepted by the service.");
+        }
+        else
+        {
+            Logger.Error<ProcessCommunicationLog>($"[CONNECTION_PROCESS] App -> Service: Connect request could not be delivered to the service. Error: {result.Error}");
+        }
     }
 
     public Task DisconnectAsync(DisconnectionRequestIpcEntity disconnectionRequest)

@@ -57,7 +57,7 @@ public class ServiceEnabler : IServiceEnabler
         _eventMessageSender = eventMessageSender;
     }
 
-    public async Task EnableAsync(IService service)
+    public async Task EnableAsync(IService service, string? installPathIfMissing = null)
     {
         if (service.IsEnabled())
         {
@@ -68,7 +68,7 @@ public class ServiceEnabler : IServiceEnabler
 
         try
         {
-            await _uiThreadDispatcher.TryEnqueueAsync(() => ShowOverlayAsync(service));
+            await _uiThreadDispatcher.TryEnqueueAsync(() => ShowOverlayAsync(service, installPathIfMissing));
         }
         catch (Exception)
         {
@@ -80,7 +80,7 @@ public class ServiceEnabler : IServiceEnabler
         }
     }
 
-    public async Task<bool> TryEnableAsync(IService service)
+    public async Task<bool> TryEnableAsync(IService service, string? installPathIfMissing = null)
     {
         if (service.IsEnabled())
         {
@@ -93,7 +93,7 @@ public class ServiceEnabler : IServiceEnabler
         try
         {
             _logger.Info<AppServiceLog>($"Attempting to enable service {service.Name}.");
-            service.Enable();
+            service.Enable(installPathIfMissing);
             await WaitUntilEnabledOrTimeoutAsync(service);
 
             bool isEnabled = service.IsEnabled();
@@ -106,7 +106,7 @@ public class ServiceEnabler : IServiceEnabler
         }
     }
 
-    private async Task ShowOverlayAsync(IService service)
+    private async Task ShowOverlayAsync(IService service, string? installPathIfMissing)
     {
         if (service.IsEnabled())
         {
@@ -125,7 +125,7 @@ public class ServiceEnabler : IServiceEnabler
         if (result is ContentDialogResult.Primary)
         {
             _logger.Info<AppServiceLog>($"The user requested to enable service {service.Name}.");
-            service.Enable();
+            service.Enable(installPathIfMissing);
             await WaitUntilEnabledOrTimeoutAsync(service);
         }
         else

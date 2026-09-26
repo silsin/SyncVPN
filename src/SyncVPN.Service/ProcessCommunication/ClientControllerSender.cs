@@ -199,7 +199,7 @@ public class ClientControllerSender : IClientController, IClientControllerSender
 
     private async Task SendStateChangeAsync(VpnState state)
     {
-        _logger.Debug<ProcessCommunicationLog>($"Sending VPN state - {GetVpnStatusLogMessage(state)}");
+        _logger.Info<ProcessCommunicationLog>($"[CONNECTION_PROCESS] Service -> App: sending VPN state - {GetVpnStatusLogMessage(state)}");
         await _vpnStateChannel.Writer.WriteAsync(CreateVpnStateIpcEntity(state));
     }
 

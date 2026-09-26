@@ -103,6 +103,8 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
         VpnConfigIpcEntity config = GetVpnConfig(settings, connectionIntent);
         List<VpnProtocol> preferredProtocols = EntityMapper.Map<VpnProtocolIpcEntity, VpnProtocol>(config.PreferredProtocols);
         ServerListResult serverListResult = GetServerListResult(connectionIntent, preferredProtocols);
+        Logger.Info<AppLog>($"[CONNECTION_PROCESS] Building connection request: protocol '{settings.VpnProtocol}', " +
+            $"preferred protocols [{string.Join(", ", preferredProtocols)}], {serverListResult.PhysicalServers.Count} legacy candidate server(s).");
         (VpnServerIpcEntity[] servers, VpnCredentialsIpcEntity credentials, int? sstpPort) =
             await ResolveServersAndCredentialsAsync(connectionIntent, serverListResult.PhysicalServers, preferredProtocols);
         ApplyClaimedSstpPort(config, sstpPort);
@@ -134,14 +136,18 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
         // contain it at all.
         if (connectionIntent.Location is SyncVpnServerLocationIntent syncVpnServerIntent)
         {
+            Logger.Info<AppLog>($"[CONNECTION_PROCESS] Specific SyncVPN server chosen (ServerId={syncVpnServerIntent.ServerId}, " +
+                $"Protocol='{syncVpnServerIntent.Protocol}', Transport='{syncVpnServerIntent.Transport}'). Claiming account from backend...");
             return await ClaimAccountAsync(syncVpnServerIntent);
         }
 
         if (IsVpnProvisioningEnabled)
         {
+            Logger.Info<AppLog>("[CONNECTION_PROCESS] New backend VPN provisioning path. Claiming account from backend...");
             return await ClaimAccountAsync(candidates, preferredProtocols);
         }
 
+        Logger.Info<AppLog>("[CONNECTION_PROCESS] Legacy backend path - using cached server list and certificate credentials.");
         return (PhysicalServersToVpnServerIpcEntities(candidates), await GetVpnCredentialsAsync(), null);
     }
 
@@ -191,6 +197,7 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
         }
 
         (string protocol, string? transport) = SyncVpnAccountClaimMapper.ResolveClaimProtocol(preferredProtocols);
+        Logger.Info<AppLog>($"[CONNECTION_PROCESS] Claiming account for candidate ServerId={serverId}, Protocol='{protocol}', Transport='{transport}'.");
 
         ApiResponseResult<ClaimAccountResponse> response = await _syncVpnApiClient.ClaimAccountAsync(
             new ClaimAccountRequest { ServerId = serverId, Protocol = protocol, Transport = transport });
@@ -208,11 +215,14 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
 
     private async Task<(VpnServerIpcEntity[] Servers, VpnCredentialsIpcEntity Credentials, int? SstpPort)> ClaimFreeServerAsync()
     {
+        Logger.Info<AppLog>("[CONNECTION_PROCESS] No legacy candidates and not logged in - fetching free servers from backend...");
         ApiResponseResult<ServerListResponse> serversResponse = await _syncVpnApiClient.GetServersAsync();
         ServerListItem? server = serversResponse.Value?.Data.FirstOrDefault();
 
         if (serversResponse.Failure || server is null)
         {
+            Logger.Error<AppLog>($"[CONNECTION_PROCESS] No free server available. Request failed: {serversResponse.Failure}, " +
+                $"Error: {serversResponse.Error}, Server count: {serversResponse.Value?.Data.Count() ?? 0}");
             throw new InvalidOperationException("Cannot claim a SyncVPN account: no free server available.");
         }
 
@@ -231,6 +241,8 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
         string protocol = server.Protocols.Contains(SyncVpnProtocols.WireGuard)
             ? SyncVpnProtocols.WireGuard
             : server.Protocols.FirstOrDefault() ?? SyncVpnProtocols.WireGuard;
+        Logger.Info<AppLog>($"[CONNECTION_PROCESS] Picked free server ServerId={server.Id}, Protocol='{protocol}' " +
+            $"(available: [{string.Join(", ", server.Protocols)}]). Claiming account...");
 
         ApiResponseResult<ClaimAccountResponse> response = await _syncVpnApiClient.ClaimAccountAsync(
             new ClaimAccountRequest { ServerId = server.Id, Protocol = protocol });
@@ -250,7 +262,7 @@ public class ConnectionRequestCreator : ConnectionRequestCreatorBase, IConnectio
     // Username/Password/PrivateKey/Config, which are live credentials for this claimed account.
     private void LogClaimedAccount(PurchasedAccount account)
     {
-        Logger.Info<AppLog>($"SyncVPN backend claim succeeded: ServerId={account.ServerId}, Name='{account.Name}', " +
+        Logger.Info<AppLog>($"[CONNECTION_PROCESS] SyncVPN backend claim succeeded:ServerId={account.ServerId}, Name='{account.Name}', " +
             $"Country='{account.Country}', ServerHostname='{account.ServerHostname}', ServerIp='{account.ServerIp}', " +
             $"Protocol='{account.Protocol}', Transport='{account.Transport}', Free={account.Free}, PlanId={account.PlanId}, " +
             $"ExpiresAt={account.ExpiresAt}");

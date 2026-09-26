@@ -23,7 +23,7 @@ namespace SyncVPN.Client.Logic.Services.Contracts;
 
 public interface IServiceEnabler
 {
-    Task EnableAsync(IService service);
+    Task EnableAsync(IService service, string? installPathIfMissing = null);
 
-    Task<bool> TryEnableAsync(IService service);
+    Task<bool> TryEnableAsync(IService service, string? installPathIfMissing = null);
 }

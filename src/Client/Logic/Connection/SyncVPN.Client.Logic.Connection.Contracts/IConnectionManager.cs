@@ -44,6 +44,12 @@ public interface IConnectionManager
     bool IsTwoFactorError { get; }
     bool IsMobileHotspotError { get; }
 
+    // True for the specific "reaching out to the server to confirm it's alive before actually tunneling"
+    // sub-phase of Connecting (see VpnEndpointScanner/ConnectingWatchdogTimeout) - lets the UI show a more
+    // specific "Trying to reach server..." status instead of a static "Connecting..." for the whole,
+    // sometimes tens-of-seconds-long, attempt.
+    bool IsPinging { get; }
+
     Task ConnectAsync(VpnTriggerDimension vpnConnectionTrigger, IConnectionIntent? connectionIntent = null);
     Task<bool> ReconnectIfNotRecentlyReconnectedAsync();
     Task<bool> ReconnectAsync(VpnTriggerDimension vpnConnectionTrigger);

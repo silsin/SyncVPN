@@ -1,5 +1,5 @@
-﻿/*
- * Copyright (c) 2023 Proton AG
+/*
+ * Copyright (c) 2026 Proton AG
  *
  * This file is part of SyncVPN.
  *
@@ -19,15 +19,10 @@
 
 using Newtonsoft.Json;
 
-namespace SyncVPN.Api.Contracts.Geographical;
+namespace SyncVPN.Api.V2.Contracts.Geographical;
 
-public class DeviceLocationResponse : LocationResponse
+public class LocationWhois
 {
-    [JsonProperty(PropertyName = "IP")]
-    public string Ip { get; set; }
-
-    [JsonProperty(PropertyName = "ISP")]
-    public string Isp { get; set; }
-
-    public string Country { get; set; }
+    [JsonProperty("isp")]
+    public string Isp { get; set; } = string.Empty;
 }

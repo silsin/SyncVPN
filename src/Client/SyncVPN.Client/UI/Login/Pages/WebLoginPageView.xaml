@@ -39,6 +39,18 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
         <StackPanel Grid.Row="0"
                     Margin="0,0,0,32"
                     Spacing="8">
+            <Border Width="56"
+                    Height="56"
+                    Margin="0,0,0,8"
+                    HorizontalAlignment="Left"
+                    Background="{ThemeResource VpnGreenWeakColorBrush}"
+                    CornerRadius="28">
+                <Image Width="34"
+                       Height="34"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Source="{ThemeResource EncryptedLockIllustrationSource}" />
+            </Border>
             <TextBlock Foreground="{ThemeResource TextNormColorBrush}"
                        Style="{ThemeResource TitleTextBlockStyle}"
                        Text="{x:Bind ViewModel.Localizer.Get('Login_WebLoginForm_Title')}" />
@@ -50,22 +62,14 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
 
         <StackPanel Grid.Row="1"
                     Spacing="16">
-            <Button HorizontalAlignment="Stretch"
+            <Button MinHeight="44"
+                    HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Center"
                     AutomationProperties.AutomationId="OpenBrowserSignInButton"
                     AutomationProperties.Name="{x:Bind ViewModel.Localizer.Get('SignIn_Form_SignIn')}"
                     Command="{x:Bind ViewModel.OpenBrowserSignInCommand, Mode=OneTime}"
                     Content="{x:Bind ViewModel.Localizer.Get('SignIn_Form_SignIn')}"
                     Style="{StaticResource PrimaryButtonStyle}" />
-
-            <Button HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Center"
-                    AutomationProperties.AutomationId="LoginWithCodeButton"
-                    AutomationProperties.Name="{x:Bind ViewModel.Localizer.Get('SignIn_Form_LoginWithCode')}"
-                    Command="{x:Bind ViewModel.NavigateToCodeLoginCommand, Mode=OneTime}"
-                    Content="{x:Bind ViewModel.Localizer.Get('SignIn_Form_LoginWithCode')}"
-                    Foreground="{ThemeResource TextNormColorBrush}"
-                    Style="{StaticResource SecondaryButtonStyle}" />
         </StackPanel>
 
     </Grid>

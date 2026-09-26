@@ -73,6 +73,8 @@ internal class L2tpConnection : ISingleVpnConnection
         _rasConnection = _rasConnectionFactory();
         _rasConnection.StateChanged += OnRasStateChanged;
 
+        _logger.Info<ConnectLog>($"[CONNECTION_PROCESS] L2TP: dialing {endpoint.Server.Ip} " +
+            $"(username set: {!string.IsNullOrEmpty(credentials.Username)}, PSK set: true).");
         _rasConnection.Connect(new RasEntryOptions
         {
             EntryName = EntryName,
@@ -103,6 +105,7 @@ internal class L2tpConnection : ISingleVpnConnection
 
     private void OnRasStateChanged(object sender, RasStateChangedEventArgs e)
     {
+        _logger.Info<ConnectLog>($"[CONNECTION_PROCESS] L2TP RAS state '{e.State}' (error code {e.ErrorCode}).");
         switch (e.State)
         {
             case RasConnectionState.Connecting:

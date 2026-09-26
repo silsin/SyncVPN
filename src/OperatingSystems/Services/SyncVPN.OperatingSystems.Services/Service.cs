@@ -150,8 +150,25 @@ public class Service : IService
         }
     }
 
-    public void Enable()
+    // "sc config" (below) can only change the start type of a service that already exists - it does
+    // nothing for a machine where the service was never installed at all (e.g. this build was run
+    // directly instead of through the real Setup installer). When a caller can supply the service exe's
+    // path, create it first with the same parameters the installer's own InstallActions.dll uses
+    // (SERVICE_WIN32_OWN_PROCESS, demand start, depends on TCPIP - see ServiceManager.cpp), then the
+    // normal enable step below still runs and is a harmless no-op on the now-existing service.
+    public void Enable(string? installPathIfMissing = null)
     {
+        if (!string.IsNullOrEmpty(installPathIfMissing) && !IsCreated())
+        {
+            // Creating already sets start=demand, so there's nothing left for the plain "sc config"
+            // path below to do - running both would also mean two separate UAC elevation prompts
+            // back to back for what the user experiences as a single "Enable" click.
+            _logger.Info<OperatingSystemLog>($"Windows service '{Name}' does not exist - creating it instead of just enabling it.");
+            _commandLineCaller.ExecuteElevated(
+                $"/c sc create \"{Name}\" binPath= \"{installPathIfMissing}\" start= demand error= normal DisplayName= \"{Name}\" depend= TCPIP");
+            return;
+        }
+
         _logger.Info<OperatingSystemLog>($"Enabling the Windows service '{Name}'.");
         _commandLineCaller.ExecuteElevated($"/c sc config \"{Name}\" start= demand");
     }

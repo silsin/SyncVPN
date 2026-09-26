@@ -78,7 +78,12 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                     <TextBlock Style="{StaticResource HomeBottomCardTitleStyle}"
                                Text="{x:Bind ViewModel.Localizer.Get('Server_Fastest')}" />
                     <TextBlock Style="{StaticResource HomeBottomCardDescriptionStyle}"
-                               Text="{x:Bind ViewModel.Localizer.Get('Home_FastestServer_Description')}" />
+                               Text="{x:Bind ViewModel.Localizer.Get('Home_FastestServer_Description')}"
+                               Visibility="{x:Bind ViewModel.IsConnecting, Converter={StaticResource NotBooleanToVisibilityConverter}}" />
+                    <TextBlock Style="{StaticResource HomeBottomCardDescriptionStyle}"
+                               AutomationProperties.AutomationId="HomeFastestServerConnectingStatusText"
+                               Text="{x:Bind ViewModel.ConnectingStatusText}"
+                               Visibility="{x:Bind ViewModel.IsConnecting, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 </StackPanel>
 
                 <Button Grid.Column="2"
@@ -88,6 +93,14 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                         Content="{x:Bind ViewModel.Localizer.Get('Common_Actions_Connect')}"
                         Style="{StaticResource SecondaryButtonStyle}"
                         Visibility="{x:Bind ViewModel.ShowConnectButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                <Button Grid.Column="2"
+                        VerticalAlignment="Center"
+                        AutomationProperties.AutomationId="HomeFastestServerEnableServiceButton"
+                        Command="{x:Bind ViewModel.EnableServiceCommand, Mode=OneTime}"
+                        Content="{x:Bind ViewModel.Localizer.Get('Common_Actions_Enable')}"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Visibility="{x:Bind ViewModel.ShowEnableServiceButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                 <Button Grid.Column="2"
                         VerticalAlignment="Center"

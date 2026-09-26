@@ -64,6 +64,7 @@ public class ConnectionErrorFactory : IConnectionErrorFactory
             VpnError.TapAdapterInUseError => GetConnectionError<TapAdapterInUseConnectionError>(vpnError),
             VpnError.TapRequiresUpdateError => GetConnectionError<TapRequiresUpdateConnectionError>(vpnError),
             VpnError.RpcServerUnavailable => GetConnectionError<RpcServerUnavailableConnectionError>(vpnError),
+            VpnError.PingTimeoutError => GetConnectionError<PingTimeoutConnectionError>(vpnError),
 
             VpnError.SessionLimitReachedBasic or
                 VpnError.SessionLimitReachedFree or

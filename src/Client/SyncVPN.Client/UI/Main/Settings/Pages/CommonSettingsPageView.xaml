@@ -109,6 +109,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                     <toolkit:SettingsCard AutomationProperties.AutomationId="ThemesSettingsCard"
                                           Header="{x:Bind ViewModel.Localizer.Get('Settings_General_Theme')}"
                                           IsTabStop="False"
+                                          Visibility="Collapsed"
                                           Style="{StaticResource DefaultSettingsCardStyle}">
                         <toolkit:SettingsCard.HeaderIcon>
                             <pathicons:CircleHalfFilled />
@@ -124,6 +125,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                                           Description="{x:Bind ViewModel.Localizer.Get('Settings_General_BetaAccess_Description')}"
                                           Header="{x:Bind ViewModel.Localizer.Get('Settings_General_BetaAccess')}"
                                           IsTabStop="False"
+                                          Visibility="Collapsed"
                                           Style="{StaticResource DefaultSettingsCardStyle}">
                         <toolkit:SettingsCard.HeaderIcon>
                             <pathicons:KeySkeleton />
@@ -153,6 +155,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                                           Command="{x:Bind ViewModel.OpenSupportCommand, Mode=OneTime}"
                                           Header="{x:Bind ViewModel.Localizer.Get('Settings_Support_SupportCenter')}"
                                           IsClickEnabled="True"
+                                          Visibility="Collapsed"
                                           Style="{StaticResource DefaultSettingsCardStyle}">
                         <toolkit:SettingsCard.HeaderIcon>
                             <pathicons:LifeRing />

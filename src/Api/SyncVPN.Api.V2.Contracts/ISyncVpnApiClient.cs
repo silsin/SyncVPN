@@ -26,6 +26,7 @@ using SyncVPN.Api.V2.Contracts.Billing;
 using SyncVPN.Api.V2.Contracts.CheckoutLinks;
 using SyncVPN.Api.V2.Contracts.Devices;
 using SyncVPN.Api.V2.Contracts.Dns;
+using SyncVPN.Api.V2.Contracts.Geographical;
 using SyncVPN.Api.V2.Contracts.Plans;
 using SyncVPN.Api.V2.Contracts.Purchases;
 using SyncVPN.Api.V2.Contracts.Servers;
@@ -47,6 +48,8 @@ public interface ISyncVpnApiClient
     Task<ApiResponseResult<ServerListResponse>> GetServersAsync(CancellationToken cancellationToken = default);
 
     Task<ApiResponseResult<ServerListResponse>> GetProServersAsync(CancellationToken cancellationToken = default);
+
+    Task<ApiResponseResult<LocationResponse>> GetLocationAsync(CancellationToken cancellationToken = default);
 
     Task<ApiResponseResult<FavoriteServersResponse>> GetFavoriteServersAsync(CancellationToken cancellationToken = default);
 

@@ -195,6 +195,16 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                     TabIndex="4"
                     Visibility="{x:Bind ViewModel.ShowConnectButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
+            <Button x:Name="ConnectionCardEnableServiceButton"
+                    MinWidth="{StaticResource MinButtonWidth}"
+                    HorizontalAlignment="Stretch"
+                    AutomationProperties.AutomationId="ConnectionCardEnableServiceButton"
+                    Command="{x:Bind ViewModel.EnableServiceCommand, Mode=OneTime}"
+                    Content="{x:Bind ViewModel.Localizer.Get('Common_Actions_Enable')}"
+                    Style="{StaticResource LargePrimaryButtonStyle}"
+                    TabIndex="4"
+                    Visibility="{x:Bind ViewModel.ShowEnableServiceButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
             <Button x:Name="ConnectionCardCancelButton"
                     MinWidth="{StaticResource MinButtonWidth}"
                     HorizontalAlignment="Stretch"
@@ -218,6 +228,15 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                     Visibility="{x:Bind ViewModel.IsConnected, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
         </controls:UniformGrid>
+
+        <TextBlock Margin="0,8,0,0"
+                   HorizontalAlignment="Center"
+                   AutomationProperties.AutomationId="ConnectionCardConnectingStatusText"
+                   Foreground="{ThemeResource TextWeakColorBrush}"
+                   Style="{StaticResource CaptionTextBlockStyle}"
+                   Text="{x:Bind ViewModel.ConnectingStatusText}"
+                   TextAlignment="Center"
+                   Visibility="{x:Bind ViewModel.IsConnecting, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
         <upsell:ConnectionCardUpsellBannerView />
 

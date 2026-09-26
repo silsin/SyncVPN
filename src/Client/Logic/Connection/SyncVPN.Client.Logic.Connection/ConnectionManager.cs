@@ -86,6 +86,7 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
     private readonly IGuestHoleConnectionRequestCreator _guestHoleConnectionRequestCreator;
     private readonly IConnectionStatisticalEventsManager _statisticalEventManager;
     private readonly IConnectionKeyManager _connectionKeyManager;
+    private readonly IServiceManager _serviceManager;
 
     private DateTime _minReconnectionDateUtc = DateTime.MinValue;
 
@@ -112,6 +113,8 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
     public bool IsTwoFactorError => !IsDisconnected && _currentError.IsTwoFactorError();
     public bool IsMobileHotspotError => _currentError == VpnErrorTypeIpcEntity.InterfaceHasForwardingEnabled;
 
+    public bool IsPinging => _currentStatus == VpnStatusIpcEntity.Pinging;
+
     public ConnectionManager(
         ILogger logger,
         ISettings settings,
@@ -126,7 +129,8 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
         IGuestHoleServersFileStorage guestHoleServersFileStorage,
         IGuestHoleConnectionRequestCreator guestHoleConnectionRequestCreator,
         IConnectionStatisticalEventsManager statisticalEventManager,
-        IConnectionKeyManager connectionKeyManager)
+        IConnectionKeyManager connectionKeyManager,
+        IServiceManager serviceManager)
     {
         _logger = logger;
         _settings = settings;
@@ -143,12 +147,26 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
         _guestHoleConnectionRequestCreator = guestHoleConnectionRequestCreator;
         _statisticalEventManager = statisticalEventManager;
         _connectionKeyManager = connectionKeyManager;
+        _serviceManager = serviceManager;
     }
 
     public async Task ConnectAsync(
         VpnTriggerDimension connectionTrigger,
         IConnectionIntent? connectionIntent = null)
     {
+        // Single choke point for every connect entry point (main Connect button, map, tray, auto-connect,
+        // change-server) - without this, the ones that don't already gate on IServiceManager.IsServiceEnabled
+        // themselves (see ConnectionCardComponentViewModel.CanConnect for the one that does) would sail
+        // straight into a request the native service isn't there to receive, surfacing as a generic/stuck
+        // failure deep in the IPC layer instead of the same clear "service unavailable" error used
+        // elsewhere (RpcServerUnavailableConnectionError) when the service disappears mid-connection.
+        if (!_serviceManager.IsServiceEnabled)
+        {
+            _logger.Warn<ConnectionErrorLog>($"[CONNECTION_PROCESS] Connection attempt (triggered by {connectionTrigger}) refused - the Windows service is not available.");
+            _eventMessageSender.Send(new ConnectionErrorMessage { VpnError = VpnError.RpcServerUnavailable });
+            return;
+        }
+
         _statisticalEventManager.SetConnectionAttempt(connectionTrigger, ConnectionStatus);
 
         connectionIntent ??= _settings.VpnPlan.IsPaid ? ConnectionIntent.Default : ConnectionIntent.FreeDefault;
@@ -158,14 +176,37 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
         CurrentConnectionTrigger = connectionTrigger;
 
         _logger.Info<ConnectTriggerLog>($"[CONNECTION_PROCESS] Connection attempt to: {connectionIntent}. Triggered by {connectionTrigger}.", stackTraceDepth: 2);
+        _logger.Info<ConnectLog>($"[CONNECTION_PROCESS] Service is enabled. Plan: {(_settings.VpnPlan.IsPaid ? "paid" : "free")}. Creating connection request...");
 
         ConnectionRequestIpcEntity? request = await TryCreateRequestAsync(() => _connectionRequestCreator.CreateAsync(connectionIntent));
         if (request is null)
         {
+            _logger.Warn<ConnectLog>("[CONNECTION_PROCESS] Connection attempt aborted - no connection request was created.");
             return;
         }
 
         await SendRequestIfValidAsync(request);
+    }
+
+    private static string GetConnectionRequestLogMessage(ConnectionRequestIpcEntity request)
+    {
+        string servers = request.Servers is null
+            ? "none"
+            : string.Join(", ", request.Servers.Select(s => $"{s.Name}/{s.Ip}/label '{s.Label}'"));
+        string ports = request.Config?.Ports is null
+            ? "none"
+            : string.Join(", ", request.Config.Ports.Select(p => $"{p.Key}:[{string.Join(",", p.Value ?? [])}]"));
+        string preferredProtocols = request.Config?.PreferredProtocols is null
+            ? "none"
+            : string.Join(", ", request.Config.PreferredProtocols);
+
+        // Only presence flags for credentials - secrets must never reach the logs.
+        return $"Protocol: '{request.Protocol}', Preferred protocols: [{preferredProtocols}], Ports: [{ports}], " +
+            $"Servers ({request.Servers?.Length ?? 0}): [{servers}], " +
+            $"All servers excluded by user preference: {request.AreAllServersExcludedByUserPreference}, " +
+            $"Username set: {!string.IsNullOrEmpty(request.Credentials?.Username)}, " +
+            $"PSK set: {!string.IsNullOrEmpty(request.Credentials?.PreSharedKey)}, " +
+            $"Certificate set: {request.Credentials?.Certificate is not null}";
     }
 
     // Building the request can fail outside the usual VpnError validation path below - e.g. the new
@@ -181,7 +222,7 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
         }
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
-            _logger.Error<ConnectionErrorLog>("Failed to create the connection request.", ex);
+            _logger.Error<ConnectionErrorLog>("[CONNECTION_PROCESS] Failed to create the connection request.", ex);
             _eventMessageSender.Send(new ConnectionErrorMessage { VpnError = VpnError.Unknown });
             return null;
         }
@@ -228,15 +269,18 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
 
     private async Task<bool> SendRequestIfValidAsync(ConnectionRequestIpcEntity request)
     {
+        _logger.Info<ConnectLog>($"[CONNECTION_PROCESS] Connection request created. {GetConnectionRequestLogMessage(request)}");
+
         VpnError error = request.GetVpnError();
         if (error == VpnError.None)
         {
+            _logger.Info<ConnectLog>("[CONNECTION_PROCESS] Connection request is valid. Sending it to the service.");
             await _vpnServiceCaller.ConnectAsync(request);
             return true;
         }
         else
         {
-            _logger.Error<ConnectionErrorLog>($"Failed to connect due to '{error}' error detected.");
+            _logger.Error<ConnectionErrorLog>($"[CONNECTION_PROCESS] Failed to connect due to '{error}' error detected while validating the request.");
 
             await DisconnectAsync(VpnTriggerDimension.Auto);
 
@@ -320,6 +364,10 @@ public class ConnectionManager : IInternalConnectionManager, IGuestHoleConnector
 
     public async Task HandleAsync(VpnStateIpcEntity message)
     {
+        _logger.Info<ConnectionStateChangeLog>($"[CONNECTION_PROCESS] Service -> App: received VPN state '{message.Status}', " +
+            $"Error: '{message.Error}', Endpoint: '{message.EndpointIp}:{message.EndpointPort}', Label: '{message.Label}', " +
+            $"Protocol: '{message.VpnProtocol}', NetworkBlocked: {message.NetworkBlocked}, Guest hole: {_isGuestHoleActive}.");
+
         _cachedMessage = message;
 
         IConnectionIntent connectionIntent = CurrentConnectionIntent ?? ConnectionIntent.Default;

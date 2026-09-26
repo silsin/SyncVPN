@@ -122,7 +122,7 @@ Source: "..\{#SourcePath}\sl-SI\Microsoft.ui.xaml.dll.mui"; DestDir: "{app}\{#Ve
 Source: "..\{#SourcePath}\zh-CN\Microsoft.ui.xaml.dll.mui"; DestDir: "{app}\{#VersionFolder}\zh-CN"; Flags: signonce;
 
 Source: "..\{#SourcePath}\Resources\SyncVPN.InstallActions.x86.dll"; DestDir: "{app}\{#VersionFolder}\Resources"; Flags: signonce nocompression;
-Source: "..\{#SourcePath}\Resources\LocalAgent.dll"; DestDir: "{app}\{#VersionFolder}\Resources"; Flags: signonce;
+Source: "..\{#SourcePath}\Resources\LocalAgent.dll"; DestDir: "{app}\{#VersionFolder}\Resources"; Flags: signonce skipifsourcedoesntexist;
 Source: "..\{#SourcePath}\Resources\SyncVPN.IPFilter.dll"; DestDir: "{app}\{#VersionFolder}\Resources"; Flags: signonce;
 Source: "..\{#SourcePath}\Resources\SyncVPN.NetworkUtil.dll"; DestDir: "{app}\{#VersionFolder}\Resources"; Flags: signonce;
 
@@ -152,8 +152,8 @@ Source: "..\{#SourcePath}\Assets\Map\Data\*"; DestDir: "{app}\{#VersionFolder}\S
 Source: "..\{#SourcePath}\Assets\Fonts\*"; DestDir: "{app}\{#VersionFolder}\SyncVPN.Client.Common.UI\Assets\Fonts";
 
 ; Comes from iplist-builder repo artifacts
-Source: "..\data\ipv6_chaos_prefixtree.bin"; DestDir: "{app}\{#VersionFolder}\ServiceData\IPv6"; DestName: "PrefixTree.bin";
-Source: "..\{#SourcePath}\proton_vpn_ipv6chaos.dll"; DestDir: "{app}\{#VersionFolder}";
+Source: "..\data\ipv6_chaos_prefixtree.bin"; DestDir: "{app}\{#VersionFolder}\ServiceData\IPv6"; DestName: "PrefixTree.bin"; Flags: skipifsourcedoesntexist;
+Source: "..\{#SourcePath}\proton_vpn_ipv6chaos.dll"; DestDir: "{app}\{#VersionFolder}"; Flags: skipifsourcedoesntexist;
 
 [Icons]
 Name: "{group}\SyncVPN"; Filename: "{app}\{#LauncherExeName}"

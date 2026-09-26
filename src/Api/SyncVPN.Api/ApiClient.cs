@@ -224,12 +224,6 @@ public class ApiClient : BaseApiClient, IApiClient
         return await SendRequestAsync<ReportAnIssueFormResponse>(request, CancellationToken.None, "Get report an issue form data");
     }
 
-    public async Task<ApiResponseResult<DeviceLocationResponse>> GetLocationDataAsync()
-    {
-        HttpRequestMessage request = GetRequest(HttpMethod.Get, "vpn/location");
-        return await SendRequestWithNoCacheAsync<DeviceLocationResponse>(request, CancellationToken.None, "Get location data");
-    }
-
     public async Task<ApiResponseResult<BaseResponse>> ReportBugAsync(
         IEnumerable<KeyValuePair<string, string>> fields, IEnumerable<File> files)
     {

@@ -75,6 +75,8 @@ internal class SstpConnection : ISingleVpnConnection
         _rasConnection = _rasConnectionFactory();
         _rasConnection.StateChanged += OnRasStateChanged;
 
+        _logger.Info<ConnectLog>($"[CONNECTION_PROCESS] SSTP: dialing {endpoint.Server.Ip} " +
+            $"(username set: {!string.IsNullOrEmpty(credentials.Username)}).");
         _rasConnection.Connect(new RasEntryOptions
         {
             EntryName = EntryName,
@@ -104,6 +106,7 @@ internal class SstpConnection : ISingleVpnConnection
 
     private void OnRasStateChanged(object sender, RasStateChangedEventArgs e)
     {
+        _logger.Info<ConnectLog>($"[CONNECTION_PROCESS] SSTP RAS state '{e.State}' (error code {e.ErrorCode}).");
         switch (e.State)
         {
             case RasConnectionState.Connecting:

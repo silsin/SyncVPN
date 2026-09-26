@@ -25,6 +25,7 @@ using SyncVPN.Client.Core.Bases;
 using SyncVPN.Client.Core.Bases.ViewModels;
 using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Factories;
+using SyncVPN.Client.Logic.Auth.Contracts;
 using SyncVPN.Client.Logic.Servers.Contracts.Messages;
 using SyncVPN.Client.Models.Connections;
 using SyncVPN.Client.Services.FreeServers;
@@ -43,6 +44,7 @@ public partial class HomeFreeServersSectionViewModel : ActivatableViewModelBase,
 {
     private readonly IFreeServersCache _freeServersCache;
     private readonly ILocationItemFactory _locationItemFactory;
+    private readonly IUserAuthenticator _userAuthenticator;
     private readonly List<ConnectionItemBase> _allServers = [];
 
     [ObservableProperty]
@@ -55,11 +57,13 @@ public partial class HomeFreeServersSectionViewModel : ActivatableViewModelBase,
     public HomeFreeServersSectionViewModel(
         IFreeServersCache freeServersCache,
         ILocationItemFactory locationItemFactory,
+        IUserAuthenticator userAuthenticator,
         IViewModelHelper viewModelHelper)
         : base(viewModelHelper)
     {
         _freeServersCache = freeServersCache;
         _locationItemFactory = locationItemFactory;
+        _userAuthenticator = userAuthenticator;
     }
 
     public void Receive(ServerListChangedMessage message)
@@ -86,9 +90,17 @@ public partial class HomeFreeServersSectionViewModel : ActivatableViewModelBase,
     {
         _allServers.Clear();
 
-        // This section is specifically the free-servers teaser (see class remarks) - the cache now also
-        // holds Pro servers (for Countries sidebar use), so filter back down to the free subset here.
-        foreach (ConnectionItemBase item in _freeServersCache.GetServers().Where(s => s.Free == 1).Select(_locationItemFactory.GetSyncVpnServer))
+        // This section is specifically the free-servers teaser (see class remarks) - but the cache is
+        // only ever free-catalog-only for anonymous/free sessions (see FreeServersObserver); once logged
+        // into a Pro plan, the cache holds the Pro catalog instead and none of those rows are flagged
+        // Free == 1, so filtering on that here would always empty the list. Mirror
+        // AllCountriesComponentViewModel: filter to the free subset only while logged out, otherwise show
+        // whatever catalog is currently cached as-is.
+        var servers = _userAuthenticator.IsLoggedIn
+            ? _freeServersCache.GetServers()
+            : _freeServersCache.GetServers().Where(s => s.Free == 1);
+
+        foreach (ConnectionItemBase item in servers.Select(_locationItemFactory.GetSyncVpnServer))
         {
             _allServers.Add(item);
         }

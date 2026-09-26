@@ -114,7 +114,8 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                VerticalAlignment="Top"
                BorderBrush="{ThemeResource PaneOverlayBorderColorBrush}"
                BorderThickness="1"
-               CornerRadius="16">
+               CornerRadius="16"
+               Visibility="{x:Bind ConnectionCardComponent.ViewModel.ShowMapConnectCard, Converter={StaticResource BooleanToVisibilityConverter}}">
 
             <!--  A plain low-alpha fill rather than AcrylicBrush (used elsewhere in the app for this same  -->
             <!--  "glass panel" look) - Acrylic's live blur depends on DWM compositor support that isn't  -->
@@ -154,9 +155,9 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                         Command="{x:Bind MapView.ViewModel.ConnectCommand, Mode=OneTime}"
                         CommandParameter="{x:Bind MapView.ViewModel.SelectedCountry}"
                         Content="{x:Bind ConnectionCardComponent.ViewModel.Localizer.Get('Common_Actions_Connect')}"
-                        IsEnabled="{x:Bind MapView.ViewModel.IsConnectingFromMapSelection, Converter={StaticResource NotBooleanToBooleanConverter}}"
+                        IsEnabled="{x:Bind MapView.ViewModel.CanConnectFromMap}"
                         Style="{StaticResource LargePrimaryButtonStyle}"
-                        Visibility="{x:Bind MapView.ViewModel.HasSelectedCountry, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        Visibility="{x:Bind MapView.ViewModel.ShowSelectedConnectButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                 <StackPanel Spacing="12"
                            Visibility="{x:Bind MapView.ViewModel.HasSelectedCountry, Converter={StaticResource NotBooleanToVisibilityConverter}}">
@@ -167,7 +168,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                               Foreground="{ThemeResource TextWeakColorBrush}"
                               Style="{StaticResource CaptionTextBlockStyle}"
                               Text="{x:Bind ConnectionCardComponent.ViewModel.Localizer.Get('Map_PleaseSelectServer_Label')}"
-                              Visibility="{x:Bind ConnectionCardComponent.ViewModel.IsDisconnected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                              Visibility="{x:Bind ConnectionCardComponent.ViewModel.CanSelectServer, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
                     <!--  Once Connect is pressed, MapView.ViewModel.SelectedCountry (and so the name block  -->
                     <!--  above) is deliberately cleared - without this, the panel dropped straight from  -->
@@ -196,7 +197,7 @@ along with SyncVPN.  If not, see <https://www.gnu.org/licenses/>.
                                 AutomationProperties.AutomationId="MapDefaultConnectButton"
                                 Command="{x:Bind MapView.ViewModel.ConnectCommand, Mode=OneTime}"
                                 Content="{x:Bind ConnectionCardComponent.ViewModel.Localizer.Get('Common_Actions_Connect')}"
-                                IsEnabled="{x:Bind MapView.ViewModel.IsConnectingFromMapSelection, Converter={StaticResource NotBooleanToBooleanConverter}}"
+                                IsEnabled="{x:Bind MapView.ViewModel.CanConnectFromMap}"
                                 Style="{StaticResource LargePrimaryButtonStyle}"
                                 Visibility="{x:Bind MapView.ViewModel.ShowConnectButton, Converter={StaticResource BooleanToVisibilityConverter}}" />
 

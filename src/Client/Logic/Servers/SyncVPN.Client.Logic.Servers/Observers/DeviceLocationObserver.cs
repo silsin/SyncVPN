@@ -19,7 +19,8 @@
 
 using System.Net.NetworkInformation;
 using SyncVPN.Api.Contracts;
-using SyncVPN.Api.Contracts.Geographical;
+using SyncVPN.Api.V2.Contracts;
+using SyncVPN.Api.V2.Contracts.Geographical;
 using SyncVPN.Client.Common.Observers;
 using SyncVPN.Client.EventMessaging.Contracts;
 using SyncVPN.Client.Logic.Auth.Contracts;
@@ -49,7 +50,7 @@ public class DeviceLocationObserver :
     private const int NETWORK_CHANGED_FETCH_DELAY_IN_MS = 2000;
     private const int APP_START_FETCH_DELAY_IN_MS = 0;
 
-    private readonly IApiClient _apiClient;
+    private readonly ISyncVpnApiClient _syncVpnApiClient;
     private readonly ISettings _settings;
     private readonly IConnectionManager _connectionManager;
     private readonly IEventMessageSender _eventMessageSender;
@@ -60,14 +61,14 @@ public class DeviceLocationObserver :
     public DeviceLocationObserver(
         ILogger logger,
         IIssueReporter issueReporter,
-        IApiClient apiClient,
+        ISyncVpnApiClient syncVpnApiClient,
         ISettings settings,
         IConnectionManager connectionManager,
         IEventMessageSender eventMessageSender,
         IUserAuthenticator userAuthenticator)
         : base(logger, issueReporter)
     {
-        _apiClient = apiClient;
+        _syncVpnApiClient = syncVpnApiClient;
         _settings = settings;
         _connectionManager = connectionManager;
         _eventMessageSender = eventMessageSender;
@@ -120,16 +121,16 @@ public class DeviceLocationObserver :
 
             Logger.Info<SettingsLog>("Retrieving current device location");
 
-            ApiResponseResult<DeviceLocationResponse> response = await _apiClient.GetLocationDataAsync();
+            ApiResponseResult<LocationResponse> response = await _syncVpnApiClient.GetLocationAsync();
             if (response.Success)
             {
-                DeviceLocationResponse currentLocation = response.Value;
+                LocationData currentLocation = response.Value.Data;
                 UpdateDeviceLocation(
                     currentLocation.Ip,
-                    currentLocation.Country,
-                    currentLocation.Isp,
-                    currentLocation.Lat,
-                    currentLocation.Long);
+                    currentLocation.Country.Code,
+                    currentLocation.Whois.Isp,
+                    currentLocation.Location.Latitude,
+                    currentLocation.Location.Longitude);
             }
         }
         catch (Exception e)

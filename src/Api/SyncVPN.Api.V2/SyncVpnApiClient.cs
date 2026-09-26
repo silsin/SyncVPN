@@ -33,6 +33,7 @@ using SyncVPN.Api.V2.Contracts.Billing;
 using SyncVPN.Api.V2.Contracts.CheckoutLinks;
 using SyncVPN.Api.V2.Contracts.Devices;
 using SyncVPN.Api.V2.Contracts.Dns;
+using SyncVPN.Api.V2.Contracts.Geographical;
 using SyncVPN.Api.V2.Contracts.Plans;
 using SyncVPN.Api.V2.Contracts.Purchases;
 using SyncVPN.Api.V2.Contracts.Servers;
@@ -105,6 +106,13 @@ public class SyncVpnApiClient : ISyncVpnApiClient, IDisposable
         using HttpRequestMessage request = CreateRequest(HttpMethod.Get, "servers/pro");
         using HttpResponseMessage response = await SendAsync(request, cancellationToken);
         return await ReadResponseAsync<ServerListResponse>(response, cancellationToken);
+    }
+
+    public async Task<ApiResponseResult<LocationResponse>> GetLocationAsync(CancellationToken cancellationToken = default)
+    {
+        using HttpRequestMessage request = CreateRequest(HttpMethod.Get, "vpn/location");
+        using HttpResponseMessage response = await SendAsync(request, cancellationToken);
+        return await ReadResponseAsync<LocationResponse>(response, cancellationToken);
     }
 
     public async Task<ApiResponseResult<FavoriteServersResponse>> GetFavoriteServersAsync(CancellationToken cancellationToken = default)

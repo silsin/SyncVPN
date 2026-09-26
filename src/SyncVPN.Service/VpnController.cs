@@ -18,6 +18,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using SyncVPN.Common.Core.Helpers;
@@ -81,8 +82,10 @@ public class VpnController : IVpnController
         _controllerRetryManager.EnforceRetryId(connectionRequest);
 
         _logger.Info<ConnectLog>("Connect requested");
+        _logger.Info<ConnectLog>($"[CONNECTION_PROCESS] Service received Connect request from app. {GetConnectionRequestLogMessage(connectionRequest)}");
 
         _serviceSettings.Apply(connectionRequest.Settings);
+        _logger.Info<ConnectLog>("[CONNECTION_PROCESS] Service settings applied.");
 
         VpnConfig config = _entityMapper.Map<VpnConfigIpcEntity, VpnConfig>(connectionRequest.Config);
         config.OpenVpnAdapter = _serviceSettings.OpenVpnAdapter;
@@ -91,7 +94,38 @@ public class VpnController : IVpnController
         _localAgentTlsCredentialsCache.Set(new LocalAgentTlsCredentials(
             new ConnectionCertificate(credentials.ClientCertPem, credentials.ClientCertificateExpirationDateUtc),
             credentials.ClientKeyPair));
+
+        _logger.Info<ConnectLog>($"[CONNECTION_PROCESS] Request mapped ({endpoints.Count} endpoint(s), protocol '{config.VpnProtocol}', " +
+            $"OpenVPN adapter '{config.OpenVpnAdapter}'). Handing over to the VPN connection pipeline.");
         _vpnConnection.Connect(endpoints, config, credentials);
+        _logger.Info<ConnectLog>("[CONNECTION_PROCESS] Connect handed over - progress continues asynchronously (see VPN state changes).");
+    }
+
+    private static string GetConnectionRequestLogMessage(ConnectionRequestIpcEntity request)
+    {
+        VpnConfigIpcEntity config = request.Config;
+        VpnCredentialsIpcEntity credentials = request.Credentials;
+
+        string servers = request.Servers is null
+            ? "none"
+            : string.Join(", ", request.Servers.Select(s => $"{s.Name}/{s.Ip}/label '{s.Label}'"));
+        string ports = config?.Ports is null
+            ? "none"
+            : string.Join(", ", config.Ports.Select(p => $"{p.Key}:[{string.Join(",", p.Value ?? [])}]"));
+        string preferredProtocols = config?.PreferredProtocols is null
+            ? "none"
+            : string.Join(", ", config.PreferredProtocols);
+
+        // Only presence flags for credentials - secrets must never reach the logs.
+        return $"Protocol: '{request.Protocol}', Config protocol: '{config?.VpnProtocol}', " +
+            $"Preferred protocols: [{preferredProtocols}], Ports: [{ports}], " +
+            $"Servers ({request.Servers?.Length ?? 0}): [{servers}], " +
+            $"All servers excluded by user preference: {request.AreAllServersExcludedByUserPreference}, " +
+            $"Split tunnel: '{config?.SplitTunnelMode}', NetShield: {config?.NetShieldMode}, Port forwarding: {config?.PortForwarding}, " +
+            $"IPv6: {config?.IsIpv6Enabled}, WireGuard timeout: {config?.WireGuardConnectionTimeout}, " +
+            $"Username set: {!string.IsNullOrEmpty(credentials?.Username)}, Password set: {!string.IsNullOrEmpty(credentials?.Password)}, " +
+            $"PSK set: {!string.IsNullOrEmpty(credentials?.PreSharedKey)}, Certificate set: {credentials?.Certificate is not null}, " +
+            $"Key pair set: {credentials?.ClientKeyPair is not null}, Provisioned config set: {!string.IsNullOrEmpty(credentials?.ProvisionedConfigText)}";
     }
 
     public async Task Disconnect(DisconnectionRequestIpcEntity disconnectionRequest, CancellationToken cancelToken)

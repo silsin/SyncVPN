@@ -58,6 +58,7 @@ public class ConnectionManagerTest
     private IGuestHoleConnectionRequestCreator? _guestHoleConnectionRequestCreator;
     private IConnectionStatisticalEventsManager? _statisticalEventManager;
     private IConnectionKeyManager? _connectionKeyManager;
+    private IServiceManager? _serviceManager;
 
     [TestInitialize]
     public void Initialize()
@@ -76,6 +77,8 @@ public class ConnectionManagerTest
         _guestHoleConnectionRequestCreator = Substitute.For<IGuestHoleConnectionRequestCreator>();
         _statisticalEventManager = Substitute.For<IConnectionStatisticalEventsManager>();
         _connectionKeyManager = Substitute.For<IConnectionKeyManager>();
+        _serviceManager = Substitute.For<IServiceManager>();
+        _serviceManager.IsServiceEnabled.Returns(true);
 
         _connectionRequestCreator!.CreateAsync(Arg.Any<IConnectionIntent>()).Returns(GetConnectionRequestIpcEntity());
         _reconnectionRequestCreator!.CreateAsync(Arg.Any<IConnectionIntent>()).Returns(GetConnectionRequestIpcEntity());
@@ -98,6 +101,7 @@ public class ConnectionManagerTest
         _guestHoleConnectionRequestCreator = null;
         _statisticalEventManager = null;
         _connectionKeyManager = null;
+        _serviceManager = null;
     }
 
     [TestMethod]
@@ -198,7 +202,8 @@ public class ConnectionManagerTest
             _guestHoleServersFileStorage!,
             _guestHoleConnectionRequestCreator!,
             _statisticalEventManager!,
-            _connectionKeyManager!);
+            _connectionKeyManager!,
+            _serviceManager!);
     }
 
     private IConnectionIntent GetConnectionIntent(IFeatureIntent featureIntent)

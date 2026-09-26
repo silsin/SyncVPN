@@ -25,6 +25,7 @@ using SyncVPN.Api.V2.Contracts.Common;
 using SyncVPN.Api.V2.Contracts.Plans;
 using SyncVPN.Client.Common.Models;
 using SyncVPN.Client.Contracts.Services.Browsing;
+using SyncVPN.Client.Extensions;
 using SyncVPN.Client.Core.Bases;
 using SyncVPN.Client.Core.Bases.ViewModels;
 using SyncVPN.Client.Core.Services.Activation;
@@ -213,7 +214,7 @@ public partial class StorePageViewModel : PageViewModelBase<IMainViewNavigator>
     private string BuildCheckoutErrorMessage(CheckoutLinkResult result)
     {
         return !string.IsNullOrWhiteSpace(result.Error?.Message)
-            ? result.Error.Message
+            ? Localizer.GetUserFacingError(result.Error.Message)
             : Localizer.Get("Store_Checkout_ErrorMessage");
     }
 
@@ -221,7 +222,7 @@ public partial class StorePageViewModel : PageViewModelBase<IMainViewNavigator>
     {
         if (!string.IsNullOrWhiteSpace(completion.Error?.Message))
         {
-            return completion.Error.Message;
+            return Localizer.GetUserFacingError(completion.Error.Message);
         }
 
         return completion.Outcome switch
@@ -272,7 +273,7 @@ public partial class StorePageViewModel : PageViewModelBase<IMainViewNavigator>
         SyncVpnErrorResponse? error = SyncVpnErrorResponse.TryParse(rawError);
 
         return !string.IsNullOrWhiteSpace(error?.Message)
-            ? error.Message
+            ? Localizer.GetUserFacingError(error.Message)
             : Localizer.Get("Store_LoadError_Message");
     }
 

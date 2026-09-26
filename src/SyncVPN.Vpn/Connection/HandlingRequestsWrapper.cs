@@ -186,7 +186,8 @@ public class HandlingRequestsWrapper : ISingleVpnConnection
             {
                 _connectRequested = false;
                 _connecting = true;
-                _logger.Info<ConnectLog>("HandlingRequestsWrapper: Connecting");
+                _logger.Info<ConnectLog>($"[CONNECTION_PROCESS] HandlingRequestsWrapper: Connecting to {_endpoint.Server.Ip}:{_endpoint.Port} " +
+                    $"(label '{_endpoint.Server.Label}') using protocol '{_config.VpnProtocol}'");
                 _origin.Connect(_endpoint, _credentials, _config);
             }
             else

@@ -1,4 +1,5 @@
-﻿/*
+﻿
+/*
  * Copyright (c) 2023 Proton AG
  *
  * This file is part of SyncVPN.
@@ -32,5 +33,5 @@ public static class GlobalConfig
     public const string BtiServerSignaturePublicKey = "";
     public const string GuestHoleKey1 = "";
     public const string GuestHoleKey2 = "";
-    public const string SyncVpnAppToken = "";
+    public const string SyncVpnAppToken = "sHGsrTHYEW$%^@5$^TSERGSGFFADSFFDDFGHDFTYHE$%^#^HDFGHDSGFFDAWDAWE%$Q#%g";
 }

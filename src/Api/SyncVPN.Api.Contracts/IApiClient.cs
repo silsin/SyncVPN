@@ -55,7 +55,6 @@ public interface IApiClient : IClientBase
     Task<ApiResponseResult<ServerCountResponse>> GetServersCountAsync();
     Task<ApiResponseResult<ReportAnIssueFormResponse>> GetReportAnIssueFormData();
     Task<ApiResponseResult<ServersResponse>> GetServerLoadsAsync(DeviceLocation? deviceLocation, CancellationToken cancellationToken);
-    Task<ApiResponseResult<DeviceLocationResponse>> GetLocationDataAsync();
     Task<ApiResponseResult<BaseResponse>> ReportBugAsync(IEnumerable<KeyValuePair<string, string>> fields, IEnumerable<File> files);
     Task<ApiResponseResult<VpnConfigResponse>> GetVpnConfigAsync(DeviceLocation? deviceLocation, CancellationToken cancellationToken = default);
     Task<ApiResponseResult<AnnouncementsResponse>> GetAnnouncementsAsync(AnnouncementsRequest request);

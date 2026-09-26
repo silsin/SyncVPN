@@ -99,6 +99,8 @@ namespace SyncVPN.Vpn.Connection
             _isToConnect = true;
             _isToReconnect = true;
 
+            _logger.Info<ConnectLog>($"[CONNECTION_PROCESS] ReconnectingWrapper: {servers.Count} endpoint candidate(s) stored. " +
+                "Disconnecting first, then pinging candidates and connecting to the first that responds.");
             _logger.Info<DisconnectTriggerLog>("Requesting disconnect as the first step of a connection process.");
             CancelTokenAndDisconnect(VpnError.NoneKeepEnabledKillSwitch);
         }
